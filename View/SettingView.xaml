@@ -1,0 +1,300 @@
+﻿<UserControl x:Class="TrippingApp.View.SettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.View"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource VM_Seting}"
+             d:DesignHeight="1000" d:DesignWidth="1920">
+    <Grid>
+        
+        <StackPanel Orientation="Vertical" Margin="0 105 0 0">
+            <!--PLC Config-->
+            <GroupBox
+                    IsEnabled="{Binding CanEdit}"
+                    FontSize="50"
+                    Header="PLC Configuration"
+                    FontWeight="Black">
+                <StackPanel Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="PLC IP Address:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="200"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PLC_IP_Address}"/>
+
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="PLC Rack:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="50"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding Rack}"/>
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="PLC Slot:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="50"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding Slot}"/>
+
+                        <!--Phần 2-->
+                        <TextBlock
+                            TextWrapping="Wrap"
+                            Width="245"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="PC IP Address:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="200"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PC_IP_Address}"/>
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            TextWrapping="Wrap"
+                            Width="245"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="PC IP Port:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="100"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PC_IP_Port}"/>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,10,0,0"
+                        Orientation="Horizontal">
+
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!--NetWork Config-->
+
+            <GroupBox
+                IsEnabled="{Binding CanEdit}"
+                Header="Network Configuration"
+                FontSize="50"
+                FontWeight="Black">
+                <StackPanel Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text=" PC Server IP Address:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="200"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PC_Server_IP_Address}"/>
+
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Port:"/>
+                        <TextBox 
+                            FontSize="30"
+                            Width="100"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding PC_Server_Port}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!--Serial Comunication Configuration-->
+
+            <GroupBox
+                    IsEnabled="{Binding CanEdit}"
+                    Header="Serial Communication Configuration"
+                    FontSize="50"
+                    FontWeight="Black">
+                <StackPanel Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="COM Port"/>
+                        <ComboBox 
+                                ItemsSource="{Binding ListCom}"
+                                FontSize="30"
+                                Width="200"
+                                Margin="10,0,0,0"
+                                SelectedItem="{Binding COM_Port}"
+                                VerticalAlignment="Center"
+                            />
+
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Baudrate:"/>
+                        <ComboBox 
+                                ItemsSource="{Binding ListBaudrate}"
+                                FontSize="30"
+                                Width="100"
+                                SelectedItem="{Binding Baudrate}"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"/>
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Databit:"/>
+                        <TextBox 
+                                IsReadOnly="True"
+                                Text="8"
+                                FontSize="30"
+                                Width="50"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"/>
+                        <TextBlock
+                            Margin="15,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Stop Bit:"/>
+                        <TextBox 
+                                IsReadOnly="True"
+                                Text="1"
+                                FontSize="30"
+                                Width="50"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"/>
+                        <TextBlock
+                                 Margin="10,0,0,0"
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Parity:"/>
+                        <ComboBox 
+                                ItemsSource="{Binding Parities}"
+                                SelectedItem="{Binding Paritys}"
+                                FontSize="30"
+                                Width="200"
+                                Margin="34,0,0,0"
+                                VerticalAlignment="Center"
+                            />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,10,0,0"
+                        Orientation="Horizontal">
+
+
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!--Folder Configuration-->
+            <GroupBox
+                    IsEnabled="{Binding CanEdit}"
+                    Header="Folder Configuration"
+                    FontSize="50"
+                    FontWeight="Black">
+                <StackPanel Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                                FontSize="30"
+                                VerticalAlignment="Center"
+                                FontWeight="DemiBold"
+                                Text="Data Folder Path"/>
+                        <TextBox 
+                                IsReadOnly="True"
+                                Text="{Binding Data_Folder}"
+                                FontSize="30"
+                                Width="1000"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                            />
+                        <Button
+                                Command="{Binding OpenPath}"
+                                Margin="20,0,0,0"
+                                Height="50"
+                                Width="60"
+                                >
+                            <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    FontWeight="ExtraBold"
+                                    HorizontalAlignment="Center"
+                                    Text="..."/>
+                        </Button>
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+
+            <Grid Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="4"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="40"
+                    FontWeight="Black"
+                    Width="150" Height="80"
+                    Command="{Binding Edit}">
+                    Edit
+                </Button>
+                <Button
+                    Grid.Column="5"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="40"
+                    FontWeight="Black"
+                    Width="150" Height="80"
+                    Command="{Binding Save}">
+                    Save
+                </Button>
+                <Button
+                    Grid.Column="6"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="40"
+                    FontWeight="Black"
+                    Width="150" Height="80"
+                    Command="{Binding Cancel}">
+                    Cancel
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

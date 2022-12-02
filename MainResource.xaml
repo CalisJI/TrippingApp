@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:TrippingApp.ViewModel"
+                    xmlns:view="clr-namespace:TrippingApp.View">
+    <viewmodel:MainViewModel x:Key="VM_Main"/>
+    <viewmodel:SimulationViewModel x:Key="VM_Simulation"/>
+    <viewmodel:MachineViewModel x:Key="VM_Machine"/>
+    <viewmodel:SettingViewModel x:Key="VM_Seting"/>
+    <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
+        <view:MainView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:SimulationViewModel}">
+        <view:SimulationView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:MachineViewModel}">
+        <view:MachineView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:SettingViewModel}">
+        <view:SettingView/>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="TrippingApp.Control.Heater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.Control"
+             x:Name="digit"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <local:A_Con  x:Key="ACVT"/>
+        <local:B_Con  x:Key="BCVT"/>
+        <local:C_Con  x:Key="CCVT"/>
+        <local:D_Con  x:Key="DCVT"/>
+        <local:E_Con  x:Key="ECVT"/>
+        <local:F_Con  x:Key="FCVT"/>
+        <local:G_Con  x:Key="GCVT"/>
+        <local:DPoint x:Key="DP"/>
+    </UserControl.Resources>
+    <Viewbox Width="{Binding Length_X,RelativeSource={RelativeSource AncestorType=UserControl}}"
+             Height="{Binding Length_Y,RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Grid Background="Black">
+            <TextBlock
+                Visibility="Hidden"
+                x:Name="tb"
+                VerticalAlignment="Top"
+                Margin="0,70,0,0"
+                Width="100"
+                Height="50"
+                Foreground="White"
+                Text="{Binding Number,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <Polygon 
+                Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource FCVT }}"
+                x:Name="f"
+                Width="60"
+                Height="160"
+                Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="22,40,188,200">
+
+            </Polygon>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource ACVT }}"
+            x:Name="a"
+            Width="60"
+            Height="160"
+            Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="91,-26,119,266" RenderTransformOrigin="0.5,0.5">
+                <Polygon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Polygon.RenderTransform>
+            </Polygon>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource BCVT }}"
+            x:Name="b"
+                Width="60"
+                Height="160"
+                Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="190,40,20,200"/>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource GCVT }}"
+            x:Name="g"
+                Width="60"
+                Height="160"
+                Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="90,138,120,102" RenderTransformOrigin="0.5,0.5">
+                <Polygon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Polygon.RenderTransform>
+            </Polygon>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource ECVT }}"
+            x:Name="e"
+            Width="60"
+            Height="160"
+            Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="22,205,188,35"/>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource CCVT }}"
+            x:Name="c"
+            Width="60"
+            Height="160"
+            Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="190,205,20,35"/>
+            <Polygon
+            Visibility="{Binding ElementName=tb,Path=Text, Converter={StaticResource DCVT }}"
+            x:Name="d"
+            Width="60"
+            Height="160"
+            Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Points="15,0 0,30 0,130 15,160 30,130 30,30" Margin="90,303,120,-63" RenderTransformOrigin="0.5,0.5">
+                <Polygon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Polygon.RenderTransform>
+            </Polygon>
+            <Ellipse
+                Visibility="{Binding Fpoint,RelativeSource={RelativeSource AncestorType=UserControl},Converter={StaticResource DP}}"
+                x:Name="dp"
+                Height="30"
+                Width="30"
+                Fill="{Binding MauChu,RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="230,360,0,0">
+            </Ellipse>
+        </Grid>
+    </Viewbox>
+    
+</UserControl>
