@@ -6,10 +6,9 @@
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
              DataContext="{StaticResource VM_Seting}"
-             d:DesignHeight="1000" d:DesignWidth="1920">
-    <Grid>
-        
-        <StackPanel Orientation="Vertical" Margin="0 105 0 0">
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid Background="{StaticResource NormalBrush}">
+        <StackPanel Orientation="Vertical" Margin="0 100 0 0">
             <!--PLC Config-->
             <GroupBox
                     IsEnabled="{Binding CanEdit}"
@@ -29,7 +28,6 @@
                             Margin="10,0,0,0"
                             VerticalAlignment="Center"
                             Text="{Binding PLC_IP_Address}"/>
-
                         <TextBlock
                             Margin="15,0,0,0"
                                 FontSize="30"
@@ -54,7 +52,6 @@
                             Margin="10,0,0,0"
                             VerticalAlignment="Center"
                             Text="{Binding Slot}"/>
-
                         <!--Phần 2-->
                         <TextBlock
                             TextWrapping="Wrap"
@@ -254,7 +251,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <Grid Margin="0,20,0,0">
+            <Grid  Margin="0 120 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

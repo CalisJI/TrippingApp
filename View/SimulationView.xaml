@@ -8,20 +8,24 @@
              xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:digit ="clr-namespace:TrippingApp.Control"
              DataContext="{StaticResource VM_Simulation}"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             d:DesignHeight="1080" d:DesignWidth="1920"
+             >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Unloaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.07*"/>
             <RowDefinition/>
             
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Button
-                Width="100"
-                Height="100">
-                <themes:PackIcon Width="80" Height="80" Kind="ShieldSun"/>
-            </Button>
-        </Grid>
+       
         <Grid Width="1920" Height="980" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

@@ -6,26 +6,124 @@
              xmlns:local="clr-namespace:TrippingApp.Control"
              mc:Ignorable="d" 
              Background="Transparent"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Viewbox Width="200" Height="100">
-        <Grid>
-            <Rectangle Width="200" Height="100">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="1 0" EndPoint="1 1.5">
-                        <GradientStop Color="Red" Offset="0.1" />
-                        <GradientStop Color="Blue" Offset="0.5"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <TextBlock VerticalAlignment="Top" Margin=" 10 10 0 0">
-                <Run Text="Temperature:" FontWeight="DemiBold"/>
-                <Run Text="{Binding NhietDo}"/>
-            </TextBlock>
-            <TextBlock VerticalAlignment="Bottom" Margin="10 0 0 10" >
-                <Run Text="Humidity:" FontWeight="DemiBold"/>
-                <Run Text="{Binding DoAm}"/>
-            </TextBlock>
-        </Grid>
+             Height="{Binding ChieuDai, RelativeSource={RelativeSource AncestorType=UserControl}}"
+             Width="{Binding ChieuRong, RelativeSource={RelativeSource AncestorType=UserControl}}">
+    <UserControl.Resources>
+        <DrawingImage x:Key="temperatureDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V491.173 H491.173 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFD5D6DB" Geometry="F1 M491.173,491.173z M0,0z M296.975,275.165L296.975,56.156C296.975,25.142,271.834,0,240.82,0L240.819,0C209.806,0,184.663,25.142,184.663,56.156L184.663,275.165C149.382,294.882 125.514,332.578 125.514,375.868 125.514,439.549 177.138,491.173 240.819,491.173 304.502,491.173 356.126,439.549 356.126,375.868 356.126,332.578 332.257,294.882 296.975,275.165z" />
+                    <GeometryDrawing Brush="#FFEBF0F3" Geometry="F1 M491.173,491.173z M0,0z M240.82,482.841C181.835,482.841 133.846,434.853 133.846,375.867 133.846,337.156 154.876,301.355 188.728,282.436L192.994,280.05 192.994,56.156C192.994,29.783 214.447,8.33 240.82,8.33 267.193,8.33 288.646,29.783 288.646,56.156L288.646,280.05 292.912,282.436C326.764,301.355 347.794,337.156 347.794,375.867 347.793,434.853 299.805,482.841 240.82,482.841z" />
+                    <GeometryDrawing Brush="#FFE1E6E9" Geometry="F1 M491.173,491.173z M0,0z M252.926,56.153C252.926,49.482 247.493,44.049 240.821,44.049 234.149,44.049 228.716,49.483 228.716,56.153L228.716,168.902 252.926,168.902 252.926,56.153z" />
+                    <GeometryDrawing Brush="#FFE56353" Geometry="F1 M491.173,491.173z M0,0z M275.452,313.601L268.577,309.75C258.91,304.335,252.926,294.12,252.926,283.037L252.926,168.902 228.716,168.902 228.716,283.043C228.716,294.121,222.731,304.335,213.068,309.75L206.155,313.626C176.847,329.99 161.965,365.321 173.459,399.227 181.925,424.2 204.387,442.7 230.493,446.39 274.351,452.586 312.072,418.55 312.072,375.868 312.072,350.08 298.058,326.228 275.452,313.601z" />
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,53.12,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,72.418,48.492,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,91.72,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,111.017,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,130.32,48.492,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,149.637,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,168.94,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,188.217,48.492,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,207.519,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,226.796,30.628,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF3A556A">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="317.167,246.098,48.492,8.929" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="humidityDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V6.827 H6.827 V0 H0 Z">
+                    <GeometryDrawing Brush="#FF1E88E5" Geometry="F0 M6.827,6.827z M0,0z M3.442,0.885C3.689,1.153 3.925,1.432 4.145,1.722 4.329,1.967 4.503,2.22 4.658,2.484 4.892,2.884 5.095,3.328 5.188,3.784 5.223,3.962 5.243,4.143 5.238,4.324A1.82,1.82,0,0,1,5.168,4.788C5.09,5.058 4.945,5.296 4.738,5.488 4.384,5.818 3.892,5.973 3.413,5.973 2.935,5.973 2.443,5.817 2.088,5.488A1.527,1.527,0,0,1,1.658,4.788A1.82,1.82,0,0,1,1.588,4.324C1.584,4.143 1.603,3.962 1.639,3.784 1.732,3.328 1.935,2.884 2.169,2.484 2.324,2.22 2.498,1.967 2.682,1.722 2.902,1.432 3.138,1.153 3.385,0.885L3.414,0.853 3.442,0.885z" />
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M6.827,6.827z M0,0z M3.138,3.557A0.252,0.252,0,0,0,2.942,3.474C2.862,3.474,2.797,3.499,2.75,3.565A0.4,0.4,0,0,0,2.68,3.804C2.68,3.894,2.694,4.001,2.756,4.071A0.24,0.24,0,0,0,2.944,4.155C3.022,4.155,3.084,4.126,3.136,4.069A0.372,0.372,0,0,0,3.216,3.815C3.216,3.725,3.2,3.625,3.137,3.557z M3.734,3.434L2.947,4.95 3.095,4.95 3.879,3.434z M3.873,4.229C3.793,4.229,3.727,4.254,3.679,4.319A0.4,0.4,0,0,0,3.609,4.559C3.609,4.649,3.624,4.756,3.686,4.826A0.24,0.24,0,0,0,3.874,4.91A0.249,0.249,0,0,0,4.067,4.825A0.372,0.372,0,0,0,4.147,4.57C4.147,4.48,4.131,4.38,4.069,4.313A0.252,0.252,0,0,0,3.873,4.229z" />
+                    <GeometryDrawing Brush="#FF1E88E5" Geometry="F0 M6.827,6.827z M0,0z M3.03,3.703A0.11,0.11,0,0,0,2.946,3.666C2.911,3.666,2.882,3.678,2.862,3.706A0.174,0.174,0,0,0,2.832,3.81C2.832,3.849,2.838,3.895,2.865,3.926A0.104,0.104,0,0,0,2.946,3.962C2.98,3.962,3.007,3.95,3.03,3.925A0.161,0.161,0,0,0,3.064,3.815C3.064,3.775,3.058,3.732,3.03,3.703z M3.96,4.458A0.11,0.11,0,0,0,3.876,4.422C3.841,4.422,3.813,4.432,3.792,4.462A0.174,0.174,0,0,0,3.762,4.565C3.762,4.605,3.768,4.651,3.795,4.681A0.104,0.104,0,0,0,3.877,4.718C3.91,4.718,3.937,4.705,3.96,4.68A0.161,0.161,0,0,0,3.995,4.57C3.995,4.531,3.988,4.488,3.96,4.458z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </UserControl.Resources>
+    <Viewbox x:Name="box"
+             Width="{Binding ChieuRong, RelativeSource={RelativeSource AncestorType=UserControl}}"
+             Height="{Binding ChieuDai, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Border BorderBrush="Yellow" BorderThickness="2" Background="Transparent" CornerRadius="5">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                    Height="50"
+                    Width="50"
+                    Source="{StaticResource temperatureDrawingImage}"/>
+                    <TextBlock
+                    Foreground="Red"
+                    Margin="10 0 10 0"
+                    FontSize="40"
+                    FontWeight="Bold">
+                    <Run Text="{Binding NhietDo, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                    <Run Text="&#186;C"/>
+                    </TextBlock>
+                </StackPanel>
+                <Border BorderBrush="Yellow" BorderThickness="1"/>
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                    Height="50"
+                    Width="50"
+                    Source="{StaticResource humidityDrawingImage}"/>
+                    <TextBlock
+                    Foreground="Blue"
+                    Margin="10 0 10 0"
+                    FontSize="40"
+                    FontWeight="Bold">
+                    <Run Text="{Binding DoAm, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                    <Run Text="%"/>
+                    </TextBlock>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+        
     </Viewbox>
     
 </UserControl>

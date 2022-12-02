@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
+using System.Windows.Threading;
 using BaseViewModel;
 using Microsoft.Expression.Interactivity.Core;
 using TrippingApp.Runtime;
@@ -28,6 +29,8 @@ namespace TrippingApp.ViewModel
             set { SetProperty(ref _childPage, value, nameof(ChildPage)); }
         }
 
+        public static DispatcherTimer ShowTimer = new DispatcherTimer();
+
         public ICommand Home_Page_Command { get; set; }
         public ICommand Test { get; set; }
         public ICommand Simulation_Page_Command { get; set; }
@@ -37,12 +40,28 @@ namespace TrippingApp.ViewModel
         public ICommand Data_Machine_Page_Command { get; set; }
         public ICommand Process_Param_Page { get; set; }
 
+        #region Model
+        private string _time;
+
+        public string Timer_Full
+        {
+            get { return _time; }
+            set { SetProperty(ref _time, value, nameof(Timer_Full)); }
+        }
+
+        #endregion
+
         #region ViewModel
         private SimulationViewModel SimulationViewModel;
         private SettingViewModel SettingViewModel;
+        private OverViewMachineViewModel OverViewMachineViewModel;
         #endregion
         public MainViewModel()
         {
+            ShowTimer.Interval = new TimeSpan(0,0,1);
+            ShowTimer.Tick += ShowTimer_Tick;
+            ShowTimer.Start();
+
             this.SelectedViewModel = this;
             Test = new ActionCommand((p) => 
             {
@@ -56,7 +75,12 @@ namespace TrippingApp.ViewModel
             });
             Data_Machine_Page_Command = new ActionCommand(() =>
             {
-            
+                if (OverViewMachineViewModel == null)
+                {
+                    OverViewMachineViewModel = new OverViewMachineViewModel();
+                }
+                ChildPage = true;
+                this.SelectedViewModel = OverViewMachineViewModel;
             });
             #endregion
 
@@ -84,7 +108,7 @@ namespace TrippingApp.ViewModel
             Robot_And_Manual_Configuration_Page_Command = new ActionCommand(() =>
             {
                 ChildPage = true;
-                GetApi.GetData("http://127.0.0.1:8000/");
+                GetApi.GetData("http://127.0.0.1:8D2/");
             });
             #endregion
 
@@ -105,6 +129,19 @@ namespace TrippingApp.ViewModel
             });
             #endregion
 
+        }
+
+        private void ShowTimer_Tick(object sender, EventArgs e)
+        {
+            DateTime dateTime = DateTime.Now;
+            Timer_Full = string.Format("{0}:{1}:{2} {3} {4}-{5}-{6}",
+                dateTime.Hour.ToString("D2"),
+                dateTime.Minute.ToString("D2"),
+                dateTime.Second.ToString("D2"),
+                dateTime.DayOfWeek,
+                dateTime.Day.ToString("D2"),
+                dateTime.Month.ToString("D2"),
+                dateTime.Year);
         }
     }
 }
