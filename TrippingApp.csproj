@@ -124,6 +124,9 @@
     <Compile Include="Control\Heater.xaml.cs">
       <DependentUpon>Heater.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\TandH_Control.xaml.cs">
+      <DependentUpon>TandH_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\VX4_Control.xaml.cs">
       <DependentUpon>VX4_Control.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <DependentUpon>SimulationView.xaml</DependentUpon>
     </Compile>
     <Page Include="Control\Heater.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\TandH_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
