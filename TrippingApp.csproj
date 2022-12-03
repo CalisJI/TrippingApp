@@ -137,6 +137,7 @@
     <Compile Include="ViewModel\MachineViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverViewMachineViewModel.cs" />
+    <Compile Include="ViewModel\Robot_Manual_ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="ViewModel\SimulationViewModel.cs" />
     <Compile Include="View\MachineView.xaml.cs">
@@ -147,6 +148,9 @@
     </Compile>
     <Compile Include="View\OverViewMachineView.xaml.cs">
       <DependentUpon>OverViewMachineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Robot_Manual_ConfigurationView.xaml.cs">
+      <DependentUpon>Robot_Manual_ConfigurationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingView.xaml.cs">
       <DependentUpon>SettingView.xaml</DependentUpon>
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OverViewMachineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Robot_Manual_ConfigurationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

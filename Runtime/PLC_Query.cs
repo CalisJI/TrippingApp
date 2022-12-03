@@ -19,6 +19,7 @@ namespace TrippingApp.Runtime
         /// Trang thái kết nối
         /// </summary>
         public static bool Connected { get; set; } = false;
+
         public static List<DataItem> DataItemPLC;
         /// <summary>
         /// Kiểm tra kết nối với các thiệt bị trong network
@@ -37,8 +38,10 @@ namespace TrippingApp.Runtime
             {
                 return false;
             }
-           
+
         }
+
+
         /// <summary>
         /// Khởi Tạo kết nối PLC
         /// </summary>
@@ -57,7 +60,7 @@ namespace TrippingApp.Runtime
                     PLC_Controller.Open();
                     Connected = true;
                 }
-                if(DataItemPLC == null)
+                if (DataItemPLC == null)
                 {
                     DataItemPLC = new List<DataItem>();
                 }
@@ -67,7 +70,7 @@ namespace TrippingApp.Runtime
 
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-            
+
         }
         /// <summary>
         /// Hàm Đọc trạng thái của Bit
@@ -76,7 +79,7 @@ namespace TrippingApp.Runtime
         /// <returns></returns>
         public static bool ReadBit(string BitAddress)
         {
-            if(PLC_Controller == null)
+            if (PLC_Controller == null)
             {
                 return false;
             }
@@ -99,15 +102,15 @@ namespace TrippingApp.Runtime
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                     return false;
                 }
-               
+
             }
-           
+
         }
         /// <summary>
         /// Hàm ghi giá trị cho các bit
         /// </summary>
         /// <param name="BitAddress"> Địa chỉ Bit cần ghi</param>
-        public static void WriteBit(string BitAddress) 
+        public static void WriteBit(string BitAddress)
         {
             if (PLC_Controller == null)
             {
@@ -121,7 +124,7 @@ namespace TrippingApp.Runtime
                     {
                         PLC_Controller.Write(BitAddress, true);
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -134,9 +137,9 @@ namespace TrippingApp.Runtime
         {
 
         }
-        public static void WriteData(string DataAdress , object value)
+        public static void WriteData(string DataAdress, object value)
         {
-            
+
         }
         /// <summary>
         /// Hàm gán giá trị các thanh ghi chưa dữ liệu barcode backup
@@ -417,9 +420,9 @@ namespace TrippingApp.Runtime
             catch (Exception)
             {
 
-                
+
             }
-         
+
 
         }
     }
@@ -443,5 +446,82 @@ namespace TrippingApp.Runtime
             BarCode = barCode;
             Kind = kind;
         }
+    }
+    public static class BitCrt
+    {
+        /// <summary>
+        /// Bật/Tắt Chế Độ Manual
+        /// </summary>
+        public readonly static string Manual_Mode = "M3.1";
+        /// <summary>
+        /// Enable Robot Servo
+        /// </summary>
+        public readonly static string OnRobot = "M61.5";
+        /// <summary>
+        /// Disable Robot Servo
+        /// </summary>
+        public readonly static string OffRobot = "M61.7";
+        /// <summary>
+        /// Begin Homing Robot Manual
+        /// </summary>
+        public readonly static string Manual_Home_Robot = "M63.3";
+        /// <summary>
+        /// Enable Lift Servo
+        /// </summary>
+        public readonly static string OnLift = "M62.1";
+        /// <summary>
+        /// Disable Lift Servo
+        /// </summary>
+        public readonly static string OffLift = "M62.3";
+        /// <summary>
+        /// Begin Home Lift Manual
+        /// </summary>
+        public readonly static string Manual_Home_Lift = "M61.5";
+
+        public readonly static string Manual_Jog_FW_Robot = "M49.1";
+        public readonly static string Manual_Jog_BW_Robot = "M49.2";
+        public readonly static string Manual_Jog_FW_Lift = "M49.3";
+        public readonly static string Manual_Jog_BW_Lift = "M49.4";
+
+        public readonly static string Write_Data_Point_Robot = "M9.0";
+        public readonly static string Write_Data_Point_Lift = "M9.3";
+
+        public readonly static string SettingData_Point2Set = "DB2.DBW0";
+
+        public readonly static string Jog_FW_TF1 = "M50.5";
+        public readonly static string Jog_BW_TF1 = "M51.0";
+        public readonly static string Jog_FW_TF2 = "M51.3";
+        public readonly static string Jog_BW_TF2 = "M51.4";
+
+        public readonly static string Run_FW_TF1 = "M57.3";
+        public readonly static string Run_BW_TF1 = "M57.4";
+        public readonly static string Run_FW_TF2 = "M54.7";
+        public readonly static string Run_BW_TF2 = "M55.0";
+
+        public readonly static string Set_Frequency_Tranfer = "M17.0";
+        public readonly static string Set_AccDec_Tranfer = "M17.1";
+
+        public readonly static string Set_Frequency_Robot = "M17.4";
+        public readonly static string Set_AccDec_Robot = "M17.6";
+
+        public readonly static string Jog_FW_Lift1 = "M52.1";
+        public readonly static string Jog_BW_Lift1 = "M52.2";
+        public readonly static string Jog_FW_Lift2 = "M52.7";
+        public readonly static string Jog_BW_Lift2 = "M53.0";
+        public readonly static string Jog_FW_Lift3 = "M53.5";
+        public readonly static string Jog_BW_Lift3 = "M53.6";
+
+        public readonly static string Run_FW_Lift1 = "M55.1";
+        public readonly static string Run_BW_Lift1 = "M55.2";
+        public readonly static string Run_FW_Lift2 = "M55.7";
+        public readonly static string Run_BW_Lift2 = "M56.0";
+        public readonly static string Run_FW_Lift3 = "M56.5";
+        public readonly static string Run_BW_Lift3 = "M56.6";
+
+        public readonly static string Run_FW_Input_Conveyor = "M98.1";
+        public readonly static string Run_BW_Input_Convetor = "M98.2";
+        public readonly static string Run_Output_Conveyor = "M98.3";
+
+
     }
 }
