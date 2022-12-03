@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Background="Transparent"
              DataContext="{StaticResource VM_Robot_Manual}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1080" d:DesignWidth="1920">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
@@ -17,7 +17,8 @@
             <i:InvokeCommandAction Command="{Binding Unloaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-            
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        
+    </ScrollViewer>
+    
 </UserControl>

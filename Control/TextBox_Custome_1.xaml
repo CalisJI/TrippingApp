@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="TrippingApp.Control.TextBox_Custome_1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.Control"
+             mc:Ignorable="d" 
+             Height="{Binding ChieuCao, RelativeSource={RelativeSource AncestorType=UserControl}}"
+             Width="{Binding ChieuRong, RelativeSource={RelativeSource AncestorType=UserControl}}">
+    <UserControl.Resources>
+        <!--Plus SVG-->
+        <DrawingImage x:Key="plus_svgrepo_comDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V297 H297 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <DrawingGroup Opacity="1">
+                            <DrawingGroup Opacity="1">
+                                <DrawingGroup Opacity="1">
+                                    <GeometryDrawing Brush="#FF16A085">
+                                        <GeometryDrawing.Geometry>
+                                            <EllipseGeometry RadiusX="148.5" RadiusY="148.5" Center="148.5,148.5" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                </DrawingGroup>
+                            </DrawingGroup>
+                        </DrawingGroup>
+                        <GeometryDrawing Brush="#FF0E7763" Geometry="F1 M297,297z M0,0z M245.337,127.5L51.663,169.5 176.513,294.35C236.059,282.981,282.981,236.059,294.35,176.513L245.337,127.5z" />
+                        <GeometryDrawing Brush="#FFECF0F1" Geometry="F1 M297,297z M0,0z M245.337,127.5L245.337,127.5 169.5,127.5 169.5,51.663 127.5,51.663 127.5,127.5 51.663,127.5 51.663,169.5 127.5,169.5 127.5,245.337 169.5,245.337 169.5,169.5 245.337,169.5z" />
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <!--Minus SVG-->
+        <DrawingImage x:Key="minus_svgrepo_comDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V297 H297 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <DrawingGroup Opacity="1">
+                            <DrawingGroup Opacity="1">
+                                <DrawingGroup Opacity="1">
+                                    <GeometryDrawing Brush="#FFC0392B">
+                                        <GeometryDrawing.Geometry>
+                                            <EllipseGeometry RadiusX="148.5" RadiusY="148.5" Center="148.5,148.5" />
+                                        </GeometryDrawing.Geometry>
+                                    </GeometryDrawing>
+                                </DrawingGroup>
+                            </DrawingGroup>
+                        </DrawingGroup>
+                        <GeometryDrawing Brush="#FF931515" Geometry="F1 M297,297z M0,0z M245.337,127.5L51.663,169.5 176.513,294.35C236.059,282.981,282.981,236.059,294.35,176.513L245.337,127.5z" />
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FFECF0F1">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="51.663,127.5,193.674,42" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </UserControl.Resources>
+    <Viewbox x:Name="box">
+        <Grid Width="{Binding ElementName=box, Path=Width}"
+              Height="{Binding ElementName=box, Path=Height}">
+           
+            <Border
+                CornerRadius="5"
+                BorderBrush="Yellow" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox
+                        VerticalAlignment="Center"
+                        Width="180"
+                        FontSize="40"
+                        Text="{Binding NumberValue, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        Grid.Column="0"
+                        Grid.RowSpan="2"/>
+                    <RepeatButton
+                        VerticalAlignment="Center"
+                        Height="50"
+                        Width="60"
+                        Interval="100"
+                        Margin="0 1 1 2"
+                        Grid.Column="1"
+                        Grid.Row="0">
+                        <Image
+                            Margin="4"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource plus_svgrepo_comDrawingImage}"/>
+                    </RepeatButton>
+                    <RepeatButton
+                        VerticalAlignment="Center"
+                        Height="50"
+                        Width="60"
+                        Interval="100"
+                        Margin="0 2 1 1"
+                        Grid.Column="1"
+                        Grid.Row="1">
+                        <Image
+                            Margin="4"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource minus_svgrepo_comDrawingImage}"/>
+                    </RepeatButton>
+                </Grid>
+            </Border>
+        </Grid>
+    </Viewbox>
+</UserControl>
