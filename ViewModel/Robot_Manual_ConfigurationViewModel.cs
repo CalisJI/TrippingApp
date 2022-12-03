@@ -10,31 +10,55 @@ namespace TrippingApp.ViewModel
 {
     public class Robot_Manual_ConfigurationViewModel:BaseViewModel.BaseViewModel
     {
+
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
+        /// <summary>
+        /// Command To Set Up Parameter Of Servo
+        /// </summary>
+        #region Command To Set Up Parameter Of Servo
         public ICommand SetRobotJogSpeed_Command { get; set; }
         public ICommand SetLiftJogSpeed_Command { get; set; }
         public ICommand SetDataPointRobot_Command { get; set; }
         public ICommand SetDataPointLift_Command { get; set; }
 
+        #endregion
+        /// <summary>
+        /// Command Of Conveyor
+        /// </summary>
+        #region Command Of Conveyor
         public ICommand RunFW_Input_Conveyor_Command { get; set; }
         public ICommand RunBW_Input_Conveyor_Command { get; set; }
         public ICommand RunFW_Output_Conveyor_Command { get; set; }
         public ICommand RunBW_Output_Conveyor_Command { get; set; }
-
+        #endregion
+        
+        /// <summary>
+        /// Robot Commandation
+        /// </summary>
+        #region Command Of Robot
         public ICommand Jog_FW_Robot_P_Command { get; set; }
         public ICommand Jog_FW_Robot_N_Command { get; set; }
 
         public ICommand Jog_BW_Robot_P_Command { get; set; }
         public ICommand Jog_BW_Robot_N_Command { get; set; }
+        #endregion
 
+        /// <summary>
+        /// Lift Commandation
+        /// </summary>
+        #region Command Of Lift
         public ICommand Jog_BW_Lift_P_Command { get; set; }
         public ICommand Jog_BW_Lift_N_Command { get; set; }
 
         public ICommand Jog_FW_Lift_P_Command { get; set; }
         public ICommand Jog_FW_Lift_N_Command { get; set; }
+        #endregion
 
 
+        /// <summary>
+        /// All Commandation of Xy Lanh
+        /// </summary>
         #region Command Control Manual Xy Lanh
         public ICommand Up_XL_Lift_Input_Command { get; set; }
         public ICommand Down_XL_Lift_Input_Command { get; set; }
@@ -65,6 +89,7 @@ namespace TrippingApp.ViewModel
         public ICommand Open_XL_Robot_Command { get; set; }
 
 
+
         #endregion
         public Robot_Manual_ConfigurationViewModel()
         {
@@ -77,6 +102,8 @@ namespace TrippingApp.ViewModel
             {
             
             });
+
+            
         }
     }
 }
