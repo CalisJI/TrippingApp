@@ -7,9 +7,8 @@
              mc:Ignorable="d" 
              xmlns:custom="clr-namespace:TrippingApp.Control"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             Height="{Binding ChieuDai,RelativeSource={RelativeSource AncestorType=UserControl}}"
-             Width="{Binding ChieuRong, RelativeSource={RelativeSource AncestorType=UserControl}}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Name="rb">
     <UserControl.Resources>
         <DrawingImage x:Key="back_svgrepo_comDrawingImage">
             <DrawingImage.Drawing>
@@ -122,60 +121,145 @@
                 </DrawingGroup>
             </DrawingImage.Drawing>
         </DrawingImage>
+        <!--Play SVG-->
+        <DrawingImage x:Key="play_svgrepo_comDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFF7F4F">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFE03A00" Geometry="F1 M512,512z M0,0z M143.496,364.385L288.999,509.888C404.085,495.076,495.24,403.846,509.928,288.72L366.187,144.979 143.496,364.385z" />
+                    <GeometryDrawing Brush="#FFFFFFFF">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="156.444" RadiusY="156.444" Center="256,256" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFD3D3D3" Geometry="F1 M512,512z M0,0z M99.578,254.276C99.571,254.85 99.556,255.424 99.556,256 99.556,342.402 169.598,412.444 256,412.444 342.402,412.444 412.444,342.402 412.444,256 412.444,255.424 412.428,254.85 412.422,254.276L99.578,254.276z" />
+                    <GeometryDrawing Brush="#FFDB0529" Geometry="F1 M512,512z M0,0z M220.074,163.693L357.936,243.287C367.721,248.936,367.721,263.06,357.936,268.709L220.074,348.303C210.289,353.952,198.056,346.891,198.056,335.591L198.056,176.402C198.056,165.105,210.287,158.044,220.074,163.693z" />
+                    <GeometryDrawing Brush="#FFC2001B" Geometry="F1 M512,512z M0,0z M198.056,254.276L198.056,335.594C198.056,346.892,210.287,353.955,220.074,348.306L357.936,268.712C363.399,265.557,365.804,259.763,365.168,254.276L198.056,254.276z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <!--Stop SVG-->
+        <DrawingImage x:Key="stop_svgrepo_comDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFC61B">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFD48B07" Geometry="F1 M512,512z M0,0z M149.838,370.074L289.571,509.807C404.301,494.778,495.123,403.79,509.89,288.98L369.9,148.989 149.838,370.074z" />
+                    <GeometryDrawing Brush="#FFFFEDB5">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="156.444" RadiusY="156.444" Center="256,256" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFEE187" Geometry="F1 M512,512z M0,0z M256,99.556C255.809,99.556,255.617,99.563,255.426,99.563L255.426,412.438C255.617,412.438 255.809,412.445 256,412.445 342.402,412.445 412.444,342.403 412.444,256.001 412.444,169.599 342.402,99.556 256,99.556z" />
+                    <GeometryDrawing Brush="#FF366695" Geometry="F1 M512,512z M0,0z M306.495,177.778L205.503,177.778C190.19,177.778,177.777,190.192,177.777,205.505L177.777,306.497C177.777,321.81,190.191,334.223,205.504,334.223L306.496,334.223C321.809,334.223,334.222,321.809,334.222,306.496L334.222,205.503C334.222,190.192,321.808,177.778,306.495,177.778z" />
+                    <GeometryDrawing Brush="#FF273B7A" Geometry="F1 M512,512z M0,0z M306.497,177.778L255.426,177.778 255.426,334.222 306.497,334.222C321.81,334.222,334.223,321.808,334.223,306.496L334.223,205.505C334.222,190.192,321.808,177.778,306.497,177.778z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid 
-            Grid.Row="1"
-            Grid.ColumnSpan="2">
+    <Viewbox>
+        <Grid Width="800" Height="450">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-
             </Grid.ColumnDefinitions>
-            <Button
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label
+                    Height="40" 
+                    Width="120"
+                    FontSize="25"
+                    FontWeight="DemiBold"
+                    BorderBrush="Purple"
+                    BorderThickness="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content="{Binding CurrentPos, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                
+            </Grid>
+            <Grid 
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Button
                 Grid.Column="0"
                 Height="80"
                 Width="90"
                 ToolTip="Jog Backward">
-                <Image 
+                    <Image 
                     Stretch="Uniform"
                     Source="{StaticResource back_svgrepo_comDrawingImage}">
 
-                </Image>
-            </Button>
-            <Button
+                    </Image>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewTouchDown">
+                            <i:InvokeCommandAction Command="{Binding JogBW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseDown">
+                            <i:InvokeCommandAction Command="{Binding JogBW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewTouchUp">
+                            <i:InvokeCommandAction Command="{Binding JogBW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseUp">
+                            <i:InvokeCommandAction Command="{Binding JogBW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </Button>
+                <Button
                 Grid.Column="1"
                 Height="80"
                 Width="90"
                 ToolTip="Jog Forward"
                 RenderTransformOrigin="0.5,0.5">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Image 
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Image 
                     Stretch="Uniform"
                     Source="{StaticResource back_svgrepo_comDrawingImage}"/>
-            </Button>
-            <TextBlock
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewTouchDown">
+                            <i:InvokeCommandAction Command="{Binding JogFW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseDown">
+                            <i:InvokeCommandAction Command="{Binding JogFW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewTouchUp">
+                            <i:InvokeCommandAction Command="{Binding JogFW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseUp">
+                            <i:InvokeCommandAction Command="{Binding JogFW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <TextBlock
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Grid.Column="2"
@@ -183,142 +267,157 @@
                 FontWeight="DemiBold"
                 TextAlignment="Center"
                 TextWrapping="Wrap"
-                Text="Jog Speed"/>
-            <Grid 
-                Grid.Column="3"
-                Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.3*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <RepeatButton
-                        Interval="50"
-                        Grid.Row="0"
-                        Margin="0 0 0 5">
-                        <Image Source="{StaticResource plus_svgrepo_comDrawingImage}"/>
-                    </RepeatButton>
-
-                    <RepeatButton
-                        Interval="100"
-                        Grid.Row="1"
-                        Margin="0 5 0 0">
-                        <Image Source="{StaticResource minus_svgrepo_comDrawingImage}"/>
-                    </RepeatButton>
-                </Grid>
-                <TextBox
-                    
-                    FontSize="45"
-                    Width="150"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    FontWeight="Black"
-                    Text="{Binding Jog_Speed, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                />
-            </Grid>
-            <Button
+                Text="Speed:"/>
+                <custom:TextBox_Custome_1
+                Height="90"
+                NumberValue="{Binding JogSpeed, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Grid.ColumnSpan="2"
+                Grid.Column="3"/>
+                <Button
+                Command="{Binding SetSpeedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Grid.Column="5"
-                Width="100"
-                Height="80" >
-                <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
-            </Button>
-        </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+                Width="80"
+                Height="70" >
+                    <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <custom:TextBox_Custome_1
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <custom:TextBox_Custome_1
                     Margin="6,6,0,6"
                     Width="160"
+                    NumberValue="{Binding PosBath4, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     HorizontalAlignment="Left"/>
-                <Button
+                    <Button
+                    Command="{Binding Set_PosBath4_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Height="60"
                     Width="60"
                     Grid.Column="1">
-                    <Image
+                        <Image
                         Margin="6"
                         Source="{StaticResource download_svgrepo_comDrawingImage}"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <custom:TextBox_Custome_1
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <custom:TextBox_Custome_1
                     Margin="6,6,0,6"
                     Width="160"
+                    NumberValue="{Binding PosBath5, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     HorizontalAlignment="Left"/>
-                <Button
+                    <Button
+                    Command="{Binding Set_PosBath5_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Height="60"
                     Width="60"
                     Grid.Column="1">
-                    <Image
+                        <Image
                         Margin="6"
                         Source="{StaticResource download_svgrepo_comDrawingImage}"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <custom:TextBox_Custome_1
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <custom:TextBox_Custome_1
                     Margin="6,6,0,6"
                     Width="160"
+                    NumberValue="{Binding PosBath6, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     HorizontalAlignment="Left"/>
-                <Button
+                    <Button
+                    Command="{Binding Set_PosBath6_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Height="60"
                     Width="60"
                     Grid.Column="1">
-                    <Image
+                        <Image
                         Margin="6"
                         Source="{StaticResource download_svgrepo_comDrawingImage}"/>
-                </Button>
+                    </Button>
+                </Grid>
             </Grid>
-        </Grid>
-        <Grid Grid.Row="3" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button
+            <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button
+                Command="{Binding Origin_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Height="80"
-                Width="100"
-                Grid.Column="2">
-                <StackPanel Orientation="Vertical">
-                    <Image
+                Width="80"
+                Grid.Column="5">
+                    <StackPanel Orientation="Vertical">
+                        <Image
                         
                         Width="50"
                         Source="{StaticResource house_home_svgrepo_comDrawingImage}"/>
-                    <Label
+                        <Label
                         Foreground="Black"
                         Content="Origin"
                         HorizontalAlignment="Center"
                         FontWeight="Bold"/>
-                </StackPanel>
-                
-            </Button>
+                    </StackPanel>
+                </Button>
+                <Button
+                Command="{Binding Enable_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Height="80"
+                Width="80"
+                Grid.Column="3">
+                    <StackPanel Orientation="Vertical">
+                        <Image
+                        
+                        Width="50"
+                        Source="{StaticResource play_svgrepo_comDrawingImage}"/>
+                        <Label
+                        Foreground="Black"
+                        Content="Enable"
+                        HorizontalAlignment="Center"
+                        FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+                <Button
+                Command="{Binding Disable_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Height="80"
+                Width="80"
+                Grid.Column="4">
+                    <StackPanel Orientation="Vertical">
+                        <Image
+                        
+                        Width="50"
+                        Source="{StaticResource stop_svgrepo_comDrawingImage}"/>
+                        <Label
+                        Foreground="Black"
+                        Content="Disable"
+                        HorizontalAlignment="Center"
+                        FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </Grid>
-    </Grid>
+    </Viewbox>
+    
 </UserControl>

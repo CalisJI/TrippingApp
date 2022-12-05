@@ -6,9 +6,7 @@
              xmlns:local="clr-namespace:TrippingApp.Control"
              xmlns:digit ="clr-namespace:TrippingApp.Control"
              xmlns:mtr="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
-             Width="{Binding Length_X,RelativeSource={RelativeSource AncestorType=UserControl}}"
-             Height="{Binding Length_Y,RelativeSource={RelativeSource AncestorType=UserControl}}">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <digit:Ditgit1 x:Key="Digit1"/>
         <digit:Ditgit2 x:Key="Digit2"/>

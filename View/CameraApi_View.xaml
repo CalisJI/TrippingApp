@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="TrippingApp.View.CameraApi_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.View"
+             xmlns:cvt="clr-namespace:TrippingApp.ViewModel"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource VM_CamApi}"
+             xmlns:camera="clr-namespace:Cognex.InSight.Controls;assembly=Cognex.InSight"
+             d:DesignHeight="1000" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <cvt:ChangedState x:Key="ChangedConnect"/>
+    </UserControl.Resources>
+    <Viewbox>
+        <Grid Width="1920" Height="1000">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.1*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GroupBox
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontSize="30"
+                Header="Controls"
+                FontWeight="Black"
+                Grid.Row="0" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.1*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Margin="5 5 0 0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Margin="10 0 0 0"
+                                    FontSize="28"
+                                    Text="Address:" Width="150"/>
+                                <TextBox
+                                    Width="320"
+                                    FontSize="28"
+                                    VerticalContentAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding CameraAddress}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Margin="10 0 0 0"
+                                    FontSize="28"
+                                    Text="Username:" Width="150"/>
+                                <TextBox
+                                    Width="320"
+                                    FontSize="28"
+                                    VerticalContentAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Username}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Margin="10 0 0 0"
+                                    FontSize="28"
+                                    Text="Password:" Width="150"/>
+                                <TextBox
+                                    Width="320"
+                                    FontSize="28"
+                                    VerticalContentAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Password}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button
+                            Command="{Binding Connect_Camera_Command}"
+                            Margin="5"
+                            Height="100"
+                            Width="100"
+                            Grid.Column="1"
+                            >
+                            <Image
+                                Margin="10"
+                                Source="{Binding Connected, Converter={StaticResource ChangedConnect}}"/>
+                        </Button>
+                    </Grid>
+                    
+                    <!--CheckBox Group-->
+                    <Grid Grid.Column="1" Margin="20 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <CheckBox 
+                            
+                            IsChecked="True"
+                            FontSize="15"
+                            VerticalAlignment="Center" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                            <TextBlock Text="Show Grid" VerticalAlignment="Center"/>
+                        </CheckBox>
+                        <CheckBox 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            IsChecked="True"
+                            FontSize="15"
+                            VerticalAlignment="Center" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                            <TextBlock Text="Show Graphics" VerticalAlignment="Center"/>
+                        </CheckBox>
+                        <CheckBox 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            IsChecked="True"
+                            FontSize="15"
+                            VerticalAlignment="Center" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                            <TextBlock Text="Show Image" VerticalAlignment="Center"/>
+                        </CheckBox>
+                        <CheckBox 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsChecked="True"
+                            FontSize="15"
+                            VerticalAlignment="Center" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                            <TextBlock Text="Online" VerticalAlignment="Center"/>
+                        </CheckBox>
+                        <CheckBox 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsChecked="True"
+                            FontSize="15"
+                            VerticalAlignment="Center" VerticalContentAlignment="Center">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                            <TextBlock Text="Live" VerticalAlignment="Center"/>
+                        </CheckBox>
+                    </Grid>
+                    
+                    <!--Show Grid-->
+                   
+                </Grid>
+                
+            </GroupBox>
+            <GroupBox
+                Header="Image Zoom"
+                FontSize="30"
+                FontWeight="DemiBold"
+                Grid.Row="0" Grid.Column="2">
+                <Grid Margin="30 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <RadioButton
+                        FontSize="15"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Row="0" >
+                        <RadioButton.LayoutTransform>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        </RadioButton.LayoutTransform>
+                        <TextBlock Text="None"/>
+                    </RadioButton>
+                    <RadioButton
+                        FontSize="15"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Row="1" >
+                        <RadioButton.LayoutTransform>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        </RadioButton.LayoutTransform>
+                        <TextBlock Text="Fit"/>
+                    </RadioButton>
+                    <RadioButton
+                        FontSize="15"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsChecked="True"
+                        Grid.Row="2" >
+                        <RadioButton.LayoutTransform>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        </RadioButton.LayoutTransform>
+                        <TextBlock Text="Fill"/>
+                    </RadioButton>
+                </Grid>
+            </GroupBox>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.Children >
+                    <ContentControl Content="{Binding CognexControl}"/>
+                </Grid.Children>
+            </Grid>
+        </Grid>
+    </Viewbox>
+   
+</UserControl>

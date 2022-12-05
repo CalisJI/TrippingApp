@@ -19,7 +19,9 @@ namespace TrippingApp.ViewModel
         #region Command To Set Up Parameter Of Servo
         public ICommand SetRobotJogSpeed_Command { get; set; }
         public ICommand SetLiftJogSpeed_Command { get; set; }
-        public ICommand SetDataPointRobot_Command { get; set; }
+        public ICommand SetDataPointBath4Robot_Command { get; set; }
+        public ICommand SetDataPointBath5Robot_Command { get; set; }
+        public ICommand SetDataPointBath6Robot_Command { get; set; }
         public ICommand SetDataPointLift_Command { get; set; }
 
         #endregion
@@ -42,8 +44,52 @@ namespace TrippingApp.ViewModel
 
         public ICommand Jog_BW_Robot_P_Command { get; set; }
         public ICommand Jog_BW_Robot_N_Command { get; set; }
+
+        public ICommand Origin_Robot_Command { get; set; }
+
+        public ICommand Enable_Robot_Command { get; set; }
+        public ICommand Disable_Robot_Command { get; set; }
         #endregion
 
+        #region Model Of Robot
+        private int _jog_robot_speed;
+
+        public int Jog_Robot_Speed
+        {
+            get { return _jog_robot_speed; }
+            set { SetProperty(ref _jog_robot_speed, value, nameof(Jog_Robot_Speed)); }
+        }
+
+        private int _posBath4;
+
+        public int PosBath4
+        {
+            get { return _posBath4; }
+            set { SetProperty(ref _posBath4, value, nameof(PosBath4)); }
+        }
+        private int _posBath5;
+
+        public int PosBath5
+        {
+            get { return _posBath5; }
+            set { SetProperty(ref _posBath5,value,nameof(PosBath5)); }
+        }
+        private int _posBath6;
+
+        public int PosBath6
+        {
+            get { return _posBath6; }
+            set { SetProperty(ref _posBath6,value,nameof(PosBath6)); }
+        }
+        private int _currentPos;
+
+        public int CurrentPos
+        {
+            get { return _currentPos; }
+            set { SetProperty(ref _currentPos, value, nameof(CurrentPos)); }
+        }
+
+        #endregion
         /// <summary>
         /// Lift Commandation
         /// </summary>
@@ -53,6 +99,12 @@ namespace TrippingApp.ViewModel
 
         public ICommand Jog_FW_Lift_P_Command { get; set; }
         public ICommand Jog_FW_Lift_N_Command { get; set; }
+
+        public ICommand Origin_Lift_Command { get; set; }
+
+        public ICommand Enable_Lift_Command { get; set; }
+
+        public ICommand Disable_Lift_Command { get; set; }
         #endregion
 
 

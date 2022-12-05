@@ -90,6 +90,8 @@
                         Interval="100"
                         Margin="0 1 1 2"
                         Grid.Column="1"
+                        PreviewTouchDown="RepeatButton_PreviewTouchDown"
+                        Click="RepeatButton_Click"
                         Grid.Row="0">
                         <Image
                             Margin="4"
@@ -103,6 +105,8 @@
                         Interval="100"
                         Margin="0 2 1 1"
                         Grid.Column="1"
+                        PreviewTouchDown="RepeatButton_PreviewTouchDown_1"
+                        Click="RepeatButton_Click_1"
                         Grid.Row="1">
                         <Image
                             Margin="4"

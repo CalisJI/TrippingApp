@@ -39,6 +39,7 @@ namespace TrippingApp.ViewModel
         public ICommand Robot_And_Manual_Configuration_Page_Command { get; set; }
         public ICommand Data_Machine_Page_Command { get; set; }
         public ICommand Process_Param_Page { get; set; }
+        public ICommand CameraAPI_Page_Command { get; set; }
 
         #region Model
         private string _time;
@@ -55,6 +56,8 @@ namespace TrippingApp.ViewModel
         private SimulationViewModel SimulationViewModel;
         private SettingViewModel SettingViewModel;
         private OverViewMachineViewModel OverViewMachineViewModel;
+        private Robot_Manual_ConfigurationViewModel Robot_Manual_ConfigurationViewModel;
+        private CameraApiViewModel CameraApiViewModel;
         #endregion
         public MainViewModel()
         {
@@ -68,6 +71,19 @@ namespace TrippingApp.ViewModel
                 string a = (string)p;
                 Console.WriteLine(a);
             });
+
+            #region C-Letter Command
+            CameraAPI_Page_Command = new ActionCommand(() =>
+            {
+                if (CameraApiViewModel == null) 
+                {
+                    CameraApiViewModel = new CameraApiViewModel();
+                }
+                this.SelectedViewModel = CameraApiViewModel;
+                ChildPage = true;
+            });
+            #endregion
+
             #region D- Letter Command
             DashBoard_Page_Command = new ActionCommand(() =>
             {
@@ -108,7 +124,12 @@ namespace TrippingApp.ViewModel
             Robot_And_Manual_Configuration_Page_Command = new ActionCommand(() =>
             {
                 ChildPage = true;
-                GetApi.GetData("http://127.0.0.1:8D2/");
+                if (Robot_Manual_ConfigurationViewModel == null)
+                {
+                    Robot_Manual_ConfigurationViewModel = new Robot_Manual_ConfigurationViewModel();
+                }
+                this.SelectedViewModel = Robot_Manual_ConfigurationViewModel;
+                //GetApi.GetData("http://127.0.0.1:8D2/");
             });
             #endregion
 

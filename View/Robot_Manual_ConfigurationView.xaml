@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
+             xmlns:control="clr-namespace:TrippingApp.Control"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Background="Transparent"
              DataContext="{StaticResource VM_Robot_Manual}"
@@ -17,8 +18,32 @@
             <i:InvokeCommandAction Command="{Binding Unloaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-        
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" Width="1920">
+        <Grid Width="3840" Height="1060">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <control:Robot_Control
+                JogBW_P_Command="{Binding Jog_BW_Robot_P_Command}"
+                JogBW_N_Command="{Binding Jog_BW_Robot_N_Command}"
+                JogFW_P_Command="{Binding Jog_FW_Robot_P_Command}"
+                JogFW_N_Command="{Binding Jog_FW_Robot_N_Command}"
+                Origin_Command="{Binding Origin_Robot_Command}"
+                Enable_Command="{Binding Enable_Robot_Command}"
+                Disable_Command="{Binding Disable_Robot_Command}"
+                SetSpeedCommand="{Binding SetRobotJogSpeed_Command}"
+                Set_PosBath4_Command="{Binding SetDataPointBath4Robot_Command}"
+                Set_PosBath5_Command="{Binding SetDataPointBath5Robot_Command}"
+                Set_PosBath6_Command="{Binding SetDataPointBath6Robot_Command}"
+                JogSpeed="{Binding Jog_Robot_Speed}"
+                PosBath4="{Binding PosBath4}"
+                PosBath5="{Binding PosBath5}"
+                PosBath6="{Binding PosBath6}"
+                CurrentPos="{Binding CurrentPos}"
+                Grid.Column="0"/>
+        </Grid>
     </ScrollViewer>
     
 </UserControl>

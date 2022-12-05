@@ -62,9 +62,38 @@ namespace TrippingApp.Control
             DependencyProperty.Register("NumberValue", typeof(int), typeof(TextBox_Custome_1), new PropertyMetadata(0));
 
 
+        void Inscrease() 
+        {
+            if (NumberValue < 2500)
+            {
+                SetValue(NumberValueProperty, NumberValue += 1);
+            }
+        }
+        void Descrease() 
+        {
+            if (NumberValue > 0)
+            {
+                SetValue(NumberValueProperty, NumberValue -= 1);
+            }
+        }
+        private void RepeatButton_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+            Inscrease();
+        }
 
+        private void RepeatButton_Click(object sender, RoutedEventArgs e)
+        {
+           Inscrease();
+        }
 
+        private void RepeatButton_PreviewTouchDown_1(object sender, TouchEventArgs e)
+        {
+            Descrease();
+        }
 
-
+        private void RepeatButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Descrease();
+        }
     }
 }

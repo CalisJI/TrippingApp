@@ -41,6 +41,14 @@
     <Reference Include="BaseViewModel">
       <HintPath>..\..\Class\BaseViewModel\bin\Debug\BaseViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="Cognex.InSight, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Public\Documents\Cognex\In-Sight\In-Sight Sample Projects 6.2.2\C# v2012\Display Control\bin\Debug\Cognex.InSight.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.InSight.Controls.Display, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Public\Documents\Cognex\In-Sight\In-Sight Sample Projects 6.2.2\C# v2012\Display Control\bin\Debug\Cognex.InSight.Controls.Display.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.9.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MaterialDesignInXamlToolkit-master\MaterialDesignInXamlToolkit-master\MainDemo.Wpf\bin\Debug\net472\MaterialDesignColors.dll</HintPath>
@@ -69,6 +77,7 @@
       <HintPath>packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -110,9 +119,10 @@
     <Reference Include="Uno.Diagnostics.Eventing, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Uno.Diagnostics.Eventing.2.0.1\lib\netstandard2.0\Uno.Diagnostics.Eventing.dll</HintPath>
     </Reference>
-    <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -137,15 +147,20 @@
       <DependentUpon>VX4_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logger\Logger.cs" />
+    <Compile Include="Runtime\CameraApi.cs" />
     <Compile Include="Runtime\DataCSV_Funtion.cs" />
     <Compile Include="Runtime\GetApi.cs" />
     <Compile Include="Runtime\PLC_Query.cs" />
+    <Compile Include="ViewModel\CameraApiViewModel.cs" />
     <Compile Include="ViewModel\MachineViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverViewMachineViewModel.cs" />
     <Compile Include="ViewModel\Robot_Manual_ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="ViewModel\SimulationViewModel.cs" />
+    <Compile Include="View\CameraApi_View.xaml.cs">
+      <DependentUpon>CameraApi_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MachineView.xaml.cs">
       <DependentUpon>MachineView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CameraApi_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

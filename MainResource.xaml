@@ -7,6 +7,7 @@
     <viewmodel:MachineViewModel x:Key="VM_Machine"/>
     <viewmodel:SettingViewModel x:Key="VM_Seting"/>
     <viewmodel:Robot_Manual_ConfigurationViewModel x:Key="VM_Robot_Manual"/>
+    <viewmodel:CameraApiViewModel x:Key="VM_CamApi"/>
     <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
         <view:MainView/>
     </DataTemplate>
@@ -21,5 +22,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:Robot_Manual_ConfigurationViewModel}">
         <view:Robot_Manual_ConfigurationView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:CameraApiViewModel}">
+        <view:CameraApi_View/>
     </DataTemplate>
 </ResourceDictionary>
