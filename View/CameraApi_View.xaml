@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TrippingApp.View"
              xmlns:cvt="clr-namespace:TrippingApp.ViewModel"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_CamApi}"
              xmlns:camera="clr-namespace:Cognex.InSight.Controls;assembly=Cognex.InSight"
              d:DesignHeight="1000" d:DesignWidth="1920">
@@ -15,8 +16,9 @@
     <Viewbox>
         <Grid Width="1920" Height="1000">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.2*"/>
                 <RowDefinition/>
+                <RowDefinition Height="0.05*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.1*"/>
@@ -45,11 +47,11 @@
                                 <TextBlock
                                     FontWeight="Bold"
                                     Margin="10 0 0 0"
-                                    FontSize="28"
+                                    FontSize="25"
                                     Text="Address:" Width="150"/>
                                 <TextBox
                                     Width="320"
-                                    FontSize="28"
+                                    FontSize="25"
                                     VerticalContentAlignment="Center"
                                     VerticalAlignment="Center"
                                     Text="{Binding CameraAddress}"/>
@@ -58,11 +60,11 @@
                                 <TextBlock
                                     FontWeight="Bold"
                                     Margin="10 0 0 0"
-                                    FontSize="28"
+                                    FontSize="25"
                                     Text="Username:" Width="150"/>
                                 <TextBox
                                     Width="320"
-                                    FontSize="28"
+                                    FontSize="25"
                                     VerticalContentAlignment="Center"
                                     VerticalAlignment="Center"
                                     Text="{Binding Username}"/>
@@ -71,17 +73,18 @@
                                 <TextBlock
                                     FontWeight="Bold"
                                     Margin="10 0 0 0"
-                                    FontSize="28"
+                                    FontSize="25"
                                     Text="Password:" Width="150"/>
                                 <TextBox
                                     Width="320"
-                                    FontSize="28"
+                                    FontSize="25"
                                     VerticalContentAlignment="Center"
                                     VerticalAlignment="Center"
                                     Text="{Binding Password}"/>
                             </StackPanel>
                         </StackPanel>
                         <Button
+                            IsEnabled="{Binding Enable_Connect_Btn}"
                             Command="{Binding Connect_Camera_Command}"
                             Margin="5"
                             Height="100"
@@ -106,58 +109,87 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <CheckBox 
-                            
-                            IsChecked="True"
+                            IsChecked="{Binding ShowGrid_Check}"
                             FontSize="15"
                             VerticalAlignment="Center" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                             <TextBlock Text="Show Grid" VerticalAlignment="Center"/>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Grid_check_Command}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </CheckBox>
                         <CheckBox 
                             Grid.Row="1"
                             Grid.Column="0"
-                            IsChecked="True"
+                            IsChecked="{Binding ShowGraphics_Check}"
                             FontSize="15"
                             VerticalAlignment="Center" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                             <TextBlock Text="Show Graphics" VerticalAlignment="Center"/>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Graphics_check_Command}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </CheckBox>
                         <CheckBox 
                             Grid.Row="2"
                             Grid.Column="0"
-                            IsChecked="True"
+                            IsChecked="{Binding ShowImage_Check}"
                             FontSize="15"
                             VerticalAlignment="Center" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                             <TextBlock Text="Show Image" VerticalAlignment="Center"/>
                         </CheckBox>
                         <CheckBox 
+                            x:Name="chkOnline"
                             Grid.Row="0"
                             Grid.Column="1"
-                            IsChecked="True"
+                            IsChecked="{Binding Online_Check}"
                             FontSize="15"
                             VerticalAlignment="Center" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                             <TextBlock Text="Online" VerticalAlignment="Center"/>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Online_check_Command}" CommandParameter="{Binding ElementName=chkOnline, Path=IsChecked}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding Online_check_Command}" CommandParameter="{Binding ElementName=chkOnline, Path=IsChecked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </CheckBox>
                         <CheckBox 
+                            x:Name="chkLive"
+                            BorderBrush="Yellow"
+                            BorderThickness="2"
                             Grid.Row="1"
                             Grid.Column="1"
-                            IsChecked="True"
+                            IsChecked="{Binding Live_Check}"
                             FontSize="15"
                             VerticalAlignment="Center" VerticalContentAlignment="Center">
                             <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                             <TextBlock Text="Live" VerticalAlignment="Center"/>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Live_check_Command}" CommandParameter="{Binding ElementName=chkLive, Path=IsChecked}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding Live_check_Command}" CommandParameter="{Binding ElementName=chkLive, Path=IsChecked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </CheckBox>
                     </Grid>
                     
@@ -179,6 +211,7 @@
                     </Grid.RowDefinitions>
                     <RadioButton
                         FontSize="15"
+                        IsChecked="{Binding RatioNone_Check}"
                         VerticalContentAlignment="Center"
                         VerticalAlignment="Center"
                         Grid.Row="0" >
@@ -189,6 +222,7 @@
                     </RadioButton>
                     <RadioButton
                         FontSize="15"
+                        IsChecked="{Binding RatioFit_Check}"
                         VerticalContentAlignment="Center"
                         VerticalAlignment="Center"
                         Grid.Row="1" >
@@ -198,10 +232,11 @@
                         <TextBlock Text="Fit"/>
                     </RadioButton>
                     <RadioButton
+                        
                         FontSize="15"
                         VerticalContentAlignment="Center"
                         VerticalAlignment="Center"
-                        IsChecked="True"
+                        IsChecked="{Binding RatioFill_Check}"
                         Grid.Row="2" >
                         <RadioButton.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -215,6 +250,36 @@
                     <ContentControl Content="{Binding CognexControl}"/>
                 </Grid.Children>
             </Grid>
+            <StatusBar
+                Background="Gray"
+                Grid.Row="2"
+                Grid.ColumnSpan="3"
+                >
+                <StatusBarItem Width="200">
+                    <TextBlock
+                        FontSize="20"
+                        Foreground="Lime"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Text="{Binding InforState}"/>
+                </StatusBarItem>
+                <StatusBarItem Width="600">
+                    <TextBlock 
+                        Foreground="Lime"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                               Text="{Binding InforStatus}"/>
+                </StatusBarItem>
+                <StatusBarItem Width="300">
+                    <TextBlock 
+                        Foreground="Lime"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        VerticalAlignment="Center"
+                               Text="{Binding Cognex_Result}"/>
+                </StatusBarItem>
+            </StatusBar>
         </Grid>
     </Viewbox>
    
