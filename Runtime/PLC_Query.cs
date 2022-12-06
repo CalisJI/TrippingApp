@@ -64,6 +64,7 @@ namespace TrippingApp.Runtime
                 {
                     DataItemPLC = new List<DataItem>();
                 }
+                //Initial_Barcode_Address(DataItemPLC);
             }
             catch (Exception ex)
             {
@@ -107,10 +108,11 @@ namespace TrippingApp.Runtime
 
         }
         /// <summary>
-        /// Hàm ghi giá trị cho các bit
+        /// Hàm Set bit
         /// </summary>
-        /// <param name="BitAddress"> Địa chỉ Bit cần ghi</param>
-        public static void WriteBit(string BitAddress)
+        /// <param name="BitAddress">Địa chỉ</param>
+        /// <param name="value">Giá trị</param>
+        public static void WriteBit(string BitAddress,bool value)
         {
             if (PLC_Controller == null)
             {
@@ -122,7 +124,7 @@ namespace TrippingApp.Runtime
                 {
                     if (Connected && PLC_Controller.IsConnected)
                     {
-                        PLC_Controller.Write(BitAddress, true);
+                        PLC_Controller.Write(BitAddress, value);
                     }
 
                 }
@@ -140,6 +142,30 @@ namespace TrippingApp.Runtime
         public static void WriteData(string DataAdress, object value)
         {
 
+        }
+
+        public static void WriteArrayData()
+        {
+            if (PLC_Controller == null)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    if (Connected && PLC_Controller.IsConnected)
+                    {
+                        PLC_Controller.Write(DataItemPLC.ToArray());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+
+            }
         }
         /// <summary>
         /// Hàm gán giá trị các thanh ghi chưa dữ liệu barcode backup
@@ -414,7 +440,6 @@ namespace TrippingApp.Runtime
                 DataItemPLC.Add(Barcode9_P2);
                 DataItemPLC.Add(Barcode10_P1);
                 DataItemPLC.Add(Barcode10_P2);
-
                 PLC_Controller.Write(DataItemPLC.ToArray());
             }
             catch (Exception)
@@ -422,8 +447,6 @@ namespace TrippingApp.Runtime
 
 
             }
-
-
         }
     }
 

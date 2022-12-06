@@ -12,12 +12,22 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using TrippingApp.AppConfig;
 using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
     public class CameraApiViewModel:BaseViewModel.BaseViewModel
     {
+
+        #region Event
+        public event EventHandler QRCodeReceived;
+        protected virtual void OnQRCodeReceived(QRCodeReceivedEventArgs e)
+        {
+            QRCodeReceived?.Invoke(this, e);
+        }
+        public delegate void QRCodeReceivedEventHandler(object sender, QRCodeReceivedEventArgs e);
+        #endregion
         private BaseViewModel.BaseViewModel _selectecViewModel;
 
         public BaseViewModel.BaseViewModel SelectedViewModel
@@ -25,10 +35,16 @@ namespace TrippingApp.ViewModel
             get { return _selectecViewModel; }
             set { SetProperty(ref _selectecViewModel, value, nameof(SelectedViewModel)); }
         }
+        #region Command
+        #region Static Command
+        public static ICommand Connect_Camera_Command { get; set; }
+        public static ICommand Online_Camera_Command { get; set; }
+        public static ICommand Offline_Camera_Command { get; set; }
+        #endregion
 
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
-        public ICommand Connect_Camera_Command { get; set; }
+
 
         public ICommand Fill_Check_Changed_Command { get; set; }
         public ICommand Fit_Check_Changed_Command { get; set; }
@@ -38,8 +54,10 @@ namespace TrippingApp.ViewModel
         public ICommand Live_check_Command { get; set; }
         public ICommand Graphics_check_Command { get; set; }
         public ICommand Grid_check_Command { get; set; }
+        #endregion
 
 
+        #region Model
         private string _cameraAddress;
 
         public string CameraAddress
@@ -164,6 +182,8 @@ namespace TrippingApp.ViewModel
             get { return _result; }
             set { SetProperty(ref _result, value, nameof(Cognex_Result)); }
         }
+        #endregion
+
 
         public Cognex.InSight.Controls.Display.CvsInSightDisplay CvsInSightDisplay2;
         public void Initialize()
@@ -269,9 +289,22 @@ namespace TrippingApp.ViewModel
         
         public CameraApiViewModel()
         {
+            Username = ApplicationConfig.SystemConfig.UserName;
+            CameraAddress = ApplicationConfig.SystemConfig.CameraIP;
+            Password = ApplicationConfig.SystemConfig.Password;
+            Loaded = new ActionCommand(() =>
+            {
+                Username = ApplicationConfig.SystemConfig.UserName;
+                CameraAddress = ApplicationConfig.SystemConfig.CameraIP;
+                Password = ApplicationConfig.SystemConfig.Password;
+            });
+            Unloaded = new ActionCommand(() => 
+            {
+            
+            });
             if(CvsInSightDisplay2 == null)
             {
-                CvsInSightDisplay2 = new Cognex.InSight.Controls.Display.CvsInSightDisplay();
+                CvsInSightDisplay2 = new CvsInSightDisplay();
             }
             CognexControl = new System.Windows.Forms.Integration.WindowsFormsHost();
             Initialize();
@@ -332,25 +365,7 @@ namespace TrippingApp.ViewModel
                 }
             });
 
-            Online_check_Command = new ActionCommand((p) =>
-            {
-                //CvsInSightDisplay2.Edit.SoftOnline.Execute();
-                if (Online_Check)
-                {
-                    CvsInSightDisplay2.SoftOnline = true;
-                }
-                else
-                {
-                    CvsInSightDisplay2.SoftOnline = false;
-                }
-                
-
-            });
-            Live_check_Command = new ActionCommand((p) =>
-            {
-                CvsInSightDisplay2.Edit.LiveAcquire.Execute();
-
-            });
+            
             Grid_check_Command = new ActionCommand(() =>
             {
                 if (ShowGrid_Check)
@@ -373,6 +388,35 @@ namespace TrippingApp.ViewModel
                 {
                     CvsInSightDisplay2.ShowGraphics = false;
                 }
+            });
+
+            Online_Camera_Command = new ActionCommand(() =>
+            {
+                CvsInSightDisplay2.SoftOnline = true;
+            });
+
+            Offline_Camera_Command = new ActionCommand(() =>
+            {
+                CvsInSightDisplay2.SoftOnline = true;
+            });
+            Live_check_Command = new ActionCommand((p) =>
+            {
+                CvsInSightDisplay2.Edit.LiveAcquire.Execute();
+
+            });
+            Online_check_Command = new ActionCommand((p) =>
+            {
+                //CvsInSightDisplay2.Edit.SoftOnline.Execute();
+                if (Online_Check)
+                {
+                    CvsInSightDisplay2.SoftOnline = true;
+                }
+                else
+                {
+                    CvsInSightDisplay2.SoftOnline = false;
+                }
+
+
             });
         }
     }
@@ -397,5 +441,10 @@ namespace TrippingApp.ViewModel
         {
             throw new NotImplementedException();
         }
+    }
+    public class QRCodeReceivedEventArgs : EventArgs
+    {
+        public int QRCode { get; set; }
+        
     }
 }

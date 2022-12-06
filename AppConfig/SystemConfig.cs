@@ -34,14 +34,14 @@ namespace TrippingApp.AppConfig
         #endregion
 
         #region Press Parameter
-        public double DipTimeTranfer { get; set; }
-        public double DipP1 { get; set; }
-        public double Dip1P2 { get; set; }
-        public double Dip2P2 { get; set; }
-        public double Dip1P3 { get; set; }
-        public double Dip2P3 { get; set; }
-        public double Dip1P4 { get; set; }
-        public double Dip2P4 { get; set; }
+        public Int32 DipTimeTranfer { get; set; }
+        public Int32 DipP1 { get; set; }
+        public Int32 Dip1P2 { get; set; }
+        public Int32 Dip2P2 { get; set; }
+        public Int32 Dip1P3 { get; set; }
+        public Int32 Dip2P3 { get; set; }
+        public Int32 Dip1P4 { get; set; }
+        public Int32 Dip2P4 { get; set; }
         #endregion
 
 
@@ -57,7 +57,21 @@ namespace TrippingApp.AppConfig
         #region Network Database
         public string PC_Server_IP { get; set; }
         public int PC_Port { get; set; }
+        #endregion
 
+        #region Camera Information
+        /// <summary>
+        /// connecting IP of Camera Sensor Cognex
+        /// </summary>
+        public string CameraIP { get; set; } = "192.168.0.14";
+        /// <summary>
+        /// UserName of Account Camera
+        /// </summary>
+        public string UserName { get; set; } = "admin";
+        /// <summary>
+        /// Password of Account Camera
+        /// </summary>
+        public string Password { get; set; }
         #endregion
     }
 }

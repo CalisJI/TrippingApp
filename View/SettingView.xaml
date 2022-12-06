@@ -88,7 +88,6 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-
             <!--NetWork Config-->
 
             <GroupBox
@@ -125,6 +124,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+
 
             <!--Serial Comunication Configuration-->
 
