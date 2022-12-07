@@ -5,14 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
     public class Robot_Manual_ConfigurationViewModel:BaseViewModel.BaseViewModel
     {
+        private BaseViewModel.BaseViewModel _cylinder_view;
+
+        public BaseViewModel.BaseViewModel Cylinder_View
+        {
+            get { return _cylinder_view; }
+            set { SetProperty(ref _cylinder_view, value, nameof(Cylinder_View)); }
+        }
+
 
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
+
+       
+        public ICommand Changed_Page_Command { get; set; }
         /// <summary>
         /// Command To Set Up Parameter Of Servo
         /// </summary>
@@ -143,19 +155,53 @@ namespace TrippingApp.ViewModel
 
 
         #endregion
+
+        private Lazy<Cylinder_Control_ViewModel> Cylinder_Control_ViewModel = new Lazy<Cylinder_Control_ViewModel>(() => { return new Cylinder_Control_ViewModel(); });
         public Robot_Manual_ConfigurationViewModel()
         {
             Loaded = new ActionCommand(() =>
             {
-            
+                try
+                {
+                    PLC_Query.Initial("192.168.0.101");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
             });
 
             Unloaded = new ActionCommand(() =>
             {
             
             });
-
-            
+            Changed_Page_Command = new ActionCommand((p) =>
+            {
+                if ((int)p==1)
+                {
+                    if (!Cylinder_Control_ViewModel.IsValueCreated)
+                    {
+                        this.Cylinder_View = Cylinder_Control_ViewModel.Value;
+                    }
+                    else
+                    {
+                        this.Cylinder_View = Cylinder_Control_ViewModel.Value;
+                    }
+                }
+            });
+            Jog_FW_Robot_P_Command = new ActionCommand(() =>
+            {
+                object a = PLC_Query.ReadData(AddressCrt.Test);
+                double b = Convert.ToDouble(a);
+                Console.WriteLine(b);
+            });
+            Enable_Robot_Command = new ActionCommand(() =>
+            {
+                object a = PLC_Query.ReadData(AddressCrt.Test);
+                double b = Convert.ToDouble(a);
+                Console.WriteLine(b);
+            });
         }
     }
 }

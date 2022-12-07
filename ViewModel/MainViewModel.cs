@@ -53,10 +53,12 @@ namespace TrippingApp.ViewModel
         #endregion
 
         #region ViewModel
-        private SimulationViewModel SimulationViewModel;
+        private Lazy<SimulationViewModel> SimulationViewModel = new Lazy<SimulationViewModel>(() => { return new ViewModel.SimulationViewModel(); });
+        //private SimulationViewModel SimulationViewModel;
         private SettingViewModel SettingViewModel;
         private OverViewMachineViewModel OverViewMachineViewModel;
-        private Robot_Manual_ConfigurationViewModel Robot_Manual_ConfigurationViewModel;
+        private Lazy<Robot_Manual_ConfigurationViewModel> Robot_Manual_ConfigurationViewModel = new Lazy<Robot_Manual_ConfigurationViewModel>(() => { return new ViewModel.Robot_Manual_ConfigurationViewModel(); });
+        //private Robot_Manual_ConfigurationViewModel Robot_Manual_ConfigurationViewModel;
         private CameraApiViewModel CameraApiViewModel;
         #endregion
         public MainViewModel()
@@ -111,12 +113,8 @@ namespace TrippingApp.ViewModel
             #region P-Letter Command
             Process_Param_Page = new ActionCommand(() =>
             {
-                if (SimulationViewModel == null)
-                {
-                    SimulationViewModel = new SimulationViewModel();
-                }
+                this.SelectedViewModel = SimulationViewModel.Value;
                 ChildPage = true;
-                this.SelectedViewModel = SimulationViewModel;
             });
             #endregion
 
@@ -124,11 +122,11 @@ namespace TrippingApp.ViewModel
             Robot_And_Manual_Configuration_Page_Command = new ActionCommand(() =>
             {
                 ChildPage = true;
-                if (Robot_Manual_ConfigurationViewModel == null)
-                {
-                    Robot_Manual_ConfigurationViewModel = new Robot_Manual_ConfigurationViewModel();
-                }
-                this.SelectedViewModel = Robot_Manual_ConfigurationViewModel;
+                //if (Robot_Manual_ConfigurationViewModel == null)
+                //{
+                //    Robot_Manual_ConfigurationViewModel = new Robot_Manual_ConfigurationViewModel();
+                //}
+                this.SelectedViewModel = Robot_Manual_ConfigurationViewModel.Value;
                 //GetApi.GetData("http://127.0.0.1:8D2/");
             });
             #endregion

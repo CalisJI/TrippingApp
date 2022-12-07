@@ -131,11 +131,17 @@
     </ApplicationDefinition>
     <Compile Include="AppConfig\ApplicationConfig.cs" />
     <Compile Include="AppConfig\SystemConfig.cs" />
+    <Compile Include="Control\Cylender_Control.xaml.cs">
+      <DependentUpon>Cylender_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Heater.xaml.cs">
       <DependentUpon>Heater.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\Robot_Control.xaml.cs">
       <DependentUpon>Robot_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ServoLit_Control.xaml.cs">
+      <DependentUpon>ServoLit_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\TandH_Control.xaml.cs">
       <DependentUpon>TandH_Control.xaml</DependentUpon>
@@ -152,6 +158,7 @@
     <Compile Include="Runtime\GetApi.cs" />
     <Compile Include="Runtime\PLC_Query.cs" />
     <Compile Include="ViewModel\CameraApiViewModel.cs" />
+    <Compile Include="ViewModel\Cylinder_Control_ViewModel.cs" />
     <Compile Include="ViewModel\MachineViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverViewMachineViewModel.cs" />
@@ -160,6 +167,9 @@
     <Compile Include="ViewModel\SimulationViewModel.cs" />
     <Compile Include="View\CameraApi_View.xaml.cs">
       <DependentUpon>CameraApi_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Cylinder_Control_View.xaml.cs">
+      <DependentUpon>Cylinder_Control_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MachineView.xaml.cs">
       <DependentUpon>MachineView.xaml</DependentUpon>
@@ -179,11 +189,19 @@
     <Compile Include="View\SimulationView.xaml.cs">
       <DependentUpon>SimulationView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Control\Cylender_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Heater.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Robot_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\ServoLit_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CameraApi_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Cylinder_Control_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

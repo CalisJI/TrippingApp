@@ -70,29 +70,26 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <TextBox
+                        VerticalContentAlignment="Center"
+                        Margin="10 0 10 0"
                         VerticalAlignment="Center"
                         Width="180"
                         FontSize="40"
                         Text="{Binding NumberValue, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        Grid.Column="0"
-                        Grid.RowSpan="2"/>
+                        Grid.Column="1"/>
                     <RepeatButton
                         VerticalAlignment="Center"
                         Height="50"
-                        Width="60"
+                        Width="50"
                         Interval="100"
-                        Margin="0 1 1 2"
-                        Grid.Column="1"
+                        Margin="0 1 5 2"
+                        Grid.Column="2"
                         PreviewTouchDown="RepeatButton_PreviewTouchDown"
-                        Click="RepeatButton_Click"
-                        Grid.Row="0">
+                        Click="RepeatButton_Click">
                         <Image
                             Margin="4"
                             VerticalAlignment="Center"
@@ -101,13 +98,12 @@
                     <RepeatButton
                         VerticalAlignment="Center"
                         Height="50"
-                        Width="60"
+                        Width="50"
                         Interval="100"
-                        Margin="0 2 1 1"
-                        Grid.Column="1"
+                        Margin="5 2 1 1"
+                        Grid.Column="0"
                         PreviewTouchDown="RepeatButton_PreviewTouchDown_1"
-                        Click="RepeatButton_Click_1"
-                        Grid.Row="1">
+                        Click="RepeatButton_Click_1">
                         <Image
                             Margin="4"
                             VerticalAlignment="Center"

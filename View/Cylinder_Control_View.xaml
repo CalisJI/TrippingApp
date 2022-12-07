@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="TrippingApp.View.Cylinder_Control_View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.View"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource VM_Cylinder}"
+             xmlns:control="clr-namespace:TrippingApp.Control"
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Viewbox>
+        <Grid>
+            <control:Cylender_Control
+                XL1_Up_Command="{Binding XL1_Up_Command}"
+                XL1_Down_Command="{Binding XL1_Down_Command}"
+                XL2_Up_Command="{Binding XL2_Up_Command}"
+                XL2_Down_Command="{Binding XL2_Down_Command}"
+                XL3_Up_Command="{Binding XL3_Up_Command}"
+                XL3_Down_Command="{Binding XL3_Down_Command}"
+                XL4_Up_Command="{Binding XL4_Up_Command}"
+                XL4_Down_Command="{Binding XL4_Down_Command}"
+                XL5_Up_Command="{Binding XL5_Up_Command}"
+                XL5_Down_Command="{Binding XL5_Down_Command}"
+                XL6_Up_Command="{Binding XL6_Up_Command}"
+                XL6_Down_Command="{Binding XL6_Down_Command}"
+                XL7_Up_Command="{Binding XL7_Up_Command}"
+                XL7_Down_Command="{Binding XL7_Down_Command}"
+                XL8_Up_Command="{Binding XL8_Up_Command}"
+                XL8_Down_Command="{Binding XL8_Down_Command}"
+                XL9_Up_Command="{Binding XL9_Up_Command}"
+                XL9_Down_Command="{Binding XL9_Down_Command}"
+                XL10_Up_Command="{Binding XL10_Up_Command}"
+                XL10_Down_Command="{Binding XL10_Down_Command}"
+                XL11_Up_Command="{Binding XL11_Up_Command}"
+                XL11_Down_Command="{Binding XL11_Down_Command}"
+                XL12_Up_Command="{Binding XL12_Up_Command}"
+                XL12_Down_Command="{Binding XL12_Down_Command}"
+                XL13_Up_Command="{Binding XL13_Up_Command}"
+                XL13_Down_Command="{Binding XL13_Down_Command}"
+                XL14_Up_Command="{Binding XL14_Up_Command}"
+                XL14_Down_Command="{Binding XL14_Down_Command}"
+                
+                
+                SS1_Up="{Binding SS1_Up}"
+                SS1_Down="{Binding SS1_Down}"
+                
+                SS2_Up="{Binding SS2_Up}"
+                SS2_Down="{Binding SS2_Down}"
+                
+                SS3_Up="{Binding SS3_Up}"
+                SS3_Down="{Binding SS3_Down}"
+                
+                SS4_Up="{Binding SS4_Up}"
+                SS4_Down="{Binding SS4_Down}"
+                
+                SS5_Up="{Binding SS5_Up}"
+                SS5_Down="{Binding SS5_Down}"
+                
+                SS6_Up="{Binding SS6_Up}"
+                SS6_Down="{Binding SS6_Down}"
+                
+                SS7_Up="{Binding SS7_Up}"
+                SS7_Down="{Binding SS7_Down}"
+                
+                SS8_Up="{Binding SS8_Up}"
+                SS8_Down="{Binding SS8_Down}"
+                
+                SS9_Up="{Binding SS9_Up}"
+                SS9_Down="{Binding SS9_Down}"
+                
+                SS10_Up="{Binding SS10_Up}"
+                SS10_Down="{Binding SS10_Down}"
+                
+                SS11_Up="{Binding SS11_Up}"
+                SS11_Down="{Binding SS11_Down}"
+                
+                SS12_Up="{Binding SS12_Up}"
+                SS12_Down="{Binding SS12_Down}"
+                
+                SS13_Up="{Binding SS13_Up}"
+                SS13_Down="{Binding SS13_Down}"
+                
+                SS14_Up="{Binding SS14_Up}"
+                SS14_Down="{Binding SS14_Down}"
+                
+                />
+        </Grid>
+    </Viewbox>
+    
+</UserControl>

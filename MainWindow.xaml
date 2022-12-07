@@ -16,26 +16,40 @@
     <Viewbox>
         <Grid Height="1080" Width="1920">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.06*"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.1*"/>
+                <!--<RowDefinition Height="0.1*"/>-->
             </Grid.RowDefinitions>
-            <GroupBox>
+            <Grid Background="Black">
+                <Button
+                    ToolTip="Menu"
+                    Margin="10 0 0 0"
+                    Visibility="{Binding ChildPage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding Home_Page_Command}"
+                    HorizontalAlignment="Left"
+                    Width="50"
+                    Height="50">
+                    <Image
+                        Margin="5"
+                        Source="{StaticResource menu_svgrepo_comDrawingImage}"/>
+                </Button>
                 <TextBlock
-                Grid.Row="0"
-                HorizontalAlignment="Center"
-                FontSize="25"
-                Margin="0 10 0 0"
-                FontWeight="Bold"
-                VerticalAlignment="Top"
-                Text="{Binding Timer_Full}"/>
-            </GroupBox>
+                    Foreground="{StaticResource GlyphBrush}"
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    FontSize="25"
+                    Margin="0 10 0 0"
+                    FontWeight="DemiBold"
+                    VerticalAlignment="Top"
+                    Text="{Binding Timer_Full}"/>
+            </Grid>
+            
             <ContentControl
                 Grid.Row="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="{Binding SelectedViewModel}" />
-            <Button
+            <!--<Button
                 Grid.Row="2"
                 Visibility="{Binding ChildPage, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Command="{Binding Home_Page_Command}"
@@ -50,7 +64,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Kind="Home"/>
-            </Button>
+            </Button>-->
         </Grid>
        
         

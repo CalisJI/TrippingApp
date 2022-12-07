@@ -52,7 +52,7 @@ namespace TrippingApp.Runtime
             {
                 if (PLC_Controller == null)
                 {
-                    PLC_Controller = new Plc(CpuType.S71200, Ip, 1, 0);
+                    PLC_Controller = new Plc(CpuType.S71500, Ip, 0, 1);
                 }
 
                 if (Connected == false || PLC_Controller.IsConnected == false)
@@ -135,13 +135,59 @@ namespace TrippingApp.Runtime
 
             }
         }
-        public static void ReadData()
+        public static object ReadData(string DataAdress)
         {
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    return PLC_Controller.Read(DataAdress);
+                }
+                catch (Exception ex)
+                {
+                   
+                }
+                return new object();
+            }
+            else
+            {
+                return new object();
+            }
+        }
+        public static object ReadData(DataOffSetPLC item)
+        {
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    return PLC_Controller.Read(item.DataType,item.DB,item.StartByteAddress,item.VarType,item.VarCount);
+                }
+                catch (Exception ex)
+                {
 
+                }
+                return new object();
+            }
+            else
+            {
+                return new object();
+            }
         }
         public static void WriteData(string DataAdress, object value)
         {
+            if (PLC_Controller.IsConnected) 
+            {
+                try
+                {
+                    PLC_Controller.Write(DataAdress, value);
+                }
+                catch (Exception ex)
+                {
 
+                    
+                }
+
+            }
         }
 
         public static void WriteArrayData()
@@ -470,7 +516,7 @@ namespace TrippingApp.Runtime
             Kind = kind;
         }
     }
-    public static class BitCrt
+    public static class AddressCrt
     {
         /// <summary>
         /// Bật/Tắt Chế Độ Manual
@@ -545,6 +591,23 @@ namespace TrippingApp.Runtime
         public readonly static string Run_BW_Input_Convetor = "M98.2";
         public readonly static string Run_Output_Conveyor = "M98.3";
 
-
+        public readonly static DataOffSetPLC Test = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 1,
+            StartByteAddress = 4,
+            VarType = VarType.Real,
+            VarCount = 1
+        };
+        
+    }
+    public struct DataOffSetPLC 
+    {
+        public DataType DataType;
+        public int DB;
+        public int StartByteAddress;
+        public VarType VarType;
+        public int VarCount;
+     
     }
 }

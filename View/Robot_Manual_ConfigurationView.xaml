@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Background="Transparent"
              DataContext="{StaticResource VM_Robot_Manual}"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="1000" d:DesignWidth="1920">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
@@ -18,32 +18,97 @@
             <i:InvokeCommandAction Command="{Binding Unloaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" Width="1920">
-        <Grid Width="3840" Height="1060">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="2*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <control:Robot_Control
-                JogBW_P_Command="{Binding Jog_BW_Robot_P_Command}"
-                JogBW_N_Command="{Binding Jog_BW_Robot_N_Command}"
-                JogFW_P_Command="{Binding Jog_FW_Robot_P_Command}"
-                JogFW_N_Command="{Binding Jog_FW_Robot_N_Command}"
-                Origin_Command="{Binding Origin_Robot_Command}"
-                Enable_Command="{Binding Enable_Robot_Command}"
-                Disable_Command="{Binding Disable_Robot_Command}"
-                SetSpeedCommand="{Binding SetRobotJogSpeed_Command}"
-                Set_PosBath4_Command="{Binding SetDataPointBath4Robot_Command}"
-                Set_PosBath5_Command="{Binding SetDataPointBath5Robot_Command}"
-                Set_PosBath6_Command="{Binding SetDataPointBath6Robot_Command}"
-                JogSpeed="{Binding Jog_Robot_Speed}"
-                PosBath4="{Binding PosBath4}"
-                PosBath5="{Binding PosBath5}"
-                PosBath6="{Binding PosBath6}"
-                CurrentPos="{Binding CurrentPos}"
-                Grid.Column="0"/>
-        </Grid>
-    </ScrollViewer>
-    
+    <Grid Width="1920" Height="1000">
+        <TabControl 
+                x:Name="container"
+                TabStripPlacement="Left"
+                Background="Transparent">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Changed_Page_Command}" CommandParameter="{Binding ElementName=container, Path=SelectedIndex}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                TextAlignment="Center"
+                                Text="Robot Control"
+                                FontSize="20"
+                                FontWeight="Black"/>
+                        <Grid.LayoutTransform>
+                            <RotateTransform>
+                                <RotateTransform.Angle>
+                                    -90
+                                </RotateTransform.Angle>
+                            </RotateTransform>
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </TabItem.Header>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <Grid Width="3840" Height="1000">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <control:Robot_Control
+                           
+                            JogBW_P_Command="{Binding Jog_BW_Robot_P_Command}"
+                            JogBW_N_Command="{Binding Jog_BW_Robot_N_Command}"
+                            JogFW_P_Command="{Binding Jog_FW_Robot_P_Command}"
+                            JogFW_N_Command="{Binding Jog_FW_Robot_N_Command}"
+                            Origin_Command="{Binding Origin_Robot_Command}"
+                            Enable_Command="{Binding Enable_Robot_Command}"
+                            Disable_Command="{Binding Disable_Robot_Command}"
+                            SetSpeedCommand="{Binding SetRobotJogSpeed_Command}"
+                            Set_PosBath4_Command="{Binding SetDataPointBath4Robot_Command}"
+                            Set_PosBath5_Command="{Binding SetDataPointBath5Robot_Command}"
+                            Set_PosBath6_Command="{Binding SetDataPointBath6Robot_Command}"
+                            JogSpeed="{Binding Jog_Robot_Speed}"
+                            PosBath4="{Binding PosBath4}"
+                            PosBath5="{Binding PosBath5}"
+                            PosBath6="{Binding PosBath6}"
+                            CurrentPos="{Binding CurrentPos}"
+                            Grid.Column="0"/>
+
+                        <control:ServoLit_Control
+                            Margin="100 0 0 0"
+                            Height="960"
+                            Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                </ScrollViewer>
+                
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                TextAlignment="Center"
+                                Text="Cylinder Control"
+                                FontSize="20"
+                                FontWeight="Black"/>
+                        <Grid.LayoutTransform>
+                            <RotateTransform>
+                                <RotateTransform.Angle>
+                                    -90
+                                </RotateTransform.Angle>
+                            </RotateTransform>
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </TabItem.Header>
+                <ContentControl Content="{Binding Cylinder_View}"/>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+
 </UserControl>

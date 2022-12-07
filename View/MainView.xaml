@@ -104,9 +104,95 @@
                 </DrawingGroup>
             </DrawingImage.Drawing>
         </DrawingImage>
+        
+        <!--Machanical Arm-->
+        <DrawingImage x:Key="loader_svgrepo_comDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V428.227 H428.227 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF808080" Geometry="F1 M428.227,428.227z M0,0z M219.762,98.527L194.031,98.527 194.031,199.426C194.031,206.532,199.791,212.292,206.897,212.292L206.897,212.292C214.003,212.292,217.319,212.292,217.319,212.292L219.762,98.527z" />
+                        <GeometryDrawing Brush="#FF999999" Geometry="F1 M428.227,428.227z M0,0z M230.185,98.527L204.454,98.527 204.454,199.426C204.454,206.532,210.214,212.292,217.32,212.292L217.32,212.292C224.426,212.292,230.186,206.532,230.186,199.426L230.186,98.527z" />
+                        <GeometryDrawing Brush="#FFCCCCCC" Geometry="F1 M428.227,428.227z M0,0z M208.335,227.125C193.037,227.125 180.635,214.723 180.635,199.425 180.635,184.127 193.037,171.725 208.335,171.725L251.884,171.725 251.884,227.124 208.335,227.124z" />
+                        <GeometryDrawing Brush="#FFB3B3B3">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="261.13,214.573,63.959,115.67" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF999999">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="244.194,214.573,63.959,115.67" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FFD3674A">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="67.541,263.862,146.573,164.365" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFEF7954">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="101.854,299.447,92.773,109.718" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFEF7954">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="214.114,263.862,146.573,164.365" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFD3674A">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="233.177,282.925,108.447,126.239" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFEF7954">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="233.177,282.925,92.773,126.239" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFD3674A">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="233.177,282.925,92.773,15.674" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="#FFF9ED82">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="279.019,298.599,46.931,23.391" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <GeometryDrawing Brush="#FF999999" Geometry="F1 M428.227,428.227z M0,0z M177.507,214.573L113.548,214.573 113.548,313.75C113.548,322.859,120.932,330.243,130.041,330.243L194.442,330.243 177.507,214.573z" />
+                        <GeometryDrawing Brush="#FFB3B3B3" Geometry="F1 M428.227,428.227z M0,0z M194.443,214.573L177.507,214.573 177.507,313.308C177.507,322.661,185.089,330.244,194.443,330.244L194.443,330.244 194.443,214.573z" />
+                        <GeometryDrawing Brush="#FF999999" Geometry="F1 M428.227,428.227z M0,0z M177.507,214.573L113.548,214.573 113.548,198.852C113.548,189.784,120.899,182.433,129.967,182.433L193.926,182.433 177.507,214.573z" />
+                        <GeometryDrawing Brush="#FFB3B3B3" Geometry="F1 M428.227,428.227z M0,0z M325.089,214.573L177.507,214.573 177.507,198.852C177.507,189.784,184.858,182.433,193.926,182.433L312.546,182.433C319.473,182.433,325.088,188.048,325.088,194.975L325.088,214.573z" />
+                        <GeometryDrawing Brush="#FFE6E6E6">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="27.7" RadiusY="27.7" Center="251.884,198.821" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF808080" Geometry="F1 M428.227,428.227z M0,0z M264.75,98.527L239.019,98.527 239.019,199.426C239.019,206.532,244.779,212.292,251.885,212.292L251.885,212.292C258.991,212.292,262.307,212.292,262.307,212.292L264.75,98.527z" />
+                        <GeometryDrawing Brush="#FF999999" Geometry="F1 M428.227,428.227z M0,0z M275.172,98.527L249.441,98.527 249.441,199.426C249.441,206.532,255.201,212.292,262.307,212.292L262.307,212.292C269.413,212.292,275.173,206.532,275.173,199.426L275.173,98.527z" />
+                        <GeometryDrawing Brush="#FF808080" Geometry="F1 M428.227,428.227z M0,0z M268.96,198.927C268.96,202.601 265.984,205.586 262.31,205.586 260.967,205.586 259.724,205.196 258.681,204.506 256.857,203.317 255.651,201.267 255.651,198.926 255.651,196.585 256.858,194.535 258.681,193.355 259.724,192.665 260.967,192.275 262.31,192.275 265.984,192.277 268.96,195.253 268.96,198.927z" />
+                        <GeometryDrawing Brush="#FF666666" Geometry="F1 M428.227,428.227z M0,0z M259.887,82.498L190.633,82.498C176.603,82.498,165.23,93.871,165.23,107.901L165.23,107.901C165.23,121.931,176.603,133.304,190.633,133.304L259.887,133.304 259.887,82.498z" />
+                        <GeometryDrawing Brush="#FF666666" Geometry="F1 M428.227,428.227z M0,0z M261.702,198.927C261.702,201.258 260.504,203.318 258.681,204.507 256.857,203.318 255.651,201.268 255.651,198.927 255.651,196.586 256.858,194.536 258.681,193.356 260.504,194.536 261.702,196.595 261.702,198.927z" />
+                        <GeometryDrawing Brush="#FF808080" Geometry="F1 M428.227,428.227z M0,0z M310.848,107.901C310.848,109.951 310.603,111.948 310.14,113.862 307.464,125.021 297.42,133.305 285.444,133.305L239.174,133.305C232.161,133.305 225.81,130.465 221.21,125.865 216.61,121.265 213.77,114.914 213.77,107.901 213.77,93.875 225.138,82.498 239.173,82.498L285.443,82.498C292.456,82.498 298.807,85.338 303.407,89.937 307.109,93.639 309.667,98.474 310.529,103.882 310.739,105.188 310.848,106.531 310.848,107.901z" />
+                        <GeometryDrawing Brush="#FF738B93">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="227.427,0,42.44,82.498" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF496A72">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="206.207,0,21.22,82.498" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF99B5C4" Geometry="F1 M428.227,428.227z M0,0z M345.923,80.293C345.923,98.801,330.871,113.862,312.354,113.862L310.14,113.862C310.603,111.948 310.848,109.952 310.848,107.901 310.848,106.531 310.739,105.188 310.53,103.882L312.354,103.882C325.364,103.882 335.943,93.303 335.943,80.293 335.943,67.283 325.364,56.704 312.354,56.704L210.741,56.704C192.233,56.704,177.172,41.643,177.172,23.135L177.172,1.815 187.152,1.815 187.152,23.136C187.152,36.146,197.74,46.725,210.741,46.725L312.354,46.725C330.871,46.724,345.923,61.785,345.923,80.293z" />
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </UserControl.Resources>
     <Viewbox>
-        <Grid Width="1920" Height="1080">
+        <Grid Width="1920" Height="1000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -161,10 +247,9 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="3"
                 Grid.Row="1">
-                <themes:PackIcon
-                        Height="180"
-                        Width="180"
-                        Kind="ApplicationBrackets"/>
+                <Image
+                    Margin="10"
+                    Source="{StaticResource settings_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Dashboard Page-->
             <Button
@@ -201,8 +286,8 @@
                 Grid.Column="3"
                 Grid.Row="2">
                 <Image
-                    Margin="10"
-                    Source="{StaticResource settings_svgrepo_comDrawingImage}"/>
+                    Margin="20"
+                    Source="{StaticResource loader_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Camera API Page-->
             <Button

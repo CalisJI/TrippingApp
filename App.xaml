@@ -58,6 +58,174 @@
                     </DrawingGroup>
                 </DrawingImage.Drawing>
             </DrawingImage>
+            
+            <!--Menu-->
+            <DrawingImage x:Key="menu_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                        <GeometryDrawing Brush="#FF2C9FD9" Geometry="F1 M512,512z M0,0z M495.304,278.262L294.957,278.262C285.777,278.262,278.261,285.739,278.261,294.958L278.261,495.306C278.261,504.52,285.743,511.999,294.957,511.999L495.305,511.999C504.519,511.999,512.001,504.519,512.001,495.306L512.001,294.958C512,285.739,504.485,278.262,495.304,278.262z" />
+                        <GeometryDrawing Brush="#FF32BBFF" Geometry="F1 M512,512z M0,0z M217.043,278.262L16.696,278.262C7.515,278.262,0,285.739,0,294.958L0,495.306C0,504.52,7.482,511.999,16.696,511.999L217.044,511.999C226.258,511.999,233.74,504.519,233.74,495.306L233.74,294.958C233.739,285.739,226.224,278.262,217.043,278.262z" />
+                        <GeometryDrawing Brush="#FF2C9FD9" Geometry="F1 M512,512z M0,0z M16.696,511.999L217.044,511.999C226.258,511.999,233.74,504.517,233.74,495.306L233.74,294.958C233.74,290.352,231.863,286.182,228.84,283.162L4.895,507.106C7.918,510.128,12.09,511.999,16.696,511.999z" />
+                        <GeometryDrawing Brush="#FF2EE6E6" Geometry="F1 M512,512z M0,0z M217.043,0.001L16.696,0.001C7.515,0.001,0,7.479,0,16.697L0,217.045C0,226.259,7.482,233.738,16.696,233.738L217.044,233.738C226.258,233.738,233.74,226.258,233.74,217.045L233.74,16.697C233.739,7.479,226.224,0.001,217.043,0.001z" />
+                        <GeometryDrawing Brush="#FF32BBFF" Geometry="F1 M512,512z M0,0z M495.304,0.001L294.957,0.001C285.777,0.001,278.261,7.478,278.261,16.697L278.261,217.045C278.261,226.259,285.743,233.738,294.957,233.738L495.305,233.738C504.519,233.738,512.001,226.258,512.001,217.045L512.001,16.697C512,7.479,504.485,0.001,495.304,0.001z" />
+                        <GeometryDrawing Brush="#FF2C9FD9" Geometry="F1 M512,512z M0,0z M294.957,233.738L495.305,233.738C504.519,233.738,512.001,226.256,512.001,217.045L512.001,16.697C512.001,12.091,510.124,7.921,507.101,4.901L283.156,228.845C286.179,231.867,290.351,233.738,294.957,233.738z" />
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <DrawingImage x:Key="back_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                        <GeometryDrawing Brush="#FF366796">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF273B7A" Geometry="F1 M512,512z M0,0z M142.27,363.218L288.947,509.895C403.904,495.125,494.986,404.108,509.862,289.185L373.712,153.035 142.27,363.218z" />
+                        <GeometryDrawing Brush="#FFFF5419">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="156.444" RadiusY="156.444" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFE03A00" Geometry="F1 M512,512z M0,0z M99.562,256.574C99.872,342.711 169.789,412.444 256,412.444 342.209,412.444 412.127,342.712 412.438,256.574L99.562,256.574 99.562,256.574z" />
+                        <GeometryDrawing Brush="#FFFFEDB5" Geometry="F1 M512,512z M0,0z M232.189,250.778L285.932,197.037C292.445,190.524,292.445,179.965,285.932,173.451L285.932,173.451C279.419,166.938,268.858,166.938,262.346,173.451L191.588,244.209C185.075,250.722,185.075,261.281,191.588,267.796L262.346,338.554C268.859,345.067,279.42,345.067,285.932,338.554L285.932,338.554C292.445,332.041,292.445,321.482,285.932,314.968L232.189,261.225C229.305,258.338,229.305,253.662,232.189,250.778z" />
+                        <GeometryDrawing Brush="#FFFEE187" Geometry="F1 M512,512z M0,0z M232.189,261.222C230.894,259.927,230.213,258.267,230.081,256.574L186.73,256.574C186.87,260.649,188.476,264.682,191.588,267.791L262.346,338.549C268.859,345.062 279.42,345.062 285.932,338.549 292.445,332.036 292.445,321.477 285.932,314.963L232.189,261.222z" />
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <!--Plus SVG-->
+            <DrawingImage x:Key="plus_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V297 H297 V0 H0 Z">
+                        <DrawingGroup Opacity="1">
+                            <DrawingGroup Opacity="1">
+                                <DrawingGroup Opacity="1">
+                                    <DrawingGroup Opacity="1">
+                                        <GeometryDrawing Brush="#FF16A085">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry RadiusX="148.5" RadiusY="148.5" Center="148.5,148.5" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingGroup>
+                            </DrawingGroup>
+                            <GeometryDrawing Brush="#FF0E7763" Geometry="F1 M297,297z M0,0z M245.337,127.5L51.663,169.5 176.513,294.35C236.059,282.981,282.981,236.059,294.35,176.513L245.337,127.5z" />
+                            <GeometryDrawing Brush="#FFECF0F1" Geometry="F1 M297,297z M0,0z M245.337,127.5L245.337,127.5 169.5,127.5 169.5,51.663 127.5,51.663 127.5,127.5 51.663,127.5 51.663,169.5 127.5,169.5 127.5,245.337 169.5,245.337 169.5,169.5 245.337,169.5z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <!--Minus SVG-->
+            <DrawingImage x:Key="minus_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V297 H297 V0 H0 Z">
+                        <DrawingGroup Opacity="1">
+                            <DrawingGroup Opacity="1">
+                                <DrawingGroup Opacity="1">
+                                    <DrawingGroup Opacity="1">
+                                        <GeometryDrawing Brush="#FFC0392B">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry RadiusX="148.5" RadiusY="148.5" Center="148.5,148.5" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingGroup>
+                            </DrawingGroup>
+                            <GeometryDrawing Brush="#FF931515" Geometry="F1 M297,297z M0,0z M245.337,127.5L51.663,169.5 176.513,294.35C236.059,282.981,282.981,236.059,294.35,176.513L245.337,127.5z" />
+                            <DrawingGroup Opacity="1">
+                                <GeometryDrawing Brush="#FFECF0F1">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry RadiusX="0" RadiusY="0" Rect="51.663,127.5,193.674,42" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <!--Download SVG-->
+            <DrawingImage x:Key="download_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                        <GeometryDrawing Brush="#FF324A5E">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF2B3B4E" Geometry="F1 M512,512z M0,0z M501.912,327.349L404.498,229.935 400.711,237.698 328.097,165.084 214.34,256.286 113.698,322.431 299.558,508.29C396.585,491.658,474.952,420.43,501.912,327.349z" />
+                        <GeometryDrawing Brush="#FFB5F1F4" Geometry="F1 M512,512z M0,0z M348.522,349.715C388.825,349.715 421.497,317.044 421.497,276.74 421.497,236.437 388.826,203.765 348.522,203.765 347.962,203.765 347.41,203.794 346.852,203.808 339,164.401 304.23,134.7 262.517,134.7 230.383,134.7 202.385,152.334 187.622,178.441 183.983,177.97 180.28,177.703 176.511,177.703 129.012,177.703 90.505,216.208 90.505,263.709 90.505,311.21 129.01,349.715 176.511,349.715L348.522,349.715 348.522,349.715z" />
+                        <GeometryDrawing Brush="#FF84DBFF" Geometry="F1 M512,512z M0,0z M348.522,203.767C347.962,203.767 347.41,203.796 346.852,203.81 339,164.403 304.23,134.702 262.517,134.702 260.129,134.702 257.766,134.811 255.427,135.002L255.427,349.714 348.521,349.714C388.824,349.714 421.496,317.043 421.496,276.739 421.495,236.437 388.823,203.767 348.522,203.767z" />
+                        <GeometryDrawing Brush="#FFFC6F58" Geometry="F1 M512,512z M0,0z M281.762,267.969L281.762,267.969 281.762,183.661 230.24,183.661 230.24,267.969 204.479,267.969 256,319.491 307.522,267.969z" />
+                        <GeometryDrawing Brush="#FFF1543F" Geometry="F1 M512,512z M0,0z M307.522,267.969L307.522,267.969 281.762,267.969 281.762,183.661 255.426,183.661 255.426,318.917 256,319.491z" />
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <!--Home SVG-->
+            <DrawingImage x:Key="house_home_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V511.999 H511.999 V0 H0 Z">
+                        <GeometryDrawing Brush="#FFFFAD61" Geometry="F1 M511.999,511.999z M0,0z M418.002,211.693L418.002,211.693 255.999,71.348 93.998,211.693 141.447,211.693 141.447,397.339 370.552,397.339 370.552,211.693z" />
+                        <GeometryDrawing Brush="#FF72BEDE">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="205.853,233.209,100.302,104.868" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FF534741" Geometry="F1 M511.999,511.999z M0,0z M12.557,221.573C13.177,221.686 13.793,221.741 14.402,221.741 19.229,221.74 23.518,218.297 24.417,213.38 44.841,101.652 142.236,20.559 255.999,20.559 350.139,20.559 436.004,77.741 472.696,163.823L453.48,169.462 497.609,211.546 511.998,152.289 492.379,158.047C473.801,113.195 443.062,74.804 403.074,46.657 359.872,16.249 309.013,0.175 255.999,0.175 132.388,0.175 26.558,88.299 4.363,209.714 3.351,215.251 7.019,220.561 12.557,221.573z" />
+                            <GeometryDrawing Brush="#FF534741" Geometry="F1 M511.999,511.999z M0,0z M499.444,290.428C493.905,289.415 488.597,293.082 487.584,298.619 487.119,301.162 486.605,303.735 486.054,306.267 484.858,311.767 488.348,317.196 493.849,318.392 494.579,318.551 495.306,318.626 496.024,318.626 500.715,318.626 504.937,315.368 505.974,310.597 506.571,307.846 507.131,305.05 507.636,302.288 508.649,296.751 504.981,291.441 499.444,290.428z" />
+                            <GeometryDrawing Brush="#FF534741" Geometry="F1 M511.999,511.999z M0,0z M489.506,333.09C484.24,331.107 478.359,333.766 476.373,339.032 442.011,430.192 353.449,491.441 255.999,491.441 161.859,491.441 75.994,434.258 39.302,348.177L58.518,342.538 14.389,300.454 0,359.71 19.619,353.952C38.197,398.804 68.936,437.195 108.924,465.342 152.127,495.751 202.985,511.824 255.999,511.824 309.036,511.824 359.912,495.738 403.126,465.305 445.371,435.555 477.295,394.375 495.447,346.221 497.433,340.955 494.772,335.075 489.506,333.09z" />
+                            <GeometryDrawing Brush="#FF534741" Geometry="F1 M511.999,511.999z M0,0z M141.447,407.531L370.552,407.531C376.181,407.531,380.744,402.967,380.744,397.339L380.744,221.886 418.001,221.886C422.256,221.886 426.064,219.242 427.551,215.255 429.038,211.268 427.891,206.777 424.675,203.99L262.673,63.645C258.843,60.326,253.155,60.326,249.325,63.645L87.324,203.989C84.107,206.776 82.961,211.267 84.448,215.254 85.935,219.241 89.742,221.885 93.998,221.885L131.255,221.885 131.255,397.34C131.255,402.968,135.818,407.531,141.447,407.531z M121.328,201.501L255.999,84.834 390.67,201.501 370.552,201.501C364.923,201.501,360.36,206.065,360.36,211.693L360.36,387.147 151.639,387.147 151.639,211.693C151.639,206.065,147.076,201.501,141.447,201.501L121.328,201.501z" />
+                            <GeometryDrawing Brush="#FF534741" Geometry="F1 M511.999,511.999z M0,0z M205.848,348.26L306.153,348.26C311.782,348.26,316.345,343.696,316.345,338.068L316.345,233.204C316.345,227.576,311.782,223.012,306.153,223.012L205.848,223.012C200.219,223.012,195.656,227.576,195.656,233.204L195.656,338.068C195.655,343.696,200.218,348.26,205.848,348.26z M216.04,243.396L295.96,243.396 295.96,327.875 216.04,327.875 216.04,243.396z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+            <!--Play SVG-->
+            <DrawingImage x:Key="play_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                        <GeometryDrawing Brush="#FFFF7F4F">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFE03A00" Geometry="F1 M512,512z M0,0z M143.496,364.385L288.999,509.888C404.085,495.076,495.24,403.846,509.928,288.72L366.187,144.979 143.496,364.385z" />
+                        <GeometryDrawing Brush="#FFFFFFFF">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="156.444" RadiusY="156.444" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFD3D3D3" Geometry="F1 M512,512z M0,0z M99.578,254.276C99.571,254.85 99.556,255.424 99.556,256 99.556,342.402 169.598,412.444 256,412.444 342.402,412.444 412.444,342.402 412.444,256 412.444,255.424 412.428,254.85 412.422,254.276L99.578,254.276z" />
+                        <GeometryDrawing Brush="#FFDB0529" Geometry="F1 M512,512z M0,0z M220.074,163.693L357.936,243.287C367.721,248.936,367.721,263.06,357.936,268.709L220.074,348.303C210.289,353.952,198.056,346.891,198.056,335.591L198.056,176.402C198.056,165.105,210.287,158.044,220.074,163.693z" />
+                        <GeometryDrawing Brush="#FFC2001B" Geometry="F1 M512,512z M0,0z M198.056,254.276L198.056,335.594C198.056,346.892,210.287,353.955,220.074,348.306L357.936,268.712C363.399,265.557,365.804,259.763,365.168,254.276L198.056,254.276z" />
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+            <!--Stop SVG-->
+            <DrawingImage x:Key="stop_svgrepo_comDrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                        <GeometryDrawing Brush="#FFFFC61B">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="256" RadiusY="256" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFD48B07" Geometry="F1 M512,512z M0,0z M149.838,370.074L289.571,509.807C404.301,494.778,495.123,403.79,509.89,288.98L369.9,148.989 149.838,370.074z" />
+                        <GeometryDrawing Brush="#FFFFEDB5">
+                            <GeometryDrawing.Geometry>
+                                <EllipseGeometry RadiusX="156.444" RadiusY="156.444" Center="256,256" />
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FFFEE187" Geometry="F1 M512,512z M0,0z M256,99.556C255.809,99.556,255.617,99.563,255.426,99.563L255.426,412.438C255.617,412.438 255.809,412.445 256,412.445 342.402,412.445 412.444,342.403 412.444,256.001 412.444,169.599 342.402,99.556 256,99.556z" />
+                        <GeometryDrawing Brush="#FF366695" Geometry="F1 M512,512z M0,0z M306.495,177.778L205.503,177.778C190.19,177.778,177.777,190.192,177.777,205.505L177.777,306.497C177.777,321.81,190.191,334.223,205.504,334.223L306.496,334.223C321.809,334.223,334.222,321.809,334.222,306.496L334.222,205.503C334.222,190.192,321.808,177.778,306.495,177.778z" />
+                        <GeometryDrawing Brush="#FF273B7A" Geometry="F1 M512,512z M0,0z M306.497,177.778L255.426,177.778 255.426,334.222 306.497,334.222C321.81,334.222,334.223,321.808,334.223,306.496L334.223,205.505C334.222,190.192,321.808,177.778,306.497,177.778z" />
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
         </ResourceDictionary>
         
     </Application.Resources>
