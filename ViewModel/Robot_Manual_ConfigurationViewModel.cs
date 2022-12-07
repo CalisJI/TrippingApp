@@ -1,11 +1,14 @@
 ﻿using Microsoft.Expression.Interactivity.Core;
+using S7.Net.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrippingApp.Runtime;
+using DateTime = System.DateTime;
 
 namespace TrippingApp.ViewModel
 {
@@ -192,15 +195,35 @@ namespace TrippingApp.ViewModel
             });
             Jog_FW_Robot_P_Command = new ActionCommand(() =>
             {
-                object a = PLC_Query.ReadData(AddressCrt.Test);
-                double b = Convert.ToDouble(a);
-                Console.WriteLine(b);
+                
             });
             Enable_Robot_Command = new ActionCommand(() =>
             {
-                object a = PLC_Query.ReadData(AddressCrt.Test);
-                double b = Convert.ToDouble(a);
-                Console.WriteLine(b);
+               
+                TestST testST = new TestST();
+                Barcode_1 barcode_1 = new Barcode_1() 
+                {
+                    
+                };
+                try
+                {
+                    PLC_Query.ReadData(barcode_1, 8);
+
+                    var a = Regex.Replace(Encoding.ASCII.GetString(barcode_1.Barcode_P1, 0, barcode_1.Barcode_P1.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
+                    var b = Regex.Replace(Encoding.UTF8.GetString(barcode_1.Barcode_P2, 0, barcode_1.Barcode_P2.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
+
+                    Console.WriteLine(a);
+                    Console.WriteLine(b);
+
+                    barcode_1.Barcode_P3 = S7String.ToByteArray("HY-001", 10);
+                    barcode_1.Barcode_P4 = S7String.ToByteArray("2", 1);
+                    PLC_Query.WriteData(barcode_1, 8);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                
             });
         }
     }

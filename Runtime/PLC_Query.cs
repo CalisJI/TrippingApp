@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Net.NetworkInformation;
 using S7.Net.Types;
+using Cognex.InSight.Controls.Display.EZBuilder;
 
 namespace TrippingApp.Runtime
 {
@@ -135,6 +136,11 @@ namespace TrippingApp.Runtime
 
             }
         }
+        /// <summary>
+        /// Read Single Data
+        /// </summary>
+        /// <param name="DataAdress"></param>
+        /// <returns></returns>
         public static object ReadData(string DataAdress)
         {
             if (PLC_Controller.IsConnected)
@@ -154,6 +160,12 @@ namespace TrippingApp.Runtime
                 return new object();
             }
         }
+
+        /// <summary>
+        /// Read Single Feild IN DataBlock
+        /// </summary>
+        /// <param name="item">Infor of Feild</param>
+        /// <returns></returns>
         public static object ReadData(DataOffSetPLC item)
         {
             if (PLC_Controller.IsConnected)
@@ -173,6 +185,56 @@ namespace TrippingApp.Runtime
                 return new object();
             }
         }
+        /// <summary>
+        /// Read Data through Struct Of Datablock
+        /// </summary>
+        /// <typeparam name="T">Type Of Struct</typeparam>
+        /// <returns></returns>
+        public static object ReadData<T>(int DB_Index,int Start_Addr=0)
+        {
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    return PLC_Controller.ReadStruct(typeof(T), DB_Index, Start_Addr);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return new object();
+            }
+            else
+            {
+                return new object();
+            }
+        }
+        /// <summary>
+        /// ReadData Full DataBlock to Class Object
+        /// </summary>
+        /// <param name="sourceClass"></param>
+        /// <param name="DB_index"></param>
+        /// <param name="Start_Addr"></param>
+        public static void ReadData(object  sourceClass,int DB_index,int Start_Addr=0)
+        {
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    PLC_Controller.ReadClass(sourceClass, DB_index, Start_Addr);
+                }
+                catch (PlcException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+          
+        }
+        /// <summary>
+        /// Write Single Data
+        /// </summary>
+        /// <param name="DataAdress"></param>
+        /// <param name="value"></param>
         public static void WriteData(string DataAdress, object value)
         {
             if (PLC_Controller.IsConnected) 
@@ -189,7 +251,28 @@ namespace TrippingApp.Runtime
 
             }
         }
+        /// <summary>
+        /// Write Full Data from Class to DataBlock
+        /// </summary>
+        /// <param name="souceClass"></param>
+        /// <param name="DB_Index"></param>
+        /// <param name="Start_Addr"></param>
+        public static void WriteData(object souceClass,int DB_Index,int Start_Addr=0)
+        {
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    PLC_Controller.WriteClass(souceClass, DB_Index, Start_Addr);
+                }
+                catch (PlcException ex)
+                {
 
+
+                }
+
+            }
+        }
         public static void WriteArrayData()
         {
             if (PLC_Controller == null)
@@ -599,7 +682,16 @@ namespace TrippingApp.Runtime
             VarType = VarType.Real,
             VarCount = 1
         };
-        
+        public readonly static DataOffSetPLC Test_time = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 1,
+            StartByteAddress = 8,
+            VarType = VarType.DInt,
+            VarCount = 1
+        };
+        public readonly static TestClass TestClass;
+
     }
     public struct DataOffSetPLC 
     {
@@ -609,5 +701,135 @@ namespace TrippingApp.Runtime
         public VarType VarType;
         public int VarCount;
      
+    }
+    public class TestClass 
+    {
+        public bool var1;
+        public int var2;
+        public float var3;
+        public int var4;
+        public object var5;
+        public Array var6;
+        public Array var7;
+        public int vw1;
+        public float vw2;
+        public object vw3;
+        public int vw4;
+
+
+    }
+    public class TestST 
+    {
+        public bool var1 { get; set; }
+        public short var2 { get; set; }
+        public float var3 { get; set; }
+        public Int32 var4 { get; set; }
+        public byte[] var5 { get; set; } = new byte[11];
+        public bool[] var6 { get; set; } = new bool[16];
+        public short[] var7 { get; set; } = new short[9];
+        public short vw1 { get; set; }
+        public float vw2 { get; set; }
+        public byte[] vw3 { get; set; } = new byte[11];
+        public Int32 vw4 { get; set; }
+       
+    }
+    /// <summary>
+    /// Note type Convert 
+    /// PLC : C#
+    /// Int <=> short
+    /// Real = Float
+    /// String[length] = byte[length +1]
+    /// Time = Int32 => to TimeSpan.FromMiliseconds
+    /// </summary>
+    public class ROBOT_PARAM
+    {
+        public short JOG_X_SPEED { get; set; }
+        public short JOG_LIFT_SPEED { get; set; }
+        public short AxisRobot_Position_1 { get; set; }
+        public short AxisRobot_Position_2 { get; set; }
+        public short AxisRobot_Position_3 { get; set; }
+        public short AxisRobot_Position_Start { get; set; }
+        public short AxisRobot_P1_Index { get; set; }
+        public short AxisRobot_P2_Index { get; set; }
+        public short AxisRobot_P3_Index { get; set; }
+        public short AxisRobot_PStart_Index { get; set; }
+        public short AxisLift_Position_1 { get; set; }
+        public short AxisLift_Position_2 { get; set; }
+        public short AxisLift_Position_Start { get; set; }
+        public short AxisLift_P1_Index { get; set; }
+        public short AxisLift_P2_Index { get; set; }
+        public short AxisLift_PStart_Index { get; set; }
+        public short AxisRobot_Target_Point { get; set; }
+        public short AxisLift_Target_Point { get; set; }
+    }
+    public class SETTING_DATA
+    {
+        public short Point_to_Set { get; set; }
+        public short Point_Data { get; set; }
+        public short Point_Speed { get; set; }
+        public short Point_Accel { get; set; }
+        public short Point_Decel { get; set; }
+        public short Axis_Number { get; set; }
+    }
+    public class SYSTEM_DATA_RETAIN
+    {
+        public float Balance_temperature { get; set; }
+        public Int32 Time_Wait_Down_XL_Lift_1 { get; set; }
+        public Int32 Time_Wait_Down_XL_Lift_2 { get; set; }
+        public Int32 Time_Wait_Down_XL_Lift_3 { get; set; }
+        public Int32 Time_Wait_Down_XL_Lift_4 { get; set; }
+        public Int32 Time_Wait_Down_XL_Lift_5 { get; set; }
+        public Int32 TIme_Wait_Back_TF { get; set; }
+        public Int32 Time_Wati_Move_RackB4 { get; set; }
+        public float Tranfer_Frequency { get; set; }
+        public float Dip_Frequency { get; set; }
+        public float Accel_Tranfer { get; set; }
+        public float Decel_Tranfer { get; set; }
+        public float Accel_Dip { get; set; }
+        public float Decel_Dip { get; set; }
+        public UInt32 BaudRate { get; set; }
+        public UInt32 Parity { get; set; }
+
+    }
+
+    public class PROCESS_DATA_PARAMETER
+    {
+        public Int32 Timer_Region1vs3 { get; set; }
+        public Int32 Timer_Bath6_P1 { get; set; }
+        public Int32 Timer_Bath6_P2 { get; set; }
+        public Int32 Timer_Bath6_P3 { get; set; }
+        public Int32 Timer_Bath6_P4 { get; set; }
+        public Int32 Timer_Bath4_P2 { get; set; }
+        public Int32 Timer_Bath4_P3 { get; set; }
+        public Int32 Timer_Bath5_P4 { get; set; }
+        public Int32 Tranfer_timer { get; set; }
+        public Int32 Timer_temp_Robot_Area { get; set; }
+        public Int32 Current_TValue_Bath4 { get; set; }
+        public Int32 Current_TValue_Bath5 { get; set; }
+        public Int32 Current_TValue_Bath6 { get; set; }
+        public Int32 Current_TValue_Area_1 { get; set; }
+        public Int32 Current_TValue_Area_3 { get; set; }
+        public short CurrentBathNumber { get; set; }
+        public short MODE { get; set; }
+        public short Time_Int_Check_Sensor_TF { get; set; }
+        public Int32 Time_Check_Sensor_TF { get; set; }
+        public Int32 Time_To_Active_Robot { get; set; }
+        public Int32 Timer_Run_Conveyor_Inpur { get; set; }
+
+
+    }
+    public struct Barcode
+    {
+        public byte[] Barcode_P1;
+        public byte[] Barcode_P2;
+    }
+    public class Barcode_1
+    {
+        public byte[] Barcode_P1 { get; set; } = new byte[11];
+        public byte[] Barcode_P2 { get; set; } = new byte[3];
+        public byte[] Barcode_P3 { get; set; } = new byte[11];
+        public byte[] Barcode_P4 { get; set; } = new byte[3];
+        public byte[] Barcode_P5 { get; set; } = new byte[11];
+        public byte[] Barcode_P6 { get; set; } = new byte[3];
     }
 }
