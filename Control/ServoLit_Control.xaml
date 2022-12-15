@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.Control"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:control="clr-namespace:TrippingApp.Control"
              d:DesignHeight="1000" d:DesignWidth="1200">
     <Viewbox>
@@ -26,13 +27,13 @@
                     BorderBrush="Yellow"
                     BorderThickness="2">
                     <TextBlock 
+                        Text="{Binding CurrentPos, RelativeSource={RelativeSource AncestorType=UserControl}}"
                         Width="250"
                         TextAlignment="Left"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="20">
                     <Run Text="Position:" FontWeight="DemiBold"/>
-                        
                     
                     <Run Text="{Binding CurrentPosition, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                    
@@ -65,6 +66,14 @@
                             Width="150"
                             Height="150"
                             HorizontalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewTouchDown">
+                                    <i:InvokeCommandAction Command="{Binding Jog_Up_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewTouchUp">
+                                    <i:InvokeCommandAction Command="{Binding Jog_Up_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <StackPanel Orientation="Vertical">
                                 <Image
                                     Width="100"
@@ -94,6 +103,14 @@
                             Width="150"
                             Height="150"
                             HorizontalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PreviewTouchDown">
+                                    <i:InvokeCommandAction Command="{Binding Jog_Down_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewTouchUp">
+                                    <i:InvokeCommandAction Command="{Binding Jog_Down_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <StackPanel Orientation="Vertical">
                                 <Label
                                     HorizontalContentAlignment="Center"
@@ -134,10 +151,12 @@
                         Header="Jog Speed">
                         <Grid>
                             <control:TextBox_Custome_1 
+                                NumberValue="{Binding Jog_Speed, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
                                 Margin="10 0 0 0"
                                 HorizontalAlignment="Left"/>
                             <Button
+                                Command="{Binding Set_Jog_Speed_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Margin="0 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
@@ -153,10 +172,12 @@
                         Header="Position Above Setting">
                         <Grid>
                             <control:TextBox_Custome_1 
+                                NumberValue="{Binding Position_Above, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
                                 Margin="10 0 0 0"
                                 HorizontalAlignment="Left"/>
                             <Button
+                                Command="{Binding Set_Position_Above_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Margin="0 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
@@ -172,10 +193,12 @@
                         Header="Position Below Setting">
                         <Grid>
                             <control:TextBox_Custome_1 
+                                NumberValue="{Binding Position_Below, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
                                 Margin="10 0 0 0"
                                 HorizontalAlignment="Left"/>
                             <Button
+                                Command="{Binding Set_Position_Below_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Margin="0 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
@@ -191,10 +214,12 @@
                         Header="Position Start Setting">
                         <Grid>
                             <control:TextBox_Custome_1 
+                                NumberValue="{Binding Position_Start, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
                                 Margin="10 0 0 0"
                                 HorizontalAlignment="Left"/>
                             <Button
+                                Command="{Binding Set_Position_Start_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Margin="0 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">

@@ -188,13 +188,21 @@ namespace TrippingApp.ViewModel
         public Cognex.InSight.Controls.Display.CvsInSightDisplay CvsInSightDisplay2;
         public void Initialize()
         {
+            try
+            {
+                CvsInSightDisplay2.LoadStandardTheme();
+                CvsInSightDisplay2.ConnectedChanged += CvsInSightDisplay2_ConnectedChanged;
+                CvsInSightDisplay2.StateChanged += CvsInSightDisplay2_StateChanged;
+                CvsInSightDisplay2.ConnectCompleted += CvsInSightDisplay2_ConnectCompleted;
+                CvsInSightDisplay2.StatusInformationChanged += CvsInSightDisplay2_StatusInformationChanged;
+                CvsInSightDisplay2.ResultsChanged += CvsInSightDisplay2_ResultsChanged;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
             Cognex.InSight.CvsInSightSoftwareDevelopmentKit.Initialize();
-            CvsInSightDisplay2.LoadStandardTheme();
-            CvsInSightDisplay2.ConnectedChanged += CvsInSightDisplay2_ConnectedChanged;
-            CvsInSightDisplay2.StateChanged += CvsInSightDisplay2_StateChanged;
-            CvsInSightDisplay2.ConnectCompleted += CvsInSightDisplay2_ConnectCompleted;
-            CvsInSightDisplay2.StatusInformationChanged += CvsInSightDisplay2_StatusInformationChanged;
-            CvsInSightDisplay2.ResultsChanged += CvsInSightDisplay2_ResultsChanged;
+          
         }
         private  void CvsInSightDisplay2_ResultsChanged(object sender, EventArgs e)
         {

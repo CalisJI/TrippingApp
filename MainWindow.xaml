@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrippingApp"
         mc:Ignorable="d"
+        xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -43,12 +44,12 @@
                     VerticalAlignment="Top"
                     Text="{Binding Timer_Full}"/>
             </Grid>
-            
             <ContentControl
-                Grid.Row="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Content="{Binding SelectedViewModel}" />
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="{Binding SelectedViewModel}" />
+            
             <!--<Button
                 Grid.Row="2"
                 Visibility="{Binding ChildPage, Converter={StaticResource BooleanToVisibilityConverter}}"

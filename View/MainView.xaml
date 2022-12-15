@@ -249,7 +249,7 @@
                 Grid.Row="1">
                 <Image
                     Margin="10"
-                    Source="{StaticResource settings_svgrepo_comDrawingImage}"/>
+                    Source="{StaticResource settingDrawingImage}"/>
             </Button>
             <!--Dashboard Page-->
             <Button
@@ -298,6 +298,34 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="4"
                 Grid.Row="1">
+                <Image
+                    Margin="10"
+                    Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+            </Button>
+            
+            <!-- Connect PLC-->
+
+            <Button
+                Command="{Binding PLC_Connect_Command}"
+                themes:ButtonAssist.CornerRadius="25"
+                Width="150"
+                Height="120"
+                VerticalAlignment="Center"                    
+                Grid.Column="1"
+                Grid.Row="3">
+                <Image
+                    Margin="10"
+                    Source="{StaticResource network_server_svgrepo_comDrawingImage}"/>
+            </Button>
+            <!--Connect Camera-->
+            <Button
+                Command="{Binding Test}"
+                themes:ButtonAssist.CornerRadius="25"
+                Width="150"
+                Height="120"
+                VerticalAlignment="Center"                    
+                Grid.Column="2"
+                Grid.Row="3">
                 <Image
                     Margin="10"
                     Source="{StaticResource camera_svgrepo_comDrawingImage}"/>

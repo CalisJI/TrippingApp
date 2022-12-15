@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using S7.Net.Types;
 using Cognex.InSight.Controls.Display.EZBuilder;
+using System.Security.AccessControl;
 
 namespace TrippingApp.Runtime
 {
@@ -51,27 +52,27 @@ namespace TrippingApp.Runtime
         {
             try
             {
-                if (PLC_Controller == null)
+                if (CheckConnect(Ip)) 
                 {
-                    PLC_Controller = new Plc(CpuType.S71500, Ip, 0, 1);
-                }
+                    if (PLC_Controller == null)
+                    {
+                        PLC_Controller = new Plc(CpuType.S71200, Ip, 0, 1);
+                    }
 
-                if (Connected == false || PLC_Controller.IsConnected == false)
-                {
-                    PLC_Controller.Open();
-                    Connected = true;
+                    if (Connected == false || PLC_Controller.IsConnected == false)
+                    {
+                        PLC_Controller.Open();
+                        Connected = true;
+                    }
                 }
-                if (DataItemPLC == null)
+                else
                 {
-                    DataItemPLC = new List<DataItem>();
+                    System.Windows.Forms.MessageBox.Show("IP Address Invalid or Lost Connect Ethernet Cable");
                 }
-                //Initial_Barcode_Address(DataItemPLC);
+              
+                
             }
-            catch (Exception ex)
-            {
-
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
+            catch (PlcException ex) { _ = Logger.Logger.Async_write(ex.Message); System.Windows.Forms.MessageBox.Show(ex.Message); }
 
         }
         /// <summary>
@@ -98,15 +99,8 @@ namespace TrippingApp.Runtime
                         return false;
                     }
                 }
-                catch (Exception ex)
-                {
-
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                    return false;
-                }
-
+                catch (PlcException ex) { _ = Logger.Logger.Async_write(ex.Message); return false; }
             }
-
         }
         /// <summary>
         /// Hàm Set bit
@@ -129,10 +123,7 @@ namespace TrippingApp.Runtime
                     }
 
                 }
-                catch (Exception ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                }
+                catch (PlcException ex) { _ = Logger.Logger.Async_write(ex.Message); }
 
             }
         }
@@ -149,10 +140,7 @@ namespace TrippingApp.Runtime
                 {
                     return PLC_Controller.Read(DataAdress);
                 }
-                catch (Exception ex)
-                {
-                   
-                }
+                catch (PlcException ex) { _ = Logger.Logger.Async_write(ex.Message); }
                 return new object();
             }
             else
@@ -160,7 +148,20 @@ namespace TrippingApp.Runtime
                 return new object();
             }
         }
+        public static async Task<object> ReadDataAsync(DataOffSetPLC item)
+        {
+            if (!PLC_Controller.IsConnected) return new object();
+            object data = null;
+            void act()
+            {
+                data =  PLC_Controller.ReadAsync(item.DataType, item.DB, item.StartByteAddress, item.VarType, item.VarCount);
+            };
+            var a = new Task(act);
+            a.Start();
+            await a;
+            return data;
 
+        }
         /// <summary>
         /// Read Single Feild IN DataBlock
         /// </summary>
@@ -174,9 +175,9 @@ namespace TrippingApp.Runtime
                 {
                     return PLC_Controller.Read(item.DataType,item.DB,item.StartByteAddress,item.VarType,item.VarCount);
                 }
-                catch (Exception ex)
+                catch (PlcException ex)
                 {
-
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
                 return new object();
             }
@@ -198,9 +199,9 @@ namespace TrippingApp.Runtime
                 {
                     return PLC_Controller.ReadStruct(typeof(T), DB_Index, Start_Addr);
                 }
-                catch (Exception ex)
+                catch (PlcException ex)
                 {
-
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
                 return new object();
             }
@@ -225,11 +226,39 @@ namespace TrippingApp.Runtime
                 }
                 catch (PlcException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
             }
-          
+            else 
+            {
+            
+            }
+
         }
+
+
+        public static void WriteData(DataOffSetPLC arg1, object value)
+        {
+
+            if (PLC_Controller.IsConnected)
+            {
+                try
+                {
+                    PLC_Controller.Write(arg1.DataType, arg1.DB, arg1.StartByteAddress, value);
+                }
+                catch ( PlcException ex)
+                {
+
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            }
+            else 
+            {
+                //System.Windows.Forms.MessageBox.Show("PLC is not connect");
+            }
+        }
+
+
         /// <summary>
         /// Write Single Data
         /// </summary>
@@ -243,12 +272,17 @@ namespace TrippingApp.Runtime
                 {
                     PLC_Controller.Write(DataAdress, value);
                 }
-                catch (Exception ex)
+                catch (PlcException ex)
                 {
-
+                    _ = Logger.Logger.Async_write(ex.Message);
                     
                 }
 
+            }
+            else
+            {
+
+                //System.Windows.Forms.MessageBox.Show("Test");
             }
         }
         /// <summary>
@@ -263,12 +297,12 @@ namespace TrippingApp.Runtime
             {
                 try
                 {
-                    PLC_Controller.WriteClass(souceClass, DB_Index, Start_Addr);
+                    PLC_Controller.WriteClassAsync(souceClass, DB_Index, Start_Addr);
                 }
                 catch (PlcException ex)
                 {
 
-
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
 
             }
@@ -299,283 +333,130 @@ namespace TrippingApp.Runtime
         /// <summary>
         /// Hàm gán giá trị các thanh ghi chưa dữ liệu barcode backup
         /// </summary>
-        private static void Initial_Barcode_Address(List<Data_Barcode_PLC> Plcs_Barcode)
+        public static void Initial_Barcode_Address(List<Data_Barcode_PLC> Plcs_Barcode , LIST_CODE_CHAR ListCode)
         {
             try
             {
-                DataItem Barcode1_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 0,
-                    Value = new object()
+                ListCode.Barcode1_P1 = S7String.ToByteArray(Plcs_Barcode[0].BarCode,10);
+                ListCode.Barcode1_P2 = S7String.ToByteArray( Plcs_Barcode[0].Kind,1);
+                ListCode.Barcode2_P1 = S7String.ToByteArray(Plcs_Barcode[1].BarCode, 10);
+                ListCode.Barcode2_P2 = S7String.ToByteArray(Plcs_Barcode[1].Kind, 1);
+                ListCode.Barcode3_P1 = S7String.ToByteArray(Plcs_Barcode[2].BarCode, 10);
+                ListCode.Barcode3_P2 = S7String.ToByteArray(Plcs_Barcode[2].Kind, 1);
+                ListCode.Barcode4_P1 = S7String.ToByteArray(Plcs_Barcode[3].BarCode, 10);
+                ListCode.Barcode4_P2 = S7String.ToByteArray(Plcs_Barcode[3].Kind, 1);
+                ListCode.Barcode5_P1 = S7String.ToByteArray(Plcs_Barcode[4].BarCode, 10);
+                ListCode.Barcode5_P2 = S7String.ToByteArray(Plcs_Barcode[4].Kind, 1);
+                ListCode.Barcode6_P1 = S7String.ToByteArray(Plcs_Barcode[5].BarCode, 10);
+                ListCode.Barcode6_P2 = S7String.ToByteArray(Plcs_Barcode[5].Kind, 1);
+                ListCode.Barcode7_P1 = S7String.ToByteArray(Plcs_Barcode[6].BarCode, 10);
+                ListCode.Barcode7_P2 = S7String.ToByteArray(Plcs_Barcode[6].Kind, 1);
+                ListCode.Barcode8_P1 = S7String.ToByteArray(Plcs_Barcode[7].BarCode, 10);
+                ListCode.Barcode8_P2 = S7String.ToByteArray(Plcs_Barcode[7].Kind, 1);
+                ListCode.Barcode9_P1 = S7String.ToByteArray(Plcs_Barcode[8].BarCode, 10);
+                ListCode.Barcode9_P2 = S7String.ToByteArray(Plcs_Barcode[8].Kind, 1);
+                ListCode.Barcode10_P1 = S7String.ToByteArray(Plcs_Barcode[10].BarCode, 10);
+                ListCode.Barcode10_P2 = S7String.ToByteArray(Plcs_Barcode[10].Kind, 1);
 
-                };
-                DataItem Barcode1_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 12,
-                    Value = new object()
-
-                };
-                DataItem Barcode2_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 16,
-                    Value = new object()
-
-                };
-                DataItem Barcode2_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 28,
-                    Value = new object()
-
-                };
-                DataItem Barcode3_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 32,
-                    Value = new object()
-
-                };
-                DataItem Barcode3_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 44,
-                    Value = new object()
-
-                };
-                DataItem Barcode4_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 48,
-                    Value = new object()
-
-                };
-                DataItem Barcode4_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 60,
-                    Value = new object()
-
-                };
-                DataItem Barcode5_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 64,
-                    Value = new object()
-
-                };
-                DataItem Barcode5_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 76,
-                    Value = new object()
-
-                };
-                DataItem Barcode6_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 80,
-                    Value = new object()
-
-                };
-                DataItem Barcode6_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 92,
-                    Value = new object()
-
-                };
-                DataItem Barcode7_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 96,
-                    Value = new object()
-
-                };
-                DataItem Barcode7_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 108,
-                    Value = new object()
-
-                };
-                DataItem Barcode8_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 112,
-                    Value = new object()
-
-                };
-                DataItem Barcode8_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 124,
-                    Value = new object()
-
-                };
-                DataItem Barcode9_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 128,
-                    Value = new object()
-
-                };
-                DataItem Barcode9_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 140,
-                    Value = new object()
-
-                };
-                DataItem Barcode10_P1 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 10,
-                    StartByteAdr = 144,
-                    Value = new object()
-
-                };
-                DataItem Barcode10_P2 = new DataItem()
-                {
-                    DataType = DataType.DataBlock,
-                    VarType = VarType.String,
-                    DB = 3,
-                    BitAdr = 0,
-                    Count = 1,
-                    StartByteAdr = 156,
-                    Value = new object()
-                };
-
-
-                Barcode1_P1.Value = Plcs_Barcode[0].BarCode;
-                Barcode1_P2.Value = Plcs_Barcode[0].Kind;
-                Barcode2_P1.Value = Plcs_Barcode[1].BarCode;
-                Barcode2_P2.Value = Plcs_Barcode[1].Kind;
-                Barcode3_P1.Value = Plcs_Barcode[2].BarCode;
-                Barcode3_P2.Value = Plcs_Barcode[2].Kind;
-                Barcode4_P1.Value = Plcs_Barcode[3].BarCode;
-                Barcode4_P2.Value = Plcs_Barcode[3].Kind;
-                Barcode5_P1.Value = Plcs_Barcode[4].BarCode;
-                Barcode5_P2.Value = Plcs_Barcode[4].Kind;
-                Barcode6_P1.Value = Plcs_Barcode[5].BarCode;
-                Barcode6_P2.Value = Plcs_Barcode[5].Kind;
-                Barcode7_P1.Value = Plcs_Barcode[6].BarCode;
-                Barcode7_P2.Value = Plcs_Barcode[6].Kind;
-                Barcode8_P1.Value = Plcs_Barcode[7].BarCode;
-                Barcode8_P2.Value = Plcs_Barcode[7].Kind;
-                Barcode9_P1.Value = Plcs_Barcode[8].BarCode;
-                Barcode9_P2.Value = Plcs_Barcode[8].Kind;
-                Barcode10_P1.Value = Plcs_Barcode[9].BarCode;
-                Barcode10_P2.Value = Plcs_Barcode[9].Kind;
-                if (DataItemPLC.Count != 0)
-                {
-                    DataItemPLC.Clear();
-                }
-
-                DataItemPLC.Add(Barcode1_P1);
-                DataItemPLC.Add(Barcode1_P2);
-                DataItemPLC.Add(Barcode2_P1);
-                DataItemPLC.Add(Barcode2_P2);
-                DataItemPLC.Add(Barcode3_P1);
-                DataItemPLC.Add(Barcode3_P2);
-                DataItemPLC.Add(Barcode4_P1);
-                DataItemPLC.Add(Barcode4_P2);
-                DataItemPLC.Add(Barcode5_P1);
-                DataItemPLC.Add(Barcode5_P2);
-                DataItemPLC.Add(Barcode6_P1);
-                DataItemPLC.Add(Barcode6_P2);
-                DataItemPLC.Add(Barcode7_P1);
-                DataItemPLC.Add(Barcode7_P2);
-                DataItemPLC.Add(Barcode8_P1);
-                DataItemPLC.Add(Barcode8_P2);
-                DataItemPLC.Add(Barcode9_P1);
-                DataItemPLC.Add(Barcode9_P2);
-                DataItemPLC.Add(Barcode10_P1);
-                DataItemPLC.Add(Barcode10_P2);
-                PLC_Controller.Write(DataItemPLC.ToArray());
+                WriteData(ListCode, 3);
+                _ = Logger.Logger.Async_write("Download List Barcode Successfully");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _ = Logger.Logger.Async_write(ex.Message);
 
             }
+        }
+
+
+        public static void PostData_Temperature(float[] Temperatures)
+        {
+            try
+            {
+                DATA_TEMPERATURE temper = new DATA_TEMPERATURE
+                {
+                    Nhiet_Do_Tank1 = Temperatures[0],
+                    Nhiet_Do_Tank2 = Temperatures[1],
+                    Nhiet_Do_Tank3 = Temperatures[2],
+                    Nhiet_Do_Tank4 = Temperatures[3],
+                    Nhiet_Do_Tank5 = Temperatures[4],
+                    Nhiet_Do_Tank6 = Temperatures[5],
+                    Nhiet_Do_Tank7 = Temperatures[6],
+                    Nhiet_Do_Tank8 = Temperatures[7],
+                    Nhiet_Do_Tank9 = Temperatures[8],
+                    Nhiet_Do_Tank10 = Temperatures[9],
+                    Nhiet_Do_Tank11 = Temperatures[10]
+                };
+                WriteData(temper, 24);
+                _ = Logger.Logger.Async_write("Write Temperature Successfully");
+            }
+            catch (Exception ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+            }
+        }
+        public static ROBOT_PARAM GetRobot_Setting()
+        {
+            try
+            {
+                ROBOT_PARAM rb = new ROBOT_PARAM();
+                ReadData(rb, 14);
+                return rb;
+            }
+            catch (PlcException ex )
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+                
+            }
+            return new ROBOT_PARAM();
+        }
+
+        public static PROCESS_DATA_PARAMETER GetProcess_Data_Parameter()
+        {
+            try
+            {
+                PROCESS_DATA_PARAMETER par = new PROCESS_DATA_PARAMETER();
+                ReadData(par, 14);
+                return par;
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+
+            }
+            return new PROCESS_DATA_PARAMETER();
+        }
+
+        public static SYSTEM_DATA_RETAIN GetSystem_Data_Retain()
+        {
+            try
+            {
+                SYSTEM_DATA_RETAIN sar = new SYSTEM_DATA_RETAIN();
+                ReadData(sar, 10);
+                return sar;
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+
+            }
+            return new SYSTEM_DATA_RETAIN();
+        }
+
+        public static DETECT_VALUE GetDetect_Value()
+        {
+            try
+            {
+                DETECT_VALUE dv = new DETECT_VALUE();
+                ReadData(dv,20);
+                return dv;
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+
+            }
+            return new DETECT_VALUE();
         }
     }
 
@@ -674,20 +555,102 @@ namespace TrippingApp.Runtime
         public readonly static string Run_BW_Input_Convetor = "M98.2";
         public readonly static string Run_Output_Conveyor = "M98.3";
 
-        public readonly static DataOffSetPLC Test = new DataOffSetPLC()
+        public readonly static string Current_Position_X = "MW128";
+        public readonly static string Current_Position_Lift = "MW130";
+
+        public readonly static string Test = "MW4";
+
+        public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 1,
-            StartByteAddress = 4,
-            VarType = VarType.Real,
+            DB = 14,
+            StartByteAddress = 0,
+            VarType = VarType.Int,
             VarCount = 1
         };
-        public readonly static DataOffSetPLC Test_time = new DataOffSetPLC()
+        public readonly static DataOffSetPLC Jog_Lift_SPEED = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 1,
+            DB = 14,
+            StartByteAddress = 2,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        
+        public readonly static DataOffSetPLC AxisRobot_Position_1 = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 4,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC AxisRobot_Position_2 = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 6,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC AxisRobot_Position_3 = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
             StartByteAddress = 8,
-            VarType = VarType.DInt,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC AxisRobot_Position_Start = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 10,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        
+        public readonly static DataOffSetPLC AxisLift_Position_1 = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 20,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC AxisLift_Position_2 = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 22,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC AxisLift_Position_Start = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 24,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC AxisRobot_Target_Point = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 32,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC AxisLift_Target_Point = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 14,
+            StartByteAddress = 34,
+            VarType = VarType.Int,
             VarCount = 1
         };
         public readonly static TestClass TestClass;
@@ -787,8 +750,10 @@ namespace TrippingApp.Runtime
         public float Decel_Tranfer { get; set; }
         public float Accel_Dip { get; set; }
         public float Decel_Dip { get; set; }
-        public UInt32 BaudRate { get; set; }
-        public UInt32 Parity { get; set; }
+        public Int32 BaudRate { get; set; }
+        public Int32 Parity { get; set; }
+        public short Detect_Vector { get; set; }
+        public short Detect_Vector_1 { get; set; }
 
     }
 
@@ -818,6 +783,79 @@ namespace TrippingApp.Runtime
 
 
     }
+    public class DETECT_VALUE
+    {
+        public byte[] SCANED_BARCODE { get; set; } = new byte[11];
+        public byte[] INPUT_SCANED_BARCODE { get; set; } = new byte[11];
+    }
+
+    public class DATA_TEMPERATURE 
+    {
+        public float Nhiet_Do_Tank1 { get; set; }
+        public float Nhiet_Do_Tank2 { get; set; }
+        public float Nhiet_Do_Tank3 { get; set; }
+        public float Nhiet_Do_Tank4 { get; set; }
+        public float Nhiet_Do_Tank5 { get; set; }
+        public float Nhiet_Do_Tank6 { get; set; }
+        public float Nhiet_Do_Tank7 { get; set; }
+        public float Nhiet_Do_Tank8 { get; set; }
+        public float Nhiet_Do_Tank9 { get; set; }
+        public float Nhiet_Do_Tank10 { get; set; }
+        public float Nhiet_Do_Tank11 { get; set; }
+    }
+
+
+    public class LIST_CODE_CHAR 
+    {
+        public byte[] Barcode1_P1 { get; set; } = new byte[11];
+        public byte[] Barcode1_P2 { get; set; } = new byte[3];
+        public byte[] Barcode2_P1 { get; set; } = new byte[11];
+        public byte[] Barcode2_P2 { get; set; } = new byte[3];
+        public byte[] Barcode3_P1 { get; set; } = new byte[11];
+        public byte[] Barcode3_P2 { get; set; } = new byte[3];
+        public byte[] Barcode4_P1 { get; set; } = new byte[11];
+        public byte[] Barcode4_P2 { get; set; } = new byte[3];
+        public byte[] Barcode5_P1 { get; set; } = new byte[11];
+        public byte[] Barcode5_P2 { get; set; } = new byte[3];
+        public byte[] Barcode6_P1 { get; set; } = new byte[11];
+        public byte[] Barcode6_P2 { get; set; } = new byte[3];
+        public byte[] Barcode7_P1 { get; set; } = new byte[11];
+        public byte[] Barcode7_P2 { get; set; } = new byte[3];
+        public byte[] Barcode8_P1 { get; set; } = new byte[11];
+        public byte[] Barcode8_P2 { get; set; } = new byte[3];
+        public byte[] Barcode9_P1 { get; set; } = new byte[11];
+        public byte[] Barcode9_P2 { get; set; } = new byte[3];
+        public byte[] Barcode10_P1 { get; set; } = new byte[11];
+        public byte[] Barcode10_P2 { get; set; } = new byte[3];
+
+        public byte[] Contain_In_Bath1_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath1_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath2_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath2_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath3_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath3_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath4_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath4_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath5_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath5_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath6_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath6_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath7_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath7_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath8_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath8_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath9_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath9_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath10_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath10_P2 { get; set; } = new byte[3];
+        public byte[] Contain_In_Bath11_P1 { get; set; } = new byte[11];
+        public byte[] Contain_In_Bath11_P2 { get; set; } = new byte[3];
+
+        public byte[] Barcode_Queue_Robot_P1 { get; set; } = new byte[11];
+        public byte[] Barcode_Queue_Robot_P2 { get; set; } = new byte[3];
+
+    }
+
     public struct Barcode
     {
         public byte[] Barcode_P1;

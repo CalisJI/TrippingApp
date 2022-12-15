@@ -10,10 +10,6 @@ namespace TrippingApp.Logger
 {
     public static class Logger
     {
-        public static void Add_Logger()
-        {
-
-        }
         public static async Task Async_write(string jd)
         {
             void act()

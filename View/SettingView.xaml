@@ -5,8 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_Seting}"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="1030" d:DesignWidth="1920">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Unloaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="{StaticResource NormalBrush}">
         <StackPanel Orientation="Vertical" Margin="0 100 0 0">
             <!--PLC Config-->

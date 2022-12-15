@@ -41,6 +41,9 @@
     <Reference Include="BaseViewModel">
       <HintPath>..\..\Class\BaseViewModel\bin\Debug\BaseViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="BusyIndicator, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\BusyIndicator.2.0.2.1\lib\net46\BusyIndicator.dll</HintPath>
+    </Reference>
     <Reference Include="Cognex.InSight, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Public\Documents\Cognex\In-Sight\In-Sight Sample Projects 6.2.2\C# v2012\Display Control\bin\Debug\Cognex.InSight.dll</HintPath>
@@ -48,6 +51,9 @@
     <Reference Include="Cognex.InSight.Controls.Display, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Public\Documents\Cognex\In-Sight\In-Sight Sample Projects 6.2.2\C# v2012\Display Control\bin\Debug\Cognex.InSight.Controls.Display.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyModbus, Version=5.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\EasyModbusTCP.5.6.0\lib\net40\EasyModbus.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.9.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -137,6 +143,9 @@
     <Compile Include="Control\Heater.xaml.cs">
       <DependentUpon>Heater.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Indicator.xaml.cs">
+      <DependentUpon>Indicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Robot_Control.xaml.cs">
       <DependentUpon>Robot_Control.xaml</DependentUpon>
     </Compile>
@@ -156,6 +165,7 @@
     <Compile Include="Runtime\CameraApi.cs" />
     <Compile Include="Runtime\DataCSV_Funtion.cs" />
     <Compile Include="Runtime\GetApi.cs" />
+    <Compile Include="Runtime\Modbus_Communicate.cs" />
     <Compile Include="Runtime\PLC_Query.cs" />
     <Compile Include="ViewModel\CameraApiViewModel.cs" />
     <Compile Include="ViewModel\Cylinder_Control_ViewModel.cs" />
@@ -194,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Control\Heater.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Indicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TrippingApp.Runtime;
 using DateTime = System.DateTime;
 
@@ -14,6 +15,7 @@ namespace TrippingApp.ViewModel
 {
     public class Robot_Manual_ConfigurationViewModel:BaseViewModel.BaseViewModel
     {
+        DispatcherTimer timer = new DispatcherTimer();
         private BaseViewModel.BaseViewModel _cylinder_view;
 
         public BaseViewModel.BaseViewModel Cylinder_View
@@ -25,8 +27,8 @@ namespace TrippingApp.ViewModel
 
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
+        public ICommand Camera_Connect { get; set; }
 
-       
         public ICommand Changed_Page_Command { get; set; }
         /// <summary>
         /// Command To Set Up Parameter Of Servo
@@ -37,7 +39,9 @@ namespace TrippingApp.ViewModel
         public ICommand SetDataPointBath4Robot_Command { get; set; }
         public ICommand SetDataPointBath5Robot_Command { get; set; }
         public ICommand SetDataPointBath6Robot_Command { get; set; }
-        public ICommand SetDataPointLift_Command { get; set; }
+        public ICommand SetDataPointAbove_Lift_Command { get; set; }
+        public ICommand SetDataPointBelow_Lift_Command { get; set; }
+        public ICommand SetDataPointStart_Lift_Command { get; set; }
 
         #endregion
         /// <summary>
@@ -105,6 +109,41 @@ namespace TrippingApp.ViewModel
         }
 
         #endregion
+
+        #region Model Of Lift
+        private int _current_pos;
+
+        public int CurrentPos_Lift
+        {
+            get { return _current_pos; }
+            set { SetProperty(ref _current_pos, value, nameof(CurrentPos_Lift)); }
+        }
+
+        private int _position_above;
+
+        public int Position_Above
+        {
+            get { return _position_above; }
+            set { SetProperty(ref _position_above, value, nameof(Position_Above)); }
+        }
+
+        private int _position_below;
+
+        public int Position_Below
+        {
+            get { return _position_below; }
+            set { SetProperty(ref _position_below, value, nameof(Position_Below)); }
+        }
+
+        private int _position_start;
+
+        public int Position_Start
+        {
+            get { return _position_start; }
+            set { SetProperty(ref _position_start, value, nameof(Position_Start)); }
+        }
+
+        #endregion
         /// <summary>
         /// Lift Commandation
         /// </summary>
@@ -164,67 +203,159 @@ namespace TrippingApp.ViewModel
         {
             Loaded = new ActionCommand(() =>
             {
-                try
-                {
-                    PLC_Query.Initial("192.168.0.101");
-                }
-                catch (Exception ex)
-                {
+                //timer.Interval = new TimeSpan(100);
+                //timer.Tick += Timer_Tick;
+                //if (timer.IsEnabled == false) 
+                //{
+                //    timer.Start();
+                //}
+                //try
+                //{
+                //    PLC_Query.Initial("192.168.0.101");
+                //}
+                //catch (Exception ex)
+                //{
 
-                    Console.WriteLine(ex.Message);
-                }
+                //    Console.WriteLine(ex.Message);
+                //}
+
+                //TestST testST = new TestST();
+                //Barcode_1 barcode_1 = new Barcode_1() 
+                //{
+
+                //};
+                //try
+                //{
+                //    PLC_Query.ReadData(barcode_1, 8);
+
+                //    var a = Regex.Replace(Encoding.ASCII.GetString(barcode_1.Barcode_P1, 0, barcode_1.Barcode_P1.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
+                //    var b = Regex.Replace(Encoding.UTF8.GetString(barcode_1.Barcode_P2, 0, barcode_1.Barcode_P2.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
+
+                //    //string ad = S7String.FromByteArray(barcode_1.Barcode_P5);
+                //    Console.WriteLine(a);
+                //    Console.WriteLine(b);
+
+                //    barcode_1.Barcode_P3 = S7String.ToByteArray("HY-001", 10);
+                //    barcode_1.Barcode_P4 = S7String.ToByteArray("2", 1);
+                //    PLC_Query.WriteData(barcode_1, 8);
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
             });
-
+           
             Unloaded = new ActionCommand(() =>
             {
-            
+                if (timer.IsEnabled) timer.Stop();
+                timer.Tick -= Timer_Tick;
             });
             Changed_Page_Command = new ActionCommand((p) =>
             {
                 if ((int)p==1)
                 {
-                    if (!Cylinder_Control_ViewModel.IsValueCreated)
-                    {
-                        this.Cylinder_View = Cylinder_Control_ViewModel.Value;
-                    }
-                    else
-                    {
-                        this.Cylinder_View = Cylinder_Control_ViewModel.Value;
-                    }
+                    this.Cylinder_View = Cylinder_Control_ViewModel.Value;
                 }
             });
             Jog_FW_Robot_P_Command = new ActionCommand(() =>
             {
                 
             });
+            Jog_FW_Robot_N_Command = new ActionCommand(() =>
+            {
+
+            });
+            Jog_BW_Robot_P_Command = new ActionCommand(() =>
+            {
+
+            });
+            Jog_BW_Robot_N_Command = new ActionCommand(() =>
+            {
+
+            });
+            Origin_Robot_Command = new ActionCommand(() =>
+            {
+            
+            });
             Enable_Robot_Command = new ActionCommand(() =>
             {
-               
-                TestST testST = new TestST();
-                Barcode_1 barcode_1 = new Barcode_1() 
-                {
-                    
-                };
                 try
                 {
-                    PLC_Query.ReadData(barcode_1, 8);
-
-                    var a = Regex.Replace(Encoding.ASCII.GetString(barcode_1.Barcode_P1, 0, barcode_1.Barcode_P1.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
-                    var b = Regex.Replace(Encoding.UTF8.GetString(barcode_1.Barcode_P2, 0, barcode_1.Barcode_P2.Length), @"(@|/h|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005|\u0006|\n)", "");
-
-                    Console.WriteLine(a);
-                    Console.WriteLine(b);
-
-                    barcode_1.Barcode_P3 = S7String.ToByteArray("HY-001", 10);
-                    barcode_1.Barcode_P4 = S7String.ToByteArray("2", 1);
-                    PLC_Query.WriteData(barcode_1, 8);
+                    object ss = PLC_Query.ReadData(AddressCrt.Test);
+                    int sss = Convert.ToInt16(ss);
+                    Console.WriteLine(ss);
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
+                }
+            });
+            Disable_Robot_Command = new ActionCommand(() =>
+            {
+            
+            });
+            SetRobotJogSpeed_Command = new ActionCommand((p) =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.Jog_X_SPEED, Jog_Robot_Speed);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
                 
             });
+            SetDataPointBath4Robot_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1, Jog_Robot_Speed);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            SetDataPointBath5Robot_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, Jog_Robot_Speed);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            SetDataPointBath6Robot_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, Jog_Robot_Speed);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                object a = PLC_Query.ReadData(AddressCrt.Current_Position_X);
+                CurrentPos = Convert.ToInt16(a);
+                object b = PLC_Query.ReadData(AddressCrt.Current_Position_Lift);
+                CurrentPos = Convert.ToInt16(b);
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }
 }
