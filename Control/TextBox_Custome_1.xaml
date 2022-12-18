@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.Control"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Height="{Binding ChieuCao, RelativeSource={RelativeSource AncestorType=UserControl}}"
              Width="{Binding ChieuRong, RelativeSource={RelativeSource AncestorType=UserControl}}">
     <UserControl.Resources>
@@ -74,12 +75,22 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBox
+                        Visibility="{Binding NumberMode, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBoolToVisConverter}}"
                         VerticalContentAlignment="Center"
                         Margin="10 0 10 0"
                         VerticalAlignment="Center"
                         Width="180"
                         FontSize="40"
                         Text="{Binding NumberValue, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        Grid.Column="1"/>
+                    <TextBox
+                        Visibility="{Binding NumberMode, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        VerticalContentAlignment="Center"
+                        Margin="10 0 10 0"
+                        VerticalAlignment="Center"
+                        Width="180"
+                        FontSize="40"
+                        Text="{Binding NumberValueF, RelativeSource={RelativeSource AncestorType=UserControl}}"
                         Grid.Column="1"/>
                     <RepeatButton
                         VerticalAlignment="Center"
@@ -90,6 +101,14 @@
                         Grid.Column="2"
                         PreviewTouchDown="RepeatButton_PreviewTouchDown"
                         Click="RepeatButton_Click">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewTouchUp">
+                                <i:InvokeCommandAction Command="{Binding BTN_Up_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseUp">
+                                <i:InvokeCommandAction Command="{Binding BTN_Up_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <Image
                             Margin="4"
                             VerticalAlignment="Center"
@@ -104,6 +123,14 @@
                         Grid.Column="0"
                         PreviewTouchDown="RepeatButton_PreviewTouchDown_1"
                         Click="RepeatButton_Click_1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewTouchUp">
+                                <i:InvokeCommandAction Command="{Binding BTN_Up_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseUp">
+                                <i:InvokeCommandAction Command="{Binding BTN_Up_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <Image
                             Margin="4"
                             VerticalAlignment="Center"

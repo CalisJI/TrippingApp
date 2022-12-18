@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
@@ -273,132 +274,470 @@ namespace TrippingApp.ViewModel
             #region XL1
             XL1_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Nang_Input)) 
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Nang_Input,false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Nang_Input, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL1_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Nang_Input))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Nang_Input, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Nang_Input, true);
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
+                
             });
             #endregion
 
             #region XL2
             XL2_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Lift1))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift1, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift1, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
+               
             });
             XL2_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Lift1))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift1, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift1, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL3
             XL3_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Lift2))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift2, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift2, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL3_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Lift2))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift2, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift2, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL4
             XL4_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Lift3))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift3, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift3, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL4_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Lift3))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift3, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift3, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL5
             XL5_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Lift4))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift4, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift4, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL5_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Lift4))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift4, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift4, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL6
             XL6_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Lift5))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift5, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Lift5, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL6_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Lift5))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift5, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Lift5, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL7
             XL7_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Chot_Input))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Chot_Input, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Chot_Input, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL7_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Chot_Input))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Chot_Input, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Chot_Input, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL8
             XL8_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Nang_Output))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Nang_Output, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Nang_Output, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL8_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Nang_Output))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Nang_Output, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Nang_Output, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL9
             XL9_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Open_XL_Robot))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Open_XL_Robot, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Open_XL_Robot, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL9_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Close_XL_Robot))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Close_XL_Robot, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Close_XL_Robot, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL10
             XL10_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Up_XL_Robot))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Robot, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Up_XL_Robot, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL10_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Down_XL_Robot))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Robot, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Down_XL_Robot, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL11
             XL11_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_On_Van_DI))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_On_Van_DI, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_On_Van_DI, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL11_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Off_Van_DI))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Off_Van_DI, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Off_Van_DI, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 
             #region XL12
             XL12_Up_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_On_Van_RO))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_On_Van_RO, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_On_Van_RO, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             XL12_Down_Command = new ActionCommand(() =>
             {
+                try
+                {
+                    if (PLC_Query.ReadBit(AddressCrt.Man_Off_Van_RO))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Off_Van_RO, false);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Man_Off_Van_RO, true);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
             });
             #endregion
 

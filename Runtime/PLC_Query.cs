@@ -16,6 +16,12 @@ namespace TrippingApp.Runtime
 {
     public class PLC_Query
     {
+        public static SYSTEM_DATA_RETAIN SYSTEM_DATA_RETAIN = new SYSTEM_DATA_RETAIN();
+        public static ROBOT_PARAM ROBOT_PARAM = new ROBOT_PARAM();
+        public static DATA_TEMPERATURE DATA_TEMPERATURE = new DATA_TEMPERATURE();
+        public static DETECT_VALUE DETECT_VALUE = new DETECT_VALUE();
+        public static PROCESS_DATA_PARAMETER PROCESS_DATA_PARAMETER = new PROCESS_DATA_PARAMETER();
+        public static SETTING_DATA SETTING_DATA = new SETTING_DATA();
         public static Plc PLC_Controller = null;
         /// <summary>
         /// Trang thái kết nối
@@ -236,7 +242,6 @@ namespace TrippingApp.Runtime
 
         }
 
-
         public static void WriteData(DataOffSetPLC arg1, object value)
         {
 
@@ -257,7 +262,6 @@ namespace TrippingApp.Runtime
                 //System.Windows.Forms.MessageBox.Show("PLC is not connect");
             }
         }
-
 
         /// <summary>
         /// Write Single Data
@@ -368,7 +372,6 @@ namespace TrippingApp.Runtime
             }
         }
 
-
         public static void PostData_Temperature(float[] Temperatures)
         {
             try
@@ -395,68 +398,69 @@ namespace TrippingApp.Runtime
                 _ = Logger.Logger.Async_write(ex.Message);
             }
         }
-        public static ROBOT_PARAM GetRobot_Setting()
+        public static void GetRobot_Setting()
         {
             try
             {
-                ROBOT_PARAM rb = new ROBOT_PARAM();
-                ReadData(rb, 14);
-                return rb;
+                ReadData(ROBOT_PARAM, 14);
             }
             catch (PlcException ex )
             {
                 _ = Logger.Logger.Async_write(ex.Message);
                 
             }
-            return new ROBOT_PARAM();
         }
 
-        public static PROCESS_DATA_PARAMETER GetProcess_Data_Parameter()
+        public static void GetProcess_Data_Parameter()
         {
             try
             {
-                PROCESS_DATA_PARAMETER par = new PROCESS_DATA_PARAMETER();
-                ReadData(par, 14);
-                return par;
+                ReadData(PROCESS_DATA_PARAMETER, 14);
             }
             catch (PlcException ex)
             {
                 _ = Logger.Logger.Async_write(ex.Message);
 
             }
-            return new PROCESS_DATA_PARAMETER();
         }
 
-        public static SYSTEM_DATA_RETAIN GetSystem_Data_Retain()
+        public static void GetSystem_Data_Retain()
         {
             try
             {
-                SYSTEM_DATA_RETAIN sar = new SYSTEM_DATA_RETAIN();
-                ReadData(sar, 10);
-                return sar;
+                ReadData(SYSTEM_DATA_RETAIN, 10);
             }
             catch (PlcException ex)
             {
                 _ = Logger.Logger.Async_write(ex.Message);
 
             }
-            return new SYSTEM_DATA_RETAIN();
         }
 
-        public static DETECT_VALUE GetDetect_Value()
+        public static void GetDetect_Value()
         {
             try
             {
-                DETECT_VALUE dv = new DETECT_VALUE();
-                ReadData(dv,20);
-                return dv;
+                ReadData(DETECT_VALUE,20);
             }
             catch (PlcException ex)
             {
                 _ = Logger.Logger.Async_write(ex.Message);
 
             }
-            return new DETECT_VALUE();
+        }
+
+        public static void Write_Setting_DataPoint()
+        {
+            try
+            {
+                WriteData(SETTING_DATA, 2);
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+
+            }
         }
     }
 
@@ -511,6 +515,9 @@ namespace TrippingApp.Runtime
         /// </summary>
         public readonly static string Manual_Home_Lift = "M61.5";
 
+        public readonly static string WRITE_DATA_POINT_X = "M9.0";
+        public readonly static string WRITE_DATA_POINT_LIFT = "M9.3";
+
         public readonly static string Manual_Jog_FW_Robot = "M49.1";
         public readonly static string Manual_Jog_BW_Robot = "M49.2";
         public readonly static string Manual_Jog_FW_Lift = "M49.3";
@@ -519,8 +526,8 @@ namespace TrippingApp.Runtime
         public readonly static string Write_Data_Point_Robot = "M9.0";
         public readonly static string Write_Data_Point_Lift = "M9.3";
 
-        public readonly static string SettingData_Point2Set = "DB2.DBW0";
-
+        public readonly static string HOME_MAN_TRIGGER_PC = "M3.3";
+        public readonly static string SELECT_AXIS_HOME = "MW6";
         public readonly static string Jog_FW_TF1 = "M50.5";
         public readonly static string Jog_BW_TF1 = "M51.0";
         public readonly static string Jog_FW_TF2 = "M51.3";
@@ -558,6 +565,43 @@ namespace TrippingApp.Runtime
         public readonly static string Current_Position_X = "MW128";
         public readonly static string Current_Position_Lift = "MW130";
 
+
+        public readonly static string Man_Up_XL_Nang_Input = "M30.7";
+        public readonly static string Man_Down_XL_Nang_Input = "M31.1";
+
+
+        public readonly static string Man_Up_XL_Lift1 = "M29.0";
+        public readonly static string Man_Down_XL_Lift1 = "M29.1";
+
+        public readonly static string Man_Up_XL_Lift2 = "M29.2.";
+        public readonly static string Man_Down_XL_Lift2 = "M29.3";
+
+        public readonly static string Man_Up_XL_Lift3 = "M29.4";
+        public readonly static string Man_Down_XL_Lift3 = "M29.5";
+
+        public readonly static string Man_Up_XL_Lift4 = "M29.6";
+        public readonly static string Man_Down_XL_Lift4 = "M29.7";
+
+        public readonly static string Man_Up_XL_Lift5 = "M30.0";
+        public readonly static string Man_Down_XL_Lift5 = "M30.1";
+
+        public readonly static string Man_Up_XL_Chot_Input = "M30.4";
+        public readonly static string Man_Down_XL_Chot_Input = "M30.5";
+
+        public readonly static string Man_Up_XL_Nang_Output = "M103.0";
+        public readonly static string Man_Down_XL_Nang_Output = "M31.4";
+
+        public readonly static string Man_Open_XL_Robot = "M31.6";
+        public readonly static string Man_Close_XL_Robot = "M32.0";
+
+        public readonly static string Man_Up_XL_Robot = "M32.2";
+        public readonly static string Man_Down_XL_Robot = "M32.4";
+
+        public readonly static string Man_On_Van_DI = "M103.4";
+        public readonly static string Man_Off_Van_DI = "M103.6";
+
+        public readonly static string Man_On_Van_RO = "M104.0";
+        public readonly static string Man_Off_Van_RO = "M104.2";
         public readonly static string Test = "MW4";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()

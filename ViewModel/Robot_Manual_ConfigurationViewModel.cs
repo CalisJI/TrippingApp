@@ -39,6 +39,7 @@ namespace TrippingApp.ViewModel
         public ICommand SetDataPointBath4Robot_Command { get; set; }
         public ICommand SetDataPointBath5Robot_Command { get; set; }
         public ICommand SetDataPointBath6Robot_Command { get; set; }
+
         public ICommand SetDataPointAbove_Lift_Command { get; set; }
         public ICommand SetDataPointBelow_Lift_Command { get; set; }
         public ICommand SetDataPointStart_Lift_Command { get; set; }
@@ -141,6 +142,13 @@ namespace TrippingApp.ViewModel
         {
             get { return _position_start; }
             set { SetProperty(ref _position_start, value, nameof(Position_Start)); }
+        }
+        private int _jog_lift_speed;
+
+        public int Jog_Lift_Speed
+        {
+            get { return _jog_lift_speed; }
+            set { SetProperty(ref _jog_lift_speed, value, nameof(Jog_Lift_Speed)); }
         }
 
         #endregion
@@ -259,40 +267,82 @@ namespace TrippingApp.ViewModel
             });
             Jog_FW_Robot_P_Command = new ActionCommand(() =>
             {
-                
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Robot, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
             });
             Jog_FW_Robot_N_Command = new ActionCommand(() =>
             {
-
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Robot, false);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
             });
             Jog_BW_Robot_P_Command = new ActionCommand(() =>
             {
-
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Robot, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
             });
             Jog_BW_Robot_N_Command = new ActionCommand(() =>
             {
-
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Robot, false);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
             });
             Origin_Robot_Command = new ActionCommand(() =>
             {
-            
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.SELECT_AXIS_HOME, 1);
+                    PLC_Query.WriteBit(AddressCrt.HOME_MAN_TRIGGER_PC, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
             });
             Enable_Robot_Command = new ActionCommand(() =>
             {
                 try
                 {
-                    object ss = PLC_Query.ReadData(AddressCrt.Test);
-                    int sss = Convert.ToInt16(ss);
-                    Console.WriteLine(ss);
+                    PLC_Query.WriteBit(AddressCrt.OnRobot, true);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    _ = Logger.Logger.Async_write(ex.Message);
                 }
             });
             Disable_Robot_Command = new ActionCommand(() =>
             {
-            
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.OffRobot, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
             });
             SetRobotJogSpeed_Command = new ActionCommand((p) =>
             {
@@ -310,18 +360,34 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1, Jog_Robot_Speed);
+                    PLC_Query.SETTING_DATA.Point_to_Set = 2;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)PosBath4;
+                    PLC_Query.SETTING_DATA.Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1, PosBath4);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
+                    
                 }
                 catch (Exception ex)
                 {
                     _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
                 }
             });
             SetDataPointBath5Robot_Command = new ActionCommand(() =>
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, Jog_Robot_Speed);
+                    PLC_Query.SETTING_DATA.Point_to_Set = 3;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)PosBath5;
+                    PLC_Query.SETTING_DATA.Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, PosBath5);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
                 }
                 catch (Exception ex)
                 {
@@ -332,7 +398,14 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, Jog_Robot_Speed);
+                    PLC_Query.SETTING_DATA.Point_to_Set = 4;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)PosBath6;
+                    PLC_Query.SETTING_DATA.Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, PosBath6);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
                 }
                 catch (Exception ex)
                 {
@@ -341,6 +414,160 @@ namespace TrippingApp.ViewModel
             });
 
 
+            Origin_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.SELECT_AXIS_HOME, 2);
+                    PLC_Query.WriteBit(AddressCrt.HOME_MAN_TRIGGER_PC, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            });
+            Enable_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.OnLift, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            Disable_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.OffLift, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+
+            SetLiftJogSpeed_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteData(AddressCrt.Jog_Lift_SPEED, Jog_Lift_Speed);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+
+            SetDataPointAbove_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.SETTING_DATA.Point_to_Set = 2;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)Position_Above;
+                    PLC_Query.SETTING_DATA.Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, Position_Above);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
+
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            });
+
+            SetDataPointBelow_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.SETTING_DATA.Point_to_Set = 3;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)Position_Below;
+                    PLC_Query.SETTING_DATA.Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_2, Position_Below);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
+
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            });
+
+            SetDataPointStart_Lift_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.SETTING_DATA.Point_to_Set = 1;
+                    PLC_Query.SETTING_DATA.Point_Data = (short)Position_Start;
+                    PLC_Query.SETTING_DATA.Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, Position_Start);
+                    PLC_Query.Write_Setting_DataPoint();
+                    PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            });
+
+            Jog_FW_Lift_P_Command = new ActionCommand(() => 
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            Jog_FW_Lift_N_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, false);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            Jog_BW_Lift_P_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, true);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
+            Jog_BW_Lift_N_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, false);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+            });
         }
 
         private void Timer_Tick(object sender, EventArgs e)

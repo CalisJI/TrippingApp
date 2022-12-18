@@ -204,6 +204,10 @@
                 FontWeight="DemiBold"
                 Grid.Row="0" Grid.Column="2">
                 <Grid Margin="30 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -243,6 +247,18 @@
                         </RadioButton.LayoutTransform>
                         <TextBlock Text="Fill"/>
                     </RadioButton>
+
+                    <Button
+                        Command="{Binding Save_Config_Command}"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        Width="160"
+                        FontSize="25"
+                        FontWeight="Bold"
+                        Height="100">
+                        Save Config
+                    </Button>
                 </Grid>
             </GroupBox>
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">

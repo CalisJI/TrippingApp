@@ -132,7 +132,9 @@
                             Grid.Column="5"
                             Height="60"
                             Width="60" >
-                            <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
+                            <Image
+                                Margin="6"
+                                Source="{StaticResource download_svgrepo_comDrawingImage}"/>
                         </Button>
                     </StackPanel>
                     

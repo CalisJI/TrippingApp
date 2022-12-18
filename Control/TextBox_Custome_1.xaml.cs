@@ -62,18 +62,78 @@ namespace TrippingApp.Control
             DependencyProperty.Register("NumberValue", typeof(int), typeof(TextBox_Custome_1), new PropertyMetadata(0));
 
 
+
+
+        public float NumberValueF
+        {
+            get { return (float)GetValue(NumberValueFProperty); }
+            set { SetValue(NumberValueFProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NumberValueF.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NumberValueFProperty =
+            DependencyProperty.Register("NumberValueF", typeof(float), typeof(TextBox_Custome_1), new PropertyMetadata(0.0f));
+
+
+
+        public bool NumberMode
+        {
+            get { return (bool)GetValue(NumberModeProperty); }
+            set { SetValue(NumberModeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NumberMode.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NumberModeProperty =
+            DependencyProperty.Register("NumberMode", typeof(bool), typeof(TextBox_Custome_1), new PropertyMetadata(false));
+
+
+
+
+        public ICommand BTN_Up_Command
+        {
+            get { return (ICommand)GetValue(BTN_Up_CommandProperty); }
+            set { SetValue(BTN_Up_CommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BTN_Up_Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BTN_Up_CommandProperty =
+            DependencyProperty.Register("BTN_Up_Command", typeof(ICommand), typeof(TextBox_Custome_1));
+
+
+
+
         void Inscrease() 
         {
-            if (NumberValue < 2500)
+            if (!NumberMode)
             {
-                SetValue(NumberValueProperty, NumberValue += 1);
+                if (NumberValue < 2500)
+                {
+                    SetValue(NumberValueProperty, NumberValue += 1);
+                }
+            }
+            else 
+            {
+                if (NumberValueF < 100.0f)
+                {
+                    SetValue(NumberValueFProperty, NumberValueF += 0.1f);
+                }
             }
         }
         void Descrease() 
         {
-            if (NumberValue > 0)
+            if (!NumberMode)
             {
-                SetValue(NumberValueProperty, NumberValue -= 1);
+                if (NumberValue > 0)
+                {
+                    SetValue(NumberValueProperty, NumberValue -= 1);
+                }
+            }
+            else 
+            {
+                if (NumberValueF > 0)
+                {
+                    SetValue(NumberValueFProperty, NumberValueF -= 0.1f);
+                }
             }
         }
         private void RepeatButton_PreviewTouchDown(object sender, TouchEventArgs e)
@@ -96,4 +156,5 @@ namespace TrippingApp.Control
             Descrease();
         }
     }
+    
 }

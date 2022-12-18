@@ -54,6 +54,8 @@ namespace TrippingApp.ViewModel
         public ICommand Live_check_Command { get; set; }
         public ICommand Graphics_check_Command { get; set; }
         public ICommand Grid_check_Command { get; set; }
+
+        public ICommand Save_Config_Command { get; set; }
         #endregion
 
 
@@ -325,22 +327,43 @@ namespace TrippingApp.ViewModel
             //CvsInSightDisplay2.Edit.ShowGrid.Bind(Grid_check_Command);
             #region C-Letter Command
 
-            Connect_Camera_Command = new ActionCommand(() => 
+            Connect_Camera_Command = new ActionCommand((p) => 
             {
                 try
                 {
-                    if (!(CvsInSightDisplay2.Connected))
+                    if((int)p == 1)
                     {
-                        CvsInSightDisplay2.Connect(CameraAddress, Username, Password, false);
-                        Enable_Connect_Btn = false;
-                        Connected = true;
+                        if (!(CvsInSightDisplay2.Connected))
+                        {
 
+                            CvsInSightDisplay2.Connect(ApplicationConfig.SystemConfig.CameraIP, ApplicationConfig.SystemConfig.UserName, ApplicationConfig.SystemConfig.PWD, false);
+                            Enable_Connect_Btn = false;
+                            Connected = true;
+
+                        }
+                        else
+                        {
+                            CvsInSightDisplay2.Disconnect();
+                            Connected = false;
+                        }
                     }
                     else
                     {
-                        CvsInSightDisplay2.Disconnect();
-                        Connected = false;
+                        if (!(CvsInSightDisplay2.Connected))
+                        {
+
+                            CvsInSightDisplay2.Connect(CameraAddress, Username, Password, false);
+                            Enable_Connect_Btn = false;
+                            Connected = true;
+
+                        }
+                        else
+                        {
+                            CvsInSightDisplay2.Disconnect();
+                            Connected = false;
+                        }
                     }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -423,8 +446,22 @@ namespace TrippingApp.ViewModel
                 {
                     CvsInSightDisplay2.SoftOnline = false;
                 }
+            });
 
-
+            Save_Config_Command = new ActionCommand(() =>
+            {
+                try
+                {
+                    ApplicationConfig.SystemConfig.CameraIP = CameraAddress;
+                    ApplicationConfig.SystemConfig.PWD = Password;
+                    ApplicationConfig.SystemConfig.UserName = Username;
+                    ApplicationConfig.UpdateData(ApplicationConfig.SystemConfig);
+                }
+                catch (Exception ex)
+                {
+                    _ = Logger.Logger.Async_write(ex.Message);
+                }
+                
             });
         }
     }

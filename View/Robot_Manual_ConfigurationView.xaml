@@ -80,6 +80,7 @@
                             Height="960"
                             Grid.Column="1"
                             HorizontalAlignment="Left"
+                            Jog_Speed="{Binding Jog_Lift_Speed}"
                             Enable_Command="{Binding Enable_Lift_Command}"
                             Origin_Command="{Binding Origin_Lift_Command}"
                             Disable_Command="{Binding Disable_Lift_Command}"
