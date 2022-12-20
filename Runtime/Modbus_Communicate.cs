@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using EasyModbus;
 
 namespace TrippingApp.Runtime
 {
     public static class Modbus_Communicate
     {
+        public static DispatcherTimer Timer = new DispatcherTimer();
+        public static bool Check_Error = false;
+        public static BackgroundWorker Worker = new BackgroundWorker();
         public static Temperature_Data VX4_1 = new Temperature_Data();
         public static Temperature_Data VX4_2 = new Temperature_Data();
         public static Temperature_Data VX4_3 = new Temperature_Data();
@@ -23,18 +28,91 @@ namespace TrippingApp.Runtime
         public static Temperature_Data VX4_11 = new Temperature_Data();
 
         public static ModbusClient ModbusClient = new ModbusClient("192.168.1.35",20000);
-        //public static void Initial()
-        //{
-        //    try
-        //    {
-        //        ModbusClient.Connect();
-        //    }
-        //    catch (Exception ex)
-        //    {
+        public static void Initial()
+        {
+            try
+            {
+                var a = PLC_Query.CheckConnect("192.168.1.35");
+                if (a)
+                {
+                    Timer.Interval = new TimeSpan(0, 0, 10);
+                    Timer.Tick += Timer_Tick;
+                    Timer.Start();
+                    Worker.DoWork += Worker_DoWork;
+                    Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+                    Worker.WorkerReportsProgress = true;
+                    Worker.WorkerSupportsCancellation = true;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("RTU Connection is not valid");
+                }
+             
+            }
+            catch (Exception ex)
+            {
 
-        //        _ = Logger.Logger.Async_write(ex.Message);
-        //    }
-        //}
+                _ = Logger.Logger.Async_write(ex.Message);
+            }
+        }
+
+        private static void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (!Check_Error)
+                {
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank1 = VX4_1.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank2 = VX4_2.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank3 = VX4_3.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank4 = VX4_4.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank5 = VX4_5.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank6 = VX4_6.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank7 = VX4_7.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank8 = VX4_8.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank9 = VX4_9.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank10 = VX4_10.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank11 = VX4_11.PV;
+
+                    PLC_Query.WriteData(PLC_Query.DATA_TEMPERATURE, 24);
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+            }
+         
+
+
+
+        }
+
+        private static void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                Read_Temp();
+                Check_Error = false;
+            }
+            catch (Exception ex)
+            {
+                Check_Error = true;
+                _ = Logger.Logger.Async_write(ex.Message);
+            }
+        }
+
+        public static void ShutDown()
+        {
+            if (Timer.IsEnabled)
+            {
+                Timer.Stop();
+            }
+        }
+        private static void Timer_Tick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void Read_Temp()
         {
             try
@@ -43,7 +121,6 @@ namespace TrippingApp.Runtime
                 {
                     ModbusClient.Connect();
                 }
-                
                 ModbusClient.UnitIdentifier = 1;
                 int[] T0 = ModbusClient.ReadHoldingRegisters(0, 4);
 
@@ -120,7 +197,7 @@ namespace TrippingApp.Runtime
                 VX4_11.TSV = T10[2] / (float)Math.Pow(10, T10[3]);
                 ModbusClient.Disconnect();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

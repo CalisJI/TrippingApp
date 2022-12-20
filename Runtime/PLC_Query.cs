@@ -22,6 +22,7 @@ namespace TrippingApp.Runtime
         public static DETECT_VALUE DETECT_VALUE = new DETECT_VALUE();
         public static PROCESS_DATA_PARAMETER PROCESS_DATA_PARAMETER = new PROCESS_DATA_PARAMETER();
         public static SETTING_DATA SETTING_DATA = new SETTING_DATA();
+        public static LIST_CODE_CHAR LIST_CODE_CHAR = new LIST_CODE_CHAR();
         public static Plc PLC_Controller = null;
         /// <summary>
         /// Trang thái kết nối
@@ -297,7 +298,7 @@ namespace TrippingApp.Runtime
         /// <param name="Start_Addr"></param>
         public static void WriteData(object souceClass,int DB_Index,int Start_Addr=0)
         {
-            if (PLC_Controller.IsConnected)
+            if (PLC_Controller != null && PLC_Controller.IsConnected)
             {
                 try
                 {

@@ -23,6 +23,13 @@ namespace TrippingApp.ViewModel
             get { return _cylinder_view; }
             set { SetProperty(ref _cylinder_view, value, nameof(Cylinder_View)); }
         }
+        private BaseViewModel.BaseViewModel _motor_Control;
+
+        public BaseViewModel.BaseViewModel Motor_Control_View
+        {
+            get { return _motor_Control; }
+            set { SetProperty(ref _motor_Control, value, nameof(Motor_Control_View)); }
+        }
 
 
         public ICommand Loaded { get; set; }
@@ -207,8 +214,10 @@ namespace TrippingApp.ViewModel
         #endregion
 
         private Lazy<Cylinder_Control_ViewModel> Cylinder_Control_ViewModel = new Lazy<Cylinder_Control_ViewModel>(() => { return new Cylinder_Control_ViewModel(); });
+        private Motor_Control_ViewModel Motor_Control_ViewModel = new Motor_Control_ViewModel();
         public Robot_Manual_ConfigurationViewModel()
         {
+            this.Motor_Control_View = Motor_Control_ViewModel;
             Loaded = new ActionCommand(() =>
             {
                 //timer.Interval = new TimeSpan(100);

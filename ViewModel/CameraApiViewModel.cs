@@ -1,6 +1,7 @@
 ﻿using Cognex.InSight;
 using Cognex.InSight.Controls.Display;
 using Microsoft.Expression.Interactivity.Core;
+using S7.Net.Types;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -213,13 +214,18 @@ namespace TrippingApp.ViewModel
                 if (CvsInSightDisplay2.Results.Cells.GetCell(31, 1) != null && CvsInSightDisplay2.Results.Cells.GetCell(31, 1).Text != string.Empty)
                 {
                     var a = CvsInSightDisplay2.Results.Cells.GetCell(31, 1).Text;
-                    Cognex_Result = a;
+                    if (a != Cognex_Result)
+                    {
+                        Cognex_Result = a;
+                        PLC_Query.DETECT_VALUE.INPUT_SCANED_BARCODE = S7String.ToByteArray(a, 10);
+                        PLC_Query.WriteData(PLC_Query.DETECT_VALUE, 20);
+                    }
+                   
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-
+                _ = Logger.Logger.Async_write(ex.Message);
             }
         }
 
@@ -331,7 +337,7 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    if((int)p == 1)
+                    if (p != null && (int)p == 1)
                     {
                         if (!(CvsInSightDisplay2.Connected))
                         {
@@ -432,8 +438,14 @@ namespace TrippingApp.ViewModel
             });
             Live_check_Command = new ActionCommand((p) =>
             {
-                CvsInSightDisplay2.Edit.LiveAcquire.Execute();
-
+                if (Live_Check)
+                {
+                    CvsInSightDisplay2.Edit.LiveAcquire.Execute();
+                }
+                else 
+                {
+                    CvsInSightDisplay2.Edit.LiveAcquire.Activated = false;
+                }
             });
             Online_check_Command = new ActionCommand((p) =>
             {

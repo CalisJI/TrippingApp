@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -90,30 +91,44 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    SYSTEM_DATA_RETAIN data = new SYSTEM_DATA_RETAIN();
-                    PLC_Query.ReadData(data, 10);
-                    Console.WriteLine(data);
+                    SYSTEM_DATA_RETAIN data10 = new SYSTEM_DATA_RETAIN();
+                    PLC_Query.ReadData(data10, 10);
                     ROBOT_PARAM data1 = new ROBOT_PARAM();
                     PLC_Query.ReadData(data1, 14);
-                    //LIST_CODE_CHAR data = new LIST_CODE_CHAR();
-                    //data.Barcode1_P1 = S7String.ToByteArray("HY-001", 10);
-                    //data.Barcode1_P2 = S7String.ToByteArray("1", 1);
-                    //data.Barcode2_P1 = S7String.ToByteArray("HY-002", 10);
-                    //data.Barcode2_P2 = S7String.ToByteArray("2", 1);
-                    //data.Barcode3_P1 = S7String.ToByteArray("HY-003", 10);
-                    //data.Barcode3_P2 = S7String.ToByteArray("3", 1);
-                    //data.Barcode4_P1 = S7String.ToByteArray("HY-004", 10);
-                    //data.Barcode4_P2 = S7String.ToByteArray("4", 1);
-                    //data.Barcode5_P1 = S7String.ToByteArray("HY-005", 10);
-                    //data.Barcode5_P2 = S7String.ToByteArray("5", 1);
-                    //data.Barcode6_P1 = S7String.ToByteArray("HY-006", 10);
-                    //data.Barcode6_P2 = S7String.ToByteArray("6", 1);
-                    //data.Barcode7_P1 = S7String.ToByteArray("HY-007", 10);
-                    //data.Barcode7_P2 = S7String.ToByteArray("7", 1);
-                    //data.Barcode8_P1 = S7String.ToByteArray("HY-008", 10);
-                    //data.Barcode8_P2 = S7String.ToByteArray("8", 1);
+                    PLC_Query.ReadData(PLC_Query.LIST_CODE_CHAR, 3);
+                    Random ab = new Random();
+                    int rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode1_P1 = S7String.ToByteArray("HY-001", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode1_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1, 4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode2_P1 = S7String.ToByteArray("HY-002", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode2_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode3_P1 = S7String.ToByteArray("HY-003", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode3_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode4_P1 = S7String.ToByteArray("HY-004", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode4_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode5_P1 = S7String.ToByteArray("HY-005", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode5_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode6_P1 = S7String.ToByteArray("HY-006", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode6_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode7_P1 = S7String.ToByteArray("HY-007", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode7_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode8_P1 = S7String.ToByteArray("HY-008", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode8_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode9_P1 = S7String.ToByteArray("HY-009", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode9_P2 = S7String.ToByteArray(rd.ToString(), 1);
+                    rd = (int)ab.Next(1,4);
+                    PLC_Query.LIST_CODE_CHAR.Barcode10_P1 = S7String.ToByteArray("HY-010", 10);
+                    PLC_Query.LIST_CODE_CHAR.Barcode10_P2 = S7String.ToByteArray(rd.ToString(), 1);
 
-                    //PLC_Query.WriteData(data, 3);
+                    PLC_Query.WriteData(PLC_Query.LIST_CODE_CHAR, 3);
                 }
                 catch (Exception ex)
                 {
@@ -137,7 +152,24 @@ namespace TrippingApp.ViewModel
             Camera_Connect_Command = new ActionCommand(() =>
             {
                 //CameraApiViewModel.Initialize();
-                CameraApiViewModel.Connect_Camera_Command.Execute(null);
+                try
+                {
+                    if (PLC_Query.PLC_Controller == null)
+                    {
+                        throw new Exception("Please Connect PLC First");
+                       
+                    }
+                    CameraApiViewModel.Connect_Camera_Command.Execute(null);
+                    CameraApiViewModel.Online_Camera_Command.Execute(null);
+                }
+                catch (Exception ex)
+                {
+
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+                
+             
+                
             });
             #endregion
 
@@ -182,10 +214,11 @@ namespace TrippingApp.ViewModel
                 try
                 {
                     PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
+                    TCP_Runtime.CreateNetWork();
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                   
                 }
                

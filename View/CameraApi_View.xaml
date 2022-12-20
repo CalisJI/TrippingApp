@@ -120,6 +120,9 @@
                                 <i:EventTrigger EventName="Checked">
                                     <i:InvokeCommandAction Command="{Binding Grid_check_Command}"/>
                                 </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding Grid_check_Command}"/>
+                                </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </CheckBox>
                         <CheckBox 
@@ -134,6 +137,9 @@
                             <TextBlock Text="Show Graphics" VerticalAlignment="Center"/>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Graphics_check_Command}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
                                     <i:InvokeCommandAction Command="{Binding Graphics_check_Command}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>

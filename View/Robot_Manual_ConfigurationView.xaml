@@ -49,13 +49,9 @@
                         </Grid.LayoutTransform>
                     </Grid>
                 </TabItem.Header>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                    <Grid Width="3840" Height="1000">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <control:Robot_Control
+                <Grid Width="1920" Height="1000">
+
+                    <control:Robot_Control
                            
                             JogBW_P_Command="{Binding Jog_BW_Robot_P_Command}"
                             JogBW_N_Command="{Binding Jog_BW_Robot_N_Command}"
@@ -74,9 +70,32 @@
                             PosBath6="{Binding PosBath6}"
                             CurrentPos="{Binding CurrentPos}"
                             Grid.Column="0"/>
+                </Grid>
+            </TabItem>
 
-                        <control:ServoLit_Control
-                            Margin="100 0 0 0"
+            <TabItem>
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                TextAlignment="Center"
+                                Text="Servo Lift Control"
+                                FontSize="20"
+                                FontWeight="Black"/>
+                        <Grid.LayoutTransform>
+                            <RotateTransform>
+                                <RotateTransform.Angle>
+                                    -90
+                                </RotateTransform.Angle>
+                            </RotateTransform>
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </TabItem.Header>
+                <control:ServoLit_Control
+                            Margin="50 0 0 0"
                             Height="960"
                             Grid.Column="1"
                             HorizontalAlignment="Left"
@@ -96,9 +115,6 @@
                             Set_Position_Above_Command="{Binding SetDataPointAbove_Lift_Command}"
                             Set_Position_Below_Command="{Binding SetDataPointBelow_Lift_Command}"
                             Set_Position_Start_Command="{Binding SetDataPointStart_Lift_Command}"/>
-                    </Grid>
-                </ScrollViewer>
-                
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -122,6 +138,29 @@
                     </Grid>
                 </TabItem.Header>
                 <ContentControl Content="{Binding Cylinder_View}"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                TextAlignment="Center"
+                                Text="Tranfer vs CAM Control"
+                                FontSize="20"
+                                FontWeight="Black"/>
+                        <Grid.LayoutTransform>
+                            <RotateTransform>
+                                <RotateTransform.Angle>
+                                    -90
+                                </RotateTransform.Angle>
+                            </RotateTransform>
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </TabItem.Header>
+                <ContentControl Content="{Binding Motor_Control_View}"/>
             </TabItem>
         </TabControl>
 
