@@ -698,6 +698,58 @@ namespace TrippingApp.Runtime
             VarType = VarType.Int,
             VarCount = 1
         };
+
+        public readonly static DataOffSetPLC Robot_Point_Speed = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 4,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC Robot_Point_Accel = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 6,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+        public readonly static DataOffSetPLC Robot_Point_Decel = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 8,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC Lift_Point_Speed = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 10,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC Lift_Point_Accel = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 12,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
+
+        public readonly static DataOffSetPLC Lift_Point_Deccel = new DataOffSetPLC()
+        {
+            DataType = DataType.DataBlock,
+            DB = 2,
+            StartByteAddress = 14,
+            VarType = VarType.Int,
+            VarCount = 1
+        };
         public readonly static TestClass TestClass;
 
     }
@@ -774,9 +826,12 @@ namespace TrippingApp.Runtime
     {
         public short Point_to_Set { get; set; }
         public short Point_Data { get; set; }
-        public short Point_Speed { get; set; }
-        public short Point_Accel { get; set; }
-        public short Point_Decel { get; set; }
+        public short Robot_Point_Speed { get; set; }
+        public short Robot_Point_Accel { get; set; }
+        public short Robot_Point_Decel { get; set; }
+        public short Lift_Point_Speed { get; set; }
+        public short Lift_Point_Accel { get; set; }
+        public short Lift_Point_Decel { get; set; }
         public short Axis_Number { get; set; }
     }
     public class SYSTEM_DATA_RETAIN

@@ -26,7 +26,8 @@ namespace TrippingApp.Runtime
         public static Temperature_Data VX4_9 = new Temperature_Data();
         public static Temperature_Data VX4_10 = new Temperature_Data();
         public static Temperature_Data VX4_11 = new Temperature_Data();
-
+        public static TempVsHumid_Data TH1 = new TempVsHumid_Data();
+        public static TempVsHumid_Data TH2 = new TempVsHumid_Data();
         public static ModbusClient ModbusClient = new ModbusClient("192.168.1.35",20000);
         public static void Initial()
         {
@@ -62,29 +63,26 @@ namespace TrippingApp.Runtime
             {
                 if (!Check_Error)
                 {
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank1 = VX4_1.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank2 = VX4_2.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank3 = VX4_3.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank4 = VX4_4.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank5 = VX4_5.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank6 = VX4_6.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank7 = VX4_7.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank8 = VX4_8.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank9 = VX4_9.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank10 = VX4_10.PV;
-                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank11 = VX4_11.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank1 = VX4_1.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank2 = VX4_2.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank3 = VX4_3.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank4 = VX4_4.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank5 = VX4_5.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank6 = VX4_6.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank7 = VX4_7.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank8 = VX4_8.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank9 = VX4_9.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank10 = VX4_10.PV;
+                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank11 = VX4_11.PV;
 
-                    PLC_Query.WriteData(PLC_Query.DATA_TEMPERATURE, 24);
+                    //PLC_Query.WriteData(PLC_Query.DATA_TEMPERATURE, 24);
+                    Console.WriteLine(VX4_3.PV);
                 }
             }
             catch (Exception ex)
             {
                 _ = Logger.Logger.Async_write(ex.Message);
             }
-         
-
-
-
         }
 
         private static void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -110,17 +108,20 @@ namespace TrippingApp.Runtime
         }
         private static void Timer_Tick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!Worker.IsBusy) 
+            {
+                Worker.RunWorkerAsync();
+            }
         }
-
+        public static void Write_Data(int ID,float value) 
+        {
+        
+        }
         public static void Read_Temp()
         {
             try
             {
-                if (!ModbusClient.Connected)
-                {
-                    ModbusClient.Connect();
-                }
+                ModbusClient.Connect();
                 ModbusClient.UnitIdentifier = 1;
                 int[] T0 = ModbusClient.ReadHoldingRegisters(0, 4);
 
@@ -203,6 +204,25 @@ namespace TrippingApp.Runtime
             }
             
         }
+        public static void Read_TemvsHum()
+        {
+            try
+            {
+                ModbusClient.Connect();
+                ModbusClient.UnitIdentifier = 12;
+                int[] TvsH1 = ModbusClient.ReadHoldingRegisters(0, 4);
+                
+                ModbusClient.UnitIdentifier = 13;
+                int[] TvsH2 = ModbusClient.ReadHoldingRegisters(0, 4);
+                ModbusClient.Disconnect();
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+            
+        }
     }
 
     public class Temperature_Data
@@ -211,5 +231,10 @@ namespace TrippingApp.Runtime
         public float SV { get; set; }
         public float TSV { get; set; }
         public int DP_P { get; set; }
+    }
+    public class TempVsHumid_Data
+    {
+        public float Temperature { get; set; }
+        public float Humidity { get; set; }
     }
 }

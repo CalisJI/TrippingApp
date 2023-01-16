@@ -7,19 +7,16 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:control="clr-namespace:TrippingApp.Control"
-             d:DesignHeight="1000" d:DesignWidth="1200">
+             d:DesignHeight="1000" d:DesignWidth="1920">
     <Viewbox>
-        <Grid Height="1000" Width="1200">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0.3*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Height="1000" Width="1900">
+         
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="0.08*"/>
                 </Grid.RowDefinitions>
-                <Border
+                <!--<Border
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Grid.Row="1"
@@ -38,21 +35,20 @@
                     <Run Text="{Binding CurrentPosition, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                    
                     </TextBlock>
-                </Border>
+                </Border>-->
                
             </Grid>
 
             <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
-                <GroupBox Background="Black">
+                <!--<GroupBox Background="Black">
                     <GroupBox.Header>
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -97,7 +93,7 @@
                             </StackPanel>
                         </Button>
                         
-                        <!--Jog Down-->
+                        --><!--Jog Down--><!--
                         <Button
                             Margin="0 60 0 0"
                             Width="150"
@@ -135,9 +131,9 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </GroupBox>
+                </GroupBox>-->
 
-                <Grid Margin="5 0 0 0" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1">
+                <Grid Margin="5 0 0 0" Grid.Row="0" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -149,7 +145,7 @@
                         FontWeight="Black"
                         Background="Black"
                         Header="Jog Speed">
-                        <Grid>
+                        <StackPanel Orientation="Horizontal">
                             <control:TextBox_Custome_1 
                                 NumberValue="{Binding Jog_Speed, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
@@ -157,12 +153,12 @@
                                 HorizontalAlignment="Left"/>
                             <Button
                                 Command="{Binding Set_Jog_Speed_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                Margin="0 0 20 0"
+                                Margin="20 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
                                 <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
                             </Button>
-                        </Grid>
+                        </StackPanel>
                     </GroupBox>
                     <GroupBox
                         Grid.Row="1"
@@ -170,7 +166,7 @@
                         FontWeight="Black"
                         Background="Black"
                         Header="Position Above Setting">
-                        <Grid>
+                        <StackPanel Orientation="Horizontal">
                             <control:TextBox_Custome_1 
                                 NumberValue="{Binding Position_Above, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
@@ -178,12 +174,12 @@
                                 HorizontalAlignment="Left"/>
                             <Button
                                 Command="{Binding Set_Position_Above_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                Margin="0 0 20 0"
+                                Margin="20 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
                                 <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
                             </Button>
-                        </Grid>
+                        </StackPanel>
                     </GroupBox>
                     <GroupBox
                         Grid.Row="2"
@@ -191,7 +187,7 @@
                         FontWeight="Black"
                         Background="Black"
                         Header="Position Below Setting">
-                        <Grid>
+                        <StackPanel Orientation="Horizontal">
                             <control:TextBox_Custome_1 
                                 NumberValue="{Binding Position_Below, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
@@ -199,12 +195,12 @@
                                 HorizontalAlignment="Left"/>
                             <Button
                                 Command="{Binding Set_Position_Below_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                Margin="0 0 20 0"
+                                Margin="20 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
                                 <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
                             </Button>
-                        </Grid>
+                        </StackPanel>
                     </GroupBox>
                     <GroupBox
                         Grid.Row="3"
@@ -212,7 +208,7 @@
                         FontWeight="Black"
                         Background="Black"
                         Header="Position Start Setting">
-                        <Grid>
+                        <StackPanel Orientation="Horizontal">
                             <control:TextBox_Custome_1 
                                 NumberValue="{Binding Position_Start, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
@@ -220,15 +216,94 @@
                                 HorizontalAlignment="Left"/>
                             <Button
                                 Command="{Binding Set_Position_Start_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                Margin="0 0 20 0"
+                                Margin="20 0 20 0"
                                 HorizontalAlignment="Right"
                                 Width="110" Height="110">
                                 <Image Source="{StaticResource download_svgrepo_comDrawingImage}"/>
                             </Button>
-                        </Grid>
+                        </StackPanel>
                     </GroupBox>
                 </Grid>
                 
+                <!--Column 2-->
+                <Grid Margin="5 0 0 0" Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox
+                        FontSize="25"
+                        FontWeight="Black"
+                        Background="Black"
+                        Header="Point Speed">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <control:TextBox_Custome_1 
+                                NumberValue="{Binding PointSpeed, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Height="100"
+                                Margin="10 0 0 0"
+                                HorizontalAlignment="Left"/>
+                         
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox
+                        Grid.Row="1"
+                        FontSize="25"
+                        FontWeight="Black"
+                        Background="Black"
+                        Header="Accel Time (ms)">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <control:TextBox_Custome_1 
+                                NumberValue="{Binding AccPointTime, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Height="100"
+                                Margin="10 0 0 0"
+                                HorizontalAlignment="Left"/>
+                         
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox
+                        Grid.Row="2"
+                        FontSize="25"
+                        FontWeight="Black"
+                        Background="Black"
+                        Header="Decel Time(ms)">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <control:TextBox_Custome_1 
+                                NumberValue="{Binding DeccePointTime, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Height="100"
+                                Margin="10 0 0 0"
+                                HorizontalAlignment="Left"/>
+                          
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox
+                        Grid.Row="3"
+                        FontSize="35"
+                        FontWeight="Black"
+                        Background="Black"
+                        Header="CurrenT Position">
+                        <Border
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Row="1"
+                            Height="60"
+                            BorderBrush="Yellow"
+                            BorderThickness="2">
+                            <TextBlock 
+                                Text="{Binding CurrentPos, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Width="500"
+                                TextAlignment="Left"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="35">
+                                <Run Text="Position:" FontWeight="DemiBold"/>
+                                <Run Text="{Binding CurrentPosition, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </TextBlock>
+                        </Border>
+                    </GroupBox>
+                </Grid>
+
                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Background="Black">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

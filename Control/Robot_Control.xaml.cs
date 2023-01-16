@@ -69,53 +69,53 @@ namespace TrippingApp.Control
             DependencyProperty.Register("Set_PosBath6_Command", typeof(ICommand), typeof(Robot_Control));
 
 
-        /// <summary>
-        /// Trigger Jog BW Positive Edge
-        /// </summary>
-        public ICommand JogBW_P_Command
-        {
-            get { return (ICommand)GetValue(JogBW_P_CommandProperty); }
-            set { SetValue(JogBW_P_CommandProperty, value); }
-        }
+        ///// <summary>
+        ///// Trigger Jog BW Positive Edge
+        ///// </summary>
+        //public ICommand JogBW_P_Command
+        //{
+        //    get { return (ICommand)GetValue(JogBW_P_CommandProperty); }
+        //    set { SetValue(JogBW_P_CommandProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for JogBW_P_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty JogBW_P_CommandProperty =
-            DependencyProperty.Register("JogBW_P_Command", typeof(ICommand), typeof(Robot_Control));
-
-
-        public ICommand JogBW_N_Command
-        {
-            get { return (ICommand)GetValue(JogBW_N_CommandProperty); }
-            set { SetValue(JogBW_N_CommandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for JogBW_N_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty JogBW_N_CommandProperty =
-            DependencyProperty.Register("JogBW_N_Command", typeof(ICommand), typeof(Robot_Control));
+        //// Using a DependencyProperty as the backing store for JogBW_P_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty JogBW_P_CommandProperty =
+        //    DependencyProperty.Register("JogBW_P_Command", typeof(ICommand), typeof(Robot_Control));
 
 
+        //public ICommand JogBW_N_Command
+        //{
+        //    get { return (ICommand)GetValue(JogBW_N_CommandProperty); }
+        //    set { SetValue(JogBW_N_CommandProperty, value); }
+        //}
 
-        public ICommand JogFW_P_Command
-        {
-            get { return (ICommand)GetValue(JogFW_P_CommandProperty); }
-            set { SetValue(JogFW_P_CommandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for JogFW_P_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty JogFW_P_CommandProperty =
-            DependencyProperty.Register("JogFW_P_Command", typeof(ICommand), typeof(Robot_Control));
+        //// Using a DependencyProperty as the backing store for JogBW_N_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty JogBW_N_CommandProperty =
+        //    DependencyProperty.Register("JogBW_N_Command", typeof(ICommand), typeof(Robot_Control));
 
 
 
-        public ICommand JogFW_N_Command
-        {
-            get { return (ICommand)GetValue(JogFW_N_CommandProperty); }
-            set { SetValue(JogFW_N_CommandProperty, value); }
-        }
+        //public ICommand JogFW_P_Command
+        //{
+        //    get { return (ICommand)GetValue(JogFW_P_CommandProperty); }
+        //    set { SetValue(JogFW_P_CommandProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for JogFW_N_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty JogFW_N_CommandProperty =
-            DependencyProperty.Register("JogFW_N_Command", typeof(ICommand), typeof(Robot_Control));
+        //// Using a DependencyProperty as the backing store for JogFW_P_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty JogFW_P_CommandProperty =
+        //    DependencyProperty.Register("JogFW_P_Command", typeof(ICommand), typeof(Robot_Control));
+
+
+
+        //public ICommand JogFW_N_Command
+        //{
+        //    get { return (ICommand)GetValue(JogFW_N_CommandProperty); }
+        //    set { SetValue(JogFW_N_CommandProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for JogFW_N_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty JogFW_N_CommandProperty =
+        //    DependencyProperty.Register("JogFW_N_Command", typeof(ICommand), typeof(Robot_Control));
 
 
 
@@ -152,6 +152,43 @@ namespace TrippingApp.Control
         // Using a DependencyProperty as the backing store for Origin_Command.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Origin_CommandProperty =
             DependencyProperty.Register("Origin_Command", typeof(ICommand), typeof(Robot_Control));
+
+
+
+        public ICommand SetAccPointCommand
+        {
+            get { return (ICommand)GetValue(SetAccPointCommandProperty); }
+            set { SetValue(SetAccPointCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SetAccPointCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetAccPointCommandProperty =
+            DependencyProperty.Register("SetAccPointCommand", typeof(ICommand), typeof(Robot_Control));
+
+
+
+        public ICommand SetDecelPointCommand
+        {
+            get { return (ICommand)GetValue(SetDecelPointCommandProperty); }
+            set { SetValue(SetDecelPointCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SetDecelPointCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetDecelPointCommandProperty =
+            DependencyProperty.Register("SetDecelPointCommand", typeof(ICommand), typeof(Robot_Control));
+
+
+
+        public ICommand SetPointSpeedCommand
+        {
+            get { return (ICommand)GetValue(SetPointSpeedCommandProperty); }
+            set { SetValue(SetPointSpeedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SetPointSpeedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetPointSpeedCommandProperty =
+            DependencyProperty.Register("SetPointSpeedCommand", typeof(ICommand), typeof(Robot_Control));
+
 
 
         #region Model
@@ -214,6 +251,42 @@ namespace TrippingApp.Control
         // Using a DependencyProperty as the backing store for PosBath6.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PosBath6Property =
             DependencyProperty.Register("PosBath6", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+
+
+
+        public int AccPoint
+        {
+            get { return (int)GetValue(AccPointProperty); }
+            set { SetValue(AccPointProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AccPoint.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AccPointProperty =
+            DependencyProperty.Register("AccPoint", typeof(int), typeof(Robot_Control), new PropertyMetadata(100));
+
+
+
+        public int DecelPoint
+        {
+            get { return (int)GetValue(DecelPointProperty); }
+            set { SetValue(DecelPointProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DecelPoint.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DecelPointProperty =
+            DependencyProperty.Register("DecelPoint", typeof(int), typeof(Robot_Control), new PropertyMetadata(100));
+
+
+
+        public int PointSpeed
+        {
+            get { return (int)GetValue(PointSpeedProperty); }
+            set { SetValue(PointSpeedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PointSpeed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PointSpeedProperty =
+            DependencyProperty.Register("PointSpeed", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
 
 
 

@@ -23,7 +23,7 @@
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <!--<Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.22*"/>
@@ -102,7 +102,61 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Content="{Binding CurrentPos, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            </Grid>
+            </Grid>-->
+
+
+            <GroupBox Grid.ColumnSpan="2"
+                Header="Parameter"
+                FontSize="18"
+                FontWeight="Black"
+                Background="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <Label Content="Accel Time(ms):" HorizontalAlignment="Center"/>
+                            <custom:TextBox_Custome_1
+                            Margin="5 0 0 0"
+                            Width="250"
+                            NumberValue="{Binding AccPoint, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        />
+                        </StackPanel>
+                       
+                    </StackPanel>
+                    
+                    <!--Column 2-->
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <Label Content="Decel Time(ms):" HorizontalAlignment="Center"/>
+                            <custom:TextBox_Custome_1
+                            Margin="5 0 0 0"
+                            Width="250"
+                            NumberValue="{Binding DecelPoint, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        />
+                        </StackPanel>
+                       
+                    </StackPanel>
+                    
+                    <!--Column 3-->
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <Label Content="Point Speed:" HorizontalAlignment="Center"/>
+                            <custom:TextBox_Custome_1
+                            Margin="5 0 0 0"
+                            Width="250"
+                            NumberValue="{Binding PointSpeed, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        />
+                        </StackPanel>
+                       
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
             <GroupBox
                 FontSize="18"
                 FontWeight="Black"

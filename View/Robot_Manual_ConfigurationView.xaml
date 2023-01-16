@@ -50,26 +50,26 @@
                     </Grid>
                 </TabItem.Header>
                 <Grid Width="1920" Height="1000">
-
                     <control:Robot_Control
-                           
-                            JogBW_P_Command="{Binding Jog_BW_Robot_P_Command}"
-                            JogBW_N_Command="{Binding Jog_BW_Robot_N_Command}"
-                            JogFW_P_Command="{Binding Jog_FW_Robot_P_Command}"
-                            JogFW_N_Command="{Binding Jog_FW_Robot_N_Command}"
-                            Origin_Command="{Binding Origin_Robot_Command}"
-                            Enable_Command="{Binding Enable_Robot_Command}"
-                            Disable_Command="{Binding Disable_Robot_Command}"
-                            SetSpeedCommand="{Binding SetRobotJogSpeed_Command}"
-                            Set_PosBath4_Command="{Binding SetDataPointBath4Robot_Command}"
-                            Set_PosBath5_Command="{Binding SetDataPointBath5Robot_Command}"
-                            Set_PosBath6_Command="{Binding SetDataPointBath6Robot_Command}"
-                            JogSpeed="{Binding Jog_Robot_Speed}"
-                            PosBath4="{Binding PosBath4}"
-                            PosBath5="{Binding PosBath5}"
-                            PosBath6="{Binding PosBath6}"
-                            CurrentPos="{Binding CurrentPos}"
-                            Grid.Column="0"/>
+                        PointSpeed="{Binding PointSpeed}"
+                        AccPoint="{Binding Accel_Point}"
+                        DecelPoint="{Binding DeccelPoint}"
+                        SetPointSpeedCommand="{Binding SetPointSpeedCommand}"
+                        SetAccPointCommand="{Binding SetAccPointCommand}"
+                        SetDecelPointCommand="{Binding SetDeccelPointCommand}"
+                        Origin_Command="{Binding Origin_Robot_Command}"
+                        Enable_Command="{Binding Enable_Robot_Command}"
+                        Disable_Command="{Binding Disable_Robot_Command}"
+                        SetSpeedCommand="{Binding SetRobotJogSpeed_Command}"
+                        Set_PosBath4_Command="{Binding SetDataPointBath4Robot_Command}"
+                        Set_PosBath5_Command="{Binding SetDataPointBath5Robot_Command}"
+                        Set_PosBath6_Command="{Binding SetDataPointBath6Robot_Command}"
+                        JogSpeed="{Binding Jog_Robot_Speed}"
+                        PosBath4="{Binding PosBath4}"
+                        PosBath5="{Binding PosBath5}"
+                        PosBath6="{Binding PosBath6}"
+                        CurrentPos="{Binding CurrentPos}"
+                        Grid.Column="0"/>
                 </Grid>
             </TabItem>
 
@@ -95,26 +95,25 @@
                     </Grid>
                 </TabItem.Header>
                 <control:ServoLit_Control
-                            Margin="50 0 0 0"
-                            Height="960"
-                            Grid.Column="1"
-                            HorizontalAlignment="Left"
-                            Jog_Speed="{Binding Jog_Lift_Speed}"
-                            Enable_Command="{Binding Enable_Lift_Command}"
-                            Origin_Command="{Binding Origin_Lift_Command}"
-                            Disable_Command="{Binding Disable_Lift_Command}"
-                            CurrentPos="{Binding CurrentPos_Lift}"
-                            Jog_Up_P_Command="{Binding Jog_FW_Lift_P_Command}"
-                            Jog_Up_N_Command="{Binding Jog_FW_Lift_N_Command}"
-                            Jog_Down_P_Command="{Binding Jog_BW_Lift_P_Command}"
-                            Jog_Down_N_Command="{Binding Jog_BW_Lift_N_Command}"
-                            Position_Start="{Binding Position_Start}"
-                            Position_Above="{Binding Position_Above}"
-                            Position_Below="{Binding Position_Below}"
-                            Set_Jog_Speed_Command="{Binding SetLiftJogSpeed_Command}"
-                            Set_Position_Above_Command="{Binding SetDataPointAbove_Lift_Command}"
-                            Set_Position_Below_Command="{Binding SetDataPointBelow_Lift_Command}"
-                            Set_Position_Start_Command="{Binding SetDataPointStart_Lift_Command}"/>
+                    Margin="50 0 0 0"
+                    Height="960"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Jog_Speed="{Binding Jog_Lift_Speed}"
+                    Enable_Command="{Binding Enable_Lift_Command}"
+                    Origin_Command="{Binding Origin_Lift_Command}"
+                    Disable_Command="{Binding Disable_Lift_Command}"
+                    CurrentPos="{Binding CurrentPos_Lift}"
+                    Position_Start="{Binding Position_Start}"
+                    Position_Above="{Binding Position_Above}"
+                    Position_Below="{Binding Position_Below}"
+                    PointSpeed="{Binding Lift_Point_Speed}"
+                    AccPointTime="{Binding AccLifftPoint}"
+                    DeccePointTime="{Binding DecLiftPoint}"
+                    Set_Jog_Speed_Command="{Binding SetLiftJogSpeed_Command}"
+                    Set_Position_Above_Command="{Binding SetDataPointAbove_Lift_Command}"
+                    Set_Position_Below_Command="{Binding SetDataPointBelow_Lift_Command}"
+                    Set_Position_Start_Command="{Binding SetDataPointStart_Lift_Command}"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

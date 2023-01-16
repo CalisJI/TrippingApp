@@ -75,7 +75,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Visibility="{Binding NumberMode, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBoolToVisConverter}}"
+                        Visibility="{Binding NumberMode, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InvertBooleanConverter}}"
                         VerticalContentAlignment="Center"
                         Margin="10 0 10 0"
                         VerticalAlignment="Center"

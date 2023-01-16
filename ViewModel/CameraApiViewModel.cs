@@ -220,7 +220,6 @@ namespace TrippingApp.ViewModel
                         PLC_Query.DETECT_VALUE.INPUT_SCANED_BARCODE = S7String.ToByteArray(a, 10);
                         PLC_Query.WriteData(PLC_Query.DETECT_VALUE, 20);
                     }
-                   
                 }
             }
             catch (Exception ex)

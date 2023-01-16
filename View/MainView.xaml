@@ -226,7 +226,6 @@
             </Button>
             <!--Process Param Page-->
             <Button
-                Command="{Binding Process_Param_Page}"
                 themes:ButtonAssist.CornerRadius="25"
                 Width="280"
                 Height="210"
@@ -265,12 +264,13 @@
             </Button>
             <!--Data Machine Page-->
             <Button
-                    themes:ButtonAssist.CornerRadius="25"
-                    Width="280"
-                    Height="210"
+                Command="{Binding Process_Param_Page}"
+                themes:ButtonAssist.CornerRadius="25"
+                Width="280"
+                Height="210"
                 VerticalAlignment="Center"                    
-                    Grid.Column="2"
-                    Grid.Row="2">
+                Grid.Column="2"
+                Grid.Row="2">
                 <themes:PackIcon
                         Height="180"
                         Width="180"

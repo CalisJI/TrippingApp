@@ -28,6 +28,8 @@ namespace TrippingApp.AppConfig
         /// </summary>
         public static readonly string DemoFile = Directory.GetCurrentDirectory() + @"\" + "demohoya.txt";
 
+
+        public static readonly string HistoryLogger = Directory.GetCurrentDirectory() + @"\" + "HistoryLogger";
         /// <summary>
         /// File Logger to report
         /// </summary>
@@ -41,6 +43,10 @@ namespace TrippingApp.AppConfig
             if (!File.Exists(File_Logger))
             {
                 File.Create(File_Logger).Close();
+            }
+            if (!Directory.Exists(HistoryLogger)) 
+            {
+                Directory.CreateDirectory(HistoryLogger);
             }
             SystemConfig = GetData<SystemConfig>();
             //TCP_HOYA.MainWindow.Port = SystemConfig.PC_Port;

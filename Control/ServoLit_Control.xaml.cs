@@ -21,7 +21,9 @@ namespace TrippingApp.Control
     public partial class ServoLit_Control : UserControl
     {
 
+        #region Model
 
+        
         public int Jog_Speed
         {
             get { return (int)GetValue(Jog_SpeedProperty); }
@@ -83,52 +85,126 @@ namespace TrippingApp.Control
 
 
 
-        public ICommand Jog_Up_P_Command
+
+        public int PointSpeed
         {
-            get { return (ICommand)GetValue(Jog_Up_P_CommandProperty); }
-            set { SetValue(Jog_Up_P_CommandProperty, value); }
+            get { return (int)GetValue(PointSpeedProperty); }
+            set { SetValue(PointSpeedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Jog_Up_P_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Jog_Up_P_CommandProperty =
-            DependencyProperty.Register("Jog_Up_P_Command", typeof(ICommand), typeof(ServoLit_Control));
+        // Using a DependencyProperty as the backing store for PointSpeed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PointSpeedProperty =
+            DependencyProperty.Register("PointSpeed", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
 
 
-        public ICommand Jog_Up_N_Command
+
+        public int AccPointTime
         {
-            get { return (ICommand)GetValue(Jog_Up_N_CommandProperty); }
-            set { SetValue(Jog_Up_N_CommandProperty, value); }
+            get { return (int)GetValue(AccPointTimeProperty); }
+            set { SetValue(AccPointTimeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Jog_Up_N_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Jog_Up_N_CommandProperty =
-            DependencyProperty.Register("Jog_Up_N_Command", typeof(ICommand), typeof(ServoLit_Control));
+        // Using a DependencyProperty as the backing store for AccPointTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AccPointTimeProperty =
+            DependencyProperty.Register("AccPointTime", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(100));
 
 
 
-        public ICommand Jog_Down_P_Command
+
+        public int DeccePointTime
         {
-            get { return (ICommand)GetValue(Jog_Down_P_CommandProperty); }
-            set { SetValue(Jog_Down_P_CommandProperty, value); }
+            get { return (int)GetValue(DeccePointTimeProperty); }
+            set { SetValue(DeccePointTimeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Jog_Down_P_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Jog_Down_P_CommandProperty =
-            DependencyProperty.Register("Jog_Down_P_Command", typeof(ICommand), typeof(ServoLit_Control));
+        // Using a DependencyProperty as the backing store for DeccePointTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DeccePointTimeProperty =
+            DependencyProperty.Register("DeccePointTime", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(100));
 
 
 
-        public ICommand Jog_Down_N_Command
+
+        #endregion
+
+        //public ICommand Jog_Up_P_Command
+        //{
+        //    get { return (ICommand)GetValue(Jog_Up_P_CommandProperty);}
+        //    set { SetValue(Jog_Up_P_CommandProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Jog_Up_P_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty Jog_Up_P_CommandProperty =
+        //    DependencyProperty.Register("Jog_Up_P_Command", typeof(ICommand), typeof(ServoLit_Control));
+
+
+        //public ICommand Jog_Up_N_Command
+        //{
+        //    get { return (ICommand)GetValue(Jog_Up_N_CommandProperty); }
+        //    set { SetValue(Jog_Up_N_CommandProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Jog_Up_N_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty Jog_Up_N_CommandProperty =
+        //    DependencyProperty.Register("Jog_Up_N_Command", typeof(ICommand), typeof(ServoLit_Control));
+
+
+        //public ICommand Jog_Down_P_Command
+        //{
+        //    get { return (ICommand)GetValue(Jog_Down_P_CommandProperty); }
+        //    set { SetValue(Jog_Down_P_CommandProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Jog_Down_P_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty Jog_Down_P_CommandProperty =
+        //    DependencyProperty.Register("Jog_Down_P_Command", typeof(ICommand), typeof(ServoLit_Control));
+
+
+        //public ICommand Jog_Down_N_Command
+        //{
+        //    get { return (ICommand)GetValue(Jog_Down_N_CommandProperty); }
+        //    set { SetValue(Jog_Down_N_CommandProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Jog_Down_N_Command.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty Jog_Down_N_CommandProperty =
+        //    DependencyProperty.Register("Jog_Down_N_Command", typeof(ICommand), typeof(ServoLit_Control));
+        #region Command
+
+
+
+        public ICommand SetDecelPoint_Command
         {
-            get { return (ICommand)GetValue(Jog_Down_N_CommandProperty); }
-            set { SetValue(Jog_Down_N_CommandProperty, value); }
+            get { return (ICommand)GetValue(SetDecelPoint_CommandProperty); }
+            set { SetValue(SetDecelPoint_CommandProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Jog_Down_N_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Jog_Down_N_CommandProperty =
-            DependencyProperty.Register("Jog_Down_N_Command", typeof(ICommand), typeof(ServoLit_Control));
+        // Using a DependencyProperty as the backing store for SetDecelPoint_Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetDecelPoint_CommandProperty =
+            DependencyProperty.Register("SetDecelPoint_Command", typeof(ICommand), typeof(ServoLit_Control));
 
 
+
+        public ICommand SetAccPoint_Command
+        {
+            get { return (ICommand)GetValue(SetAccPoint_CommandProperty); }
+            set { SetValue(SetAccPoint_CommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SetAccPoint_Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetAccPoint_CommandProperty =
+            DependencyProperty.Register("SetAccPoint_Command", typeof(ICommand), typeof(ServoLit_Control));
+
+
+
+        public ICommand SetPointSpeed_Command
+        {
+            get { return (ICommand)GetValue(SetPointSpeed_CommandProperty); }
+            set { SetValue(SetPointSpeed_CommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SetPointSpeed_Command.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SetPointSpeed_CommandProperty =
+            DependencyProperty.Register("SetPointSpeed_Command", typeof(ICommand), typeof(ServoLit_Control));
 
         public ICommand Enable_Command
         {
@@ -177,8 +253,6 @@ namespace TrippingApp.Control
             DependencyProperty.Register("Set_Jog_Speed_Command", typeof(ICommand), typeof(ServoLit_Control));
 
 
-
-
         public ICommand Set_Position_Above_Command
         {
             get { return (ICommand)GetValue(Set_Position_Above_CommandProperty); }
@@ -212,7 +286,7 @@ namespace TrippingApp.Control
         // Using a DependencyProperty as the backing store for Set_Position_Start_Command.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Set_Position_Start_CommandProperty =
             DependencyProperty.Register("Set_Position_Start_Command", typeof(ICommand), typeof(ServoLit_Control));
-
+        #endregion
 
         public ServoLit_Control()
         {

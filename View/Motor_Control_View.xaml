@@ -19,27 +19,28 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <!--Tranfer-->
-            <GroupBox
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                <GroupBox
                 Background="Gray"
                 Header="Tranfer 1"
                 FontSize="20"
                 FontWeight="Black">
-                <control:Motor_Control
-                    />
-            </GroupBox>
+                    <control:Motor_Control/>
+                </GroupBox>
 
 
-            <GroupBox
+                <GroupBox
                 Grid.Row="0" 
                 Grid.Column="1"
                 Background="Gray"
                 Header="Tranfer 2"
                 FontSize="20"
                 FontWeight="Black">
-                <control:Motor_Control/>
-            </GroupBox>
+                    <control:Motor_Control/>
+                </GroupBox>
+            </StackPanel>
+            <!--Tranfer-->
+            
 
             <GroupBox
                 Grid.Row="1" 

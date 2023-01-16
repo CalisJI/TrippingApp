@@ -2,6 +2,7 @@
 using S7.Net.Types;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -51,6 +52,7 @@ namespace TrippingApp.ViewModel
         public ICommand SetDataPointBelow_Lift_Command { get; set; }
         public ICommand SetDataPointStart_Lift_Command { get; set; }
 
+
         #endregion
         /// <summary>
         /// Command Of Conveyor
@@ -61,19 +63,15 @@ namespace TrippingApp.ViewModel
         public ICommand RunFW_Output_Conveyor_Command { get; set; }
         public ICommand RunBW_Output_Conveyor_Command { get; set; }
         #endregion
-        
+
         /// <summary>
         /// Robot Commandation
         /// </summary>
         #region Command Of Robot
-        public ICommand Jog_FW_Robot_P_Command { get; set; }
-        public ICommand Jog_FW_Robot_N_Command { get; set; }
-
-        public ICommand Jog_BW_Robot_P_Command { get; set; }
-        public ICommand Jog_BW_Robot_N_Command { get; set; }
-
+        public ICommand SetPointSpeedCommand { get; set; }
+        public ICommand SetAccPointCommand { get; set; }
+        public ICommand SetDeccelPointCommand { get; set; }
         public ICommand Origin_Robot_Command { get; set; }
-
         public ICommand Enable_Robot_Command { get; set; }
         public ICommand Disable_Robot_Command { get; set; }
         #endregion
@@ -116,9 +114,58 @@ namespace TrippingApp.ViewModel
             set { SetProperty(ref _currentPos, value, nameof(CurrentPos)); }
         }
 
+        private int _pointSpeed;
+
+        public int PointSpeed
+        {
+            get { return _pointSpeed; }
+            set { SetProperty(ref _pointSpeed, value, nameof(PointSpeed)); }
+        }
+
+        private int _accpoint;
+
+        public int Accel_Point
+        {
+            get { return _accpoint; }
+            set { SetProperty(ref _accpoint, value, nameof(Accel_Point)); }
+        }
+
+        private int _deccelpoint;
+
+        public int DeccelPoint
+        {
+            get { return _deccelpoint; }
+            set { SetProperty(ref _deccelpoint, value, nameof(DeccelPoint)); }
+        }
+
         #endregion
 
         #region Model Of Lift
+
+        private int _lift_point_speed;
+
+        public int Lift_Point_Speed
+        {
+            get { return _lift_point_speed; }
+            set { SetProperty(ref _lift_point_speed, value, nameof(Lift_Point_Speed)); }
+        }
+
+        private int _acclift_point;
+
+        public int AccLifftPoint
+        {
+            get { return _acclift_point; }
+            set { SetProperty(ref _acclift_point, value, nameof(AccLifftPoint)); }
+        }
+
+        private int _decel_Lift_point;
+
+        public int DecLiftPoint
+        {
+            get { return _decel_Lift_point; }
+            set { SetProperty(ref _decel_Lift_point, value, nameof(DecLiftPoint)); }
+        }
+
         private int _current_pos;
 
         public int CurrentPos_Lift
@@ -163,11 +210,14 @@ namespace TrippingApp.ViewModel
         /// Lift Commandation
         /// </summary>
         #region Command Of Lift
-        public ICommand Jog_BW_Lift_P_Command { get; set; }
-        public ICommand Jog_BW_Lift_N_Command { get; set; }
+        //public ICommand Jog_BW_Lift_P_Command { get; set; }
+        //public ICommand Jog_BW_Lift_N_Command { get; set; }
 
-        public ICommand Jog_FW_Lift_P_Command { get; set; }
-        public ICommand Jog_FW_Lift_N_Command { get; set; }
+        //public ICommand Jog_FW_Lift_P_Command { get; set; }
+        //public ICommand Jog_FW_Lift_N_Command { get; set; }
+        public ICommand SetPointSpeed_Lift_Command { get; set; }
+        public ICommand SetAccLift_Point_Command { get; set; }
+        public ICommand SetDecLift_Point_Command { get; set; }
 
         public ICommand Origin_Lift_Command { get; set; }
 
@@ -274,50 +324,7 @@ namespace TrippingApp.ViewModel
                     this.Cylinder_View = Cylinder_Control_ViewModel.Value;
                 }
             });
-            Jog_FW_Robot_P_Command = new ActionCommand(() =>
-            {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Robot, true);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
-            });
-            Jog_FW_Robot_N_Command = new ActionCommand(() =>
-            {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Robot, false);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
-            });
-            Jog_BW_Robot_P_Command = new ActionCommand(() =>
-            {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Robot, true);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
-            });
-            Jog_BW_Robot_N_Command = new ActionCommand(() =>
-            {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Robot, false);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
-            });
+           
             Origin_Robot_Command = new ActionCommand(() =>
             {
                 try
@@ -371,9 +378,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 2;
                     PLC_Query.SETTING_DATA.Point_Data = (short)PosBath4;
-                    PLC_Query.SETTING_DATA.Point_Accel = 100;
-                    PLC_Query.SETTING_DATA.Point_Decel = 100;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.SETTING_DATA.Robot_Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
                     PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1, PosBath4);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
@@ -391,9 +398,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 3;
                     PLC_Query.SETTING_DATA.Point_Data = (short)PosBath5;
-                    PLC_Query.SETTING_DATA.Point_Accel = 100;
-                    PLC_Query.SETTING_DATA.Point_Decel = 100;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.SETTING_DATA.Robot_Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
                     PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, PosBath5);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
@@ -409,9 +416,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 4;
                     PLC_Query.SETTING_DATA.Point_Data = (short)PosBath6;
-                    PLC_Query.SETTING_DATA.Point_Accel = 100;
-                    PLC_Query.SETTING_DATA.Point_Decel = 100;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Robot_Speed;
+                    PLC_Query.SETTING_DATA.Robot_Point_Accel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Decel = 100;
+                    PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
                     PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, PosBath6);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
@@ -421,8 +428,7 @@ namespace TrippingApp.ViewModel
                     _ = Logger.Logger.Async_write(ex.Message);
                 }
             });
-
-
+            
             Origin_Lift_Command = new ActionCommand(() =>
             {
                 try
@@ -477,9 +483,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 2;
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Above;
-                    PLC_Query.SETTING_DATA.Point_Accel = 200;
-                    PLC_Query.SETTING_DATA.Point_Decel = 200;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.SETTING_DATA.Lift_Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
                     PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, Position_Above);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
@@ -498,9 +504,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 3;
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Below;
-                    PLC_Query.SETTING_DATA.Point_Accel = 200;
-                    PLC_Query.SETTING_DATA.Point_Decel = 200;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.SETTING_DATA.Lift_Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
                     PLC_Query.WriteData(AddressCrt.AxisLift_Position_2, Position_Below);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
@@ -519,9 +525,9 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.SETTING_DATA.Point_to_Set = 1;
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Start;
-                    PLC_Query.SETTING_DATA.Point_Accel = 200;
-                    PLC_Query.SETTING_DATA.Point_Decel = 200;
-                    PLC_Query.SETTING_DATA.Point_Speed = (short)Jog_Lift_Speed;
+                    PLC_Query.SETTING_DATA.Lift_Point_Accel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Decel = 200;
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
                     PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, Position_Start);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
@@ -533,50 +539,63 @@ namespace TrippingApp.ViewModel
                 }
             });
 
-            Jog_FW_Lift_P_Command = new ActionCommand(() => 
+            SetPointSpeed_Lift_Command = new ActionCommand(() =>
             {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, true);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
+            
             });
-            Jog_FW_Lift_N_Command = new ActionCommand(() =>
+            SetAccLift_Point_Command = new ActionCommand(() =>
             {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, false);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
+            
             });
-            Jog_BW_Lift_P_Command = new ActionCommand(() =>
+
+            SetDecLift_Point_Command = new ActionCommand(() => 
             {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, true);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
+            
             });
-            Jog_BW_Lift_N_Command = new ActionCommand(() =>
-            {
-                try
-                {
-                    PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, false);
-                }
-                catch (Exception ex)
-                {
-                    _ = Logger.Logger.Async_write(ex.Message);
-                }
-            });
+            //Jog_FW_Lift_P_Command = new ActionCommand(() => 
+            //{
+            //    try
+            //    {
+            //        PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, true);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _ = Logger.Logger.Async_write(ex.Message);
+            //    }
+            //});
+            //Jog_FW_Lift_N_Command = new ActionCommand(() =>
+            //{
+            //    try
+            //    {
+            //        PLC_Query.WriteBit(AddressCrt.Manual_Jog_FW_Lift, false);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _ = Logger.Logger.Async_write(ex.Message);
+            //    }
+            //});
+            //Jog_BW_Lift_P_Command = new ActionCommand(() =>
+            //{
+            //    try
+            //    {
+            //        PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, true);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _ = Logger.Logger.Async_write(ex.Message);
+            //    }
+            //});
+            //Jog_BW_Lift_N_Command = new ActionCommand(() =>
+            //{
+            //    try
+            //    {
+            //        PLC_Query.WriteBit(AddressCrt.Manual_Jog_BW_Lift, false);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _ = Logger.Logger.Async_write(ex.Message);
+            //    }
+            //});
         }
 
         private void Timer_Tick(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using TrippingApp.Model;
 
 namespace TrippingApp.Runtime
 {
@@ -41,9 +42,31 @@ namespace TrippingApp.Runtime
                         string store_vl = string.Empty;
                         while (!TcpListener.Pending())
                         {
-                            Console.WriteLine("Connected");
-                            if (networkStream.DataAvailable)
+                            //Console.WriteLine("Connected");
+                            //if (networkStream.DataAvailable)
+                            //{
+                            //    try
+                            //    {
+                            //        byte[] data = new byte[256];
+
+                            //        var read = networkStream.Read(data, 0, data.Length);
+
+                            //        string str = Encoding.ASCII.GetString(data, 0, read);
+                            //        string filter = Regex.Replace(str, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
+                            //        string add = filter.Substring(0, filter.Length);
+                            //        Console.WriteLine(add);
+                            //    }
+                            //    catch (Exception)
+                            //    {
+
+                            //        //MessageBox.Show("TCP/IP Disconnected");
+                            //        CreateNetWork();
+                            //        goto DMM;
+                            //    }
+                            //}
+                            do
                             {
+                                DateTime dateTime1 = DateTime.Now;
                                 try
                                 {
                                     byte[] data = new byte[256];
@@ -53,17 +76,19 @@ namespace TrippingApp.Runtime
                                     string str = Encoding.ASCII.GetString(data, 0, read);
                                     string filter = Regex.Replace(str, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
                                     string add = filter.Substring(0, filter.Length);
-                                    Console.WriteLine(add);
+                                    Console.WriteLine("Counter: {0}", aa);
+                                    Console.WriteLine("Recaived: {1} {0}", add, DateTime.Now.ToString("HH:mm:ss:ff"));
+                                    //UpdateStatus(add);
+                                    FuntionSelection(add);
                                 }
                                 catch (Exception)
                                 {
-
                                     //MessageBox.Show("TCP/IP Disconnected");
                                     CreateNetWork();
                                     goto DMM;
                                 }
-                            }
 
+                            } while (networkStream.DataAvailable);
                             //Console.WriteLine("Recycle");
                         }
 
@@ -85,6 +110,46 @@ namespace TrippingApp.Runtime
                 Console.WriteLine(ex.Message);
             }
           
+        }
+
+        public static void FuntionSelection(string _char)
+        {
+
+            switch (_char)
+            {
+                //Move Area 1 Done
+                case "a":
+                    MonitorRackData.MoveRack123();
+                    break;
+                //Move Area 2 Done
+                case "b":
+                    MonitorRackData.MoveRack456();
+                    break;
+                //Move Area 3 Done
+                case "c":
+                    MonitorRackData.MoveRack789_10();
+                    break;
+                // Run Out of Barcode 
+                case "d":
+                    break;
+                // Optional
+                case "e":
+                    break;
+                //Begin Tranfer 1
+                case "f":
+                    break;
+                //Begin Robot
+                case "g":
+                    break;
+                //Begin Tranfer3
+                case "h":
+                    break;
+                //Has Rack Done
+                case "k":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
