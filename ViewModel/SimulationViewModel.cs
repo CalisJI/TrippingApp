@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
+using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
     public class SimulationViewModel: BaseViewModel.BaseViewModel
     {
+        private DispatcherTimer GetValueTimer = new DispatcherTimer();
         #region Command ViewModel
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
@@ -297,20 +300,96 @@ namespace TrippingApp.ViewModel
         #endregion
         public SimulationViewModel()
         {
+            GetValueTimer.Tick += GetValueTimer_Tick;
+            GetValueTimer.Interval = new TimeSpan(2000);
+            
 
             Loaded = new ActionCommand((p) =>
             {
-            
+                if (!GetValueTimer.IsEnabled) 
+                {
+                    GetValueTimer.Start();
+                }
+                SV1 = Modbus_Communicate.VX4_1.SV;
+                SV2 = Modbus_Communicate.VX4_2.SV;
+                SV3 = Modbus_Communicate.VX4_3.SV;
+                SV4 = Modbus_Communicate.VX4_4.SV;
+                SV5 = Modbus_Communicate.VX4_5.SV;
+                SV6 = Modbus_Communicate.VX4_6.SV;
+                SV7 = Modbus_Communicate.VX4_7.SV;
+                SV8 = Modbus_Communicate.VX4_8.SV;
+                SV9 = Modbus_Communicate.VX4_9.SV;
+                SV10 = Modbus_Communicate.VX4_10.SV;
+                SV11 = Modbus_Communicate.VX4_11.SV;
             });
             Unloaded = new ActionCommand((p) =>
             {
-            
+                if (GetValueTimer.IsEnabled)
+                {
+                    GetValueTimer.Stop();
+                }
             });
 
-            B1_Set = new ActionCommand((p) => 
+            B1_Set = new ActionCommand((p) =>
             {
-               
+
             });
+            B2_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B3_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B4_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B5_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B6_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B7_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B8_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B9_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B10_Set = new ActionCommand((p) =>
+            {
+
+            });
+            B11_Set = new ActionCommand((p) =>
+            {
+
+            });
+        }
+
+        private void GetValueTimer_Tick(object sender, EventArgs e)
+        {
+            PV1 = Modbus_Communicate.VX4_1.PV;
+            PV2 = Modbus_Communicate.VX4_2.PV;
+            PV3 = Modbus_Communicate.VX4_3.PV;
+            PV4 = Modbus_Communicate.VX4_4.PV;
+            PV5 = Modbus_Communicate.VX4_5.PV;
+            PV6 = Modbus_Communicate.VX4_6.PV;
+            PV7 = Modbus_Communicate.VX4_7.PV;
+            PV8 = Modbus_Communicate.VX4_8.PV;
+            PV9 = Modbus_Communicate.VX4_9.PV;
+            PV10 = Modbus_Communicate.VX4_10.PV;
+            PV11 = Modbus_Communicate.VX4_11.PV;
+
         }
     }
 }

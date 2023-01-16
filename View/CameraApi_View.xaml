@@ -9,12 +9,12 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_CamApi}"
              xmlns:camera="clr-namespace:Cognex.InSight.Controls;assembly=Cognex.InSight"
-             d:DesignHeight="1000" d:DesignWidth="1920">
+             d:DesignHeight="990" d:DesignWidth="1920">
     <UserControl.Resources>
         <cvt:ChangedState x:Key="ChangedConnect"/>
     </UserControl.Resources>
     <Viewbox>
-        <Grid Width="1920" Height="1000">
+        <Grid Width="1920" Height="990">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition/>

@@ -238,6 +238,9 @@
     <Compile Include="View\SimulationView.xaml.cs">
       <DependentUpon>SimulationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TrackHistory_View.xaml.cs">
+      <DependentUpon>TrackHistory_View.xaml</DependentUpon>
+    </Compile>
     <Page Include="Control\Cylender_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -331,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SimulationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TrackHistory_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

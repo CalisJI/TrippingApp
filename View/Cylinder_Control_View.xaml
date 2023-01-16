@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              DataContext="{StaticResource VM_Cylinder}"
              xmlns:control="clr-namespace:TrippingApp.Control"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             d:DesignHeight="990" d:DesignWidth="1920">
     <Viewbox>
         <Grid>
             <control:Cylender_Control

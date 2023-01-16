@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Background="Transparent"
              DataContext="{StaticResource VM_Robot_Manual}"
-             d:DesignHeight="1000" d:DesignWidth="1920">
+             d:DesignHeight="990" d:DesignWidth="1920">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
@@ -18,7 +18,7 @@
             <i:InvokeCommandAction Command="{Binding Unloaded}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Width="1920" Height="1000">
+    <Grid Width="1920" Height="990">
         <TabControl 
                 x:Name="container"
                 TabStripPlacement="Left"

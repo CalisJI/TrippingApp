@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_Seting}"
-             d:DesignHeight="1030" d:DesignWidth="1920">
+             d:DesignHeight="990" d:DesignWidth="1920">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Loaded}"/>
@@ -17,7 +17,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="{StaticResource NormalBrush}">
-        <StackPanel Orientation="Vertical" Margin="0 100 0 0">
+        <StackPanel Orientation="Vertical" Margin="0 0 0 0">
             <!--PLC Config-->
             <GroupBox
                     IsEnabled="{Binding CanEdit}"

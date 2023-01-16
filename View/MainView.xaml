@@ -330,6 +330,19 @@
                     Margin="10"
                     Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
             </Button>
+
+            <Button
+                themes:ButtonAssist.CornerRadius="25"
+                Width="280"
+                Height="210"
+                VerticalAlignment="Center"                    
+                Grid.Column="4"
+                Grid.Row="2">
+                <themes:PackIcon
+                    Height="180"
+                    Width="180"
+                    Kind="TrackChanges"/>
+            </Button>
         </Grid>
     </Viewbox>
     
