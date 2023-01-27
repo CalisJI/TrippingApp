@@ -61,9 +61,9 @@ namespace TrippingApp.Model
         {
             try
             {
-                if (!File.Exists(ApplicationConfig.HistoryLogger + @"\" + fileDatename))
+                if (!File.Exists(DataMonitorStore))
                 {
-                    File.Create(ApplicationConfig.HistoryLogger + @"\" + fileDatename).Close();
+                    File.Create(DataMonitorStore).Close();
                 }
             }
             catch (Exception ex)

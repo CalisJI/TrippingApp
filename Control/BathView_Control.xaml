@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="TrippingApp.Control.BathView_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrippingApp.Control"
+             mc:Ignorable="d" 
+             x:Name="bath"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewbox>
+        <Grid Height="{Binding ElementName=bath, Path=ActualHeight}" Width="{Binding ElementName=bath, Path=ActualWidth}">
+            <GroupBox>
+                <GroupBox.Header>
+                    <TextBox
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontSize="25"
+                        FontWeight="Bold"
+                        Text="{Binding BathName, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        />
+                </GroupBox.Header>
+                <Border BorderThickness="1" BorderBrush="Yellow" CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border 
+                            Margin="3"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            CornerRadius="5" Background="#FF1C49FF">
+
+                            <StackPanel Orientation="Vertical">
+                                <Label 
+                                   HorizontalAlignment="Center"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Content="Time:" 
+                                    Foreground="Black"/>
+                                <TextBox 
+                                    IsReadOnly="True"
+                                    FontWeight="DemiBold"
+                                    FontSize="20"
+                                    Foreground="Black"
+                                    HorizontalContentAlignment="Center"
+                                    Text="{Binding DipTime, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border 
+                            Margin="3"
+                            Grid.Row="1"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            CornerRadius="5" Background="#FF1C49FF">
+
+                            <StackPanel Orientation="Vertical">
+                                <Label 
+                                   HorizontalAlignment="Center"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Content="Input Time:" 
+                                    Foreground="Black"/>
+                                <TextBox 
+                                    IsReadOnly="True"
+                                    FontWeight="DemiBold"
+                                    FontSize="20"
+                                    Foreground="Black"
+                                    HorizontalContentAlignment="Center"
+                                    Text="{Binding InputTime, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border 
+                            Margin="3"
+                            Grid.Row="2"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            CornerRadius="5" Background="#FF1C49FF">
+
+                            <StackPanel Orientation="Vertical">
+                                <Label 
+                                   HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    FontWeight="Bold"
+                                    Content="Barcode:" 
+                                    Foreground="Black"/>
+                                <TextBox 
+                                    IsReadOnly="True"
+                                    FontWeight="DemiBold"
+                                    FontSize="25"
+                                    Foreground="Black"
+                                    HorizontalContentAlignment="Center"
+                                    Text="{Binding Barcode, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border 
+                            Margin="3"
+                            Grid.Row="3"
+                            BorderBrush="Blue"
+                            BorderThickness="2"
+                            CornerRadius="5" Background="#FF1C49FF">
+
+                            <StackPanel Orientation="Vertical">
+                                <Label 
+                                   HorizontalAlignment="Center"
+                                    FontSize="25"
+                                    FontWeight="Bold"
+                                    Content="Temperature:" 
+                                    Foreground="Black"/>
+                                <TextBox 
+                                    IsReadOnly="True"
+                                    FontWeight="DemiBold"
+                                    FontSize="25"
+                                    Foreground="Black"
+                                    HorizontalContentAlignment="Center"
+                                    Text="{Binding Temperature,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+            </GroupBox>
+        </Grid>
+    </Viewbox>
+</UserControl>

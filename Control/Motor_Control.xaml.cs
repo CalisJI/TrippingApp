@@ -183,7 +183,47 @@ namespace TrippingApp.Control
             DependencyProperty.Register("Apply_Acc_Dec_Command", typeof(ICommand), typeof(Motor_Control));
 
 
+        #region Model Binding
 
+
+
+        public int Frequency
+        {
+            get { return (int)GetValue(FrequencyProperty); }
+            set { SetValue(FrequencyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Frequency.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FrequencyProperty =
+            DependencyProperty.Register("Frequency", typeof(int), typeof(Motor_Control), new PropertyMetadata(0));
+
+
+
+        public float Acc_Time
+        {
+            get { return (float)GetValue(Acc_TimeProperty); }
+            set { SetValue(Acc_TimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Acc_Time.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Acc_TimeProperty =
+            DependencyProperty.Register("Acc_Time", typeof(float), typeof(Motor_Control), new PropertyMetadata(0.0f));
+
+
+
+        public float Decc_Time
+        {
+            get { return (float)GetValue(Decc_TimeProperty); }
+            set { SetValue(Decc_TimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Decc_Time.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Decc_TimeProperty =
+            DependencyProperty.Register("Decc_Time", typeof(float), typeof(Motor_Control), new PropertyMetadata(0.0f));
+
+
+
+        #endregion
 
         public Motor_Control()
         {

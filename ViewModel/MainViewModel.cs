@@ -38,7 +38,7 @@ namespace TrippingApp.ViewModel
 
         public ICommand Home_Page_Command { get; set; }
         public ICommand Test { get; set; }
-        public ICommand Simulation_Page_Command { get; set; }
+        public ICommand Machine_Page_Command { get; set; }
         public ICommand Setting_Page_Command { get; set; }
         public ICommand DashBoard_Page_Command { get; set; }
         public ICommand Robot_And_Manual_Configuration_Page_Command { get; set; }
@@ -78,6 +78,7 @@ namespace TrippingApp.ViewModel
         private OverViewMachineViewModel OverViewMachineViewModel;
         private Lazy<Robot_Manual_ConfigurationViewModel> Robot_Manual_ConfigurationViewModel = new Lazy<Robot_Manual_ConfigurationViewModel>(() => { return new ViewModel.Robot_Manual_ConfigurationViewModel(); });
         //private Robot_Manual_ConfigurationViewModel Robot_Manual_ConfigurationViewModel;
+        private MachineViewModel MachineViewModel;
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
         #endregion
         public MainViewModel()
@@ -209,10 +210,10 @@ namespace TrippingApp.ViewModel
             #region P-Letter Command
             Process_Param_Page = new ActionCommand(() =>
             {
-                IsActive = true;
+                //IsActive = true;
                 this.SelectedViewModel = SimulationViewModel.Value;
                 ChildPage = true;
-                IsActive = false;
+                //IsActive = false;
             });
             PLC_Connect_Command = new ActionCommand(() =>
             {
@@ -241,22 +242,25 @@ namespace TrippingApp.ViewModel
 
             #region S - Letter Command
 
-            Simulation_Page_Command = new ActionCommand(() =>
+            Machine_Page_Command = new ActionCommand(() =>
             {
-               
+                if (MachineViewModel == null) 
+                {
+                    MachineViewModel = new MachineViewModel();
+                }
+                this.SelectedViewModel = MachineViewModel;
             });
             Setting_Page_Command = new ActionCommand(() =>
             {
-                IsBusy = true;
-                IsActive = true;
+                //IsBusy = true;
+                //IsActive = true;
                 if (SettingViewModel == null)
                 {
                     SettingViewModel = new SettingViewModel();
                 }
                 ChildPage = true;
                 this.SelectedViewModel = SettingViewModel;
-                IsBusy = false;
-                IsBusy = false;
+              
             });
             #endregion
 

@@ -5,8 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1920">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="990" d:DesignWidth="1920">
+    <Viewbox>
+        <Grid Name="box" Width="1920" Height="990">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DataGrid
+                Grid.Row="1"
+                
+                Width="{Binding ElementName=box, Path=ActualWidth}"
+                Height="{Binding ElementName=box, Path=ActualHeight}">
+                
+            </DataGrid>
+        </Grid>
+    </Viewbox>
 </UserControl>

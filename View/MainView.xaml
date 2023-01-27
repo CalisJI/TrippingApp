@@ -210,7 +210,7 @@
 
             <!--Simulation Process Page-->
             <Button
-                    Command="{Binding Simulation_Page_Command}"
+                    Command="{Binding Machine_Page_Command}"
                     themes:ButtonAssist.CornerRadius="25"
                     Width="280"
                     Height="210"

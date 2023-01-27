@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using TrippingApp.Logger;
 using TrippingApp.Model;
 
 namespace TrippingApp.Runtime
@@ -34,6 +35,7 @@ namespace TrippingApp.Runtime
                     {
                         // set the TcpListener on port 13000
                         Console.WriteLine("Waiting for connection...");
+                        _ = Logger.Logger.Async_write("Waiting for connection...");
                         socket = TcpListener.AcceptSocket();
                         networkStream = new NetworkStream(socket);
                         TcpListener.Start();
@@ -76,8 +78,8 @@ namespace TrippingApp.Runtime
                                     string str = Encoding.ASCII.GetString(data, 0, read);
                                     string filter = Regex.Replace(str, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
                                     string add = filter.Substring(0, filter.Length);
-                                    Console.WriteLine("Counter: {0}", aa);
-                                    Console.WriteLine("Recaived: {1} {0}", add, DateTime.Now.ToString("HH:mm:ss:ff"));
+                                    //Console.WriteLine("Counter: {0}", aa);
+                                    //Console.WriteLine("Recaived: {1} {0}", add, DateTime.Now.ToString("HH:mm:ss:ff"));
                                     //UpdateStatus(add);
                                     FuntionSelection(add);
                                 }
@@ -97,6 +99,7 @@ namespace TrippingApp.Runtime
                     catch (SocketException e)
                     {
                         Console.WriteLine("SocketException: {0}", e);
+                        _ = Logger.Logger.Async_write(string.Format("SocketException: {0}", e));
                     }
 
                 });
@@ -146,6 +149,16 @@ namespace TrippingApp.Runtime
                     break;
                 //Has Rack Done
                 case "k":
+                    break;
+                // Read Barcode A1
+                case "l":
+                    PLC_Query.Get_ListCodeChar();
+                    break;
+                // Read Barcode A2
+                case "m":
+                    break;
+                // Read Barcode A3
+                case "n":
                     break;
                 default:
                     break;

@@ -166,6 +166,9 @@
     </ApplicationDefinition>
     <Compile Include="AppConfig\ApplicationConfig.cs" />
     <Compile Include="AppConfig\SystemConfig.cs" />
+    <Compile Include="Control\BathView_Control.xaml.cs">
+      <DependentUpon>BathView_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Cylender_Control.xaml.cs">
       <DependentUpon>Cylender_Control.xaml</DependentUpon>
     </Compile>
@@ -211,6 +214,7 @@
     <Compile Include="ViewModel\Robot_Manual_ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="ViewModel\SimulationViewModel.cs" />
+    <Compile Include="ViewModel\TrackHistory_ViewModel.cs" />
     <Compile Include="View\CameraApi_View.xaml.cs">
       <DependentUpon>CameraApi_View.xaml</DependentUpon>
     </Compile>
@@ -241,6 +245,10 @@
     <Compile Include="View\TrackHistory_View.xaml.cs">
       <DependentUpon>TrackHistory_View.xaml</DependentUpon>
     </Compile>
+    <Page Include="Control\BathView_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\Cylender_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

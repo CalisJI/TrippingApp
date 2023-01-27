@@ -5,8 +5,118 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
+             x:Name="form"
+             DataContext="{StaticResource VM_Machine}"
+             xmlns:control="clr-namespace:TrippingApp.Control"
              d:DesignHeight="990" d:DesignWidth="1920">
-    <Grid>
-       
-    </Grid>
+    <Viewbox>
+        <Grid Height="990"
+              Width="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="0"
+                Grid.Row="0"
+                BathName="Bath 1"
+                DipTime="{Binding DipTime1}"
+                Barcode="{Binding Barcode1}"
+                InputTime="{Binding ImputTime1}"
+                Temperature="{Binding Temper1}"/>
+
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="1"
+                Grid.Row="0"
+                BathName="Bath 2"
+                DipTime="{Binding DipTime2}"
+                Barcode="{Binding Barcode2}"
+                InputTime="{Binding ImputTime2}"
+                Temperature="{Binding Temper2}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="2"
+                Grid.Row="0"
+                BathName="Bath 3"
+                DipTime="{Binding DipTime3}"
+                Barcode="{Binding Barcode3}"
+                InputTime="{Binding ImputTime3}"
+                Temperature="{Binding Temper3}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="3"
+                Grid.Row="0"
+                BathName="Bath 4"
+                DipTime="{Binding DipTime4}"
+                Barcode="{Binding Barcode4}"
+                InputTime="{Binding ImputTime4}"
+                Temperature="{Binding Temper4}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="4"
+                Grid.Row="0"
+                BathName="Bath 5"
+                DipTime="{Binding DipTime5}"
+                Barcode="{Binding Barcode5}"
+                InputTime="{Binding ImputTime5}"
+                Temperature="{Binding Temper5}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="5"
+                Grid.Row="0"
+                BathName="Bath 6"
+                DipTime="{Binding DipTime6}"
+                Barcode="{Binding Barcode6}"
+                InputTime="{Binding ImputTime6}"
+                Temperature="{Binding Temper6}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="0"
+                Grid.Row="1"
+                BathName="Bath 7"
+                DipTime="{Binding DipTime7}"
+                Barcode="{Binding Barcode7}"
+                InputTime="{Binding ImputTime7}"
+                Temperature="{Binding Temper7}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="1"
+                Grid.Row="1"
+                BathName="Bath 8"
+                DipTime="{Binding DipTime8}"
+                Barcode="{Binding Barcode8}"
+                InputTime="{Binding ImputTime8}"
+                Temperature="{Binding Temper8}"/>
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="2"
+                Grid.Row="1"
+                BathName="Bath 9"
+                DipTime="{Binding DipTime9}"
+                Barcode="{Binding Barcode9}"
+                InputTime="{Binding ImputTime9}"
+                Temperature="{Binding Temper9}"/>
+
+            <control:BathView_Control
+                Margin="5"
+                Grid.Column="3"
+                Grid.Row="1"
+                BathName="Bath 10"
+                DipTime="{Binding DipTime10}"
+                Barcode="{Binding Barcode10}"
+                InputTime="{Binding ImputTime10}"
+                Temperature="{Binding Temper10}"/>
+        </Grid>
+    </Viewbox>
 </UserControl>

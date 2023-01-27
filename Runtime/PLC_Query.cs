@@ -392,7 +392,7 @@ namespace TrippingApp.Runtime
                     Nhiet_Do_Tank11 = Temperatures[10]
                 };
                 WriteData(temper, 24);
-                _ = Logger.Logger.Async_write("Write Temperature Successfully");
+                //_ = Logger.Logger.Async_write("Write Temperature Successfully");
             }
             catch (Exception ex)
             {
@@ -443,6 +443,19 @@ namespace TrippingApp.Runtime
             try
             {
                 ReadData(DETECT_VALUE,20);
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
+
+            }
+        }
+
+        public static void Get_ListCodeChar()
+        {
+            try
+            {
+                ReadData(LIST_CODE_CHAR, 3);
             }
             catch (PlcException ex)
             {
@@ -821,6 +834,8 @@ namespace TrippingApp.Runtime
         public short AxisLift_PStart_Index { get; set; }
         public short AxisRobot_Target_Point { get; set; }
         public short AxisLift_Target_Point { get; set; }
+        public short Point_Speed_X { get; set; }
+        public short Point_Speed_Lift { get; set; }
     }
     public class SETTING_DATA
     {
@@ -880,8 +895,6 @@ namespace TrippingApp.Runtime
         public Int32 Time_Check_Sensor_TF { get; set; }
         public Int32 Time_To_Active_Robot { get; set; }
         public Int32 Timer_Run_Conveyor_Inpur { get; set; }
-
-
     }
     public class DETECT_VALUE
     {
