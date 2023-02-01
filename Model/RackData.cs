@@ -340,4 +340,99 @@ namespace TrippingApp.Model
             SaveHitory();
         }
     }
+
+
+    public static class TrackingProces 
+    {
+        public static List<RackObject> ListRackData { get; set; } = new List<RackObject>();
+
+        public static string fileDatename
+        {
+            get { return "DataHoya-" + DateTime.Now.ToString("dd-MM-yyyy") + ".json"; }
+
+        }
+        //readonly static string fileDatename = DateTime.Now.ToString("dd-MM-yyyy");
+        //readonly static string DataMonitorStore = ApplicationConfig.HistoryLogger + @"\" + fileDatename;
+        public static string DataMonitorStore
+        {
+            get => ApplicationConfig.HistoryLogger + @"\" + fileDatename;
+        }
+        public static void TrackerData()
+        {
+
+        }
+        public static void CheckFileExist()
+        {
+            try
+            {
+                if (!File.Exists(DataMonitorStore))
+                {
+                    File.Create(DataMonitorStore).Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+        public static void SaveHitory()
+        {
+            CheckFileExist();
+            try
+            {
+                string jObject = System.Text.Json.JsonSerializer.Serialize(ListRackData, typeof(List<RackObject>));
+                using (FileStream fs = new FileStream(DataMonitorStore, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    System.Text.Json.JsonSerializer.Serialize(fs, jObject);
+                    fs.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                _ = Logger.Logger.Async_write(ex.Message);
+            }
+        }
+
+        //public static void GetHistory(DateTime Time)
+        //{
+        //    var filterfile = Directory.GetFiles(ApplicationConfig.HistoryLogger)
+        //        .Where(file =>
+        //        {
+        //            var filename = Path.GetFileNameWithoutExtension(file);
+        //            return fi
+        //        });
+        //}
+    }
+
+
+    public class RackObject
+    {
+        public string RackBarcode { get; set; }
+        public string NGType { get; set; }
+        public object RackDetails { get; set; }
+        public BathInformation Bath1_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath2_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath3_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath4_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath5_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath6_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath7_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath8_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath9_Infor { get; set; } = new BathInformation();
+        public BathInformation Bath10_Infor { get; set; } = new BathInformation();
+        public Status RackStatus { get; set; }
+    }
+    public enum Status
+    {
+        Done,
+        Inprocess
+    }
+    public class BathInformation
+    {
+        public float BathTemper { get; set; }
+        public DateTime TimeIn { get; set; }
+        public DateTime TimeOut { get; set; }
+    }
 }

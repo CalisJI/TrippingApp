@@ -220,8 +220,16 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
-                    TCP_Runtime.CreateNetWork();
+                    if (!PLC_Query.Connected) 
+                    {
+                        PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
+                    }
+                    if(TCP_Runtime.TcpListener != null)
+                    {
+                        TCP_Runtime.CreateNetWork();
+                    }
+                   
+                    
                     Modbus_Communicate.Initial();
                 }
                 catch (Exception ex)

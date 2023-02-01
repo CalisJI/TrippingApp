@@ -14,9 +14,6 @@
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <control:TextBox_Custome_1
-                Foreground="Wheat"
-                NumberValue="{Binding Variable}"/>
             <!--<DataGrid
                 Grid.Row="1"
                 

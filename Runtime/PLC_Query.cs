@@ -623,6 +623,8 @@ namespace TrippingApp.Runtime
 
         public readonly static string PC_Detected_Rack = "M167.0";
 
+        public readonly static string Sync_Position = "M126.1";
+
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
@@ -678,8 +680,8 @@ namespace TrippingApp.Runtime
             DataType = DataType.DataBlock,
             DB = 14,
             StartByteAddress = 20,
-            VarType = VarType.Int,
-            VarCount = 1
+            VarType = VarType.Byte,
+            VarCount = 0
         };
         public readonly static DataOffSetPLC AxisLift_Position_2 = new DataOffSetPLC()
         {
@@ -687,7 +689,7 @@ namespace TrippingApp.Runtime
             DB = 14,
             StartByteAddress = 22,
             VarType = VarType.Int,
-            VarCount = 1
+            VarCount = 0
         };
 
         public readonly static DataOffSetPLC AxisLift_Position_Start = new DataOffSetPLC()
@@ -696,7 +698,7 @@ namespace TrippingApp.Runtime
             DB = 14,
             StartByteAddress = 24,
             VarType = VarType.Int,
-            VarCount = 1
+            VarCount = 0
         };
 
         public readonly static DataOffSetPLC AxisRobot_Target_Point = new DataOffSetPLC()

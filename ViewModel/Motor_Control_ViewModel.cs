@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
@@ -23,7 +24,8 @@ namespace TrippingApp.ViewModel
         public ICommand Run_CCW_P_TF1_Command { get; set; }
         public ICommand Run_CCW_N_TF1_Command { get; set; }
 
-
+        public ICommand Loaded { get; set; }
+        public ICommand Unloaded { get; set; }
 
         #endregion
         #region Model TF 1
@@ -214,6 +216,43 @@ namespace TrippingApp.ViewModel
         #endregion
         public Motor_Control_ViewModel()
         {
+            Loaded = new ActionCommand(() =>
+            {
+                if (PLC_Query.Connected)
+                {
+                    PLC_Query.ReadData(PLC_Query.SYSTEM_DATA_RETAIN, 10);
+                    Frequency1 = (int)PLC_Query.SYSTEM_DATA_RETAIN.Tranfer_Frequency;
+                    Acc_Time1 = PLC_Query.SYSTEM_DATA_RETAIN.Accel_Tranfer*100;
+                    Dec_Time1 = PLC_Query.SYSTEM_DATA_RETAIN.Decel_Tranfer*100;
+
+                    Frequency2 = (int)PLC_Query.SYSTEM_DATA_RETAIN.Tranfer_Frequency;
+                    Acc_Time2 = PLC_Query.SYSTEM_DATA_RETAIN.Accel_Tranfer * 100;
+                    Dec_Time2 = PLC_Query.SYSTEM_DATA_RETAIN.Decel_Tranfer * 100;
+
+
+                    Frequency3 = (int)PLC_Query.SYSTEM_DATA_RETAIN.Dip_Frequency;
+                    Acc_Time3 = PLC_Query.SYSTEM_DATA_RETAIN.Accel_Dip * 100;
+                    Dec_Time3 = PLC_Query.SYSTEM_DATA_RETAIN.Decel_Dip * 100;
+
+                    Frequency4 = (int)PLC_Query.SYSTEM_DATA_RETAIN.Dip_Frequency;
+                    Acc_Time4 = PLC_Query.SYSTEM_DATA_RETAIN.Accel_Dip * 100;
+                    Dec_Time4 = PLC_Query.SYSTEM_DATA_RETAIN.Decel_Dip * 100;
+
+                    Frequency5 = (int)PLC_Query.SYSTEM_DATA_RETAIN.Dip_Frequency;
+                    Acc_Time5 = PLC_Query.SYSTEM_DATA_RETAIN.Accel_Dip * 100;
+                    Dec_Time5 = PLC_Query.SYSTEM_DATA_RETAIN.Decel_Dip * 100;
+
+
+                }
+            });
+
+            Unloaded = new ActionCommand(() =>
+            {
+            
+            });
+
+
+
             // Tranfer 1
             #region Run Command
             Run_CW_P_TF1_Command = new ActionCommand(() =>

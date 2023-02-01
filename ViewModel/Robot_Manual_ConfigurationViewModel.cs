@@ -292,6 +292,14 @@ namespace TrippingApp.ViewModel
                     Position_Start = PLC_Query.ROBOT_PARAM.AxisLift_Position_Start;
                     Position_Above = PLC_Query.ROBOT_PARAM.AxisLift_Position_1;
                     Position_Below = PLC_Query.ROBOT_PARAM.AxisLift_Position_2;
+
+                    PLC_Query.WriteBit(AddressCrt.Sync_Position, true);
+                    timer.Interval = new TimeSpan(500);
+                    timer.Tick += Timer_Tick;
+                    if (timer.IsEnabled == false)
+                    {
+                        timer.Start();
+                    }
                 }
                 //timer.Interval = new TimeSpan(100);
                 //timer.Tick += Timer_Tick;
@@ -387,7 +395,7 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.Jog_X_SPEED, Jog_Robot_Speed);
+                    PLC_Query.WriteData(AddressCrt.Jog_X_SPEED, (short)Jog_Robot_Speed);
                 }
                 catch (Exception ex)
                 {
@@ -404,7 +412,7 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Robot_Point_Accel = (short)Accel_Point;
                     PLC_Query.SETTING_DATA.Robot_Point_Decel = (short)DeccelPoint;
                     PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1, PosBath4);
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_1,(short) PosBath4);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
                     
@@ -424,7 +432,7 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Robot_Point_Accel = (short)Accel_Point;
                     PLC_Query.SETTING_DATA.Robot_Point_Decel = (short)DeccelPoint;
                     PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, PosBath5);
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_2, (short)PosBath5);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
                 }
@@ -442,7 +450,7 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Robot_Point_Accel = (short)Accel_Point;
                     PLC_Query.SETTING_DATA.Robot_Point_Decel = (short)DeccelPoint;
                     PLC_Query.SETTING_DATA.Robot_Point_Speed = (short)PointSpeed;
-                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, PosBath6);
+                    PLC_Query.WriteData(AddressCrt.AxisRobot_Position_3, (short)PosBath6);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_X, true);
                 }
@@ -456,7 +464,7 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.SELECT_AXIS_HOME, 2);
+                    //PLC_Query.WriteData(AddressCrt.SELECT_AXIS_HOME, 2);
                     PLC_Query.WriteBit(AddressCrt.Manual_Home_Lift, true);
                 }
                 catch (Exception ex)
@@ -492,7 +500,7 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    PLC_Query.WriteData(AddressCrt.Jog_Lift_SPEED, Jog_Lift_Speed);
+                    PLC_Query.WriteData(AddressCrt.Jog_Lift_SPEED, (short)Jog_Lift_Speed);
                 }
                 catch (Exception ex)
                 {
@@ -508,8 +516,8 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Above;
                     PLC_Query.SETTING_DATA.Lift_Point_Accel = (short)AccLifftPoint;
                     PLC_Query.SETTING_DATA.Lift_Point_Decel = (short)DecLiftPoint;
-                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
-                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, Position_Above);
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Lift_Point_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_1, (short)Position_Above);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
 
@@ -529,8 +537,8 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Below;
                     PLC_Query.SETTING_DATA.Lift_Point_Accel = (short)AccLifftPoint;
                     PLC_Query.SETTING_DATA.Lift_Point_Decel = (short)DecLiftPoint;
-                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
-                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_2, Position_Below);
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Lift_Point_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_2, (short)Position_Below);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
 
@@ -550,8 +558,8 @@ namespace TrippingApp.ViewModel
                     PLC_Query.SETTING_DATA.Point_Data = (short)Position_Start;
                     PLC_Query.SETTING_DATA.Lift_Point_Accel = (short)AccLifftPoint;
                     PLC_Query.SETTING_DATA.Lift_Point_Decel = (short)DecLiftPoint;
-                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Jog_Lift_Speed;
-                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_Start, Position_Start);
+                    PLC_Query.SETTING_DATA.Lift_Point_Speed = (short)Lift_Point_Speed;
+                    PLC_Query.WriteData(AddressCrt.AxisLift_Position_Start,(short)Position_Start);
                     PLC_Query.Write_Setting_DataPoint();
                     PLC_Query.WriteBit(AddressCrt.WRITE_DATA_POINT_LIFT, true);
                 }
@@ -628,7 +636,7 @@ namespace TrippingApp.ViewModel
                 object a = PLC_Query.ReadData(AddressCrt.Current_Position_X);
                 CurrentPos = Convert.ToInt16(a);
                 object b = PLC_Query.ReadData(AddressCrt.Current_Position_Lift);
-                CurrentPos = Convert.ToInt16(b);
+                CurrentPos_Lift = Convert.ToInt16(b);
             }
             catch (Exception ex)
             {

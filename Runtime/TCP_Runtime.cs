@@ -17,10 +17,10 @@ namespace TrippingApp.Runtime
     {
         const int PORT_NO = 2000;
         const string SERVER_IP = "192.168.1.15";
-        private static TcpListener TcpListener;
+        public static TcpListener TcpListener;
         private static Socket socket;
         private static NetworkStream networkStream;
-
+        
         public static void CreateNetWork()
         {
             try
