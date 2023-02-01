@@ -59,7 +59,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for NumberValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NumberValueProperty =
-            DependencyProperty.Register("NumberValue", typeof(int), typeof(TextBox_Custome_1), new PropertyMetadata(0));
+            DependencyProperty.Register("NumberValue", typeof(int), typeof(TextBox_Custome_1), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -72,7 +72,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for NumberValueF.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NumberValueFProperty =
-            DependencyProperty.Register("NumberValueF", typeof(float), typeof(TextBox_Custome_1), new PropertyMetadata(0.0f));
+            DependencyProperty.Register("NumberValueF", typeof(float), typeof(TextBox_Custome_1), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -84,8 +84,20 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for NumberMode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NumberModeProperty =
-            DependencyProperty.Register("NumberMode", typeof(bool), typeof(TextBox_Custome_1), new PropertyMetadata(false));
+            DependencyProperty.Register("NumberMode", typeof(bool), typeof(TextBox_Custome_1), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+
+
+
+        public bool UnLimited
+        {
+            get { return (bool)GetValue(UnLimitedProperty); }
+            set { SetValue(UnLimitedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UnLimited.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UnLimitedProperty =
+            DependencyProperty.Register("UnLimited", typeof(bool), typeof(TextBox_Custome_1), new PropertyMetadata(false));
 
 
 
@@ -106,7 +118,11 @@ namespace TrippingApp.Control
         {
             if (!NumberMode)
             {
-                if (NumberValue < 2500)
+                if (NumberValue < 2500 && !UnLimited)
+                {
+                    SetValue(NumberValueProperty, NumberValue += 1);
+                }
+                else 
                 {
                     SetValue(NumberValueProperty, NumberValue += 1);
                 }
@@ -117,6 +133,7 @@ namespace TrippingApp.Control
                 {
                     SetValue(NumberValueFProperty, NumberValueF += 0.1f);
                 }
+              
             }
         }
         void Descrease() 

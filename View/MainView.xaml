@@ -332,6 +332,7 @@
             </Button>
 
             <Button
+                Command="{Binding Test}"
                 themes:ButtonAssist.CornerRadius="25"
                 Width="280"
                 Height="210"

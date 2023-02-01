@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +34,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Jog_Speed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Jog_SpeedProperty =
-            DependencyProperty.Register("Jog_Speed", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("Jog_Speed", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -44,10 +46,8 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Position_Above.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Position_AboveProperty =
-            DependencyProperty.Register("Position_Above", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
-
-
-
+            DependencyProperty.Register("Position_Above", typeof(int), typeof(ServoLit_Control),new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        
         public int Position_Below
         {
             get { return (int)GetValue(Position_BelowProperty); }
@@ -56,9 +56,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Position_Below.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Position_BelowProperty =
-            DependencyProperty.Register("Position_Below", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
-
-
+            DependencyProperty.Register("Position_Below", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public int Position_Start
         {
@@ -68,7 +66,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Position_Start.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Position_StartProperty =
-            DependencyProperty.Register("Position_Start", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("Position_Start", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -81,7 +79,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for CurrentPos.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentPosProperty =
-            DependencyProperty.Register("CurrentPos", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("CurrentPos", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -94,7 +92,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for PointSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PointSpeedProperty =
-            DependencyProperty.Register("PointSpeed", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("PointSpeed", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -106,7 +104,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for AccPointTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AccPointTimeProperty =
-            DependencyProperty.Register("AccPointTime", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(100));
+            DependencyProperty.Register("AccPointTime", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -119,7 +117,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for DeccePointTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DeccePointTimeProperty =
-            DependencyProperty.Register("DeccePointTime", typeof(int), typeof(ServoLit_Control), new PropertyMetadata(100));
+            DependencyProperty.Register("DeccePointTime", typeof(int), typeof(ServoLit_Control), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -291,6 +289,8 @@ namespace TrippingApp.Control
         public ServoLit_Control()
         {
             InitializeComponent();
+            
+
         }
     }
 }

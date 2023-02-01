@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using S7.Net.Types;
 using Cognex.InSight.Controls.Display.EZBuilder;
 using System.Security.AccessControl;
+using TrippingApp.ViewModel;
 
 namespace TrippingApp.Runtime
 {
@@ -302,7 +303,7 @@ namespace TrippingApp.Runtime
             {
                 try
                 {
-                    PLC_Controller.WriteClassAsync(souceClass, DB_Index, Start_Addr);
+                    PLC_Controller.WriteClass(souceClass, DB_Index, Start_Addr);
                 }
                 catch (PlcException ex)
                 {
@@ -456,6 +457,8 @@ namespace TrippingApp.Runtime
             try
             {
                 ReadData(LIST_CODE_CHAR, 3);
+
+                MachineViewModel.Getbarcode_Command.Execute(null);
             }
             catch (PlcException ex)
             {
@@ -527,7 +530,7 @@ namespace TrippingApp.Runtime
         /// <summary>
         /// Begin Home Lift Manual
         /// </summary>
-        public readonly static string Manual_Home_Lift = "M61.5";
+        public readonly static string Manual_Home_Lift = "M63.7";
 
         public readonly static string WRITE_DATA_POINT_X = "M9.0";
         public readonly static string WRITE_DATA_POINT_LIFT = "M9.3";
@@ -617,6 +620,8 @@ namespace TrippingApp.Runtime
         public readonly static string Man_On_Van_RO = "M104.0";
         public readonly static string Man_Off_Van_RO = "M104.2";
         public readonly static string Test = "MW4";
+
+        public readonly static string PC_Detected_Rack = "M167.0";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {
@@ -869,6 +874,7 @@ namespace TrippingApp.Runtime
         public Int32 Parity { get; set; }
         public short Detect_Vector { get; set; }
         public short Detect_Vector_1 { get; set; }
+        public short Mode_Connect_TCP { get; set; }
 
     }
 

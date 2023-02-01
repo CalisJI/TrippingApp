@@ -43,67 +43,88 @@
             Posit="1"
             Length_X="460"
             Length_Y="350"
+                NhietDo="{Binding PV1}"
             WriteCommand="{Binding B1_Set}"/>
             <digit:VX4_Control
             Grid.Column="1"
             Grid.Row="0"
             Posit="2"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV2}"
+            WriteCommand="{Binding B2_Set}"/>
             <digit:VX4_Control
             Grid.Column="2"
             Grid.Row="0"
             Posit="3"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV3}"
+                WriteCommand="{Binding B3_Set}"/>
             <digit:VX4_Control
             Grid.Column="3"
             Grid.Row="0"
             Posit="4"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV4}"
+                WriteCommand="{Binding B4_Set}"/>
             <digit:VX4_Control
             Grid.Column="0"
             Grid.Row="1"
             Posit="5"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV5}"
+                WriteCommand="{Binding B5_Set}"/>
             <digit:VX4_Control
             Grid.Column="1"
             Grid.Row="1"
             Posit="6"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV6}"
+                WriteCommand="{Binding B6_Set}"/>
             <digit:VX4_Control
             Grid.Column="2"
             Grid.Row="1"
             Posit="7"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV7}"
+                WriteCommand="{Binding B7_Set}"/>
             <digit:VX4_Control
             Grid.Column="3"
             Grid.Row="1"
             Posit="8"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV8}"
+                WriteCommand="{Binding B8_Set}"/>
             <digit:VX4_Control
             Grid.Column="0"
             Grid.Row="2"
             Posit="9"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV9}"
+                WriteCommand="{Binding B9_Set}"/>
             <digit:VX4_Control
             Grid.Column="1"
             Grid.Row="2"
             Posit="10"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV10}"
+                WriteCommand="{Binding B10_Set}"/>
             <digit:VX4_Control
             Grid.Column="2"
             Grid.Row="2"
             Posit="11"
             Length_X="460"
-            Length_Y="350"/>
+            Length_Y="350"
+                NhietDo="{Binding PV11}"
+                WriteCommand="{Binding B11_Set}"/>
 
         </Grid>
     </Grid>

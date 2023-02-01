@@ -168,7 +168,8 @@
                         Header="Position Above Setting">
                         <StackPanel Orientation="Horizontal">
                             <control:TextBox_Custome_1 
-                                NumberValue="{Binding Position_Above, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                UnLimited="True"
+                                NumberValue="{Binding Position_Above, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                 Height="100"
                                 Margin="10 0 0 0"
                                 HorizontalAlignment="Left"/>

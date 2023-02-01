@@ -195,7 +195,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Frequency.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FrequencyProperty =
-            DependencyProperty.Register("Frequency", typeof(int), typeof(Motor_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("Frequency", typeof(int), typeof(Motor_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -207,7 +207,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Acc_Time.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Acc_TimeProperty =
-            DependencyProperty.Register("Acc_Time", typeof(float), typeof(Motor_Control), new PropertyMetadata(0.0f));
+            DependencyProperty.Register("Acc_Time", typeof(float), typeof(Motor_Control), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -219,7 +219,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Decc_Time.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Decc_TimeProperty =
-            DependencyProperty.Register("Decc_Time", typeof(float), typeof(Motor_Control), new PropertyMetadata(0.0f));
+            DependencyProperty.Register("Decc_Time", typeof(float), typeof(Motor_Control), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 

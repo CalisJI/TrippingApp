@@ -39,6 +39,7 @@ namespace TrippingApp.Model
         public TempVsHumid_Data[] TempervsHumidity { get; set; } = new TempVsHumid_Data[11];
         public string Status { get; set; }
     }
+    
     public static class MonitorRackData
     {
         public static List<RackData> ListRackData { get; set; } = new List<RackData>();
@@ -56,6 +57,10 @@ namespace TrippingApp.Model
         public static string DataMonitorStore
         {
             get => ApplicationConfig.HistoryLogger + @"\" + fileDatename;
+        }
+        public static void TrackerData() 
+        {
+        
         }
         public static void CheckFileExist() 
         {
@@ -75,7 +80,7 @@ namespace TrippingApp.Model
         public static void SaveHitory()
         {
             CheckFileExist();
-            string jObject = System.Text.Json.JsonSerializer.Serialize(ListRackData, typeof(RackData[]));
+            string jObject = System.Text.Json.JsonSerializer.Serialize(ListRackData, typeof(List<RackData>));
             using (FileStream fs = new FileStream(DataMonitorStore, FileMode.Open,FileAccess.ReadWrite))
             {
                 System.Text.Json.JsonSerializer.Serialize(fs, jObject);
@@ -106,9 +111,23 @@ namespace TrippingApp.Model
                     Status = "Aborted"
 
                 };
+                for (int i = 0; i < 11; i++)
+                {
+                    rackData.TempervsHumidity[i] = new TempVsHumid_Data();
+                }
                 rackData.Rack_Temp[0] = Modbus_Communicate.VX4_1.PV;
-                rackData.TempervsHumidity[0].Temperature = Modbus_Communicate.TH1.Temperature;
-                rackData.TempervsHumidity[0].Humidity = Modbus_Communicate.TH1.Humidity;
+                try
+                {
+                    rackData.TempervsHumidity[0].Temperature = Modbus_Communicate.TH1.Temperature;
+                    rackData.TempervsHumidity[0].Humidity = Modbus_Communicate.TH1.Humidity;
+                   
+                }
+                catch (Exception ex)
+                {
+                    rackData.TempervsHumidity[0].Temperature = 0;
+                    rackData.TempervsHumidity[0].Humidity = 0;
+                    Console.WriteLine("Has No Data Temperature");
+                }
                 rackData.Time[0] = DateTime.Now;
                 ListRackData.Add(rackData);
             }
@@ -117,16 +136,34 @@ namespace TrippingApp.Model
             {
                 R2.Time[1] = DateTime.Now;
                 R2.Rack_Temp[1] = Modbus_Communicate.VX4_2.PV;
-                R2.TempervsHumidity[1].Temperature = Modbus_Communicate.TH1.Temperature;
-                R2.TempervsHumidity[1].Temperature = Modbus_Communicate.TH1.Humidity;
+                try
+                {
+                    R2.TempervsHumidity[1].Temperature = Modbus_Communicate.TH1.Temperature;
+                    R2.TempervsHumidity[1].Humidity = Modbus_Communicate.TH1.Humidity;
+                }
+                catch (Exception)
+                {
+                    R2.TempervsHumidity[1].Temperature = 0;
+                    R2.TempervsHumidity[1].Humidity = 0;
+                }
+              
             }
             var R3 = ListRackData.Where(x => x.Barcode == S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1) && x.Status == "Aborted").FirstOrDefault();
             if (R3 != null)
             {
                 R3.Time[2] = DateTime.Now;
                 R3.Rack_Temp[2] = Modbus_Communicate.VX4_3.PV;
-                R3.TempervsHumidity[2].Temperature = Modbus_Communicate.TH1.Temperature;
-                R3.TempervsHumidity[2].Temperature = Modbus_Communicate.TH1.Humidity;
+                try
+                {
+                    R3.TempervsHumidity[2].Temperature = Modbus_Communicate.TH1.Temperature;
+                    R3.TempervsHumidity[2].Humidity = Modbus_Communicate.TH1.Humidity;
+                }
+                catch (Exception)
+                {
+                    R3.TempervsHumidity[2].Temperature = 0;
+                    R3.TempervsHumidity[2].Humidity = 0;
+                }
+              
             }
             SaveHitory();
         }
@@ -141,8 +178,17 @@ namespace TrippingApp.Model
                 {
                     R4.Time[3] = DateTime.Now;
                     R4.Rack_Temp[3] = Modbus_Communicate.VX4_4.PV;
-                    R4.TempervsHumidity[3].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R4.TempervsHumidity[3].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R4.TempervsHumidity[3].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R4.TempervsHumidity[3].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+
+                        R4.TempervsHumidity[3].Temperature = 0;
+                        R4.TempervsHumidity[3].Humidity = 0;
+                    }
                 }
             }
             else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
@@ -152,8 +198,16 @@ namespace TrippingApp.Model
                 {
                     R5.Time[4] = DateTime.Now;
                     R5.Rack_Temp[4] = Modbus_Communicate.VX4_5.PV;
-                    R5.TempervsHumidity[4].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R5.TempervsHumidity[4].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R5.TempervsHumidity[4].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R5.TempervsHumidity[4].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+                        R5.TempervsHumidity[4].Temperature = 0;
+                        R5.TempervsHumidity[4].Humidity = 0;
+                    }
                 }
             }
             else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
@@ -163,8 +217,17 @@ namespace TrippingApp.Model
                 {
                     R6.Time[5] = DateTime.Now;
                     R6.Rack_Temp[5] = Modbus_Communicate.VX4_6.PV;
-                    R6.TempervsHumidity[5].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R6.TempervsHumidity[5].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R6.TempervsHumidity[5].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R6.TempervsHumidity[5].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        R6.TempervsHumidity[5].Temperature = 0;
+                        R6.TempervsHumidity[5].Humidity = 0;
+                    }
                 }
             }
             else 
@@ -183,8 +246,17 @@ namespace TrippingApp.Model
                 {
                     R7.Time[6] = DateTime.Now;
                     R7.Rack_Temp[6] = Modbus_Communicate.VX4_7.PV;
-                    R7.TempervsHumidity[6].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R7.TempervsHumidity[6].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R7.TempervsHumidity[6].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R7.TempervsHumidity[6].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+
+                        R7.TempervsHumidity[6].Temperature = 0;
+                        R7.TempervsHumidity[6].Humidity = 0;
+                    }
                 }
             }
 
@@ -195,8 +267,16 @@ namespace TrippingApp.Model
                 {
                     R8.Time[7] = DateTime.Now;
                     R8.Rack_Temp[7] = Modbus_Communicate.VX4_8.PV;
-                    R8.TempervsHumidity[7].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R8.TempervsHumidity[7].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R8.TempervsHumidity[7].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R8.TempervsHumidity[7].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+                        R8.TempervsHumidity[7].Temperature = 0;
+                        R8.TempervsHumidity[7].Humidity = 0;
+                    }
                 }
             }
             if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1) != "")
@@ -206,8 +286,16 @@ namespace TrippingApp.Model
                 {
                     R9.Time[8] = DateTime.Now;
                     R9.Rack_Temp[8] = Modbus_Communicate.VX4_9.PV;
-                    R9.TempervsHumidity[8].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R9.TempervsHumidity[8].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R9.TempervsHumidity[8].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R9.TempervsHumidity[8].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+                        R9.TempervsHumidity[8].Temperature = 0;
+                        R9.TempervsHumidity[8].Humidity = 0;
+                    }
                 }
             }
             if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1) != "")
@@ -217,8 +305,16 @@ namespace TrippingApp.Model
                 {
                     R10.Time[9] = DateTime.Now;
                     R10.Rack_Temp[9] = Modbus_Communicate.VX4_10.PV;
-                    R10.TempervsHumidity[9].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R10.TempervsHumidity[9].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R10.TempervsHumidity[9].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R10.TempervsHumidity[9].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+                        R10.TempervsHumidity[9].Temperature = 0;
+                        R10.TempervsHumidity[9].Humidity = 0;
+                    }
                 }
             }
             if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath11_P1) != "")
@@ -228,8 +324,16 @@ namespace TrippingApp.Model
                 {
                     R11.Time[10] = DateTime.Now;
                     R11.Rack_Temp[10] = 0;
-                    R11.TempervsHumidity[10].Temperature = Modbus_Communicate.TH1.Temperature;
-                    R11.TempervsHumidity[10].Temperature = Modbus_Communicate.TH1.Humidity;
+                    try
+                    {
+                        R11.TempervsHumidity[10].Temperature = Modbus_Communicate.TH1.Temperature;
+                        R11.TempervsHumidity[10].Humidity = Modbus_Communicate.TH1.Humidity;
+                    }
+                    catch (Exception)
+                    {
+                        R11.TempervsHumidity[10].Temperature = 0;
+                        R11.TempervsHumidity[10].Humidity = 0;
+                    }
                     R11.Status = "Completed";
                 }
             }

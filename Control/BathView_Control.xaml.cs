@@ -30,7 +30,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for BathName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BathNameProperty =
-            DependencyProperty.Register("BathName", typeof(string), typeof(BathView_Control), new PropertyMetadata("Bath 1"));
+            DependencyProperty.Register("BathName", typeof(string), typeof(BathView_Control), new FrameworkPropertyMetadata("Bath 1",FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -42,7 +42,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for DipTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DipTimeProperty =
-            DependencyProperty.Register("DipTime", typeof(string), typeof(BathView_Control), new PropertyMetadata(""));
+            DependencyProperty.Register("DipTime", typeof(string), typeof(BathView_Control), new FrameworkPropertyMetadata("",FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -54,7 +54,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Barcode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BarcodeProperty =
-            DependencyProperty.Register("Barcode", typeof(string), typeof(BathView_Control), new PropertyMetadata(""));
+            DependencyProperty.Register("Barcode", typeof(string), typeof(BathView_Control), new FrameworkPropertyMetadata("",FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -66,7 +66,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for InputTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InputTimeProperty =
-            DependencyProperty.Register("InputTime", typeof(string), typeof(BathView_Control), new PropertyMetadata(""));
+            DependencyProperty.Register("InputTime", typeof(string), typeof(BathView_Control), new FrameworkPropertyMetadata("",FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -78,7 +78,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Temperature.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TemperatureProperty =
-            DependencyProperty.Register("Temperature", typeof(float), typeof(BathView_Control), new PropertyMetadata(0.0f));
+            DependencyProperty.Register("Temperature", typeof(float), typeof(BathView_Control), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 

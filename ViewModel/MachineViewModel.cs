@@ -1,4 +1,5 @@
 ﻿using Microsoft.Expression.Interactivity.Core;
+using S7.Net.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using TrippingApp.Runtime;
+using DateTime = System.DateTime;
 
 namespace TrippingApp.ViewModel
 {
@@ -14,6 +17,10 @@ namespace TrippingApp.ViewModel
         #region Command
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
+
+        public static ICommand Getbarcode_Command { get; set; }
+        public static ICommand Get_Input_Time_Command { get; set; }
+        public static ICommand Get_Trip_Time_Command { get; set; }
         #endregion
 
         #region Model
@@ -393,6 +400,45 @@ namespace TrippingApp.ViewModel
             
             });
 
+            Getbarcode_Command = new ActionCommand(() => 
+            {
+                Barcode1 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1);
+                Barcode2 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P1);
+                Barcode3 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1);
+                Barcode4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                Barcode5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                Barcode6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                Barcode7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1);
+                Barcode8 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P1);
+                Barcode9 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1);
+                Barcode10 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1);
+            });
+            Get_Input_Time_Command = new ActionCommand((p) => 
+            {
+                if((int)p == 1)
+                {
+                    DateTime dateTime = DateTime.Now;
+                    ImputTime1 = dateTime.ToShortTimeString(); 
+                    ImputTime2 = dateTime.ToShortTimeString();
+                    ImputTime3 = dateTime.ToShortTimeString(); 
+                }
+                else if((int)p == 2) 
+                {
+                    DateTime dateTime = DateTime.Now;
+                    ImputTime4 = dateTime.ToShortTimeString();
+                    ImputTime5 = dateTime.ToShortTimeString();
+                    ImputTime6 = dateTime.ToShortTimeString();
+
+                }
+                else if ((int)p == 3) 
+                {
+                    DateTime dateTime = DateTime.Now;
+                    ImputTime7 = dateTime.ToShortTimeString();
+                    ImputTime8 = dateTime.ToShortTimeString();
+                    ImputTime9 = dateTime.ToShortTimeString();
+                    ImputTime10 = dateTime.ToShortTimeString();
+                }
+            });
         }
     }
 }

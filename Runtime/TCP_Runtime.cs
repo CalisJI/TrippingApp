@@ -16,7 +16,7 @@ namespace TrippingApp.Runtime
     public class TCP_Runtime
     {
         const int PORT_NO = 2000;
-        const string SERVER_IP = "192.168.1.5";
+        const string SERVER_IP = "192.168.1.15";
         private static TcpListener TcpListener;
         private static Socket socket;
         private static NetworkStream networkStream;
@@ -86,6 +86,7 @@ namespace TrippingApp.Runtime
                                 catch (Exception)
                                 {
                                     //MessageBox.Show("TCP/IP Disconnected");
+                                    Console.WriteLine("TCP/IP Disconnected");
                                     CreateNetWork();
                                     goto DMM;
                                 }
@@ -132,10 +133,10 @@ namespace TrippingApp.Runtime
                 case "c":
                     MonitorRackData.MoveRack789_10();
                     break;
-                // Run Out of Barcode 
+                // Has rack Done
                 case "d":
                     break;
-                // Optional
+                // Run Out of Barcode 
                 case "e":
                     break;
                 //Begin Tranfer 1
@@ -147,18 +148,30 @@ namespace TrippingApp.Runtime
                 //Begin Tranfer3
                 case "h":
                     break;
-                //Has Rack Done
+                //
                 case "k":
                     break;
-                // Read Barcode A1
+                // Read Barcode Position
                 case "l":
                     PLC_Query.Get_ListCodeChar();
                     break;
-                // Read Barcode A2
+                // Read Time Trip 3
                 case "m":
                     break;
-                // Read Barcode A3
+                //Trip Area 3 Done Trigger
+                case "m1":
+                    break;
+                // Read Time Trip 1
                 case "n":
+                    break;
+                //Trip Area 1 Done Trigger
+                case "n1":
+                    break;
+                // Read Time Trip Robot
+                case "o":
+                    break;
+                // Trip Robot Done trigger
+                case "o1":
                     break;
                 default:
                     break;

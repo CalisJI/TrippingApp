@@ -202,7 +202,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for CurrentPos.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentPosProperty =
-            DependencyProperty.Register("CurrentPos", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("CurrentPos", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -214,7 +214,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for JogSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty JogSpeedProperty =
-            DependencyProperty.Register("JogSpeed", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("JogSpeed", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -226,7 +226,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for PosBath4.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PosBath4Property =
-            DependencyProperty.Register("PosBath4", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("PosBath4", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -238,7 +238,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for PosBath5.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PosBath5Property =
-            DependencyProperty.Register("PosBath5", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("PosBath5", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -250,7 +250,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for PosBath6.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PosBath6Property =
-            DependencyProperty.Register("PosBath6", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("PosBath6", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -262,7 +262,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for AccPoint.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AccPointProperty =
-            DependencyProperty.Register("AccPoint", typeof(int), typeof(Robot_Control), new PropertyMetadata(100));
+            DependencyProperty.Register("AccPoint", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(100,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -274,7 +274,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for DecelPoint.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DecelPointProperty =
-            DependencyProperty.Register("DecelPoint", typeof(int), typeof(Robot_Control), new PropertyMetadata(100));
+            DependencyProperty.Register("DecelPoint", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -286,7 +286,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for PointSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PointSpeedProperty =
-            DependencyProperty.Register("PointSpeed", typeof(int), typeof(Robot_Control), new PropertyMetadata(0));
+            DependencyProperty.Register("PointSpeed", typeof(int), typeof(Robot_Control), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 

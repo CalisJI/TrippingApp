@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
+             DataContext="{StaticResource VM_Tracker}"
+             xmlns:control="clr-namespace:TrippingApp.Control"
              d:DesignHeight="990" d:DesignWidth="1920">
     <Viewbox>
         <Grid Name="box" Width="1920" Height="990">
@@ -12,13 +14,16 @@
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <DataGrid
+            <control:TextBox_Custome_1
+                Foreground="Wheat"
+                NumberValue="{Binding Variable}"/>
+            <!--<DataGrid
                 Grid.Row="1"
                 
                 Width="{Binding ElementName=box, Path=ActualWidth}"
                 Height="{Binding ElementName=box, Path=ActualHeight}">
                 
-            </DataGrid>
+            </DataGrid>-->
         </Grid>
     </Viewbox>
 </UserControl>

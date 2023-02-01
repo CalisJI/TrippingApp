@@ -28,7 +28,7 @@ namespace TrippingApp.Runtime
         public static Temperature_Data VX4_11 = new Temperature_Data();
         public static TempVsHumid_Data TH1 = new TempVsHumid_Data();
         public static TempVsHumid_Data TH2 = new TempVsHumid_Data();
-        public static ModbusClient ModbusClient = new ModbusClient("192.168.1.35",20000);
+        public static ModbusClient ModbusClient = new ModbusClient("192.168.1.35",20002);
         public static void Initial()
         {
             try

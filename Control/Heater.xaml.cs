@@ -32,7 +32,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Number.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NumberProperty =
-            DependencyProperty.Register("Number", typeof(int), typeof(Heater), new PropertyMetadata(0,new PropertyChangedCallback(NumberChanged)));
+            DependencyProperty.Register("Number", typeof(int), typeof(Heater), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -45,7 +45,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for NumberS.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NumberSProperty =
-            DependencyProperty.Register("NumberS", typeof(string), typeof(Heater), new PropertyMetadata());
+            DependencyProperty.Register("NumberS", typeof(string), typeof(Heater), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -58,7 +58,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Fpoint.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FpointProperty =
-            DependencyProperty.Register("Fpoint", typeof(bool), typeof(Heater), new PropertyMetadata(false));
+            DependencyProperty.Register("Fpoint", typeof(bool), typeof(Heater), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -71,7 +71,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Length_X.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Length_XProperty =
-            DependencyProperty.Register("Length_X", typeof(int), typeof(Heater), new PropertyMetadata(100));
+            DependencyProperty.Register("Length_X", typeof(int), typeof(Heater), new FrameworkPropertyMetadata(100,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -83,7 +83,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for Length_Y.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Length_YProperty =
-            DependencyProperty.Register("Length_Y", typeof(int), typeof(Heater), new PropertyMetadata(100));
+            DependencyProperty.Register("Length_Y", typeof(int), typeof(Heater), new FrameworkPropertyMetadata(100,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -101,13 +101,6 @@ namespace TrippingApp.Control
         public static readonly DependencyProperty MauChuProperty =
             DependencyProperty.Register("MauChu", typeof(Brush), typeof(Heater), new PropertyMetadata(Brushes.WhiteSmoke));
 
-
-
-        private static void NumberChanged(DependencyObject d , DependencyPropertyChangedEventArgs e)
-        {
-            
-          
-        }
 
         public Heater()
         {

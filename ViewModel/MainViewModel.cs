@@ -78,8 +78,9 @@ namespace TrippingApp.ViewModel
         private OverViewMachineViewModel OverViewMachineViewModel;
         private Lazy<Robot_Manual_ConfigurationViewModel> Robot_Manual_ConfigurationViewModel = new Lazy<Robot_Manual_ConfigurationViewModel>(() => { return new ViewModel.Robot_Manual_ConfigurationViewModel(); });
         //private Robot_Manual_ConfigurationViewModel Robot_Manual_ConfigurationViewModel;
-        private MachineViewModel MachineViewModel;
+        private MachineViewModel MachineViewModel = new MachineViewModel();
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
+        private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
         #endregion
         public MainViewModel()
         {
@@ -133,7 +134,7 @@ namespace TrippingApp.ViewModel
 
                     //Modbus_Communicate.Initial();
 
-                    TCP_Runtime.CreateNetWork();
+                    this.SelectedViewModel = TrackHistory_ViewModel;
 
                 }
                 catch (Exception ex)
@@ -221,6 +222,7 @@ namespace TrippingApp.ViewModel
                 {
                     PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
                     TCP_Runtime.CreateNetWork();
+                    Modbus_Communicate.Initial();
                 }
                 catch (Exception ex)
                 {

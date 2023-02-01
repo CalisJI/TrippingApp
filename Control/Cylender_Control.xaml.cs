@@ -31,7 +31,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS1_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS1_UpProperty =
-            DependencyProperty.Register("SS1_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS1_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false));
 
 
 
@@ -44,7 +44,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS1_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS1_DownProperty =
-            DependencyProperty.Register("SS1_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS1_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false));
 
 
         public bool SS2_Up
@@ -55,7 +55,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS2_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS2_UpProperty =
-            DependencyProperty.Register("SS2_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS2_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false));
 
 
 
@@ -68,7 +68,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS2_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS2_DownProperty =
-            DependencyProperty.Register("SS2_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS2_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
         public bool SS3_Up
@@ -79,7 +79,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS3_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS3_UpProperty =
-            DependencyProperty.Register("SS3_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS3_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -92,7 +92,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS3_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS3_DownProperty =
-            DependencyProperty.Register("SS3_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS3_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS4_Up
         {
@@ -102,7 +102,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS4_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS4_UpProperty =
-            DependencyProperty.Register("SS4_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS4_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -115,7 +115,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS4_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS4_DownProperty =
-            DependencyProperty.Register("SS4_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS4_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS5_Up
         {
@@ -125,7 +125,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS5_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS5_UpProperty =
-            DependencyProperty.Register("SS5_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS5_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -138,7 +138,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS5_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS5_DownProperty =
-            DependencyProperty.Register("SS5_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS5_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS6_Up
         {
@@ -148,7 +148,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS6_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS6_UpProperty =
-            DependencyProperty.Register("SS6_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS6_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -161,7 +161,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS6_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS6_DownProperty =
-            DependencyProperty.Register("SS6_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS6_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS7_Up
         {
@@ -171,7 +171,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS7_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS7_UpProperty =
-            DependencyProperty.Register("SS7_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS7_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -184,7 +184,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS7_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS7_DownProperty =
-            DependencyProperty.Register("SS7_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS7_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS8_Up
         {
@@ -194,7 +194,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS8_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS8_UpProperty =
-            DependencyProperty.Register("SS8_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS8_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -207,7 +207,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS8_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS8_DownProperty =
-            DependencyProperty.Register("SS8_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS8_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS9_Up
         {
@@ -217,7 +217,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS9_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS9_UpProperty =
-            DependencyProperty.Register("SS9_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS9_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -230,7 +230,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS9_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS9_DownProperty =
-            DependencyProperty.Register("SS9_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS9_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS10_Up
         {
@@ -240,7 +240,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS10_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS10_UpProperty =
-            DependencyProperty.Register("SS10_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS10_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -253,7 +253,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS10_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS10_DownProperty =
-            DependencyProperty.Register("SS10_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS10_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS11_Up
         {
@@ -263,7 +263,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS11_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS11_UpProperty =
-            DependencyProperty.Register("SS11_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS11_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -276,7 +276,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS11_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS11_DownProperty =
-            DependencyProperty.Register("SS11_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS11_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS12_Up
         {
@@ -286,7 +286,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS12_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS12_UpProperty =
-            DependencyProperty.Register("SS12_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS12_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -299,7 +299,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS12_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS12_DownProperty =
-            DependencyProperty.Register("SS12_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS12_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS13_Up
         {
@@ -309,7 +309,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS13_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS13_UpProperty =
-            DependencyProperty.Register("SS13_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS13_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -322,7 +322,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS13_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS13_DownProperty =
-            DependencyProperty.Register("SS13_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS13_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool SS14_Up
         {
@@ -332,7 +332,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS14_Up.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS14_UpProperty =
-            DependencyProperty.Register("SS14_Up", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS14_Up", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -345,7 +345,7 @@ namespace TrippingApp.Control
 
         // Using a DependencyProperty as the backing store for SS14_Down.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SS14_DownProperty =
-            DependencyProperty.Register("SS14_Down", typeof(bool), typeof(Cylender_Control), new PropertyMetadata(false));
+            DependencyProperty.Register("SS14_Down", typeof(bool), typeof(Cylender_Control), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
