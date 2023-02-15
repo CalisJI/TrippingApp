@@ -10,6 +10,7 @@
         WindowStyle="None"
         xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="Black"
+        Closing="Window_Closing"
         DataContext="{StaticResource VM_Main}"
         Title="MainWindow"
         Height="1080"
@@ -43,6 +44,24 @@
                     FontWeight="DemiBold"
                     VerticalAlignment="Top"
                     Text="{Binding Timer_Full}"/>
+                <Grid Width="200" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Visibility="{Binding Workbench_Running, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="20"
+                        Source="{StaticResource database_svgrepo_comDrawingImage}"/>
+                    <Image
+                        DataContext="{StaticResource VM_CamApi}"
+                        Visibility="{Binding Connected_Camera, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Grid.Column="1"
+                        Margin="20"
+                        VerticalAlignment="Center"
+                        Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+                </Grid>
             </Grid>
             <ContentControl
                     Grid.Row="1"

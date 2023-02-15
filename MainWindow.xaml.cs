@@ -1,6 +1,7 @@
 ﻿using BusyIndicator;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,11 +23,33 @@ namespace TrippingApp
     /// </summary>
     public partial class MainWindow : Window
     {
-       
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+
+            }
+            
         }
-       
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var workbenchName = "MySQLWorkbench";
+
+            var process = Process.GetProcessesByName(workbenchName);
+            if (process.Length > 0)
+            {
+                process[0].Kill();
+                Console.WriteLine("MySQL Workbench has been shut down.");
+            }
+            else
+            {
+                Console.WriteLine("MySQL Workbench is not running.");
+            }
+        }
     }
 }

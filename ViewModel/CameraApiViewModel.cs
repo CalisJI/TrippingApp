@@ -185,10 +185,19 @@ namespace TrippingApp.ViewModel
             get { return _result; }
             set { SetProperty(ref _result, value, nameof(Cognex_Result)); }
         }
+
+
+        private bool _connectCam;
+
+        public bool Connected_Camera
+        {
+            get { return _connectCam; }
+            set { SetProperty(ref _connectCam, value, nameof(Connected_Camera)); }
+        }
         #endregion
 
 
-        public Cognex.InSight.Controls.Display.CvsInSightDisplay CvsInSightDisplay2;
+        public static Cognex.InSight.Controls.Display.CvsInSightDisplay CvsInSightDisplay2;
         public void Initialize()
         {
             try
@@ -217,8 +226,9 @@ namespace TrippingApp.ViewModel
                     if (a != Cognex_Result)
                     {
                         Cognex_Result = a;
-                        PLC_Query.DETECT_VALUE.INPUT_SCANED_BARCODE = S7String.ToByteArray(a, 10);
+                        PLC_Query.DETECT_VALUE.SCANED_BARCODE = S7String.ToByteArray(a, 10);
                         PLC_Query.WriteData(PLC_Query.DETECT_VALUE, 20);
+                        PLC_Query.WriteBit(AddressCrt.PC_Detected_Rack, true);
                     }
                 }
             }
@@ -255,10 +265,11 @@ namespace TrippingApp.ViewModel
             if (CvsInSightDisplay2.Connected)
             {
                 Connected = true;
+                Connected_Camera = true;
             }
             else
             {
-                
+                Connected_Camera = false;
             }
         }
 
@@ -317,10 +328,18 @@ namespace TrippingApp.ViewModel
             {
             
             });
-            if(CvsInSightDisplay2 == null)
+            try
             {
-                CvsInSightDisplay2 = new CvsInSightDisplay();
+                if (CvsInSightDisplay2 == null)
+                {
+                    CvsInSightDisplay2 = new CvsInSightDisplay();
+                }
             }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+           
             CognexControl = new System.Windows.Forms.Integration.WindowsFormsHost();
             Initialize();
 

@@ -10,6 +10,7 @@ using System.Text.Json;
 using TrippingApp.Runtime;
 using S7.Net.Types;
 using DateTime = System.DateTime;
+using System.Globalization;
 
 namespace TrippingApp.Model
 {
@@ -395,15 +396,25 @@ namespace TrippingApp.Model
             }
         }
 
-        //public static void GetHistory(DateTime Time)
-        //{
-        //    var filterfile = Directory.GetFiles(ApplicationConfig.HistoryLogger)
-        //        .Where(file =>
-        //        {
-        //            var filename = Path.GetFileNameWithoutExtension(file);
-        //            return fi
-        //        });
-        //}
+        public static void GetHistory(DateTime Time)
+        {
+            string directoryPath = ApplicationConfig.HistoryLogger;
+            string dateFormat = ""+Time.Day.ToString("D2")+"-"+Time.Month.ToString("D2")+"-"+Time.Year.ToString();
+            string searchPattern = "Data-*.json";
+
+            var filteredFiles = Directory.GetFiles(directoryPath, searchPattern)
+                .Where(file =>
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    string datePart = fileName.Replace("Data-", "");
+                    return DateTime.TryParseExact(datePart, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+                });
+
+            foreach (var file in filteredFiles)
+            {
+                Console.WriteLine(file);
+            }
+        }
     }
 
 
@@ -434,5 +445,325 @@ namespace TrippingApp.Model
         public float BathTemper { get; set; }
         public DateTime TimeIn { get; set; }
         public DateTime TimeOut { get; set; }
+    }
+
+    public static class SyncProcessData
+    {
+        public static List<RackObject> RackObjects = new List<RackObject>();
+
+        public static void MovedRack123()
+        {
+            PLC_Query.Get_ListCodeChar();
+            if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1) != "")
+            {
+                RackObject rackObject = new RackObject()
+                {
+                    RackBarcode = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1),
+                    RackDetails = new object(),
+                    RackStatus = Status.Inprocess,
+                    NGType = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2),
+                    Bath1_Infor = new BathInformation()
+                    {
+                        BathTemper = Modbus_Communicate.VX4_1.PV,
+                        TimeIn = DateTime.Now,
+                        TimeOut = new DateTime()
+                    },
+                    Bath2_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath3_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath4_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath5_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath6_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath7_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath8_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath9_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                    Bath10_Infor = new BathInformation()
+                    {
+                        BathTemper = 0,
+                        TimeIn = new DateTime(),
+                        TimeOut = new DateTime()
+                    },
+                };
+                RackObjects.Add(rackObject);
+                HistoryLogger.AddRackObject(rackObject);
+            }
+            string code2 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P1);
+            string type2 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P2);
+            var R2 = RackObjects.Where(x => x.RackBarcode == code2 && x.NGType == type2 && code2 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R2!=null)
+            {
+                R2.Bath2_Infor.BathTemper = Modbus_Communicate.VX4_2.PV;
+                R2.Bath2_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R2);
+            }
+            
+            
+            string code3 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1);
+            string type3 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P2);
+            var R3 = RackObjects.Where(x => x.RackBarcode == code3 && x.NGType == type3 && code3 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R3 != null) 
+            {
+                R3.Bath3_Infor.BathTemper = Modbus_Communicate.VX4_3.PV;
+                R3.Bath3_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R3);
+            }
+           
+
+
+        }
+        public static void MovedRack456()
+        {
+            PLC_Query.Get_ListCodeChar();
+
+            if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1) != "")
+            {
+                string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                if (R4!=null)
+                {
+                    R4.Bath4_Infor.BathTemper = Modbus_Communicate.VX4_4.PV;
+                    R4.Bath4_Infor.TimeIn = DateTime.Now;
+                    HistoryLogger.EditRackObject(R4);
+                }
+            }
+            else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
+            {
+                string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                if (R5 != null)
+                {
+                    R5.Bath5_Infor.BathTemper = Modbus_Communicate.VX4_5.PV;
+                    R5.Bath5_Infor.TimeIn = DateTime.Now;
+                    HistoryLogger.EditRackObject(R5);
+                }
+            
+            }
+            else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
+            {
+                string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                if (R6 != null)
+                {
+                    R6.Bath6_Infor.BathTemper = Modbus_Communicate.VX4_6.PV;
+                    R6.Bath6_Infor.TimeIn = DateTime.Now;
+                    HistoryLogger.EditRackObject(R6);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        public static void MovedRack789_10()
+        {
+            string code7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1);
+            string type7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P2);
+            var R7 = RackObjects.Where(x => x.RackBarcode == code7 && x.NGType == type7 && code7 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+            if (R7 != null) 
+            {
+                R7.Bath7_Infor.BathTemper = Modbus_Communicate.VX4_7.PV;
+                R7.Bath7_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R7);
+            }
+            string code8 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P1);
+            string type8 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P2);
+            var R8 = RackObjects.Where(x => x.RackBarcode == code8 && x.NGType == type8 && code8 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+            if (R8 != null)
+            {
+                R8.Bath8_Infor.BathTemper = Modbus_Communicate.VX4_8.PV;
+                R8.Bath8_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R8);
+            }
+            string code9 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1);
+            string type9 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P2);
+            var R9 = RackObjects.Where(x => x.RackBarcode == code9 && x.NGType == type9 && code9 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+            if (R9 != null)
+            {
+                R9.Bath9_Infor.BathTemper = Modbus_Communicate.VX4_9.PV;
+                R9.Bath9_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R9);
+            }
+
+            string code10 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1);
+            string type10 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P2);
+            var R10 = RackObjects.Where(x => x.RackBarcode == code10 && x.NGType == type10 && code10 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+            if (R10 != null)
+            {
+                R10.Bath10_Infor.BathTemper = Modbus_Communicate.VX4_10.PV;
+                R10.Bath10_Infor.TimeIn = DateTime.Now;
+                HistoryLogger.EditRackObject(R10);
+            }
+
+            string code11 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath11_P1);
+            string type11 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath11_P2);
+            var R11 = RackObjects.Where(x => x.RackBarcode == code11 && x.NGType == type11 && code11 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+            if (R11 != null)
+            {
+                R11.RackStatus = Status.Done;
+                HistoryLogger.EditRackObject(R11);
+            }
+        }
+
+        public static void TripDoneRack_123()
+        {
+            string code1 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1);
+            string type1 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2);
+            var R1 = RackObjects.Where(x => x.RackBarcode == code1 && x.NGType == type1 && code1 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R1 != null)
+            {
+                R1.Bath1_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R1);
+            }
+
+
+            string code2 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P1);
+            string type2 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P2);
+            var R2 = RackObjects.Where(x => x.RackBarcode == code2 && x.NGType == type2 && code2 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R2 != null)
+            {
+                R2.Bath2_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R2);
+            }
+
+            string code3 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1);
+            string type3 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P2);
+            var R3 = RackObjects.Where(x => x.RackBarcode == code3 && x.NGType == type3 && code3 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R3 != null)
+            {
+                R3.Bath3_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R3);
+            }
+        }
+        public static void TripDoneRack_456()
+        {
+            string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+            if (code4 != "") 
+            {
+                string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                if (R4 != null)
+                {
+                    R4.Bath1_Infor.TimeOut = DateTime.Now;
+                    HistoryLogger.EditRackObject(R4);
+                }
+            }
+
+            string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+            if (code5!="")
+            {
+                string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+                if (R5 != null)
+                {
+                    R5.Bath2_Infor.TimeOut = DateTime.Now;
+                    HistoryLogger.EditRackObject(R5);
+                }
+            }
+
+            string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+            if (code6 != "")
+            {
+                string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                if (R6 != null)
+                {
+                    R6.Bath6_Infor.TimeOut = DateTime.Now;
+                    HistoryLogger.EditRackObject(R6);
+                }
+            }
+           
+        }
+
+        public static void TripRackDone_798_10()
+        {
+            string code7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1);
+            string type7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P2);
+            var R7 = RackObjects.Where(x => x.RackBarcode == code7 && x.NGType == type7 && code7 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R7 != null)
+            {
+                R7.Bath7_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R7);
+            }
+
+            string code8 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P1);
+            string type8 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P2);
+            var R8 = RackObjects.Where(x => x.RackBarcode == code8 && x.NGType == type8 && code8 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R8 != null)
+            {
+                R8.Bath8_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R8);
+            }
+
+            string code9 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1);
+            string type9 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P2);
+            var R9 = RackObjects.Where(x => x.RackBarcode == code9 && x.NGType == type9 && code9 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R9 != null)
+            {
+                R9.Bath9_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R9);
+            }
+
+            string code10 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1);
+            string type10 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P2);
+            var R10 = RackObjects.Where(x => x.RackBarcode == code10 && x.NGType == type10 && code10 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+            if (R10 != null)
+            {
+                R10.Bath10_Infor.TimeOut = DateTime.Now;
+                HistoryLogger.EditRackObject(R10);
+            }
+        }
     }
 }

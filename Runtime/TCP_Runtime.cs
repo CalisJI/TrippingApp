@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using TrippingApp.Logger;
 using TrippingApp.Model;
+using TrippingApp.View;
+using TrippingApp.ViewModel;
 
 namespace TrippingApp.Runtime
 {
@@ -81,7 +83,8 @@ namespace TrippingApp.Runtime
                                     //Console.WriteLine("Counter: {0}", aa);
                                     //Console.WriteLine("Recaived: {1} {0}", add, DateTime.Now.ToString("HH:mm:ss:ff"));
                                     //UpdateStatus(add);
-                                    FuntionSelection(add);
+                                    Console.WriteLine("TCP-IP: "+add);
+                                    //FuntionSelection(add);
                                 }
                                 catch (Exception)
                                 {
@@ -122,28 +125,43 @@ namespace TrippingApp.Runtime
             switch (_char)
             {
                 //Move Area 1 Done
-                case "a":
-                    MonitorRackData.MoveRack123();
+                case "1m":
+                    //MonitorRackData.MoveRack123();
+                    SyncProcessData.MovedRack123();
+                    PLC_Query.WriteBit(AddressCrt.MoveRack123,false);
                     break;
                 //Move Area 2 Done
-                case "b":
-                    MonitorRackData.MoveRack456();
+                case "2m":
+                    //MonitorRackData.MoveRack456();
+                    SyncProcessData.MovedRack456();
+                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
                     break;
                 //Move Area 3 Done
-                case "c":
-                    MonitorRackData.MoveRack789_10();
+                case "3m":
+                    //MonitorRackData.MoveRack789_10();
+                    SyncProcessData.MovedRack789_10();
+                    PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
                     break;
                 // Has rack Done
-                case "d":
+                case "1t":
+                    SyncProcessData.TripDoneRack_123();
+
+                    PLC_Query.WriteBit(AddressCrt.TripDoneRack123, false);
                     break;
                 // Run Out of Barcode 
-                case "e":
+                case "2t":
+                    SyncProcessData.TripDoneRack_456();
+                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
                     break;
                 //Begin Tranfer 1
-                case "f":
+                case "3t":
+                    SyncProcessData.TripRackDone_798_10();
+                    PLC_Query.WriteBit(AddressCrt.TripDoneRack_789_10, false);
                     break;
                 //Begin Robot
-                case "g":
+                case "gr":
+                    MachineViewModel.Getbarcode_Command.Execute(null);
+                    PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
                     break;
                 //Begin Tranfer3
                 case "h":
@@ -153,7 +171,7 @@ namespace TrippingApp.Runtime
                     break;
                 // Read Barcode Position
                 case "l":
-                    PLC_Query.Get_ListCodeChar();
+                    //PLC_Query.Get_ListCodeChar();
                     break;
                 // Read Time Trip 3
                 case "m":

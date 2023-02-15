@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using BaseViewModel;
 using Microsoft.Expression.Interactivity.Core;
 using S7.Net.Types;
 using TrippingApp.AppConfig;
+using TrippingApp.Model;
 using TrippingApp.Runtime;
 using DateTime = System.DateTime;
 
@@ -34,10 +37,20 @@ namespace TrippingApp.ViewModel
             set { SetProperty(ref _childPage, value, nameof(ChildPage)); }
         }
 
+        private bool _workbench;
+
+        public bool Workbench_Running
+        {
+            get { return _workbench; }
+            set { SetProperty(ref _workbench, value, nameof(Workbench_Running)); }
+        }
         public static DispatcherTimer ShowTimer = new DispatcherTimer();
 
         public ICommand Home_Page_Command { get; set; }
         public ICommand Test { get; set; }
+        public ICommand Test1 { get; set; }
+        public ICommand Test2 { get; set; }
+        public ICommand Test3 { get; set; }
         public ICommand Machine_Page_Command { get; set; }
         public ICommand Setting_Page_Command { get; set; }
         public ICommand DashBoard_Page_Command { get; set; }
@@ -82,8 +95,26 @@ namespace TrippingApp.ViewModel
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
         private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
         #endregion
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         public MainViewModel()
         {
+            try
+            {
+                var workbenchPath = @"C:\Program Files\MySQL\MySQL Workbench 8.0\MySQLWorkbench.exe";
+
+                var process = new Process();
+                process.StartInfo.FileName = workbenchPath;
+                process.Start();
+                ShowWindow(process.MainWindowHandle, 6);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+            
+
+            
             ShowTimer.Interval = new TimeSpan(0,0,1);
             ShowTimer.Tick += ShowTimer_Tick;
             ShowTimer.Start();
@@ -134,7 +165,12 @@ namespace TrippingApp.ViewModel
 
                     //Modbus_Communicate.Initial();
 
-                    this.SelectedViewModel = TrackHistory_ViewModel;
+                    //this.SelectedViewModel = TrackHistory_ViewModel;
+
+                    //TrackingProces.GetHistory(new DateTime(2023, 1, 29));
+
+
+                    HistoryLogger.CreateTable_History();
 
                 }
                 catch (Exception ex)
@@ -143,6 +179,27 @@ namespace TrippingApp.ViewModel
                 }
                
             });
+
+            Test1 = new ActionCommand(() => 
+            {
+                RackObject rackObject = new RackObject();
+                rackObject.RackBarcode = "HY-001";
+                rackObject.RackStatus = Status.Inprocess;
+                rackObject.RackDetails = "aaa";
+                rackObject.Bath1_Infor.TimeIn = DateTime.Now;
+
+                HistoryLogger.AddRackObject(rackObject);
+            });
+            Test2 = new ActionCommand(() =>
+            {
+            
+            });
+
+            Test3 = new ActionCommand(() =>
+            {
+            
+            });
+
 
             #region C-Letter Command
             CameraAPI_Page_Command = new ActionCommand(() =>
@@ -224,7 +281,7 @@ namespace TrippingApp.ViewModel
                     {
                         PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
                     }
-                    if(TCP_Runtime.TcpListener != null)
+                    if(TCP_Runtime.TcpListener == null)
                     {
                         TCP_Runtime.CreateNetWork();
                     }
@@ -287,6 +344,17 @@ namespace TrippingApp.ViewModel
                 dateTime.Day.ToString("D2"),
                 dateTime.Month.ToString("D2"),
                 dateTime.Year);
+
+            var workbenchPath = @"MySQLWorkbench";
+            var process = Process.GetProcessesByName(workbenchPath);
+            if (process.Length > 0)
+            {
+                Workbench_Running = true;
+            }
+            else
+            {
+                Workbench_Running = false;
+            }
         }
     }
 }

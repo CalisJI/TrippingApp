@@ -457,7 +457,6 @@ namespace TrippingApp.Runtime
             try
             {
                 ReadData(LIST_CODE_CHAR, 3);
-
                 MachineViewModel.Getbarcode_Command.Execute(null);
             }
             catch (PlcException ex)
@@ -624,6 +623,17 @@ namespace TrippingApp.Runtime
         public readonly static string PC_Detected_Rack = "M167.0";
 
         public readonly static string Sync_Position = "M126.1";
+
+        public readonly static string MoveRack123 = "175.2";
+        public readonly static string TripDoneRack123 = "174.4";
+
+        public readonly static string MoveRack456 = "M174.5";
+        public readonly static string TripRackDone456 = "M174.6";
+
+        public readonly static string MoveRack789_10 = "M174.1";
+        public readonly static string TripDoneRack_789_10 = "M174.3";
+
+        public readonly static string Trigger_GetRack_Infor = "183.0";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {

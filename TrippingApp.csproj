@@ -50,6 +50,7 @@
     <Reference Include="Cognex.InSight, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Public\Documents\Cognex\In-Sight\In-Sight Sample Projects 6.2.2\C# v2012\Display Control\bin\Debug\Cognex.InSight.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Cognex.InSight.Controls.Display, Version=6.2.35.2, Culture=neutral, PublicKeyToken=6b9774afddb09935, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

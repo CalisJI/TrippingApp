@@ -319,7 +319,7 @@
             </Button>
             <!--Connect Camera-->
             <Button
-                Command="{Binding Test}"
+                Command="{Binding Camera_Connect_Command}"
                 themes:ButtonAssist.CornerRadius="25"
                 Width="150"
                 Height="120"
@@ -344,6 +344,49 @@
                     Width="180"
                     Kind="TrackChanges"/>
             </Button>
+            <Grid Grid.Column="4" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button 
+                Command="{Binding Test}"
+                 Width="100"
+                Height="100"
+                Content="Create"
+                FontSize="20"
+                FontWeight="DemiBold"
+                >
+
+                </Button>
+                <Button 
+                Command="{Binding Test1}"
+                 Width="100"
+                Height="100"
+                Content="add"
+                FontSize="20"
+                    Grid.Column="1"
+                FontWeight="DemiBold"
+                >
+
+                </Button>
+                <Button 
+                Command="{Binding Test2}"
+                 Width="100"
+                Height="100"
+                Content="Edit"
+                FontSize="20"
+                    Grid.Row="1"
+                FontWeight="DemiBold"
+                >
+
+                </Button>
+            </Grid>
+           
         </Grid>
     </Viewbox>
     

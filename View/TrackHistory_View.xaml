@@ -14,13 +14,9 @@
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <!--<DataGrid
-                Grid.Row="1"
+            <DataGrid Grid.Row="1">
                 
-                Width="{Binding ElementName=box, Path=ActualWidth}"
-                Height="{Binding ElementName=box, Path=ActualHeight}">
-                
-            </DataGrid>-->
+            </DataGrid>
         </Grid>
     </Viewbox>
 </UserControl>

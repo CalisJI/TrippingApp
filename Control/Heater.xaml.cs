@@ -37,15 +37,15 @@ namespace TrippingApp.Control
 
 
 
-        public string NumberS
-        {
-            get { return (string)GetValue(NumberSProperty); }
-            set { SetValue(NumberSProperty, value); }
-        }
+        //public string NumberS
+        //{
+        //    get { return (string)GetValue(NumberSProperty); }
+        //    set { SetValue(NumberSProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for NumberS.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty NumberSProperty =
-            DependencyProperty.Register("NumberS", typeof(string), typeof(Heater), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        //// Using a DependencyProperty as the backing store for NumberS.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty NumberSProperty =
+        //    DependencyProperty.Register("NumberS", typeof(string), typeof(Heater), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
