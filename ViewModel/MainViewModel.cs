@@ -12,7 +12,9 @@ using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using BaseViewModel;
 using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Owin.Hosting;
 using S7.Net.Types;
+using TrippingApp.APIController;
 using TrippingApp.AppConfig;
 using TrippingApp.Model;
 using TrippingApp.Runtime;
@@ -60,6 +62,7 @@ namespace TrippingApp.ViewModel
         public ICommand CameraAPI_Page_Command { get; set; }
         public ICommand Camera_Connect_Command { get; set; }
         public ICommand PLC_Connect_Command { get; set; }
+        public ICommand Tracking_Page_Command { get; set; }
         #region Model
         private string _time;
 
@@ -97,8 +100,11 @@ namespace TrippingApp.ViewModel
         #endregion
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+
         public MainViewModel()
         {
+
             try
             {
                 var workbenchPath = @"C:\Program Files\MySQL\MySQL Workbench 8.0\MySQLWorkbench.exe";
@@ -331,6 +337,18 @@ namespace TrippingApp.ViewModel
             });
             #endregion
 
+            #region T - Letter Command
+            Tracking_Page_Command = new ActionCommand(() =>
+            {
+                if (TrackHistory_ViewModel == null) 
+                {
+                    TrackHistory_ViewModel = new TrackHistory_ViewModel();
+                }
+                ChildPage = true;
+                this.SelectedViewModel = TrackHistory_ViewModel;
+            });
+            #endregion
+
         }
 
         private void ShowTimer_Tick(object sender, EventArgs e)
@@ -356,5 +374,6 @@ namespace TrippingApp.ViewModel
                 Workbench_Running = false;
             }
         }
+        
     }
 }

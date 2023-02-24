@@ -10,13 +10,83 @@
              d:DesignHeight="990" d:DesignWidth="1920">
     <Viewbox>
         <Grid Name="box" Width="1920" Height="990">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <DataGrid Grid.Row="1">
-                
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                ItemsSource="{Binding HistoryTable}"
+                Grid.Row="1"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding rack_barcode}"/>
+                    <DataGridTextColumn Header="NG Type" Binding="{Binding ng_type}"/>
+                    <DataGridTextColumn Header="Rack Details" Binding="{Binding rack_details}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding rack_status}"/>
+                    <DataGridTextColumn Header="Bath1 Temperature" Binding="{Binding bath1_temper}"/>
+                    <DataGridTextColumn Header="Bath1 Time In" Binding="{Binding bath1_time_in}"/>
+                    <DataGridTextColumn Header="Bath1 Time Out" Binding="{Binding bath1_time_out}"/>
+                    <DataGridTextColumn Header="Bath2 Temperature" Binding="{Binding bath2_temper}"/>
+                    <DataGridTextColumn Header="Bath2 Time In" Binding="{Binding bath2_time_in}"/>
+                    <DataGridTextColumn Header="Bath2 Time Out" Binding="{Binding bath2_time_out}"/>
+                    <DataGridTextColumn Header="Bath3 Temperature" Binding="{Binding bath3_temper}"/>
+                    <DataGridTextColumn Header="Bath3 Time In" Binding="{Binding bath3_time_in}"/>
+                    <DataGridTextColumn Header="Bath3 Time Out" Binding="{Binding bath3_time_out}"/>
+                    <DataGridTextColumn Header="Bath4 Temperature" Binding="{Binding bath4_temper}"/>
+                    <DataGridTextColumn Header="Bath4 Time In" Binding="{Binding bath4_time_in}"/>
+                    <DataGridTextColumn Header="Bath4 Time Out" Binding="{Binding bath4_time_out}"/>
+                    <DataGridTextColumn Header="Bath5 Temperature" Binding="{Binding bath5_temper}"/>
+                    <DataGridTextColumn Header="Bath5 Time In" Binding="{Binding bath5_time_in}"/>
+                    <DataGridTextColumn Header="Bath5 Time Out" Binding="{Binding bath5_time_out}"/>
+                    <DataGridTextColumn Header="Bath6 Temperature" Binding="{Binding bath6_temper}"/>
+                    <DataGridTextColumn Header="Bath6 Time In" Binding="{Binding bath6_time_in}"/>
+                    <DataGridTextColumn Header="Bath6 Time Out" Binding="{Binding bath6_time_out}"/>
+                    <DataGridTextColumn Header="Bath7 Temperature" Binding="{Binding bath7_temper}"/>
+                    <DataGridTextColumn Header="Bath7 Time In" Binding="{Binding bath7_time_in}"/>
+                    <DataGridTextColumn Header="Bath7 Time Out" Binding="{Binding bath7_time_out}"/>
+                    <DataGridTextColumn Header="Bath8 Temperature" Binding="{Binding bath8_temper}"/>
+                    <DataGridTextColumn Header="Bath8 Time In" Binding="{Binding bath8_time_in}"/>
+                    <DataGridTextColumn Header="Bath8 Time Out" Binding="{Binding bath8_time_out}"/>
+                    <DataGridTextColumn Header="Bath9 Temperature" Binding="{Binding bath9_temper}"/>
+                    <DataGridTextColumn Header="Bath9 Time In" Binding="{Binding bath9_time_in}"/>
+                    <DataGridTextColumn Header="Bath9 Time Out" Binding="{Binding bath9_time_out}"/>
+                    <DataGridTextColumn Header="Bath10 Temperature" Binding="{Binding bath10_temper}"/>
+                    <DataGridTextColumn Header="Bath10 Time In" Binding="{Binding bath10_time_in}"/>
+                    <DataGridTextColumn Header="Bath10 Time Out" Binding="{Binding bath10_time_out}"/>
+                </DataGrid.Columns>
             </DataGrid>
+            <StackPanel Grid.Column="1">
+                <Label
+                    Margin="0 10 0 0"
+                    Content="Barcode"
+                    HorizontalAlignment="Center"/>
+                <TextBox
+                    Foreground="Wheat"
+                    Width="250"
+                    Text="{Binding SearchBarcodeItem_Prop}"/>
+                <Label
+                    Margin="0 10 0 0"
+                    Content="Time"
+                    HorizontalAlignment="Center"
+                    />
+                <DatePicker
+                    Foreground="Wheat"
+                    HorizontalAlignment="Center"
+                    Width="250" FirstDayOfWeek="Monday"
+                    DisplayDateEnd="2050-02-18"
+                    DisplayDateStart="2022-02-01"
+                    SelectedDate="{Binding Search_Time_Prop, Mode=TwoWay}"/>
+
+                <Button
+                    Command="{Binding Search_Command}"
+                    Margin="0 50 0 0"
+                    Content="Search"
+                    Height="50"
+                    Width="150"/>
+            </StackPanel>
         </Grid>
     </Viewbox>
 </UserControl>

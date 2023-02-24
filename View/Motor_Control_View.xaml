@@ -62,13 +62,12 @@
                     Run_CW_N_Command="{Binding Run_CW_N_TF2_Command}"
                     Run_CCW_P_Command="{Binding Run_CCW_P_TF2_Command}"
                     Run_CCW_N_Commnand="{Binding Run_CCW_N_TF2_Command}"
-                    Frequency="{Binding Frequency2}"
-                    Acc_Time="{Binding Acc_Time2}"
-                    Decc_Time="{Binding Dec_Time2}"/>
+                    Frequency="{Binding Frequency1}"
+                    Acc_Time="{Binding Acc_Time1}"
+                    Decc_Time="{Binding Dec_Time1}"/>
             </GroupBox>
 
             <!--Tranfer-->
-            
 
             <GroupBox
                 Grid.Row="1" 
@@ -102,9 +101,9 @@
                     Run_CW_N_Command="{Binding Run_CW_N_ML2_Command}"
                     Run_CCW_P_Command="{Binding Run_CCW_P_ML2_Command}"
                     Run_CCW_N_Commnand="{Binding Run_CCW_N_ML2_Command}"
-                    Frequency="{Binding Frequency4}"
-                    Acc_Time="{Binding Acc_Time4}"
-                    Decc_Time="{Binding Dec_Time4}"/>
+                    Frequency="{Binding Frequency3}"
+                    Acc_Time="{Binding Acc_Time3}"
+                    Decc_Time="{Binding Dec_Time3}"/>
             </GroupBox>
             <GroupBox
                 Grid.Row="1" 
@@ -120,9 +119,9 @@
                     Run_CW_N_Command="{Binding Run_CW_N_ML3_Command}"
                     Run_CCW_P_Command="{Binding Run_CCW_P_ML3_Command}"
                     Run_CCW_N_Commnand="{Binding Run_CCW_N_ML3_Command}"
-                    Frequency="{Binding Frequency5}"
-                    Acc_Time="{Binding Acc_Time5}"
-                    Decc_Time="{Binding Dec_Time5}"/>
+                    Frequency="{Binding Frequency3}"
+                    Acc_Time="{Binding Acc_Time3}"
+                    Decc_Time="{Binding Dec_Time3}"/>
             </GroupBox>
         </Grid>
     </Viewbox>

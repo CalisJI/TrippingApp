@@ -11,6 +11,7 @@
     <viewmodel:Cylinder_Control_ViewModel x:Key="VM_Cylinder"/>
     <viewmodel:Motor_Control_ViewModel x:Key="VM_Motor"/>
     <viewmodel:TrackHistory_ViewModel x:Key="VM_Tracker"/>
+    <viewmodel:Parameter_Process_ViewModel x:Key="VM_Param"/>
     <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
         <view:MainView/>
     </DataTemplate>
@@ -37,5 +38,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:TrackHistory_ViewModel}">
         <view:TrackHistory_View/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:Parameter_Process_ViewModel}">
+        <view:Parameter_Process_View/>
     </DataTemplate>
 </ResourceDictionary>

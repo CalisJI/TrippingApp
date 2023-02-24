@@ -231,6 +231,7 @@ namespace TrippingApp.Runtime
                 try
                 {
                     PLC_Controller.ReadClass(sourceClass, DB_index, Start_Addr);
+                    
                 }
                 catch (PlcException ex)
                 {
@@ -557,8 +558,8 @@ namespace TrippingApp.Runtime
         public readonly static string Set_Frequency_Tranfer = "M17.0";
         public readonly static string Set_AccDec_Tranfer = "M17.1";
 
-        public readonly static string Set_Frequency_Robot = "M17.4";
-        public readonly static string Set_AccDec_Robot = "M17.6";
+        public readonly static string Set_Frequency_Motor_lift = "M17.4";
+        public readonly static string Set_AccDec_Motor_lift = "M17.6";
 
         public readonly static string Jog_FW_Lift1 = "M52.1";
         public readonly static string Jog_BW_Lift1 = "M52.2";

@@ -11,6 +11,9 @@ using TrippingApp.Runtime;
 using S7.Net.Types;
 using DateTime = System.DateTime;
 using System.Globalization;
+using TrippingApp.APIController;
+using Newtonsoft.Json;
+using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
 
 namespace TrippingApp.Model
 {
@@ -422,7 +425,20 @@ namespace TrippingApp.Model
     {
         public string RackBarcode { get; set; }
         public string NGType { get; set; }
-        public object RackDetails { get; set; }
+
+        [JsonIgnore]
+        public HoyaData Data { get; set; }
+        public string RackDetails
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(Data);
+            }
+            set
+            {
+                Data = JsonConvert.DeserializeObject<HoyaData>(value);
+            }
+        }
         public BathInformation Bath1_Infor { get; set; } = new BathInformation();
         public BathInformation Bath2_Infor { get; set; } = new BathInformation();
         public BathInformation Bath3_Infor { get; set; } = new BathInformation();
@@ -459,7 +475,7 @@ namespace TrippingApp.Model
                 RackObject rackObject = new RackObject()
                 {
                     RackBarcode = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1),
-                    RackDetails = new object(),
+                    Data = GlobalDataHoya.HoyadataDict[S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1)],
                     RackStatus = Status.Inprocess,
                     NGType = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2),
                     Bath1_Infor = new BathInformation()

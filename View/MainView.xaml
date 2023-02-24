@@ -226,16 +226,16 @@
             </Button>
             <!--Process Param Page-->
             <Button
+                Command="{Binding Tracking_Page_Command}"
                 themes:ButtonAssist.CornerRadius="25"
                 Width="280"
                 Height="210"
                 VerticalAlignment="Center"                    
                 Grid.Column="2"
                 Grid.Row="1">
-                <themes:PackIcon
-                    Height="180"
-                    Width="180"
-                    Kind="MicrosoftExcel"/>
+                <Image
+                    Margin="20"
+                    Source="{StaticResource table_excel_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Setting Page-->
             <Button
@@ -247,8 +247,8 @@
                 Grid.Column="3"
                 Grid.Row="1">
                 <Image
-                    Margin="10"
-                    Source="{StaticResource settingDrawingImage}"/>
+                    Margin="20"
+                    Source="{StaticResource setting_two_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Dashboard Page-->
             <Button

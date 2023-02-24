@@ -33,6 +33,14 @@ namespace TrippingApp.ViewModel
         }
 
 
+        private BaseViewModel.BaseViewModel _process_param_view;
+
+        public BaseViewModel.BaseViewModel Process_Param_View
+        {
+            get { return _process_param_view; }
+            set { SetProperty(ref _process_param_view, value, nameof(Process_Param_View)); }
+        }
+
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
         public ICommand Camera_Connect { get; set; }
@@ -265,9 +273,11 @@ namespace TrippingApp.ViewModel
 
         private Lazy<Cylinder_Control_ViewModel> Cylinder_Control_ViewModel = new Lazy<Cylinder_Control_ViewModel>(() => { return new Cylinder_Control_ViewModel(); });
         private Motor_Control_ViewModel Motor_Control_ViewModel = new Motor_Control_ViewModel();
+        private Parameter_Process_ViewModel Parameter_Process_ViewModel = new Parameter_Process_ViewModel();
         public Robot_Manual_ConfigurationViewModel()
         {
             this.Motor_Control_View = Motor_Control_ViewModel;
+            this.Process_Param_View = Parameter_Process_ViewModel;
             Loaded = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected) 

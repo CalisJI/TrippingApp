@@ -161,6 +161,29 @@
                 </TabItem.Header>
                 <ContentControl Content="{Binding Motor_Control_View}"/>
             </TabItem>
+            <TabItem >
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                TextAlignment="Center"
+                                Text="Process Parameter"
+                                FontSize="20"
+                                FontWeight="Black"/>
+                        <Grid.LayoutTransform>
+                            <RotateTransform>
+                                <RotateTransform.Angle>
+                                    -90
+                                </RotateTransform.Angle>
+                            </RotateTransform>
+                        </Grid.LayoutTransform>
+                    </Grid>
+                </TabItem.Header>
+                <ContentControl Content="{Binding Process_Param_View}"/>
+            </TabItem>
         </TabControl>
 
 

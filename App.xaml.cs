@@ -6,7 +6,10 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.SelfHost;
 using System.Windows;
+
 
 namespace TrippingApp
 {
@@ -15,8 +18,13 @@ namespace TrippingApp
     /// </summary>
     public partial class App : Application
     {
+        
         public App()
         {
+            var config = new HttpSelfHostConfiguration("http://0.0.0.0:5001");
+            config.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional,action = RouteParameter.Optional });
+            var server = new HttpSelfHostServer(config);
+            server.OpenAsync().Wait();
             try
             {
                 new AppConfig.ApplicationConfig();

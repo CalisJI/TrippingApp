@@ -21,10 +21,10 @@ namespace TrippingApp.Runtime
             {
                 connection.Open();
 
-                string createTableQuery = "CREATE TABLE "+TableName+" ( " +
+                string createTableQuery = "CREATE TABLE "+TableName+ " ( id INT AUTO_INCREMENT PRIMARY KEY, " +
                                           "rack_barcode VARCHAR(255), " +
                                           "ng_type VARCHAR(255), " +
-                                          "rack_details TEXT, " +
+                                          "rack_details JSON, " +
                                           "bath1_temper FLOAT, " +
                                           "bath1_time_in DATETIME, " +
                                           "bath1_time_out DATETIME, " +
@@ -233,7 +233,7 @@ namespace TrippingApp.Runtime
 
         public static DataTable Upload_Rows(bool init = false)
         {
-            string query = "SELECT * FROM "+TableName+" ORDER BY id DESC LIMIT 1000";
+            string query = "SELECT * FROM "+TableName+" ORDER BY bath1_time_in DESC LIMIT 1000";
             var dataTable = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -256,14 +256,13 @@ namespace TrippingApp.Runtime
         {
             var dataTable = new DataTable();
             string query = "SELECT * FROM "+TableName+" WHERE";
-            StringBuilder sb = new StringBuilder();
             try
             {
                 if(mode != ModeFilter.None)
                 {
                     if(mode == ModeFilter.ByBarcode) 
                     {
-                        query += " AND rack_barcode = @RackBarcode";
+                        query += " rack_barcode = @RackBarcode";
 
                         using (MySqlConnection connection = new MySqlConnection(ConnectionString))
                         using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -278,7 +277,7 @@ namespace TrippingApp.Runtime
                     }
                     else if (mode == ModeFilter.ByDate) 
                     {
-                        query += " AND bath1_time_in = @Bath1In";
+                        query += " DATE(bath1_time_in) = @Bath1In";
                         using (MySqlConnection connection = new MySqlConnection(ConnectionString))
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
@@ -294,7 +293,7 @@ namespace TrippingApp.Runtime
                     }
                     else if(mode == ModeFilter.ByType)
                     {
-                        query += " AND ng_type = @NG_Type";
+                        query += " ng_type = @NG_Type";
                         using (MySqlConnection connection = new MySqlConnection(ConnectionString))
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
@@ -310,7 +309,7 @@ namespace TrippingApp.Runtime
                     }
                     else if(mode == ModeFilter.All) 
                     {
-                        query += " AND rack_barcode = @RackBarcode AND ng_type = @NG_Type";
+                        query += " rack_barcode = @RackBarcode AND ng_type = @NG_Type";
                         using (MySqlConnection connection = new MySqlConnection(ConnectionString))
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
