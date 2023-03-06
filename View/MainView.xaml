@@ -354,16 +354,15 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button 
-                Command="{Binding Test}"
+                Command="{Binding IO_Page_Command}"
                  Width="100"
                 Height="100"
-                Content="Create"
+                Content="IO Table"
                 FontSize="20"
                 FontWeight="DemiBold"
                 >
-
                 </Button>
-                <Button 
+                <!--<Button 
                 Command="{Binding Test1}"
                  Width="100"
                 Height="100"
@@ -372,7 +371,6 @@
                     Grid.Column="1"
                 FontWeight="DemiBold"
                 >
-
                 </Button>
                 <Button 
                 Command="{Binding Test2}"
@@ -384,7 +382,7 @@
                 FontWeight="DemiBold"
                 >
 
-                </Button>
+                </Button>-->
             </Grid>
            
         </Grid>

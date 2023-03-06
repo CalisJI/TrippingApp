@@ -63,6 +63,7 @@ namespace TrippingApp.ViewModel
         public ICommand Camera_Connect_Command { get; set; }
         public ICommand PLC_Connect_Command { get; set; }
         public ICommand Tracking_Page_Command { get; set; }
+        public ICommand IO_Page_Command { get; set; }
         #region Model
         private string _time;
 
@@ -97,6 +98,7 @@ namespace TrippingApp.ViewModel
         private MachineViewModel MachineViewModel = new MachineViewModel();
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
         private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
+        private IOViewModel IOViewModel = new IOViewModel();
         #endregion
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -176,7 +178,10 @@ namespace TrippingApp.ViewModel
                     //TrackingProces.GetHistory(new DateTime(2023, 1, 29));
 
 
-                    HistoryLogger.CreateTable_History();
+                    //HistoryLogger.CreateTable_History();
+
+                    //PLC_Query.WriteData(AddressCrt.Barcode_1_P1, S7String.ToByteArray("HY-007",10));
+                    //PLC_Query.WriteData(AddressCrt.Barcode_1_P2, S7String.ToByteArray("2", 1));
 
                 }
                 catch (Exception ex)
@@ -271,6 +276,13 @@ namespace TrippingApp.ViewModel
             });
             #endregion
 
+
+            #region I - Letter Command
+            IO_Page_Command = new ActionCommand(() =>
+            {
+                this.SelectedViewModel = IOViewModel;
+            });
+            #endregion
             #region P-Letter Command
             Process_Param_Page = new ActionCommand(() =>
             {
@@ -287,13 +299,13 @@ namespace TrippingApp.ViewModel
                     {
                         PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
                     }
-                    if(TCP_Runtime.TcpListener == null)
-                    {
-                        TCP_Runtime.CreateNetWork();
-                    }
+                    //if(TCP_Runtime.TcpListener == null)
+                    //{
+                    //    TCP_Runtime.CreateNetWork();
+                    //}
                    
                     
-                    Modbus_Communicate.Initial();
+                    //Modbus_Communicate.Initial();
                 }
                 catch (Exception ex)
                 {
@@ -335,7 +347,9 @@ namespace TrippingApp.ViewModel
                 this.SelectedViewModel = SettingViewModel;
               
             });
+
             #endregion
+
 
             #region T - Letter Command
             Tracking_Page_Command = new ActionCommand(() =>

@@ -1,0 +1,121 @@
+<Tagtable name="ControllerTagsFolder">
+  
+  <Tag type="Bool" addr="I0.0">Start</Tag>
+  <Tag type="Bool" addr="I0.1">Stop</Tag>
+  <Tag type="Bool" addr="I0.2">Reset</Tag>
+  <Tag type="Bool" addr="I0.3">EMG</Tag>
+  <Tag type="Bool" addr="I0.4">SS Position1 CV Input</Tag>
+  <Tag type="Bool" addr="I0.5">SS Position2 CV Input</Tag>
+  <Tag type="Bool" addr="I1.0">SS Up XL N&#226;ng Input</Tag>
+  <Tag type="Bool" addr="I1.1">SS Down XL N&#226;ng Input</Tag>
+  <Tag type="Bool" addr="I11.4">SS Position3 CV Input</Tag>
+  <Tag type="Bool" addr="I1.4">SS Rack Input XL</Tag>
+  <Tag type="Bool" addr="I1.5">SS Limit 1 Tranfer1</Tag>
+  <Tag type="Bool" addr="I2.1">SS Limit 1 Tranfer2</Tag>
+  <Tag type="Bool" addr="I2.3">SS Open XL Robot</Tag>
+  <Tag type="Bool" addr="I2.4">SS Close XL Robot</Tag>
+  <Tag type="Bool" addr="I2.5">SS Down XL Robot</Tag>
+  <Tag type="Bool" addr="I2.6">SS Up XL Robot</Tag>
+  <Tag type="Bool" addr="I3.1">SS Up XL N&#226;ng Output</Tag>
+  <Tag type="Bool" addr="I3.2">SS Down XL N&#226;ng Output</Tag>
+  <Tag type="Bool" addr="I5.5">SS Up XL Lift 1</Tag>
+  <Tag type="Bool" addr="I5.6">SS Down XL Lift 1</Tag>
+  <Tag type="Bool" addr="I5.7">SS Up XL Lift 5</Tag>
+  <Tag type="Bool" addr="I6.0">SS Down XL Lift 5</Tag>
+  <Tag type="Bool" addr="I6.2">SS LW Tank1</Tag>
+  <Tag type="Bool" addr="I6.4">SS LW Tank2</Tag>
+  <Tag type="Bool" addr="I6.6">SS LW Tank3</Tag>
+  <Tag type="Bool" addr="I6.7">SS_Rack_Robot</Tag>
+  <Tag type="Bool" addr="I7.0">SS LW Tank4</Tag>
+  <Tag type="Bool" addr="I7.2">SS LW Tank5</Tag>
+  <Tag type="Bool" addr="I7.4">SS LW Tank6</Tag>
+  <Tag type="Bool" addr="I7.6">SS LW Tank7</Tag>
+  <Tag type="Bool" addr="I8.0">SS LW Tank8</Tag>
+  <Tag type="Bool" addr="I8.2">SS LW Tank9</Tag>
+  <Tag type="Bool" addr="I8.5">SS W Tank1</Tag>
+  <Tag type="Bool" addr="I8.6">SS W Tank2</Tag>
+  <Tag type="Bool" addr="I8.7">SS W Tank3</Tag>
+  <Tag type="Bool" addr="I9.0">SS W Tank4</Tag>
+  <Tag type="Bool" addr="I9.1">SS W Tank5</Tag>
+  <Tag type="Bool" addr="I9.2">SS W Tank6</Tag>
+  <Tag type="Bool" addr="I9.3">SS W Tank7</Tag>
+  <Tag type="Bool" addr="I9.4">SS W Tank8</Tag>
+  <Tag type="Bool" addr="I9.5">SS W Tank9</Tag>
+  <Tag type="Bool" addr="I9.7">SS Rack BT Out</Tag>
+  <Tag type="Bool" addr="I10.2">Up_Limit_Lift</Tag>
+  <Tag type="Bool" addr="I10.3">Down_Limit_Lift</Tag>
+  <Tag type="Bool" addr="I10.4">Jog + Robot</Tag>
+  <Tag type="Bool" addr="I10.5">Jog - Robot</Tag>
+  <Tag type="Bool" addr="I10.6">SS Up XL Lift 2</Tag>
+  <Tag type="Bool" addr="I10.7">SS Down XL Lift 2</Tag>
+  <Tag type="Bool" addr="I11.0">SS Up XL Lift 3</Tag>
+  <Tag type="Bool" addr="I11.1">SS Down XL Lift 3</Tag>
+  <Tag type="Bool" addr="I11.2">SS Up XL Lift 4</Tag>
+  <Tag type="Bool" addr="I11.3">SS Down XL Lift 4</Tag>
+  <Tag type="Bool" addr="I11.5">Right_Limit_X</Tag>
+  <Tag type="Bool" addr="I11.6">Left_Limit_X</Tag>
+  <Tag type="Bool" addr="Q0.0">XL Ch&#7889;t Input_1</Tag>
+  <Tag type="Bool" addr="Q0.1">XL Ch&#7889;t Input_2</Tag>
+  <Tag type="Bool" addr="Q0.4">XL N&#226;ng Input1</Tag>
+  <Tag type="Bool" addr="Q0.5">XL N&#226;ng Input2</Tag>
+  <Tag type="Bool" addr="Q0.6">XL K&#7865;p Robot_1</Tag>
+  <Tag type="Bool" addr="Q0.7">XL K&#7865;p Robot_2</Tag>
+  <Tag type="Bool" addr="Q1.0">Motor B&#259;ng t&#7843;i Input</Tag>
+  <Tag type="Bool" addr="Q2.1">XL N&#226;ng Output1</Tag>
+  <Tag type="Bool" addr="Q2.2">XL N&#226;ng Output2</Tag>
+  <Tag type="Bool" addr="Q2.4">Van DI ON</Tag>
+  <Tag type="Bool" addr="Q2.5">Van DI OFF</Tag>
+  <Tag type="Bool" addr="Q2.6">Pump Bath1</Tag>
+  <Tag type="Bool" addr="Q2.7">Pump Bath2</Tag>
+  <Tag type="Bool" addr="Q3.0">Pump Bath3</Tag>
+  <Tag type="Bool" addr="Q3.1">Pump Bath4</Tag>
+  <Tag type="Bool" addr="Q3.2">Pump Bath5</Tag>
+  <Tag type="Bool" addr="Q3.3">Pump Bath6</Tag>
+  <Tag type="Bool" addr="Q3.4">Pump Bath7</Tag>
+  <Tag type="Bool" addr="Q3.5">Pump Bath8</Tag>
+  <Tag type="Bool" addr="Q3.6">Pump Bath9</Tag>
+  <Tag type="Bool" addr="Q4.0">Van RO ON</Tag>
+  <Tag type="Bool" addr="Q4.1">Van RO OFF</Tag>
+  <Tag type="Bool" addr="Q4.5">UltraS Tank1</Tag>
+  <Tag type="Bool" addr="Q4.6">UltraS Tank2</Tag>
+  <Tag type="Bool" addr="Q4.7">UltraS Tank3</Tag>
+  <Tag type="Bool" addr="Q5.0">UltraS Tank4</Tag>
+  <Tag type="Bool" addr="Q5.1">UltraS Tank5</Tag>
+  <Tag type="Bool" addr="Q5.2">UltraS Tank6</Tag>
+  <Tag type="Bool" addr="Q5.3">UltraS Tank7</Tag>
+  <Tag type="Bool" addr="Q5.4">UltraS Tank8</Tag>
+  <Tag type="Bool" addr="Q5.5">UltraS Tank9</Tag>
+  <Tag type="Bool" addr="Q6.0">XL Lift 1_1</Tag>
+  <Tag type="Bool" addr="Q6.1">XL Lift 1_2</Tag>
+  <Tag type="Bool" addr="Q6.2">XL Lift 2_1</Tag>
+  <Tag type="Bool" addr="Q6.3">XL Lift 2_2</Tag>
+  <Tag type="Bool" addr="Q6.4">XL Lift 3_1</Tag>
+  <Tag type="Bool" addr="Q6.5">XL Lift 3_2</Tag>
+  <Tag type="Bool" addr="Q6.6">XL Lift 4_1</Tag>
+  <Tag type="Bool" addr="Q6.7">XL Lift 4_2</Tag>
+  <Tag type="Bool" addr="Q7.0">XL Lift 5_1</Tag>
+  <Tag type="Bool" addr="Q7.1">XL Lift 5_2</Tag>
+  <Tag type="Bool" addr="Q7.2">Red Lamp</Tag>
+  <Tag type="Bool" addr="Q7.3">Yellow Lamp</Tag>
+  <Tag type="Bool" addr="Q7.4">Green Lamp</Tag>
+  <Tag type="Bool" addr="Q7.6">XL_UP_Robot</Tag>
+  <Tag type="Bool" addr="Q7.7">XL_DOWN_Robot</Tag>
+  <Tag type="Bool" addr="I3.3">Axis_X_Selection</Tag>
+  <Tag type="Bool" addr="I3.4">Axis_Lift_Selection</Tag>
+  <Tag type="Bool" addr="Q4.2">Brake_Lift</Tag>
+  <Tag type="Bool" addr="I3.6">Press_Input_Rack</Tag>
+  <Tag type="Bool" addr="Q4.3">Motor B&#259;ng t&#7843;i Input_2</Tag>
+  <Tag type="Bool" addr="I2.0">SS Limit 2 Tranfer1</Tag>
+  <Tag type="Bool" addr="I2.2">SS Limit 2 Tranfer2</Tag>
+  <Tag type="Bool" addr="I3.5">SS Limit 3 Tranfer2</Tag>
+  <Tag type="Word" addr="IW64">Flow_1</Tag>
+  <Tag type="Word" addr="IW66">Flow_2</Tag>
+  <Tag type="Bool" addr="Q5.6">Motor_B&#259;ng_T&#7843;i_Output_1</Tag>
+  <Tag type="Bool" addr="Q5.7">Motor_B&#259;ng_T&#7843;i_Output_2</Tag>
+  <Tag type="Bool" addr="I10.0">SS Position1 CV Output</Tag>
+  <Tag type="Bool" addr="I10.1">SS Position2 CV Output</Tag>
+  <Tag type="Bool" addr="I3.7">SS_C&#7917;a 1</Tag>
+  <Tag type="Bool" addr="I4.0">SS_C&#7917;a 2</Tag>
+  <Tag type="Bool" addr="I4.1">SS_C&#7917;a 3</Tag>
+  <Tag type="Bool" addr="I4.2">SS_C&#7917;a 4</Tag>
+</Tagtable>

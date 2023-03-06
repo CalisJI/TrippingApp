@@ -123,42 +123,42 @@ namespace TrippingApp.ViewModel
             });
             Apply_DataProcess_Command = new ActionCommand(async () =>
             {
-                //if (PLC_Query.Connected)
-                //{
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P1 = (Int32)Bath6P1Time.TotalMilliseconds;
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P2 = (Int32)Bath6P2Time.TotalMilliseconds;
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P3 = (Int32)Bath6P3Time.TotalMilliseconds;
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P4 = (Int32)Bath6P4Time.TotalMilliseconds;
-
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath4_P2 = (Int32)Bath4P2Time.TotalMilliseconds;
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath4_P3 = (Int32)Bath4P3Time.TotalMilliseconds;
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath5_P4 = (Int32)Bath5P4Time.TotalMilliseconds;
-
-                //    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Region1vs3 = (Int32)BathA1Time.TotalMilliseconds;
-
-                //    PLC_Query.WriteData(PLC_Query.PROCESS_DATA_PARAMETER, 5);
-                //}
-                //else 
-                //{
-
-                //}
-
-
-                using (var client = new HttpClient()) 
+                if (PLC_Query.Connected)
                 {
-                    var response = await client.GetAsync("http://localhost:8000/data");
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P1 = (Int32)Bath6P1Time.TotalMilliseconds;
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P2 = (Int32)Bath6P2Time.TotalMilliseconds;
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P3 = (Int32)Bath6P3Time.TotalMilliseconds;
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath6_P4 = (Int32)Bath6P4Time.TotalMilliseconds;
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(content);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"API request failed with status code {response.StatusCode}");
-                    }
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath4_P2 = (Int32)Bath4P2Time.TotalMilliseconds;
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath4_P3 = (Int32)Bath4P3Time.TotalMilliseconds;
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Bath5_P4 = (Int32)Bath5P4Time.TotalMilliseconds;
+
+                    PLC_Query.PROCESS_DATA_PARAMETER.Timer_Region1vs3 = (Int32)BathA1Time.TotalMilliseconds;
+
+                    PLC_Query.WriteData(PLC_Query.PROCESS_DATA_PARAMETER, 5);
                 }
-                  
+                else
+                {
+
+                }
+
+
+                //using (var client = new HttpClient()) 
+                //{
+                //    var response = await client.GetAsync("http://localhost:8000/data");
+
+                //    if (response.IsSuccessStatusCode)
+                //    {
+                //        var content = await response.Content.ReadAsStringAsync();
+                //        Console.WriteLine(content);
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine($"API request failed with status code {response.StatusCode}");
+                //    }
+                //}
+
             });
             Unloaded = new ActionCommand(() =>
             {

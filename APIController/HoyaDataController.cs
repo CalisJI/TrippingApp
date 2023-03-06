@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Hosting;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math.Field;
 using Owin;
@@ -193,9 +194,16 @@ namespace TrippingApp.APIController
         {
             if (data != null)
             {
-                if (!GlobalDataHoya.HoyadataDict.ContainsKey("HY-002"))
+                string barcode = data.GetValue("Barcode").ToString();
+                JObject hoyadt = data.GetValue("HoyaData") as JObject;
+                HoyaData hoyaData = hoyadt.ToObject<HoyaData>();
+                if (!GlobalDataHoya.HoyadataDict.ContainsKey(barcode))
                 {
-                    GlobalDataHoya.HoyadataDict.Add("HY-002", null);
+                    GlobalDataHoya.HoyadataDict.Add(barcode, hoyaData);
+                }
+                else 
+                {
+                    GlobalDataHoya.HoyadataDict[barcode] = hoyaData;
                 }
                 return Ok(new { message = "Update Barcode Rack" });
             }

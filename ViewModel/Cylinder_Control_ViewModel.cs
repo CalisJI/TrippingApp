@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TrippingApp.Runtime;
 
 namespace TrippingApp.ViewModel
 {
     public class Cylinder_Control_ViewModel:BaseViewModel.BaseViewModel
     {
+        
+
         public ICommand XL1_Up_Command { get; set; }
         public ICommand XL1_Down_Command { get; set; }
         public ICommand XL2_Up_Command { get; set; }
@@ -40,7 +43,11 @@ namespace TrippingApp.ViewModel
         public ICommand XL14_Up_Command { get; set; }
         public ICommand XL14_Down_Command { get; set; }
 
+        public ICommand UpdateInput_Command { get; set; }
+        public ICommand UpdateOutput_Commmand { get; set; }
 
+        public ICommand Loaded { get; set; }
+        public ICommand Unloaded { get; set; }
         #region Model Sensor
         private bool _ss1_up;
 
@@ -269,8 +276,71 @@ namespace TrippingApp.ViewModel
 
 
         #endregion
+
+
+        DispatcherTimer DispatcherTimer = new DispatcherTimer();
+        
         public Cylinder_Control_ViewModel()
         {
+            UpdateInput_Command = new ActionCommand(() =>
+            {
+                //Lift Input
+                SS1_Up = PLC_Query.PLCInput.I10;
+                SS1_Down = PLC_Query.PLCInput.I11;
+                //Lift 1
+                SS2_Up = PLC_Query.PLCInput.I56;
+                SS2_Down = PLC_Query.PLCInput.I57;
+                //Lift2
+                SS3_Up = PLC_Query.PLCInput.I106;
+                SS3_Down = PLC_Query.PLCInput.I107;
+                //Lift3
+                SS4_Up = PLC_Query.PLCInput.I110;
+                SS4_Down = PLC_Query.PLCInput.I111;
+                //Lift4
+                SS5_Up = PLC_Query.PLCInput.I112;
+                SS5_Down = PLC_Query.PLCInput.I113;
+                //Lift5
+                SS5_Up = PLC_Query.PLCInput.I57;
+                SS5_Down = PLC_Query.PLCInput.I60;
+
+                //Lift Output
+
+                SS8_Up = PLC_Query.PLCInput.I31;
+                SS8_Down = PLC_Query.PLCInput.I32;
+
+                //GrabRobot
+
+                SS9_Up = PLC_Query.PLCInput.I24;
+                SS9_Down = PLC_Query.PLCInput.I23;
+
+                //LiftRobot
+
+                SS10_Up = PLC_Query.PLCInput.I26;
+                SS10_Down = PLC_Query.PLCInput.I25;
+            });
+
+            UpdateOutput_Commmand = new ActionCommand(() =>
+            {
+            
+            });
+
+            Loaded = new ActionCommand(() =>
+            {
+                if (!DispatcherTimer.IsEnabled) 
+                {
+                    DispatcherTimer.Start();
+                }
+            });
+            Unloaded = new ActionCommand(() =>
+            {
+                if (DispatcherTimer.IsEnabled) 
+                {
+                    DispatcherTimer.Stop();
+                }
+            });
+            DispatcherTimer.Tick += DispatcherTimer_Tick;
+            DispatcherTimer.Interval = new TimeSpan(100);
+            DispatcherTimer.Start();
             #region XL1
             XL1_Up_Command = new ActionCommand(() =>
             {
@@ -766,6 +836,19 @@ namespace TrippingApp.ViewModel
 
 
 
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                PLC_Query.ReadInput();
+                PLC_Query.ReadOutput();
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
