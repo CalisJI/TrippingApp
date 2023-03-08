@@ -64,6 +64,7 @@ namespace TrippingApp.ViewModel
         public ICommand PLC_Connect_Command { get; set; }
         public ICommand Tracking_Page_Command { get; set; }
         public ICommand IO_Page_Command { get; set; }
+        public ICommand OpenKeyBoard_Command { get; set; }
         #region Model
         private string _time;
 
@@ -99,6 +100,7 @@ namespace TrippingApp.ViewModel
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
         private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
         private IOViewModel IOViewModel = new IOViewModel();
+        private Process _touchKeyboardProcess;
         #endregion
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -316,6 +318,29 @@ namespace TrippingApp.ViewModel
             });
             #endregion
 
+
+            #region O-Letter Command
+            OpenKeyBoard_Command = new ActionCommand(() =>
+            {
+                if (Process.GetProcessesByName("TabTip").Length == 0)
+                {
+                    string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
+                    _touchKeyboardProcess = Process.Start(touchKeyboardPath);
+
+                }
+                else
+                {
+                    foreach (var item in Process.GetProcessesByName("TabTip"))
+                    {
+                        item.Kill();
+                        _touchKeyboardProcess.Dispose();
+                        _touchKeyboardProcess = null;
+                    }
+                    string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
+                    _touchKeyboardProcess = Process.Start(touchKeyboardPath);
+                }
+            });
+            #endregion
             #region R-Letter Command
             Robot_And_Manual_Configuration_Page_Command = new ActionCommand(() =>
             {

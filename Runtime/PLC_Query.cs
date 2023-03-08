@@ -707,7 +707,11 @@ namespace TrippingApp.Runtime
 
         public readonly static string Run_FW_Input_Conveyor = "M98.1";
         public readonly static string Run_BW_Input_Convetor = "M98.2";
-        public readonly static string Run_Output_Conveyor = "M98.3";
+        public readonly static string Run_FW_Output_Conveyor = "M98.3";
+        public readonly static string Run_BW_Output_Conveyor = "M135.5";
+
+        public readonly static string Init_Output_Conveyor = "M166.2";
+        public readonly static string Init_Input_Conveyor = "M165.6";
 
         public readonly static string Current_Position_X = "MW128";
         public readonly static string Current_Position_Lift = "MW130";

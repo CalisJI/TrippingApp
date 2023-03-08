@@ -221,6 +221,9 @@
     <Compile Include="Control\BathView_Control.xaml.cs">
       <DependentUpon>BathView_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\Conveyor_Control.xaml.cs">
+      <DependentUpon>Conveyor_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\Cylender_Control.xaml.cs">
       <DependentUpon>Cylender_Control.xaml</DependentUpon>
     </Compile>
@@ -307,6 +310,10 @@
       <DependentUpon>TrackHistory_View.xaml</DependentUpon>
     </Compile>
     <Page Include="Control\BathView_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\Conveyor_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

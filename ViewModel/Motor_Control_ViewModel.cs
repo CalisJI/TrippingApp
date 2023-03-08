@@ -24,6 +24,21 @@ namespace TrippingApp.ViewModel
         public ICommand Run_CCW_P_TF1_Command { get; set; }
         public ICommand Run_CCW_N_TF1_Command { get; set; }
 
+        public ICommand CVIN_IN_P_Command { get; set; }
+        public ICommand CVIN_IN_N_Command { get; set; }
+
+        public ICommand CVIN_Out_P_Command { get; set; }
+        public ICommand CVIN_Out_N_Command { get; set; }
+
+        public ICommand CVIN_Initial_Command { get; set; }
+
+        public ICommand CVOut_IN_P_Command { get; set; }
+        public ICommand CVOut_IN_N_Command { get; set; }
+
+        public ICommand CVOut_Out_P_Command { get; set; }
+        public ICommand CVOut_Out_N_Command { get; set; }
+
+        public ICommand CVOut_Initial_Command { get; set; }
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
 
@@ -216,6 +231,52 @@ namespace TrippingApp.ViewModel
         #endregion
         public Motor_Control_ViewModel()
         {
+            CVIN_Initial_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Init_Input_Conveyor, true);
+            });
+            CVOut_Initial_Command = new ActionCommand(() => 
+            {
+                PLC_Query.WriteBit(AddressCrt.Init_Output_Conveyor, true);
+            });
+
+            CVIN_IN_P_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_FW_Input_Conveyor, true);
+            });
+
+            CVIN_IN_N_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_FW_Input_Conveyor, false);
+            });
+
+            CVIN_Out_P_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_BW_Input_Convetor, true);
+            });
+            CVIN_Out_N_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_BW_Input_Convetor, false);
+            });
+
+
+            CVOut_IN_P_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_FW_Output_Conveyor, true);
+            });
+            CVOut_IN_N_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_FW_Output_Conveyor, false);
+            });
+
+            CVOut_Out_P_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_BW_Output_Conveyor, true);
+            });
+            CVOut_Out_N_Command = new ActionCommand(() =>
+            {
+                PLC_Query.WriteBit(AddressCrt.Run_BW_Output_Conveyor, false);
+            });
             Loaded = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected)

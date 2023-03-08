@@ -29,7 +29,42 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-           
+
+            <GroupBox
+                Grid.Row="0"
+                Grid.Column="2"
+                Header="Conveyor"
+                FontSize="20"
+                FontWeight="Black"
+                Background="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <control:Conveyor_Control 
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                        
+                        NameConveyor="Input Conveyor"
+                        InClick_Down_Command="{Binding CVIN_IN_P_Command}"
+                        InClick_Up_Command="{Binding CVIN_IN_N_Command}"
+                        OutClick_Down_Command="{Binding CVIN_Out_P_Command}"
+                        OutClick_Up_Command="{Binding CVIN_Out_N_Command}"
+                        Click_Initial="{Binding CVIN_Initial_Command}"
+                        Grid.Row="0"/>
+                    <control:Conveyor_Control 
+                        BorderBrush="Blue"
+                        BorderThickness="2"
+                        NameConveyor="Output Conveyor"
+                        InClick_Down_Command="{Binding CVOut_IN_P_Command}"
+                        InClick_Up_Command="{Binding CVOut_IN_N_Command}"
+                        OutClick_Down_Command="{Binding CVOut_Out_P_Command}"
+                        OutClick_Up_Command="{Binding CVOut_Out_N_Command}"
+                        Click_Initial="{Binding CVOut_Initial_Command}"
+                        Grid.Row="1"/>
+                </Grid>
+            </GroupBox>
             <GroupBox
                 Background="Gray"
                 Header="Tranfer 1"

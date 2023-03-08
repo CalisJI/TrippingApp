@@ -44,8 +44,9 @@
                     FontWeight="DemiBold"
                     VerticalAlignment="Top"
                     Text="{Binding Timer_Full}"/>
-                <Grid Width="200" HorizontalAlignment="Right">
+                <Grid Width="250" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -61,6 +62,14 @@
                         Margin="20"
                         VerticalAlignment="Center"
                         Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+                    <Button
+                        Command="{Binding OpenKeyBoard_Command}"
+                        Margin="10"
+                        Grid.Column="3">
+                        <Image
+                        Source="{StaticResource keyboard_svgrepo_comDrawingImage}"/>
+                    </Button>
+                    
                 </Grid>
             </Grid>
             <ContentControl

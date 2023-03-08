@@ -37,7 +37,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text="Robot Control"
+                                Text=" Robot Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
@@ -82,7 +82,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text="Servo Lift Control"
+                                Text=" Servo Lift Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
@@ -124,7 +124,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text="Cylinder Control"
+                                Text=" Cylinder Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
@@ -147,7 +147,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text="Tranfer vs CAM Control"
+                                Text=" Motor Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
@@ -170,7 +170,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text="Process Parameter"
+                                Text=" Timer Parameter "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
