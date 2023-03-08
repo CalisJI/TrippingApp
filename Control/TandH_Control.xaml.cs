@@ -51,27 +51,27 @@ namespace TrippingApp.Control
 
 
 
-        public int NhietDo
+        public float NhietDo
         {
-            get { return (int)GetValue(NhietDoProperty); }
+            get { return (float)GetValue(NhietDoProperty); }
             set { SetValue(NhietDoProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for NhietDo.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NhietDoProperty =
-            DependencyProperty.Register("NhietDo", typeof(int), typeof(TandH_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("NhietDo", typeof(float), typeof(TandH_Control), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
-        public int DoAm
+        public float DoAm
         {
-            get { return (int)GetValue(DoAmProperty); }
+            get { return (float)GetValue(DoAmProperty); }
             set { SetValue(DoAmProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for DoAm.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DoAmProperty =
-            DependencyProperty.Register("DoAm", typeof(int), typeof(TandH_Control), new FrameworkPropertyMetadata(0,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("DoAm", typeof(float), typeof(TandH_Control), new FrameworkPropertyMetadata(0.0f,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
     }

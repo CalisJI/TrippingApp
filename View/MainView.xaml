@@ -331,7 +331,7 @@
                     Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
             </Button>
 
-            <Button
+            <!--<Button
                 Command="{Binding Test}"
                 themes:ButtonAssist.CornerRadius="25"
                 Width="280"
@@ -343,16 +343,16 @@
                     Height="180"
                     Width="180"
                     Kind="TrackChanges"/>
-            </Button>
+            </Button>-->
             <Grid Grid.Column="4" Grid.Row="3">
-                <Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
-                </Grid.RowDefinitions>
+                </Grid.RowDefinitions>-->
                 <Button 
                 Command="{Binding IO_Page_Command}"
                  Width="100"

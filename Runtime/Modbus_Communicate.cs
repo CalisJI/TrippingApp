@@ -66,19 +66,19 @@ namespace TrippingApp.Runtime
             {
                 if (!Check_Error)
                 {
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank1 = VX4_1.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank2 = VX4_2.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank3 = VX4_3.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank4 = VX4_4.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank5 = VX4_5.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank6 = VX4_6.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank7 = VX4_7.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank8 = VX4_8.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank9 = VX4_9.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank10 = VX4_10.PV;
-                    //PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank11 = VX4_11.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank1 = VX4_1.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank2 = VX4_2.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank3 = VX4_3.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank4 = VX4_4.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank5 = VX4_5.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank6 = VX4_6.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank7 = VX4_7.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank8 = VX4_8.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank9 = VX4_9.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank10 = VX4_10.PV;
+                    PLC_Query.DATA_TEMPERATURE.Nhiet_Do_Tank11 = VX4_11.PV;
 
-                    ////PLC_Query.WriteData(PLC_Query.DATA_TEMPERATURE, 24);
+                    PLC_Query.WriteData(PLC_Query.DATA_TEMPERATURE, 24);
                     //Console.WriteLine("Bath1: " + VX4_1.PV);
                     //Console.WriteLine("Bath2: " + VX4_2.PV);
                     //Console.WriteLine("Bath3: " + VX4_3.PV);
@@ -97,40 +97,40 @@ namespace TrippingApp.Runtime
                     //Console.WriteLine("Humidity 1: " + TH1.Humidity);
                     //Console.WriteLine("Humidity 2: " + TH2.Humidity);
 
-                    Console.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}" +
-                        "-{15}-{16}-{17}" +
-                        "-{18}--{19}--{20}--{21}--{22}--{23}--{24}--{25}--{26}--{27}--{28}--{29}--{30}",
-                        EnergyAnalyzer.L1_Voltage,
-                        EnergyAnalyzer.L2_Voltage,
-                        EnergyAnalyzer.L3_Voltage,
-                        EnergyAnalyzer.L12_Voltage,
-                        EnergyAnalyzer.L23_Voltage,
-                        EnergyAnalyzer.L31_Voltage,
-                        EnergyAnalyzer.L1_Current,
-                        EnergyAnalyzer.L2_Current,
-                        EnergyAnalyzer.L3_Current,
-                        EnergyAnalyzer.L1_Frequency,
-                        EnergyAnalyzer.L2_Frequency,
-                        EnergyAnalyzer.L3_Frequency,
-                        EnergyAnalyzer.L1_ActivePower,
-                        EnergyAnalyzer.L2_ActivePower,
-                        EnergyAnalyzer.L3_ActivePower,
-                        EnergyAnalyzer.Total_Active_Power,
-                        VX4_1.PV,
-                        VX4_2.PV,
-                        VX4_3.PV,
-                        VX4_4.PV,
-                        VX4_5.PV,
-                        VX4_6.PV,
-                        VX4_7.PV,
-                        VX4_8.PV,
-                        VX4_9.PV,
-                        VX4_10.PV,
-                        VX4_11.PV,
-                        TH1.Temperature,
-                        TH2.Temperature,
-                        TH1.Humidity,
-                        TH2.Humidity));
+                    //Console.WriteLine(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}" +
+                    //    "-{15}-{16}-{17}" +
+                    //    "-{18}--{19}--{20}--{21}--{22}--{23}--{24}--{25}--{26}--{27}--{28}--{29}--{30}",
+                    //    EnergyAnalyzer.L1_Voltage,
+                    //    EnergyAnalyzer.L2_Voltage,
+                    //    EnergyAnalyzer.L3_Voltage,
+                    //    EnergyAnalyzer.L12_Voltage,
+                    //    EnergyAnalyzer.L23_Voltage,
+                    //    EnergyAnalyzer.L31_Voltage,
+                    //    EnergyAnalyzer.L1_Current,
+                    //    EnergyAnalyzer.L2_Current,
+                    //    EnergyAnalyzer.L3_Current,
+                    //    EnergyAnalyzer.L1_Frequency,
+                    //    EnergyAnalyzer.L2_Frequency,
+                    //    EnergyAnalyzer.L3_Frequency,
+                    //    EnergyAnalyzer.L1_ActivePower,
+                    //    EnergyAnalyzer.L2_ActivePower,
+                    //    EnergyAnalyzer.L3_ActivePower,
+                    //    EnergyAnalyzer.Total_Active_Power,
+                    //    VX4_1.PV,
+                    //    VX4_2.PV,
+                    //    VX4_3.PV,
+                    //    VX4_4.PV,
+                    //    VX4_5.PV,
+                    //    VX4_6.PV,
+                    //    VX4_7.PV,
+                    //    VX4_8.PV,
+                    //    VX4_9.PV,
+                    //    VX4_10.PV,
+                    //    VX4_11.PV,
+                    //    TH1.Temperature,
+                    //    TH2.Temperature,
+                    //    TH1.Humidity,
+                    //    TH2.Humidity));
                     //Console.WriteLine(nameof(EnergyAnalyzer.L1_Voltage) + " :" + EnergyAnalyzer.L1_Voltage);
                     //Console.WriteLine(nameof(EnergyAnalyzer.L2_Voltage) + " :" + EnergyAnalyzer.L2_Voltage);
                     //Console.WriteLine(nameof(EnergyAnalyzer.L3_Voltage) + " :" + EnergyAnalyzer.L3_Voltage);

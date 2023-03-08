@@ -297,6 +297,41 @@ namespace TrippingApp.ViewModel
             get { return _sv11; }
             set { SetProperty(ref _sv11, value, nameof(SV11)); }
         }
+
+
+        private float _t1;
+
+        public float T1
+        {
+            get { return _t1; }
+            set { SetProperty(ref _t1, value, nameof(T1)); }
+        }
+
+        private float _h1;
+
+        public float H1
+        {
+            get { return _h1; }
+            set { SetProperty(ref _h1, value, nameof(H1)); }
+        }
+
+
+        private float _t2;
+
+        public float T2
+        {
+            get { return _t2; }
+            set { SetProperty(ref _t2, value, nameof(T2)); }
+        }
+
+
+        private float _h2;
+
+        public float H2
+        {
+            get { return _h2; }
+            set { SetProperty(ref _h2, value, nameof(H2)); }
+        }
         #endregion
         public SimulationViewModel()
         {
@@ -389,7 +424,10 @@ namespace TrippingApp.ViewModel
             PV9 = Modbus_Communicate.VX4_9.PV;
             PV10 = Modbus_Communicate.VX4_10.PV;
             PV11 = Modbus_Communicate.VX4_11.PV;
-
+            T1 = Modbus_Communicate.TH1.Temperature;
+            H1 = Modbus_Communicate.TH1.Humidity;
+            T2 = Modbus_Communicate.TH2.Temperature;
+            H2 = Modbus_Communicate.TH2.Humidity;
         }
     }
 }
