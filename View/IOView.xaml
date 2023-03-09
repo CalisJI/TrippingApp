@@ -67,7 +67,6 @@
             </DataGrid>
             <DataGrid
                 RowHeight="40"
-               
                 VirtualizingPanel.VirtualizationMode="Recycling"
                 VirtualizingPanel.IsVirtualizing="True"
                 Height="550"

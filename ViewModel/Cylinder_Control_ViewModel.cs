@@ -288,8 +288,8 @@ namespace TrippingApp.ViewModel
                 SS1_Up = PLC_Query.PLCInput.I10;
                 SS1_Down = PLC_Query.PLCInput.I11;
                 //Lift 1
-                SS2_Up = PLC_Query.PLCInput.I56;
-                SS2_Down = PLC_Query.PLCInput.I57;
+                SS2_Up = PLC_Query.PLCInput.I55;
+                SS2_Down = PLC_Query.PLCInput.I56;
                 //Lift2
                 SS3_Up = PLC_Query.PLCInput.I106;
                 SS3_Down = PLC_Query.PLCInput.I107;
@@ -300,8 +300,8 @@ namespace TrippingApp.ViewModel
                 SS5_Up = PLC_Query.PLCInput.I112;
                 SS5_Down = PLC_Query.PLCInput.I113;
                 //Lift5
-                SS5_Up = PLC_Query.PLCInput.I57;
-                SS5_Down = PLC_Query.PLCInput.I60;
+                SS6_Up = PLC_Query.PLCInput.I57;
+                SS6_Down = PLC_Query.PLCInput.I60;
 
                 //Lift Output
 
@@ -844,6 +844,7 @@ namespace TrippingApp.ViewModel
             {
                 PLC_Query.ReadInput();
                 PLC_Query.ReadOutput();
+                UpdateInput_Command.Execute(null);
             }
             catch (Exception)
             {

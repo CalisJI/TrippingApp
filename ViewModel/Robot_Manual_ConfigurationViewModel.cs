@@ -271,13 +271,14 @@ namespace TrippingApp.ViewModel
 
         #endregion
 
-        private Lazy<Cylinder_Control_ViewModel> Cylinder_Control_ViewModel = new Lazy<Cylinder_Control_ViewModel>(() => { return new Cylinder_Control_ViewModel(); });
+        private Cylinder_Control_ViewModel Cylinder_Control_ViewModel = new Cylinder_Control_ViewModel();
         private Motor_Control_ViewModel Motor_Control_ViewModel = new Motor_Control_ViewModel();
         private Parameter_Process_ViewModel Parameter_Process_ViewModel = new Parameter_Process_ViewModel();
         public Robot_Manual_ConfigurationViewModel()
         {
             this.Motor_Control_View = Motor_Control_ViewModel;
             this.Process_Param_View = Parameter_Process_ViewModel;
+            this.Cylinder_View = Cylinder_Control_ViewModel;
             Loaded = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected) 
@@ -360,10 +361,10 @@ namespace TrippingApp.ViewModel
             });
             Changed_Page_Command = new ActionCommand((p) =>
             {
-                if ((int)p==1)
-                {
-                    this.Cylinder_View = Cylinder_Control_ViewModel.Value;
-                }
+                //if ((int)p==1)
+                //{
+                //    this.Cylinder_View = Cylinder_Control_ViewModel.Value;
+                //}
             });
            
             Origin_Robot_Command = new ActionCommand(() =>

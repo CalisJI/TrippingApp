@@ -225,10 +225,15 @@ namespace TrippingApp.ViewModel
                     var a = CvsInSightDisplay2.Results.Cells.GetCell(31, 1).Text;
                     if (a != Cognex_Result)
                     {
-                        Cognex_Result = a;
-                        PLC_Query.DETECT_VALUE.SCANED_BARCODE = S7String.ToByteArray(a, 10);
-                        PLC_Query.WriteData(PLC_Query.DETECT_VALUE, 20);
-                        PLC_Query.WriteBit(AddressCrt.PC_Detected_Rack, true);
+                        bool run = PLC_Query.ReadBit(AddressCrt.AUTO_STATE);
+                        if (run)
+                        {
+                            Cognex_Result = a;
+                            PLC_Query.DETECT_VALUE.SCANED_BARCODE = S7String.ToByteArray(a, 10);
+                            PLC_Query.WriteData(PLC_Query.DETECT_VALUE, 20);
+                            PLC_Query.WriteBit(AddressCrt.PC_Detected_Rack, true);
+                        }
+                       
                     }
                 }
             }

@@ -260,8 +260,10 @@ namespace TrippingApp.Runtime
                 {
                     // Perform any necessary operations on the property here
                     // For example, you can set the value of the property to true
+                    if (i == 14) i = 16;
                     bool bitValue = (In[i / 8] & (1 << (i % 8))) != 0;
                     property.SetValue(PLCInput, bitValue, null);
+
                     i++;
                 }
 
@@ -768,6 +770,7 @@ namespace TrippingApp.Runtime
         public readonly static string MoveRack789_10 = "M174.1";
         public readonly static string TripDoneRack_789_10 = "M174.3";
 
+        public readonly static string AUTO_STATE = "M3.2";
         public readonly static string Trigger_GetRack_Infor = "183.0";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()

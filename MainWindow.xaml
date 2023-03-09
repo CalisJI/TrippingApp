@@ -52,12 +52,12 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Image
+                        Grid.Column="3"
                         Visibility="{Binding Workbench_Running, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Margin="20"
                         Source="{StaticResource database_svgrepo_comDrawingImage}"/>
                     <Image
-                        DataContext="{StaticResource VM_CamApi}"
-                        Visibility="{Binding Connected_Camera, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Visibility="{Binding CameraOn, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Grid.Column="1"
                         Margin="20"
                         VerticalAlignment="Center"
@@ -65,7 +65,7 @@
                     <Button
                         Command="{Binding OpenKeyBoard_Command}"
                         Margin="10"
-                        Grid.Column="3">
+                        Grid.Column="0">
                         <Image
                         Source="{StaticResource keyboard_svgrepo_comDrawingImage}"/>
                     </Button>

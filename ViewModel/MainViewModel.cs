@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using BaseViewModel;
+using Cognex.InSight.Controls.Display;
 using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Owin.Hosting;
 using S7.Net.Types;
@@ -45,6 +46,15 @@ namespace TrippingApp.ViewModel
         {
             get { return _workbench; }
             set { SetProperty(ref _workbench, value, nameof(Workbench_Running)); }
+        }
+
+
+        private bool _camOn;
+
+        public bool CameraOn
+        {
+            get { return _camOn; }
+            set { SetProperty(ref _camOn, value, nameof(CameraOn)); }
         }
         public static DispatcherTimer ShowTimer = new DispatcherTimer();
 
@@ -322,23 +332,31 @@ namespace TrippingApp.ViewModel
             #region O-Letter Command
             OpenKeyBoard_Command = new ActionCommand(() =>
             {
-                if (Process.GetProcessesByName("TabTip").Length == 0)
+                try
                 {
-                    string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
-                    _touchKeyboardProcess = Process.Start(touchKeyboardPath);
-
-                }
-                else
-                {
-                    foreach (var item in Process.GetProcessesByName("TabTip"))
+                    if (Process.GetProcessesByName("TabTip").Length == 0)
                     {
-                        item.Kill();
-                        _touchKeyboardProcess.Dispose();
-                        _touchKeyboardProcess = null;
+                        string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
+                        _touchKeyboardProcess = Process.Start(touchKeyboardPath);
+
                     }
-                    string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
-                    _touchKeyboardProcess = Process.Start(touchKeyboardPath);
+                    else
+                    {
+                        foreach (var item in Process.GetProcessesByName("TabTip"))
+                        {
+                            item.Kill();
+                            _touchKeyboardProcess.Dispose();
+                            _touchKeyboardProcess = null;
+                        }
+                        string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
+                        _touchKeyboardProcess = Process.Start(touchKeyboardPath);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+               
             });
             #endregion
             #region R-Letter Command
@@ -412,6 +430,8 @@ namespace TrippingApp.ViewModel
             {
                 Workbench_Running = false;
             }
+            
+            CameraOn = CameraApiViewModel.CvsInSightDisplay2.Connected;
         }
         
     }
