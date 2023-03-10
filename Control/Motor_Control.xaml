@@ -209,25 +209,12 @@
             </Button>
 
             <Button
+                Command="{Binding Run_CCW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Grid.Row="2"
                 Grid.Column="1"
                 Height="100"
                 Width="120">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseDown">
-                        <i:InvokeCommandAction Command="{Binding Run_CCW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewTouchDown">
-                        <i:InvokeCommandAction Command="{Binding Run_CCW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-
-                    <i:EventTrigger EventName="PreviewMouseUp">
-                        <i:InvokeCommandAction Command="{Binding Run_CCW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewTouchUp">
-                        <i:InvokeCommandAction Command="{Binding Run_CCW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                
                 <Grid Height="100" Width="100">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -250,25 +237,12 @@
             </Button>
 
             <Button
+                Command="{Binding Run_CW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Grid.Row="3"
                 Grid.Column="1"
                 Height="100"
                 Width="120">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseDown">
-                        <i:InvokeCommandAction Command="{Binding Run_CW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewTouchDown">
-                        <i:InvokeCommandAction Command="{Binding Run_CW_P_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-
-                    <i:EventTrigger EventName="PreviewMouseUp">
-                        <i:InvokeCommandAction Command="{Binding Run_CW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewTouchUp">
-                        <i:InvokeCommandAction Command="{Binding Run_CW_N_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                
                 <Grid Height="100" Width="100">
                     <Grid.RowDefinitions>
                         <RowDefinition/>

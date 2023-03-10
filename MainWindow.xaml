@@ -8,6 +8,7 @@
         xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        ResizeMode="NoResize"
         xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="Black"
         Closing="Window_Closing"

@@ -311,13 +311,13 @@ namespace TrippingApp.ViewModel
                     {
                         PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
                     }
-                    //if(TCP_Runtime.TcpListener == null)
-                    //{
-                    //    TCP_Runtime.CreateNetWork();
-                    //}
-                   
-                    
-                    //Modbus_Communicate.Initial();
+                    if (TCP_Runtime.TcpListener == null)
+                    {
+                        TCP_Runtime.CreateNetWork();
+                    }
+
+
+                    Modbus_Communicate.Initial();
                 }
                 catch (Exception ex)
                 {
@@ -344,9 +344,16 @@ namespace TrippingApp.ViewModel
                     {
                         foreach (var item in Process.GetProcessesByName("TabTip"))
                         {
-                            item.Kill();
-                            _touchKeyboardProcess.Dispose();
-                            _touchKeyboardProcess = null;
+                            try
+                            {
+                                item.Kill();
+                                _touchKeyboardProcess.Dispose();
+                                _touchKeyboardProcess = null;
+                            }
+                            catch (Exception)
+                            {
+
+                            }
                         }
                         string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
                         _touchKeyboardProcess = Process.Start(touchKeyboardPath);

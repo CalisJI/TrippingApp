@@ -123,17 +123,6 @@ namespace TrippingApp.Control
 
 
 
-        public ICommand Run_CW_N_Command
-        {
-            get { return (ICommand)GetValue(Run_CW_N_CommandProperty); }
-            set { SetValue(Run_CW_N_CommandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Run_CW_N_Command.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Run_CW_N_CommandProperty =
-            DependencyProperty.Register("Run_CW_N_Command", typeof(ICommand), typeof(Motor_Control));
-
-
 
 
         public ICommand Run_CCW_P_Command
@@ -147,16 +136,6 @@ namespace TrippingApp.Control
             DependencyProperty.Register("Run_CCW_P_Command", typeof(ICommand), typeof(Motor_Control));
 
 
-
-        public ICommand Run_CCW_N_Commnand
-        {
-            get { return (ICommand)GetValue(Run_CCW_N_CommnandProperty); }
-            set { SetValue(Run_CCW_N_CommnandProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Run_CCW_N_Commnand.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Run_CCW_N_CommnandProperty =
-            DependencyProperty.Register("Run_CCW_N_Commnand", typeof(ICommand), typeof(Motor_Control));
 
 
 

@@ -20,9 +20,7 @@ namespace TrippingApp.ViewModel
         public ICommand Jog_CCW_N_TF1_Command { get; set; }
 
         public ICommand Run_CW_P_TF1_Command { get; set; }
-        public ICommand Run_CW_N_TF1_Command { get; set; }
         public ICommand Run_CCW_P_TF1_Command { get; set; }
-        public ICommand Run_CCW_N_TF1_Command { get; set; }
 
         public ICommand CVIN_IN_P_Command { get; set; }
         public ICommand CVIN_IN_N_Command { get; set; }
@@ -120,9 +118,7 @@ namespace TrippingApp.ViewModel
         public ICommand Jog_CCW_N_ML1_Command { get; set; }
 
         public ICommand Run_CW_P_ML1_Command { get; set; }
-        public ICommand Run_CW_N_ML1_Command { get; set; }
         public ICommand Run_CCW_P_ML1_Command { get; set; }
-        public ICommand Run_CCW_N_ML1_Command { get; set; }
         #endregion
         #region Model ML 1
         private int _frequency3;
@@ -159,9 +155,7 @@ namespace TrippingApp.ViewModel
         public ICommand Jog_CCW_N_ML2_Command { get; set; }
 
         public ICommand Run_CW_P_ML2_Command { get; set; }
-        public ICommand Run_CW_N_ML2_Command { get; set; }
         public ICommand Run_CCW_P_ML2_Command { get; set; }
-        public ICommand Run_CCW_N_ML2_Command { get; set; }
 
         #endregion
         #region Model ML 2
@@ -200,9 +194,7 @@ namespace TrippingApp.ViewModel
         public ICommand Jog_CCW_N_ML3_Command { get; set; }
 
         public ICommand Run_CW_P_ML3_Command { get; set; }
-        public ICommand Run_CW_N_ML3_Command { get; set; }
         public ICommand Run_CCW_P_ML3_Command { get; set; }
-        public ICommand Run_CCW_N_ML3_Command { get; set; }
         #endregion
         #region Model ML 3
         private int _frequency5;
@@ -321,13 +313,7 @@ namespace TrippingApp.ViewModel
                     PLC_Query.WriteBit(AddressCrt.Run_FW_TF1, true);
                 }
             });
-            Run_CW_N_TF1_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_TF1, false);
-                }
-            });
+          
             Run_CCW_P_TF1_Command = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected)
@@ -335,13 +321,7 @@ namespace TrippingApp.ViewModel
                     PLC_Query.WriteBit(AddressCrt.Run_BW_TF1, true);
                 }
             });
-            Run_CCW_N_TF1_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_TF1, false);
-                }
-            });
+           
             #endregion
 
 
@@ -490,30 +470,33 @@ namespace TrippingApp.ViewModel
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift1, true);
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_FW_Lift1)) 
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift1, true);
+                    }
+                    else 
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift1, false);
+                    }
                 }
             });
-            Run_CW_N_ML1_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift1, false);
-                }
-            });
+            
             Run_CCW_P_ML1_Command = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift1, true);
+
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_BW_Lift1))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift1, true);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift1, false);
+                    }
                 }
             });
-            Run_CCW_N_ML1_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift1, false);
-                }
-            });
+           
             #endregion
 
 
@@ -575,30 +558,32 @@ namespace TrippingApp.ViewModel
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift2, true);
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_FW_Lift2))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift2, true);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift2, false);
+                    }
                 }
             });
-            Run_CW_N_ML2_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift2, false);
-                }
-            });
+           
             Run_CCW_P_ML2_Command = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift2, true);
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_BW_Lift2))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift2, true);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift2, false);
+                    }
                 }
             });
-            Run_CCW_N_ML2_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift2, false);
-                }
-            });
+           
             #endregion
 
 
@@ -660,30 +645,30 @@ namespace TrippingApp.ViewModel
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift3, true);
-                }
-            });
-            Run_CW_N_ML3_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_FW_Lift3, false);
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_FW_Lift3))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift3, true);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_FW_Lift3, false);
+                    }
                 }
             });
             Run_CCW_P_ML3_Command = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected)
                 {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift3, true);
+                    if (!PLC_Query.ReadBit(AddressCrt.Run_BW_Lift3))
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift3, true);
+                    }
+                    else
+                    {
+                        PLC_Query.WriteBit(AddressCrt.Run_BW_Lift3, false);
+                    }
                 }
 
-            });
-            Run_CCW_N_ML3_Command = new ActionCommand(() =>
-            {
-                if (PLC_Query.Connected)
-                {
-                    PLC_Query.WriteBit(AddressCrt.Run_BW_Lift3, false);
-                }
             });
             #endregion
 
