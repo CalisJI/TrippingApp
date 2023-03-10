@@ -27,7 +27,10 @@
                 <Button
                     ToolTip="Menu"
                     Margin="10 0 0 0"
-                    
+                    PreviewMouseDown="Button_PreviewMouseDown"
+                    PreviewMouseUp="Button_PreviewMouseUp"
+                    PreviewTouchDown="Button_PreviewTouchDown"
+                    PreviewTouchUp="Button_PreviewTouchUp"
                     Command="{Binding Home_Page_Command}"
                     HorizontalAlignment="Left"
                     Width="50"

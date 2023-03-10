@@ -334,30 +334,10 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    if (Process.GetProcessesByName("TabTip").Length == 0)
-                    {
-                        string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
-                        _touchKeyboardProcess = Process.Start(touchKeyboardPath);
-
-                    }
-                    else
-                    {
-                        foreach (var item in Process.GetProcessesByName("TabTip"))
-                        {
-                            try
-                            {
-                                item.Kill();
-                                _touchKeyboardProcess.Dispose();
-                                _touchKeyboardProcess = null;
-                            }
-                            catch (Exception)
-                            {
-
-                            }
-                        }
-                        string touchKeyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\Ink\TabTip.exe";
-                        _touchKeyboardProcess = Process.Start(touchKeyboardPath);
-                    }
+                    var uiHostNoLaunch = new UIHostNoLaunch();
+                    var tipInvocation = (ITipInvocation)uiHostNoLaunch;
+                    tipInvocation.Toggle(GetDesktopWindow());
+                    Marshal.ReleaseComObject(uiHostNoLaunch);
                 }
                 catch (Exception ex)
                 {
@@ -440,6 +420,21 @@ namespace TrippingApp.ViewModel
             
             CameraOn = CameraApiViewModel.CvsInSightDisplay2.Connected;
         }
-        
+
+
+        [ComImport, Guid("4ce576fa-83dc-4F88-951c-9d0782b4e376")]
+        class UIHostNoLaunch
+        {
+        }
+
+        [ComImport, Guid("37c994e7-432b-4834-a2f7-dce1f13b834b")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface ITipInvocation
+        {
+            void Toggle(IntPtr hwnd);
+        }
+
+        [DllImport("user32.dll", SetLastError = false)]
+        static extern IntPtr GetDesktopWindow();
     }
 }
