@@ -250,7 +250,7 @@ namespace TrippingApp.Runtime
         public static void ReadInput()
         {
 
-            if (PLC_Controller.IsConnected)
+            if (PLC_Controller!=null && PLC_Controller.IsConnected)
             {
                 _ = new byte[8];
                 byte[] In = PLC_Controller.ReadBytes(DataType.Input, 0, 0, 12);
@@ -279,7 +279,7 @@ namespace TrippingApp.Runtime
         public static void ReadOutput()
         {
 
-            if (PLC_Controller.IsConnected)
+            if (PLC_Controller !=null &&  PLC_Controller.IsConnected)
             {
                 _ = new byte[8];
                 byte[] Out = PLC_Controller.ReadBytes(DataType.Output, 0, 0, 8);
@@ -761,8 +761,8 @@ namespace TrippingApp.Runtime
 
         public readonly static string Sync_Position = "M126.1";
 
-        public readonly static string MoveRack123 = "175.2";
-        public readonly static string TripDoneRack123 = "174.4";
+        public readonly static string MoveRack123 = "M175.2";
+        public readonly static string TripDoneRack123 = "M174.4";
 
         public readonly static string MoveRack456 = "M174.5";
         public readonly static string TripRackDone456 = "M174.6";
@@ -771,7 +771,7 @@ namespace TrippingApp.Runtime
         public readonly static string TripDoneRack_789_10 = "M174.3";
 
         public readonly static string AUTO_STATE = "M3.2";
-        public readonly static string Trigger_GetRack_Infor = "183.0";
+        public readonly static string Trigger_GetRack_Infor = "M183.0";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {
@@ -1108,7 +1108,7 @@ namespace TrippingApp.Runtime
     /// <summary>
     /// Note type Convert 
     /// PLC : C#
-    /// Int <=> short
+    /// Int  short
     /// Real = Float
     /// String[length] = byte[length +1]
     /// Time = Int32 => to TimeSpan.FromMiliseconds

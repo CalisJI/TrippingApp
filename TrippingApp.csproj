@@ -259,6 +259,7 @@
     <Compile Include="Control\VX4_Control.xaml.cs">
       <DependentUpon>VX4_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Init\Converter.cs" />
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Model\RackData.cs" />
     <Compile Include="Runtime\CameraApi.cs" />

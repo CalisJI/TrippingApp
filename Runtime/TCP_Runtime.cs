@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using TrippingApp.Logger;
 using TrippingApp.Model;
@@ -15,13 +17,14 @@ using TrippingApp.ViewModel;
 
 namespace TrippingApp.Runtime
 {
-    public class TCP_Runtime
+    public  static class TCP_Runtime
     {
         const int PORT_NO = 2000;
         const string SERVER_IP = "192.168.1.15";
         public static TcpListener TcpListener;
         private static Socket socket;
-        private static NetworkStream networkStream;
+        public static bool Connect_TCP = false;
+        //private static NetworkStream networkStream;
         
         public static void CreateNetWork()
         {
@@ -29,7 +32,7 @@ namespace TrippingApp.Runtime
             {
                 bool abv = PLC_Query.CheckConnect(SERVER_IP);
                 var ipaddr = IPAddress.Parse(SERVER_IP);
-                TcpListener = new TcpListener(ipaddr, PORT_NO);
+                TcpListener = new TcpListener(IPAddress.Any, PORT_NO);
                 TcpListener.Start();
                 Thread thread = new Thread(() =>
                 {
@@ -39,42 +42,20 @@ namespace TrippingApp.Runtime
                         Console.WriteLine("Waiting for connection...");
                         _ = Logger.Logger.Async_write("Waiting for connection...");
                         socket = TcpListener.AcceptSocket();
-                        networkStream = new NetworkStream(socket);
+                        NetworkStream networkStream = new NetworkStream(socket);
+                        Console.WriteLine(socket.RemoteEndPoint);
                         TcpListener.Start();
                         int aa = 0;
                         DateTime dateTime = DateTime.Now;
                         string store_vl = string.Empty;
                         while (!TcpListener.Pending())
                         {
-                            //Console.WriteLine("Connected");
-                            //if (networkStream.DataAvailable)
-                            //{
-                            //    try
-                            //    {
-                            //        byte[] data = new byte[256];
-
-                            //        var read = networkStream.Read(data, 0, data.Length);
-
-                            //        string str = Encoding.ASCII.GetString(data, 0, read);
-                            //        string filter = Regex.Replace(str, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
-                            //        string add = filter.Substring(0, filter.Length);
-                            //        Console.WriteLine(add);
-                            //    }
-                            //    catch (Exception)
-                            //    {
-
-                            //        //MessageBox.Show("TCP/IP Disconnected");
-                            //        CreateNetWork();
-                            //        goto DMM;
-                            //    }
-                            //}
                             do
                             {
                                 DateTime dateTime1 = DateTime.Now;
                                 try
                                 {
                                     byte[] data = new byte[256];
-
                                     var read = networkStream.Read(data, 0, data.Length);
 
                                     string str = Encoding.ASCII.GetString(data, 0, read);
@@ -83,22 +64,24 @@ namespace TrippingApp.Runtime
                                     //Console.WriteLine("Counter: {0}", aa);
                                     //Console.WriteLine("Recaived: {1} {0}", add, DateTime.Now.ToString("HH:mm:ss:ff"));
                                     //UpdateStatus(add);
-                                    Console.WriteLine("TCP-IP: "+add);
+                                    Console.WriteLine("TCP-IP: " + add);
                                     //FuntionSelection(add);
+                                    //networkStream.Close();
                                 }
                                 catch (Exception)
                                 {
                                     //MessageBox.Show("TCP/IP Disconnected");
                                     Console.WriteLine("TCP/IP Disconnected");
-                                    CreateNetWork();
+
                                     goto DMM;
                                 }
 
                             } while (networkStream.DataAvailable);
-                            //Console.WriteLine("Recycle");
+                            Console.WriteLine("Recycle");
                         }
-
+                       
                         DMM:;
+                        CreateNetWork();
                     }
                     catch (SocketException e)
                     {
@@ -119,80 +102,122 @@ namespace TrippingApp.Runtime
           
         }
 
+        public static void CreateNetWork2() 
+        {
+            TcpListener = new TcpListener(IPAddress.Any, PORT_NO);
+            TcpListener.Start();
+            
+            Thread thread = new Thread(() =>
+            {
+                while (true)
+                {
+                    Console.WriteLine("Waiting for a client to connect...");
+                    TcpClient client = TcpListener.AcceptTcpClient();
+                    Console.WriteLine("Client connected: {0}", client.Client.RemoteEndPoint);
+                    Connect_TCP = true;
+                    // Get the network stream from the client
+                    NetworkStream stream = client.GetStream();
+
+                    // Read data from the client
+                    byte[] buffer = new byte[1024];
+                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                    string data = System.Text.Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                    string filter = Regex.Replace(data, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
+                    string add = filter.Substring(0, filter.Length);
+                    FuntionSelection(add);
+                    stream.Close();
+                    client.Close();
+                }
+            });
+
+            if (!thread.IsAlive) 
+            {
+                thread.Start();
+            }
+           
+        }
+
         public static void FuntionSelection(string _char)
         {
-
-            switch (_char)
+            try
             {
-                //Move Area 1 Done
-                case "1m":
-                    //MonitorRackData.MoveRack123();
-                    SyncProcessData.MovedRack123();
-                    PLC_Query.WriteBit(AddressCrt.MoveRack123,false);
-                    break;
-                //Move Area 2 Done
-                case "2m":
-                    //MonitorRackData.MoveRack456();
-                    SyncProcessData.MovedRack456();
-                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
-                    break;
-                //Move Area 3 Done
-                case "3m":
-                    //MonitorRackData.MoveRack789_10();
-                    SyncProcessData.MovedRack789_10();
-                    PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
-                    break;
-                // Has rack Done
-                case "1t":
-                    SyncProcessData.TripDoneRack_123();
+                switch (_char)
+                {
+                    //Move Area 1 Done
+                    case "1m":
+                        //MonitorRackData.MoveRack123();
+                        SyncProcessData.MovedRack123();
+                        PLC_Query.WriteBit(AddressCrt.MoveRack123, false);
+                        break;
+                    //Move Area 2 Done
+                    case "2m":
+                        //MonitorRackData.MoveRack456();
+                        SyncProcessData.MovedRack456();
+                        PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                        break;
+                    //Move Area 3 Done
+                    case "3m":
+                        //MonitorRackData.MoveRack789_10();
+                        SyncProcessData.MovedRack789_10();
+                        PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
+                        break;
+                    // Has rack Done
+                    case "1t":
+                        SyncProcessData.TripDoneRack_123();
 
-                    PLC_Query.WriteBit(AddressCrt.TripDoneRack123, false);
-                    break;
-                // Run Out of Barcode 
-                case "2t":
-                    SyncProcessData.TripDoneRack_456();
-                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
-                    break;
-                //Begin Tranfer 1
-                case "3t":
-                    SyncProcessData.TripRackDone_798_10();
-                    PLC_Query.WriteBit(AddressCrt.TripDoneRack_789_10, false);
-                    break;
-                //Begin Robot
-                case "gr":
-                    MachineViewModel.Getbarcode_Command.Execute(null);
-                    PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
-                    break;
-                //Begin Tranfer3
-                case "h":
-                    break;
-                //
-                case "k":
-                    break;
-                // Read Barcode Position
-                case "l":
-                    //PLC_Query.Get_ListCodeChar();
-                    break;
-                // Read Time Trip 3
-                case "m":
-                    break;
-                //Trip Area 3 Done Trigger
-                case "m1":
-                    break;
-                // Read Time Trip 1
-                case "n":
-                    break;
-                //Trip Area 1 Done Trigger
-                case "n1":
-                    break;
-                // Read Time Trip Robot
-                case "o":
-                    break;
-                // Trip Robot Done trigger
-                case "o1":
-                    break;
-                default:
-                    break;
+                        PLC_Query.WriteBit(AddressCrt.TripDoneRack123, false);
+                        break;
+                    // Run Out of Barcode 
+                    case "2t":
+                        SyncProcessData.TripDoneRack_456();
+                        PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
+                        break;
+                    //Begin Tranfer 1
+                    case "3t":
+                        SyncProcessData.TripRackDone_798_10();
+                        PLC_Query.WriteBit(AddressCrt.TripDoneRack_789_10, false);
+                        break;
+                    //Begin Robot
+                    case "gr":
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+                        PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
+                        break;
+                    //Begin Tranfer3
+                    case "h":
+                        break;
+                    //
+                    case "k":
+                        break;
+                    // Read Barcode Position
+                    case "l":
+                        //PLC_Query.Get_ListCodeChar();
+                        break;
+                    // Read Time Trip 3
+                    case "m":
+                        break;
+                    //Trip Area 3 Done Trigger
+                    case "m1":
+                        break;
+                    // Read Time Trip 1
+                    case "n":
+                        break;
+                    //Trip Area 1 Done Trigger
+                    case "n1":
+                        break;
+                    // Read Time Trip Robot
+                    case "o":
+                        break;
+                    // Trip Robot Done trigger
+                    case "o1":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("ERROR WWITH PLC");
             }
         }
     }

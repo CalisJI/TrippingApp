@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TrippingApp.Runtime;
 using DateTime = System.DateTime;
 
@@ -14,6 +15,13 @@ namespace TrippingApp.ViewModel
 {
     public class MachineViewModel : BaseViewModel.BaseViewModel
     {
+
+        private DispatcherTimer TimerA1 = new DispatcherTimer();
+        private DispatcherTimer TimerA3 = new DispatcherTimer();
+        private DispatcherTimer TimerRobot = new DispatcherTimer();
+        private TimeSpan TimeA1_TP = new TimeSpan();
+        private TimeSpan TimeA3_TP = new TimeSpan();
+        private TimeSpan TimeRobot_TP = new TimeSpan();
         #region Command
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
@@ -21,6 +29,10 @@ namespace TrippingApp.ViewModel
         public static ICommand Getbarcode_Command { get; set; }
         public static ICommand Get_Input_Time_Command { get; set; }
         public static ICommand Get_Trip_Time_Command { get; set; }
+
+        public static ICommand Get_Dip_Time_A1_Command { get; set; }
+        public static ICommand Get_Dip_Time_A3_Command { get; set; }
+        public static ICommand Get_Dip_Time_Robot { get; set; }
         #endregion
 
         #region Model
@@ -390,6 +402,13 @@ namespace TrippingApp.ViewModel
 
         public MachineViewModel()
         {
+            TimerA1.Interval = new TimeSpan(1000);
+            TimerA1.Tick += TimerA1_Tick;
+            TimerA3.Interval = new TimeSpan(1000);
+            TimerA3.Tick += TimerA3_Tick;
+            TimerRobot.Interval = new TimeSpan(1000);
+            TimerRobot.Tick += TimerRobot_Tick;
+
             Loaded = new ActionCommand(() => 
             {
             
@@ -439,6 +458,87 @@ namespace TrippingApp.ViewModel
                     ImputTime10 = dateTime.ToShortTimeString();
                 }
             });
+
+            Get_Dip_Time_A1_Command = new ActionCommand(() => 
+            {
+                if(TimerA1.IsEnabled == false) 
+                {
+                    TimerA1.Start();
+                    TimerA1.IsEnabled = true;
+                }
+                else 
+                {
+                    TimerA1.Stop();
+                    TimerA1.IsEnabled = false;
+                    TimeA1_TP = TimeSpan.FromSeconds(0);
+                }
+            });
+            Get_Dip_Time_A3_Command = new ActionCommand(() => 
+            {
+                if (TimerA3.IsEnabled == false)
+                {
+                    TimerA3.Start();
+                    TimerA3.IsEnabled = true;
+                }
+                else
+                {
+                    TimerA3.Stop();
+                    TimerA3.IsEnabled = false;
+                    TimeA3_TP = TimeSpan.FromSeconds(0);
+                }
+            });
+            Get_Dip_Time_Robot = new ActionCommand(() => 
+            {
+                if (TimerRobot.IsEnabled == false)
+                {
+                    TimerRobot.Start();
+                    TimerRobot.IsEnabled = true;
+                }
+                else
+                {
+                    TimerRobot.Stop();
+                    TimerRobot.IsEnabled = false;
+                    TimeRobot_TP = TimeSpan.FromSeconds(0);
+                }
+            });
+            
+        }
+
+        private void TimerRobot_Tick(object sender, EventArgs e)
+        {
+            if(Barcode4 != string.Empty) 
+            {
+                DipTime5 = "00:00";
+                DipTime6 = "00:00";
+                TimeRobot_TP += TimeSpan.FromSeconds(1);
+                DipTime4 = TimeRobot_TP.ToString(@"mm:/ss");
+            }
+            else if(Barcode5 != string.Empty)
+            {
+                DipTime4 = "00:00";
+                DipTime6 = "00:00";
+                TimeRobot_TP += TimeSpan.FromSeconds(1);
+                DipTime5 = TimeRobot_TP.ToString(@"mm:/ss");
+            }
+            else if (Barcode6 != string.Empty) 
+            {
+                DipTime5 = "00:00";
+                DipTime4 = "00:00";
+                TimeRobot_TP += TimeSpan.FromSeconds(1);
+                DipTime6 = TimeRobot_TP.ToString(@"mm:/ss");
+            }
+        }
+
+        private void TimerA3_Tick(object sender, EventArgs e)
+        {
+            TimeA3_TP += TimeSpan.FromSeconds(1);
+            DipTime7 = DipTime8 = DipTime9 = DipTime10 = TimeA3_TP.ToString(@"mm:/ss");
+        }
+
+        private void TimerA1_Tick(object sender, EventArgs e)
+        {
+            TimeA1_TP += TimeSpan.FromSeconds(1);
+            DipTime1 = DipTime2 = DipTime3 = TimeA1_TP.ToString(@"mm:/ss");
         }
     }
 }

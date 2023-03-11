@@ -66,6 +66,12 @@
                         Margin="20"
                         VerticalAlignment="Center"
                         Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+                    <Image
+                        Visibility="{Binding PLC_Connect, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Grid.Column="2"
+                        Margin="20"
+                        VerticalAlignment="Center"
+                        Source="{StaticResource network_server_svgrepo_comDrawingImage}"/>
                     <Button
                         Command="{Binding OpenKeyBoard_Command}"
                         Margin="10"

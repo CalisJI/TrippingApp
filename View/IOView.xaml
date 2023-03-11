@@ -17,7 +17,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Viewbox>
-        <Grid>
+        <Grid Width="1920" Height="990">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -27,7 +27,7 @@
                 
                 VirtualizingPanel.VirtualizationMode="Recycling"
                 VirtualizingPanel.IsVirtualizing="True"
-                Height="550"
+                Margin="20"
                 VerticalScrollBarVisibility="Auto"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding Itags, IsAsync=True}">
@@ -67,9 +67,9 @@
             </DataGrid>
             <DataGrid
                 RowHeight="40"
+                Margin="20"
                 VirtualizingPanel.VirtualizationMode="Recycling"
                 VirtualizingPanel.IsVirtualizing="True"
-                Height="550"
                 Grid.Column="1" 
                 VerticalScrollBarVisibility="Auto"
                 AutoGenerateColumns="False" ItemsSource="{Binding OTags, IsAsync=True}">

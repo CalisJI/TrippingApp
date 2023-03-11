@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.Control"
              mc:Ignorable="d" 
+             xmlns:cvt="clr-namespace:TrippingApp.Init"
              x:Name="bath"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <cvt:Converter x:Key="str2Bool"/>
+    </UserControl.Resources>
     <Viewbox>
         <Grid Height="{Binding ElementName=bath, Path=ActualHeight}" Width="{Binding ElementName=bath, Path=ActualWidth}">
             <GroupBox>
@@ -80,13 +84,15 @@
                             Grid.Row="2"
                             BorderBrush="Blue"
                             BorderThickness="2"
-                            CornerRadius="5"
-                            Background="Lime">
+                            CornerRadius="5">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Barcode, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="">
+                                        <DataTrigger Binding="{Binding Path=Barcode , Converter={StaticResource str2Bool}, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="False">
                                             <Setter Property="Background" Value="Gray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Barcode , Converter={StaticResource str2Bool}, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                                            <Setter Property="Background" Value="Lime"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

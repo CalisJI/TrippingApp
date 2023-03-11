@@ -56,6 +56,15 @@ namespace TrippingApp.ViewModel
             get { return _camOn; }
             set { SetProperty(ref _camOn, value, nameof(CameraOn)); }
         }
+
+
+        private bool _plc_connect;
+
+        public bool PLC_Connect
+        {
+            get { return _plc_connect; }
+            set { SetProperty(ref _plc_connect, value, nameof(PLC_Connect)); }
+        }
         public static DispatcherTimer ShowTimer = new DispatcherTimer();
 
         public ICommand Home_Page_Command { get; set; }
@@ -307,17 +316,18 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    if (!PLC_Query.Connected) 
-                    {
-                        PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
-                    }
+                    //if (!PLC_Query.Connected) 
+                    //{
+                    //    PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
+                    //}
                     if (TCP_Runtime.TcpListener == null)
                     {
-                        TCP_Runtime.CreateNetWork();
+                        //TCP_Runtime.CreateNetWork();
+                        TCP_Runtime.CreateNetWork2();
                     }
 
 
-                    Modbus_Communicate.Initial();
+                    //Modbus_Communicate.Initial();
                 }
                 catch (Exception ex)
                 {
@@ -419,6 +429,7 @@ namespace TrippingApp.ViewModel
             }
             
             CameraOn = CameraApiViewModel.CvsInSightDisplay2.Connected;
+            PLC_Connect = PLC_Query.Connected;
         }
 
 
