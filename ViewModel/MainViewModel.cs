@@ -200,6 +200,7 @@ namespace TrippingApp.ViewModel
 
 
                     //HistoryLogger.CreateTable_History();
+                   
 
                     //PLC_Query.WriteData(AddressCrt.Barcode_1_P1, S7String.ToByteArray("HY-007",10));
                     //PLC_Query.WriteData(AddressCrt.Barcode_1_P2, S7String.ToByteArray("2", 1));
@@ -217,7 +218,7 @@ namespace TrippingApp.ViewModel
                 RackObject rackObject = new RackObject();
                 rackObject.RackBarcode = "HY-001";
                 rackObject.RackStatus = Status.Inprocess;
-                rackObject.RackDetails = "aaa";
+                rackObject.Data = new HoyaData();
                 rackObject.Bath1_Infor.TimeIn = DateTime.Now;
 
                 HistoryLogger.AddRackObject(rackObject);
@@ -316,10 +317,10 @@ namespace TrippingApp.ViewModel
             {
                 try
                 {
-                    //if (!PLC_Query.Connected) 
-                    //{
-                    //    PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
-                    //}
+                    if (!PLC_Query.Connected)
+                    {
+                        PLC_Query.Initial(ApplicationConfig.SystemConfig.PLC_IP_Address);
+                    }
                     if (TCP_Runtime.TcpListener == null)
                     {
                         //TCP_Runtime.CreateNetWork();

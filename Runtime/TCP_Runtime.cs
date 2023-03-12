@@ -111,22 +111,32 @@ namespace TrippingApp.Runtime
             {
                 while (true)
                 {
-                    Console.WriteLine("Waiting for a client to connect...");
-                    TcpClient client = TcpListener.AcceptTcpClient();
-                    Console.WriteLine("Client connected: {0}", client.Client.RemoteEndPoint);
-                    Connect_TCP = true;
-                    // Get the network stream from the client
-                    NetworkStream stream = client.GetStream();
+                    try
+                    {
+                        Console.WriteLine("Waiting for a client to connect...");
+                        TcpClient client = TcpListener.AcceptTcpClient();
+                        Console.WriteLine("Client connected: {0}", client.Client.RemoteEndPoint);
+                        Connect_TCP = true;
+                        // Get the network stream from the client
+                        NetworkStream stream = client.GetStream();
 
-                    // Read data from the client
-                    byte[] buffer = new byte[1024];
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                    string data = System.Text.Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    string filter = Regex.Replace(data, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
-                    string add = filter.Substring(0, filter.Length);
-                    FuntionSelection(add);
-                    stream.Close();
-                    client.Close();
+                        // Read data from the client
+                        byte[] buffer = new byte[1024];
+                        int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                        string data = System.Text.Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                        string filter = Regex.Replace(data, @"(\s+|@|&|'|\(|\)|<|>|#|\?|\\|\0|\u0000|\u0001|\u0002|\u0003|\u0004|\u0005)", "");
+                        string add = filter.Substring(0, filter.Length);
+                        Console.WriteLine("TCP-IP: " + add);
+                        FuntionSelection(add);
+                        stream.Close();
+                        client.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("TCP Function");
+                        Console.WriteLine(ex.Message);
+                    }
+                   
                 }
             });
 
@@ -147,34 +157,39 @@ namespace TrippingApp.Runtime
                     case "1m":
                         //MonitorRackData.MoveRack123();
                         SyncProcessData.MovedRack123();
+                        MachineViewModel.Get_Dip_Time_A1_Command.Execute(true);
                         PLC_Query.WriteBit(AddressCrt.MoveRack123, false);
                         break;
                     //Move Area 2 Done
                     case "2m":
                         //MonitorRackData.MoveRack456();
                         SyncProcessData.MovedRack456();
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(true);
                         PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
                         break;
                     //Move Area 3 Done
                     case "3m":
                         //MonitorRackData.MoveRack789_10();
                         SyncProcessData.MovedRack789_10();
+                        MachineViewModel.Get_Dip_Time_A3_Command.Execute(true);
                         PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
                         break;
-                    // Has rack Done
+                    // Trip A1 Done
                     case "1t":
-                        SyncProcessData.TripDoneRack_123();
-
+                            SyncProcessData.TripDoneRack_123();
+                        MachineViewModel.Get_Dip_Time_A1_Command.Execute(false);
                         PLC_Query.WriteBit(AddressCrt.TripDoneRack123, false);
                         break;
-                    // Run Out of Barcode 
+                    // Trip A2 Done
                     case "2t":
                         SyncProcessData.TripDoneRack_456();
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(false);
                         PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
                         break;
-                    //Begin Tranfer 1
+                    // Trip A3 Done
                     case "3t":
                         SyncProcessData.TripRackDone_798_10();
+                        MachineViewModel.Get_Dip_Time_A3_Command.Execute(false);
                         PLC_Query.WriteBit(AddressCrt.TripDoneRack_789_10, false);
                         break;
                     //Begin Robot
@@ -182,11 +197,13 @@ namespace TrippingApp.Runtime
                         MachineViewModel.Getbarcode_Command.Execute(null);
                         PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
                         break;
-                    //Begin Tranfer3
-                    case "h":
+                    //out of qrcode
+                    case "e":
+                        PLC_Query.WriteBit(AddressCrt.SEND_OutofQR, false);
                         break;
                     //
-                    case "k":
+                    case "d":
+                        PLC_Query.WriteBit(AddressCrt.SEND_Done_rack, false);
                         break;
                     // Read Barcode Position
                     case "l":

@@ -121,7 +121,7 @@ namespace TrippingApp.Runtime
                         command.Parameters.AddWithValue("@Bath10Temper", rackObject.Bath10_Infor.BathTemper);
                         command.Parameters.AddWithValue("@Bath10In", rackObject.Bath10_Infor.TimeIn);
                         command.Parameters.AddWithValue("@Bath10Out", rackObject.Bath10_Infor.TimeOut);
-                        command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus);
+                        command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus.ToString());
                         command.ExecuteNonQuery();
                     }
                 }
@@ -209,7 +209,7 @@ namespace TrippingApp.Runtime
                     command.Parameters.AddWithValue("@Bath10Temper", rackObject.Bath10_Infor.BathTemper);
                     command.Parameters.AddWithValue("@Bath10In", rackObject.Bath10_Infor.TimeIn);
                     command.Parameters.AddWithValue("@Bath10Out", rackObject.Bath10_Infor.TimeOut);
-                    command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus);
+                    command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus.ToString());
                 }
             }
         }

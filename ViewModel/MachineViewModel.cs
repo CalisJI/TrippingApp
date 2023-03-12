@@ -400,18 +400,196 @@ namespace TrippingApp.ViewModel
         #endregion
 
 
+
+        private bool Init = false;
+
+
         public MachineViewModel()
         {
-            TimerA1.Interval = new TimeSpan(1000);
+            
+            TimerA1.Interval = new TimeSpan(0, 0, 1);
             TimerA1.Tick += TimerA1_Tick;
-            TimerA3.Interval = new TimeSpan(1000);
+            TimerA3.Interval = new TimeSpan(0, 0, 1);
             TimerA3.Tick += TimerA3_Tick;
-            TimerRobot.Interval = new TimeSpan(1000);
+            TimerRobot.Interval = new TimeSpan(0, 0, 1);
             TimerRobot.Tick += TimerRobot_Tick;
 
             Loaded = new ActionCommand(() => 
             {
-            
+                try
+                {
+                    if (!Init && PLC_Query.Connected)
+                    {
+                        PLC_Query.Get_ListCodeChar();
+                        PLC_Query.GetProcess_Data_Parameter();
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1) != "")
+                        {
+                            var time1 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_1);
+                            TimeA1_TP = time1;
+                            DipTime1 = string.Format("{0:00}:{1:00}", time1.Minutes, time1.Seconds);
+                            ImputTime1 = (DateTime.Now - time1).ToString("HH:mm:ss");
+                            if (TimerA1.IsEnabled == false) 
+                            {
+                                TimerA1.Start();
+                                TimerA1.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime1 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P1) != "")
+                        {
+                            var time2 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_1);
+                            TimeA1_TP = time2;
+                            DipTime2 = string.Format("{0:00}:{1:00}", time2.Minutes, time2.Seconds);
+                            ImputTime2 = (DateTime.Now - time2).ToString("HH:mm:ss");
+                            if (TimerA1.IsEnabled == false)
+                            {
+                                TimerA1.Start();
+                                TimerA1.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime2 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1) != "")
+                        {
+                            var time3 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_1);
+                            TimeA1_TP = time3;
+                            DipTime3 = string.Format("{0:00}:{1:00}", time3.Minutes, time3.Seconds);
+                            ImputTime3 = (DateTime.Now - time3).ToString("HH:mm:ss");
+                            if (TimerA1.IsEnabled == false)
+                            {
+                                TimerA1.Start();
+                                TimerA1.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime3 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1) != "")
+                        {
+                            var time4 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Bath4);
+                            TimeRobot_TP = time4;
+                            DipTime4 = string.Format("{0:00}:{1:00}", time4.Minutes, time4.Seconds);
+                            ImputTime4 = (DateTime.Now - time4).ToString("HH:mm:ss");
+                            if (TimerRobot.IsEnabled == false)
+                            {
+                                TimerRobot.Start();
+                                TimerRobot.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime4 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
+                        {
+                            var time5 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Bath5);
+                            TimeRobot_TP = time5;
+                            DipTime5 = string.Format("{0:00}:{1:00}", time5.Minutes, time5.Seconds);
+                            ImputTime5 = (DateTime.Now - time5).ToString("HH:mm:ss");
+                            if (TimerRobot.IsEnabled == false)
+                            {
+                                TimerRobot.Start();
+                                TimerRobot.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime5 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
+                        {
+                            var time6 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Bath6);
+                            TimeRobot_TP = time6;
+                            DipTime6 = string.Format("{0:00}:{1:00}", time6.Minutes, time6.Seconds);
+                            ImputTime6 = (DateTime.Now - time6).ToString("HH:mm:ss");
+                            if (TimerRobot.IsEnabled == false)
+                            {
+                                TimerRobot.Start();
+                                TimerRobot.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime6 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1) != "")
+                        {
+                            var time7 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_3);
+                            TimeA3_TP = time7;
+                            DipTime7 = string.Format("{0:00}:{1:00}", time7.Minutes, time7.Seconds);
+                            ImputTime7 = (DateTime.Now - time7).ToString("HH:mm:ss");
+                            if (TimerA3.IsEnabled == false)
+                            {
+                                TimerA3.Start();
+                                TimerA3.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime7 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P1) != "")
+                        {
+                            var time8 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_3);
+                            TimeA3_TP = time8;
+                            DipTime8 = string.Format("{0:00}:{1:00}", time8.Minutes, time8.Seconds);
+                            ImputTime8 = (DateTime.Now - time8).ToString("HH:mm:ss");
+                            if (TimerA3.IsEnabled == false)
+                            {
+                                TimerA3.Start();
+                                TimerA3.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime8 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1) != "")
+                        {
+                            var time9 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_3);
+                            TimeA3_TP = time9;
+                            DipTime9 = string.Format("{0:00}:{1:00}", time9.Minutes, time9.Seconds);
+                            ImputTime9 = (DateTime.Now - time9).ToString("HH:mm:ss");
+                            if (TimerA3.IsEnabled == false)
+                            {
+                                TimerA3.Start();
+                                TimerA3.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime9 = "--:--";
+                        }
+                        if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1) != "")
+                        {
+                            var time10 = TimeSpan.FromMilliseconds(PLC_Query.PROCESS_DATA_PARAMETER.Current_TValue_Area_3);
+                            TimeA3_TP = time10;
+                            DipTime10 = string.Format("{0:00}:{1:00}", time10.Minutes, time10.Seconds);
+                            ImputTime10 = (DateTime.Now - time10).ToString("HH:mm:ss");
+                            if (TimerA3.IsEnabled == false)
+                            {
+                                TimerA3.Start();
+                                TimerA3.IsEnabled = true;
+                            }
+                        }
+                        else
+                        {
+                            DipTime10 = "--:--";
+                        }
+                        Getbarcode_Command.Execute(null);
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("exeption with convert value or error with plc comunication");
+                }
+                
             });
 
             Unloaded = new ActionCommand(() =>
@@ -459,46 +637,72 @@ namespace TrippingApp.ViewModel
                 }
             });
 
-            Get_Dip_Time_A1_Command = new ActionCommand(() => 
+            Get_Dip_Time_A1_Command = new ActionCommand((p) => 
             {
-                if(TimerA1.IsEnabled == false) 
+                if((bool)p) 
                 {
+                    ImputTime1 = ImputTime2 = ImputTime3 = DateTime.Now.ToString("HH:mm:ss");
                     TimerA1.Start();
                     TimerA1.IsEnabled = true;
+                    
                 }
                 else 
                 {
+                    ImputTime1 = ImputTime2 = ImputTime3 = "--:--";
                     TimerA1.Stop();
                     TimerA1.IsEnabled = false;
                     TimeA1_TP = TimeSpan.FromSeconds(0);
                 }
             });
-            Get_Dip_Time_A3_Command = new ActionCommand(() => 
+            Get_Dip_Time_A3_Command = new ActionCommand((p) => 
             {
-                if (TimerA3.IsEnabled == false)
+                if ((bool)p)
                 {
+                    ImputTime7 = ImputTime8 = ImputTime9 = ImputTime10 = DateTime.Now.ToString("HH:mm:ss");
                     TimerA3.Start();
                     TimerA3.IsEnabled = true;
                 }
                 else
                 {
+                    ImputTime7 = ImputTime8 = ImputTime9 = ImputTime10 = "--:--";
                     TimerA3.Stop();
                     TimerA3.IsEnabled = false;
                     TimeA3_TP = TimeSpan.FromSeconds(0);
                 }
             });
-            Get_Dip_Time_Robot = new ActionCommand(() => 
+            Get_Dip_Time_Robot = new ActionCommand((p) => 
             {
-                if (TimerRobot.IsEnabled == false)
+                if ((bool)p)
                 {
                     TimerRobot.Start();
                     TimerRobot.IsEnabled = true;
+                    if (Barcode4 != string.Empty)
+                    {
+                        ImputTime5 = "--:--";
+                        ImputTime6 = "--:--";
+                        ImputTime4 = DateTime.Now.ToString("HH:mm:ss");
+                    }
+                    else if (Barcode5 != string.Empty)
+                    {
+                        ImputTime4 = "--:--";
+                        ImputTime6 = "--:--";
+                        ImputTime5 = DateTime.Now.ToString("HH:mm:ss");
+                    }
+                    else if (Barcode6 != string.Empty)
+                    {
+                        ImputTime4 = "--:--";
+                        ImputTime5 = "--:--";
+                        ImputTime6 = DateTime.Now.ToString("HH:mm:ss");
+                    }
                 }
                 else
                 {
                     TimerRobot.Stop();
                     TimerRobot.IsEnabled = false;
                     TimeRobot_TP = TimeSpan.FromSeconds(0);
+                    ImputTime5 = "--:--";
+                    ImputTime6 = "--:--";
+                    ImputTime5 = "--:--";
                 }
             });
             
@@ -508,37 +712,53 @@ namespace TrippingApp.ViewModel
         {
             if(Barcode4 != string.Empty) 
             {
-                DipTime5 = "00:00";
-                DipTime6 = "00:00";
+                DipTime5 = "--:--";
+                DipTime6 = "--:--";
                 TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime4 = TimeRobot_TP.ToString(@"mm:/ss");
+                DipTime4 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
             }
             else if(Barcode5 != string.Empty)
             {
-                DipTime4 = "00:00";
-                DipTime6 = "00:00";
+                DipTime4 = "--:--";
+                DipTime6 = "--:--";
                 TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime5 = TimeRobot_TP.ToString(@"mm:/ss");
+                DipTime5 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
             }
             else if (Barcode6 != string.Empty) 
             {
-                DipTime5 = "00:00";
-                DipTime4 = "00:00";
+                DipTime5 = "--:--";
+                DipTime4 = "--:--";
                 TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime6 = TimeRobot_TP.ToString(@"mm:/ss");
+                DipTime6 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
             }
         }
 
         private void TimerA3_Tick(object sender, EventArgs e)
         {
-            TimeA3_TP += TimeSpan.FromSeconds(1);
-            DipTime7 = DipTime8 = DipTime9 = DipTime10 = TimeA3_TP.ToString(@"mm:/ss");
+            try
+            {
+                TimeA3_TP += TimeSpan.FromSeconds(1);
+                DipTime7 = DipTime8 = DipTime9 = DipTime10 = string.Format("{0:00}:{1:00}", TimeA3_TP.Minutes, TimeA3_TP.Seconds);
+            }
+            catch (Exception)
+            {
+
+               
+            }
+           
         }
 
         private void TimerA1_Tick(object sender, EventArgs e)
         {
-            TimeA1_TP += TimeSpan.FromSeconds(1);
-            DipTime1 = DipTime2 = DipTime3 = TimeA1_TP.ToString(@"mm:/ss");
+            try
+            {
+                TimeA1_TP += TimeSpan.FromSeconds(1);
+                DipTime1 = DipTime2 = DipTime3 = string.Format("{0:00}:{1:00}", TimeA1_TP.Minutes,TimeA1_TP.Seconds);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

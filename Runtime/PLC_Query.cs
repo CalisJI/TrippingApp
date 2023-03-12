@@ -762,7 +762,7 @@ namespace TrippingApp.Runtime
         public readonly static string Sync_Position = "M126.1";
 
         public readonly static string MoveRack123 = "M175.2";
-        public readonly static string TripDoneRack123 = "M174.4";
+        public readonly static string TripDoneRack123 = "M175.4";
 
         public readonly static string MoveRack456 = "M174.5";
         public readonly static string TripRackDone456 = "M174.6";
@@ -772,6 +772,9 @@ namespace TrippingApp.Runtime
 
         public readonly static string AUTO_STATE = "M3.2";
         public readonly static string Trigger_GetRack_Infor = "M183.0";
+
+        public readonly static string SEND_OutofQR = "M185.2";
+        public readonly static string SEND_Done_rack = "M185.3";
 
         public readonly static DataOffSetPLC Jog_X_SPEED  = new DataOffSetPLC()
         {

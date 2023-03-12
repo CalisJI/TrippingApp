@@ -475,7 +475,8 @@ namespace TrippingApp.Model
                 RackObject rackObject = new RackObject()
                 {
                     RackBarcode = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1),
-                    Data = GlobalDataHoya.HoyadataDict[S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1)],
+                    //Data = GlobalDataHoya.HoyadataDict[S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1)],
+                    Data = new HoyaData(),
                     RackStatus = Status.Inprocess,
                     NGType = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2),
                     Bath1_Infor = new BathInformation()
@@ -617,6 +618,7 @@ namespace TrippingApp.Model
 
         public static void MovedRack789_10()
         {
+            PLC_Query.Get_ListCodeChar();
             string code7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1);
             string type7 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P2);
             var R7 = RackObjects.Where(x => x.RackBarcode == code7 && x.NGType == type7 && code7 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
@@ -662,6 +664,8 @@ namespace TrippingApp.Model
             {
                 R11.RackStatus = Status.Done;
                 HistoryLogger.EditRackObject(R11);
+                GlobalDataHoya.HoyadataDict[R11.RackBarcode] = null;
+
             }
         }
 
