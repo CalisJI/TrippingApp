@@ -141,8 +141,10 @@ namespace TrippingApp.Runtime
                 connection.Open();
                 using (MySqlCommand command = new MySqlCommand())
                 {
+                    var condition = rackObject.Bath1_Infor.TimeIn.Year.ToString() + "-" + rackObject.Bath1_Infor.TimeIn.Month.ToString("D2") + "-" + rackObject.Bath1_Infor.TimeIn.Day.ToString("D2") + " " + rackObject.Bath1_Infor.TimeIn.Hour.ToString("D2") + ":" + rackObject.Bath1_Infor.TimeIn.Minute.ToString("D2");
+
                     command.Connection = connection;
-                    command.CommandText = @"UPDATE "+TableName+" SET " +
+                    command.CommandText = @"SET SQL_SAFE_UPDATES = 0; UPDATE " + TableName+" SET " +
                         "ng_type = @NGType, " +
                         "bath1_temper = @Bath1Temper, " +
                         "bath1_time_in = @Bath1In, " +
@@ -175,7 +177,7 @@ namespace TrippingApp.Runtime
                         "bath10_time_in = @Bath10In, "+
                         "bath10_time_out = @Bath10Out, "+
                         "rack_status = @RackStatus "+
-                        "WHERE (rack_barcode = @RackBarcode AND bath1_time_in = @Bath1In) ";
+                        "WHERE (rack_barcode = @RackBarcode AND DATE_FORMAT(bath1_time_in, '%Y-%m-%d %H:%i') = '"+condition+"')";
                     command.Parameters.AddWithValue("@RackBarcode", rackObject.RackBarcode);
                     command.Parameters.AddWithValue("@NGType", rackObject.NGType);
                     command.Parameters.AddWithValue("@Bath1Temper", rackObject.Bath1_Infor.BathTemper);
@@ -209,7 +211,8 @@ namespace TrippingApp.Runtime
                     command.Parameters.AddWithValue("@Bath10In", rackObject.Bath10_Infor.TimeIn);
                     command.Parameters.AddWithValue("@Bath10Out", rackObject.Bath10_Infor.TimeOut);
                     command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus.ToString());
-                    command.ExecuteNonQuery();
+                    int r = command.ExecuteNonQuery();
+                    Console.WriteLine($"rows effects = {r}");
                 }
             }
         }

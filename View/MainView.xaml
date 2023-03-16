@@ -359,7 +359,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>-->
                 <Button 
-                Command="{Binding Test1}"
+                Command="{Binding IO_Page_Command}"
                  Width="100"
                 Height="100"
                 Content="IO Table"

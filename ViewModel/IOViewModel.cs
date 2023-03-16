@@ -44,20 +44,20 @@ namespace TrippingApp.ViewModel
             DispatcherTimer.Tick += DispatcherTimer_Tick;
             Loaded = new ActionCommand(() =>
             {
-                if(DispatcherTimer.IsEnabled == false) 
-                {
-                    DispatcherTimer.Start();
-                    DispatcherTimer.IsEnabled = true;
-                }
+                //if(DispatcherTimer.IsEnabled == false) 
+                //{
+                //    DispatcherTimer.Start();
+                //    DispatcherTimer.IsEnabled = true;
+                //}
             });
 
             Unloaded = new ActionCommand(() =>
             {
-                if (DispatcherTimer.IsEnabled == true)
-                {
-                    DispatcherTimer.Stop();
-                    DispatcherTimer.IsEnabled = false;
-                }
+                //if (DispatcherTimer.IsEnabled == true)
+                //{
+                //    DispatcherTimer.Stop();
+                //    DispatcherTimer.IsEnabled = false;
+                //}
                 GC.Collect();
             });
         }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d" 
+             xmlns:WPF="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_IO}"
              Height="990" Width="1920">
@@ -18,11 +19,8 @@
     </i:Interaction.Triggers>
     <Viewbox>
         <Grid Width="1920" Height="990">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <DataGrid
+           
+            <!--<DataGrid
                 RowHeight="40"
                 
                 VirtualizingPanel.VirtualizationMode="Recycling"
@@ -106,7 +104,9 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
+
+            <WPF:WebView2 Source="http://127.0.0.1:1880/ui/#!/3"/>
         </Grid>
     </Viewbox>
    

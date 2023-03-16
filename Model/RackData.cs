@@ -701,16 +701,25 @@ namespace TrippingApp.Model
                 R3.Bath3_Infor.TimeOut = DateTime.Now;
                 HistoryLogger.EditRackObject(R3);
             }
-            //DateTime dateTime = DateTime.Parse("2023-03-15 17:18:56");
+            DateTime dateTime = DateTime.Parse("2023-03-16 17:49:57");
             //var R4 = new RackObject()
             //{
-            //    RackBarcode = "HY-014",
+            //    RackBarcode = "HY-004",
             //    Data = new HoyaData(),
             //    NGType = "2",
-            //    Bath1_Infor = new BathInformation() { TimeIn = dateTime, BathTemper = 10, TimeOut = new DateTime() },
-            //    Bath2_Infor = new BathInformation() { TimeIn = DateTime.Now , BathTemper = 49, TimeOut = DateTime.Now}
-                
+            //    Bath1_Infor = new BathInformation() { TimeIn = dateTime, BathTemper = 10, TimeOut = DateTime.Now },
+            //    Bath2_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 49, TimeOut = DateTime.Now },
+            //    Bath3_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 61, TimeOut = DateTime.Now },
+            //    Bath4_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 54, TimeOut = DateTime.Now },
+            //    Bath5_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 55, TimeOut = DateTime.Now },
+            //    Bath6_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 49, TimeOut = DateTime.Now },
+            //    Bath7_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 74, TimeOut = DateTime.Now },
+            //    Bath8_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 49, TimeOut = DateTime.Now },
+            //    Bath9_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 49, TimeOut = DateTime.Now },
+            //    Bath10_Infor = new BathInformation() { TimeIn = DateTime.Now, BathTemper = 49, TimeOut = DateTime.Now },
+            //    RackStatus = Status.Inprocess
 
+                
             //};
             //HistoryLogger.EditRackObject(R4);
 
