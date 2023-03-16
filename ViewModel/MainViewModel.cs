@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 using BaseViewModel;
@@ -67,6 +69,10 @@ namespace TrippingApp.ViewModel
         }
         public static DispatcherTimer ShowTimer = new DispatcherTimer();
 
+
+
+        public ICommand Loaded { get; set; }
+        public static ICommand Unloaded { get; set; }
         public ICommand Home_Page_Command { get; set; }
         public ICommand Test { get; set; }
         public ICommand Test1 { get; set; }
@@ -108,6 +114,8 @@ namespace TrippingApp.ViewModel
         }
         #endregion
 
+
+        private static Process process = null;
         #region ViewModel
         private Lazy<SimulationViewModel> SimulationViewModel = new Lazy<SimulationViewModel>(() => { return new ViewModel.SimulationViewModel(); });
         //private SimulationViewModel SimulationViewModel;
@@ -127,7 +135,24 @@ namespace TrippingApp.ViewModel
 
         public MainViewModel()
         {
+            Loaded = new ActionCommand(() =>
+            {
+                
+            });
+            Unloaded = new ActionCommand(() =>
+            {
+                SendCtrlC(process);
+            });
+            try
+            {
+                string cmd = "node-red";
+                _ = Execute_Command(cmd);
+            }
+            catch (Exception)
+            {
 
+                Console.WriteLine("Node Red Error");
+            }
             try
             {
                 var workbenchPath = @"C:\Program Files\MySQL\MySQL Workbench 8.0\MySQLWorkbench.exe";
@@ -406,6 +431,7 @@ namespace TrippingApp.ViewModel
 
         }
 
+
         private void ShowTimer_Tick(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
@@ -432,7 +458,78 @@ namespace TrippingApp.ViewModel
             CameraOn = CameraApiViewModel.CvsInSightDisplay2.Connected;
             PLC_Connect = PLC_Query.Connected;
         }
+        private async Task Execute_Command(string command)
+        {
+            void act() 
+            {
+                using (process = new Process())
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = "cmd.exe";
+                    psi.Arguments = $"/c {command}";
+                    psi.CreateNoWindow = true;
+                    psi.RedirectStandardOutput = true;
+                    psi.UseShellExecute = false;
+                    process.EnableRaisingEvents = true;
+                    process.StartInfo = psi;
+                    process.Exited += Process_Exited;
+                    process.OutputDataReceived += Process_OutputDataReceived;
+                    process.Start();
+                    process.BeginOutputReadLine();
+                    process.WaitForExit();
 
+                    // Update UI with the output
+
+                }
+            }
+            var task = new Task(act);
+            task.Start();
+            await task;
+           
+
+        }
+        private static async Task SendCommandAsync(Process process, string command)
+        {
+            if (process == null || process.HasExited)
+            {
+                throw new InvalidOperationException("Node-RED process is not running.");
+            }
+
+            process.StandardInput.WriteLine(command);
+            await process.StandardInput.FlushAsync();
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, uint dwProcessGroupId);
+
+        private static void SendCtrlC(Process process)
+        {
+            try
+            {
+                const uint CTRL_C_EVENT = 0x00000002;
+                GenerateConsoleCtrlEvent(CTRL_C_EVENT, (uint)process.Id);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error Send Ctrl+C");
+            }
+           
+        }
+
+
+
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                Console.WriteLine(e.Data);
+            }
+        }
+
+        private void Process_Exited(object sender, EventArgs e)
+        {
+            Console.WriteLine("Process Exit");
+        }
 
         [ComImport, Guid("4ce576fa-83dc-4F88-951c-9d0782b4e376")]
         class UIHostNoLaunch

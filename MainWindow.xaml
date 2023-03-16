@@ -12,6 +12,7 @@
         xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="Black"
         Closing="Window_Closing"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{StaticResource VM_Main}"
         Title="MainWindow"
         Height="1080"

@@ -7,9 +7,10 @@
              mc:Ignorable="d"
              xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:digit ="clr-namespace:TrippingApp.Control"
+             xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              DataContext="{StaticResource VM_Simulation}"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             d:DesignHeight="990" d:DesignWidth="1920"
+             Height="1080" Width="1920"
              >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -25,7 +26,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>-->
        
-        <Grid Width="1920" Height="990" Grid.Row="1">
+        <!--<Grid Width="1920" Height="990" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -36,8 +37,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-            </Grid.RowDefinitions>
-            <digit:VX4_Control
+            </Grid.RowDefinitions>-->
+            <!--<digit:VX4_Control
             Grid.Column="0"
             Grid.Row="0"
             Posit="1"
@@ -142,6 +143,7 @@
                     DoAm="{Binding H2}"
                     Grid.Row="1"/>
             </Grid>
-        </Grid>
+        </Grid>-->
+        <Wpf:WebView2 Source="http://127.0.0.1:1880/ui/#!/2"/>
     </Grid>
 </UserControl>

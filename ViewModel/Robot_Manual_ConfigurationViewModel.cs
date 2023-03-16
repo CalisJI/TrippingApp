@@ -274,11 +274,13 @@ namespace TrippingApp.ViewModel
         private Cylinder_Control_ViewModel Cylinder_Control_ViewModel = new Cylinder_Control_ViewModel();
         private Motor_Control_ViewModel Motor_Control_ViewModel = new Motor_Control_ViewModel();
         private Parameter_Process_ViewModel Parameter_Process_ViewModel = new Parameter_Process_ViewModel();
+        private Manual_ViewModel Manual_ViewModel = new Manual_ViewModel();
+
         public Robot_Manual_ConfigurationViewModel()
         {
-            this.Motor_Control_View = Motor_Control_ViewModel;
+            //this.Motor_Control_View = Motor_Control_ViewModel;
             this.Process_Param_View = Parameter_Process_ViewModel;
-            this.Cylinder_View = Cylinder_Control_ViewModel;
+            this.Cylinder_View = Manual_ViewModel;
             Loaded = new ActionCommand(() =>
             {
                 if (PLC_Query.Connected) 

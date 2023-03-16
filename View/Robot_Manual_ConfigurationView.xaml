@@ -124,7 +124,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                                 TextAlignment="Center"
-                                Text=" Cylinder Control "
+                                Text=" Manual Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
                         <Grid.LayoutTransform>
@@ -138,7 +138,7 @@
                 </TabItem.Header>
                 <ContentControl Content="{Binding Cylinder_View}"/>
             </TabItem>
-            <TabItem>
+            <!--<TabItem>
                 <TabItem.Header>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -160,7 +160,7 @@
                     </Grid>
                 </TabItem.Header>
                 <ContentControl Content="{Binding Motor_Control_View}"/>
-            </TabItem>
+            </TabItem>-->
             <TabItem >
                 <TabItem.Header>
                     <Grid>

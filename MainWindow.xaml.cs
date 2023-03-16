@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TrippingApp.ViewModel;
 
 namespace TrippingApp
 {
@@ -31,7 +32,7 @@ namespace TrippingApp
             try
             {
                 InitializeComponent();
-                timer.Interval = new TimeSpan(100);
+                timer.Interval = new TimeSpan(0,0,1);
                 timer.Tick += Timer_Tick;
             }
             catch (Exception ex)
@@ -45,8 +46,9 @@ namespace TrippingApp
         private void Timer_Tick(object sender, EventArgs e)
         {
             count_hold++;
-            if(count_hold >= 30)
+            if(count_hold >= 3)
             {
+                MainViewModel.Unloaded.Execute(null);
                 Environment.Exit(0);
             }
         }
@@ -54,7 +56,7 @@ namespace TrippingApp
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var workbenchName = "MySQLWorkbench";
-
+          
             var process = Process.GetProcessesByName(workbenchName);
             if (process.Length > 0)
             {

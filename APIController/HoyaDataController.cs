@@ -17,12 +17,14 @@ namespace TrippingApp.APIController
 {
     public static class GlobalDataHoya
     {
+        
         public static List<HoyaData> hoyaDatas = new List<HoyaData>
         {
             new HoyaData { Id = 1, Name = "John", Age = 30 },
             new HoyaData { Id = 2, Name = "Jane", Age = 25 },
             new HoyaData { Id = 3, Name = "Bob", Age = 40 }
         };
+        public static Nhietdo Nhietdo = new Nhietdo();
         public static Dictionary<string, HoyaData> HoyadataDict = new Dictionary<string, HoyaData>();
     }
 
@@ -213,11 +215,46 @@ namespace TrippingApp.APIController
             }
         }
     }
+    public class MonitorController : ApiController
+    {
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            //var data = HistoryLogger.Upload_Rows();
+            return Json(GlobalDataHoya.Nhietdo); // Return the list of users as JSON
+        }
+        [HttpPut]
+        public IHttpActionResult Put([FromBody] Nhietdo nhietdo)
+        {
+            
+            if (nhietdo == null)
+            {
+                return NotFound();
+            }
+            GlobalDataHoya.Nhietdo = nhietdo;
+            return Json("OK"); // Return the updated user object as JSON
+        }
+       
+    }
     public class HoyaData
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+    }
+    public class Nhietdo 
+    {
+        public int Temp1 { get; set; }
+        public int Temp2 { get; set; }
+        public int Temp3 { get; set; }
+        public int Temp4 { get; set; }
+        public int Temp5 { get; set; }
+        public int Temp6 { get; set; }
+        public int Temp7 { get; set; }
+        public int Temp8 { get; set; }
+        public int Temp9 { get; set; }
+        public int Temp10 { get; set; }
+        public int Temp11 { get; set; }
     }
     
 }

@@ -481,7 +481,7 @@ namespace TrippingApp.Model
                     NGType = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2),
                     Bath1_Infor = new BathInformation()
                     {
-                        BathTemper = Modbus_Communicate.VX4_1.PV,
+                        BathTemper = GlobalDataHoya.Nhietdo.Temp1,
                         TimeIn = DateTime.Now,
                         TimeOut = new DateTime()
                     },
@@ -549,7 +549,7 @@ namespace TrippingApp.Model
 
             if (R2!=null)
             {
-                R2.Bath2_Infor.BathTemper = Modbus_Communicate.VX4_2.PV;
+                R2.Bath2_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp2;
                 R2.Bath2_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R2);
             }
@@ -561,7 +561,7 @@ namespace TrippingApp.Model
 
             if (R3 != null) 
             {
-                R3.Bath3_Infor.BathTemper = Modbus_Communicate.VX4_3.PV;
+                R3.Bath3_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp3;
                 R3.Bath3_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R3);
             }
@@ -580,7 +580,7 @@ namespace TrippingApp.Model
                 var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
                 if (R4!=null)
                 {
-                    R4.Bath4_Infor.BathTemper = Modbus_Communicate.VX4_4.PV;
+                    R4.Bath4_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp4;
                     R4.Bath4_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R4);
                 }
@@ -592,7 +592,7 @@ namespace TrippingApp.Model
                 var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
                 if (R5 != null)
                 {
-                    R5.Bath5_Infor.BathTemper = Modbus_Communicate.VX4_5.PV;
+                    R5.Bath5_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp5;
                     R5.Bath5_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R5);
                 }
@@ -605,7 +605,7 @@ namespace TrippingApp.Model
                 var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
                 if (R6 != null)
                 {
-                    R6.Bath6_Infor.BathTemper = Modbus_Communicate.VX4_6.PV;
+                    R6.Bath6_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp6;
                     R6.Bath6_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R6);
                 }
@@ -624,7 +624,7 @@ namespace TrippingApp.Model
             var R7 = RackObjects.Where(x => x.RackBarcode == code7 && x.NGType == type7 && code7 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
             if (R7 != null) 
             {
-                R7.Bath7_Infor.BathTemper = Modbus_Communicate.VX4_7.PV;
+                R7.Bath7_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp7;
                 R7.Bath7_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R7);
             }
@@ -633,7 +633,7 @@ namespace TrippingApp.Model
             var R8 = RackObjects.Where(x => x.RackBarcode == code8 && x.NGType == type8 && code8 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
             if (R8 != null)
             {
-                R8.Bath8_Infor.BathTemper = Modbus_Communicate.VX4_8.PV;
+                R8.Bath8_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp8;
                 R8.Bath8_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R8);
             }
@@ -642,7 +642,7 @@ namespace TrippingApp.Model
             var R9 = RackObjects.Where(x => x.RackBarcode == code9 && x.NGType == type9 && code9 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
             if (R9 != null)
             {
-                R9.Bath9_Infor.BathTemper = Modbus_Communicate.VX4_9.PV;
+                R9.Bath9_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp9;
                 R9.Bath9_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R9);
             }
@@ -652,7 +652,7 @@ namespace TrippingApp.Model
             var R10 = RackObjects.Where(x => x.RackBarcode == code10 && x.NGType == type10 && code10 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
             if (R10 != null)
             {
-                R10.Bath10_Infor.BathTemper = Modbus_Communicate.VX4_10.PV;
+                R10.Bath10_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp10;
                 R10.Bath10_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R10);
             }
@@ -701,6 +701,19 @@ namespace TrippingApp.Model
                 R3.Bath3_Infor.TimeOut = DateTime.Now;
                 HistoryLogger.EditRackObject(R3);
             }
+            //DateTime dateTime = DateTime.Parse("2023-03-15 17:18:56");
+            //var R4 = new RackObject()
+            //{
+            //    RackBarcode = "HY-014",
+            //    Data = new HoyaData(),
+            //    NGType = "2",
+            //    Bath1_Infor = new BathInformation() { TimeIn = dateTime, BathTemper = 10, TimeOut = new DateTime() },
+            //    Bath2_Infor = new BathInformation() { TimeIn = DateTime.Now , BathTemper = 49, TimeOut = DateTime.Now}
+                
+
+            //};
+            //HistoryLogger.EditRackObject(R4);
+
         }
         public static void TripDoneRack_456()
         {

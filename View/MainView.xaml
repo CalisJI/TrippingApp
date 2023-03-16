@@ -9,6 +9,11 @@
              xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              DataContext="{StaticResource VM_Main}"
              d:DesignHeight="990" d:DesignWidth="1920" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
         <!--Camera-->
         <DrawingImage x:Key="camera_svgrepo_comDrawingImage">

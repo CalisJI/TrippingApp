@@ -142,41 +142,40 @@ namespace TrippingApp.Runtime
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"UPDATE "+TableName+"SET " +
-                        "ng_type = @NGType," +
-                        "rack_details = @RackDetails," +
-                        "bath1_temper = @Bath1Temper," +
-                        "bath1_time_in = @Bath1In," +
-                        "bath1_time_out = @Bath1Out,"+
-                        "bath2_temper = @Bath2Temper,"+
-                        "bath2_time_in = @Bath2In,"+
-                        "bath2_time_out = @Bath2Out,"+
-                        "bath3_temper = @Bath3Temper,"+
-                        "bath3_time_in = @Bath3In,"+
-                        "bath3_time_out = @Bath3Out,"+
-                        "bath4_temper = @Bath4Temper,"+
-                        "bath4_time_in = @Bath4In,"+
-                        "bath4_time_out = @Bath4Out,"+
-                        "bath5_temper = @Bath5Temper,"+
-                        "bath5_time_in = @Bath5In,"+
-                        "bath5_time_out = @Bath5Out,"+
-                        "bath6_temper = @Bath6Temper,"+
-                        "bath6_time_in = @Bath6In,"+
-                        "bath6_time_out = @Bath6Out,"+
-                        "bath7_temper = @Bath7Temper,"+
-                        "bath7_time_in = @Bath7In,"+
-                        "bath7_time_out = @Bath7Out,"+
-                        "bath8_temper = @Bath8Temper,"+
-                        "bath8_time_in = @Bath8In,"+
-                        "bath8_time_out = @Bath8Out,"+
-                        "bath9_temper = @Bath9Temper,"+
-                        "bath9_time_in = @Bath9In,"+
-                        "bath9_time_out = @Bath9Out,"+
-                        "bath10_temper = @Bath10Temper,"+
-                        "bath10_time_in = @Bath10In,"+
-                        "bath10_time_out = @Bath10Out,"+
-                        "rack_status = @RackStatus"+
-                        "WHERE RackBarcode = @RackBarcode AND bath1_time_in = @Bath1In ";
+                    command.CommandText = @"UPDATE "+TableName+" SET " +
+                        "ng_type = @NGType, " +
+                        "bath1_temper = @Bath1Temper, " +
+                        "bath1_time_in = @Bath1In, " +
+                        "bath1_time_out = @Bath1Out, "+
+                        "bath2_temper = @Bath2Temper, "+
+                        "bath2_time_in = @Bath2In, "+
+                        "bath2_time_out = @Bath2Out, "+
+                        "bath3_temper = @Bath3Temper, "+
+                        "bath3_time_in = @Bath3In, "+
+                        "bath3_time_out = @Bath3Out, "+
+                        "bath4_temper = @Bath4Temper, "+
+                        "bath4_time_in = @Bath4In, "+
+                        "bath4_time_out = @Bath4Out, "+
+                        "bath5_temper = @Bath5Temper, "+
+                        "bath5_time_in = @Bath5In, "+
+                        "bath5_time_out = @Bath5Out, "+
+                        "bath6_temper = @Bath6Temper, "+
+                        "bath6_time_in = @Bath6In, "+
+                        "bath6_time_out = @Bath6Out, "+
+                        "bath7_temper = @Bath7Temper, "+
+                        "bath7_time_in = @Bath7In, "+
+                        "bath7_time_out = @Bath7Out, "+
+                        "bath8_temper = @Bath8Temper, "+
+                        "bath8_time_in = @Bath8In, "+
+                        "bath8_time_out = @Bath8Out, "+
+                        "bath9_temper = @Bath9Temper, "+
+                        "bath9_time_in = @Bath9In, "+
+                        "bath9_time_out = @Bath9Out, "+
+                        "bath10_temper = @Bath10Temper, "+
+                        "bath10_time_in = @Bath10In, "+
+                        "bath10_time_out = @Bath10Out, "+
+                        "rack_status = @RackStatus "+
+                        "WHERE (rack_barcode = @RackBarcode AND bath1_time_in = @Bath1In) ";
                     command.Parameters.AddWithValue("@RackBarcode", rackObject.RackBarcode);
                     command.Parameters.AddWithValue("@NGType", rackObject.NGType);
                     command.Parameters.AddWithValue("@Bath1Temper", rackObject.Bath1_Infor.BathTemper);
@@ -210,6 +209,7 @@ namespace TrippingApp.Runtime
                     command.Parameters.AddWithValue("@Bath10In", rackObject.Bath10_Infor.TimeIn);
                     command.Parameters.AddWithValue("@Bath10Out", rackObject.Bath10_Infor.TimeOut);
                     command.Parameters.AddWithValue("@RackStatus", rackObject.RackStatus.ToString());
+                    command.ExecuteNonQuery();
                 }
             }
         }
