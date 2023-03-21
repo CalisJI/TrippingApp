@@ -236,6 +236,10 @@ namespace TrippingApp.ViewModel
                        
                     }
                 }
+                if(CvsInSightDisplay2.Results.Cells.GetCell(31, 1)!= null) 
+                {
+                 Cognex_Result = CvsInSightDisplay2.Results.Cells.GetCell(31, 1).Text.ToString();
+                }
             }
             catch (Exception ex)
             {

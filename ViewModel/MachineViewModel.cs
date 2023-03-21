@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TrippingApp.APIController;
 using TrippingApp.Runtime;
 using DateTime = System.DateTime;
 
@@ -29,6 +30,7 @@ namespace TrippingApp.ViewModel
         public static ICommand Getbarcode_Command { get; set; }
         public static ICommand Get_Input_Time_Command { get; set; }
         public static ICommand Get_Trip_Time_Command { get; set; }
+        public static ICommand Update_Temperature_Command { get; set; }
 
         public static ICommand Get_Dip_Time_A1_Command { get; set; }
         public static ICommand Get_Dip_Time_A3_Command { get; set; }
@@ -37,9 +39,9 @@ namespace TrippingApp.ViewModel
 
         #region Model
         //bath 1
-        private float _temper1;
+        private int _temper1;
 
-        public float Temper1
+        public int Temper1
         {
             get { return _temper1; }
             set { SetProperty(ref _temper1, value, nameof(Temper1)); }
@@ -74,9 +76,9 @@ namespace TrippingApp.ViewModel
 
 
         //bath 2
-        private float _temper2;
+        private int _temper2;
 
-        public float Temper2
+        public int Temper2
         {
             get { return _temper2; }
             set { SetProperty(ref _temper2, value, nameof(Temper2)); }
@@ -111,9 +113,9 @@ namespace TrippingApp.ViewModel
 
 
         //bath 3
-        private float _temper3;
+        private int _temper3;
 
-        public float Temper3
+        public int Temper3
         {
             get { return _temper3; }
             set { SetProperty(ref _temper3, value, nameof(Temper3)); }
@@ -147,9 +149,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 4
-        private float _temper4;
+        private int _temper4;
 
-        public float Temper4
+        public int Temper4
         {
             get { return _temper4; }
             set { SetProperty(ref _temper4, value, nameof(Temper4)); }
@@ -183,9 +185,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 5
-        private float _temper5;
+        private int _temper5;
 
-        public float Temper5
+        public int Temper5
         {
             get { return _temper5; }
             set { SetProperty(ref _temper5, value, nameof(Temper5)); }
@@ -219,9 +221,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 6
-        private float _temper6;
+        private int _temper6;
 
-        public float Temper6
+        public int Temper6
         {
             get { return _temper6; }
             set { SetProperty(ref _temper6, value, nameof(Temper6)); }
@@ -255,9 +257,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 7
-        private float _temper7;
+        private int _temper7;
 
-        public float Temper7
+        public int Temper7
         {
             get { return _temper7; }
             set { SetProperty(ref _temper7, value, nameof(Temper7)); }
@@ -291,9 +293,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 8
-        private float _temper8;
+        private int _temper8;
 
-        public float Temper8
+        public int Temper8
         {
             get { return _temper8; }
             set { SetProperty(ref _temper8, value, nameof(Temper8)); }
@@ -327,9 +329,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 9
-        private float _temper9;
+        private int _temper9;
 
-        public float Temper9
+        public int Temper9
         {
             get { return _temper9; }
             set { SetProperty(ref _temper9, value, nameof(Temper9)); }
@@ -363,9 +365,9 @@ namespace TrippingApp.ViewModel
         }
 
         //bath 10
-        private float _temper10;
+        private int _temper10;
 
-        public float Temper10
+        public int Temper10
         {
             get { return _temper10; }
             set { SetProperty(ref _temper10, value, nameof(Temper10)); }
@@ -413,6 +415,9 @@ namespace TrippingApp.ViewModel
             TimerA3.Tick += TimerA3_Tick;
             TimerRobot.Interval = new TimeSpan(0, 0, 1);
             TimerRobot.Tick += TimerRobot_Tick;
+
+
+            
 
             Loaded = new ActionCommand(() => 
             {
@@ -704,6 +709,21 @@ namespace TrippingApp.ViewModel
                     ImputTime6 = "--:--";
                     ImputTime5 = "--:--";
                 }
+            });
+
+            Update_Temperature_Command = new ActionCommand(() => 
+            {
+                Temper1 = GlobalDataHoya.Nhietdo.Temp1;
+                Temper2 = GlobalDataHoya.Nhietdo.Temp2;
+                Temper3 = GlobalDataHoya.Nhietdo.Temp3;
+                Temper4 = GlobalDataHoya.Nhietdo.Temp4;
+                Temper5 = GlobalDataHoya.Nhietdo.Temp5;
+                Temper6 = GlobalDataHoya.Nhietdo.Temp6;
+                Temper7 = GlobalDataHoya.Nhietdo.Temp7;
+                Temper8 = GlobalDataHoya.Nhietdo.Temp8;
+                Temper9 = GlobalDataHoya.Nhietdo.Temp9;
+                Temper10 = GlobalDataHoya.Nhietdo.Temp10;
+                 
             });
             
         }

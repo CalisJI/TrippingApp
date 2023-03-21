@@ -63,7 +63,7 @@ namespace TrippingApp.AppConfig
         /// <summary>
         /// connecting IP of Camera Sensor Cognex
         /// </summary>
-        public string CameraIP { get; set; } = "192.168.0.14";
+        public string CameraIP { get; set; } = "192.168.1.64";
         /// <summary>
         /// UserName of Account Camera
         /// </summary>
@@ -73,5 +73,8 @@ namespace TrippingApp.AppConfig
         /// </summary>
         public string Password { get; set; }
         #endregion
+
+
+        public bool DataMethod { get; set; }
     }
 }

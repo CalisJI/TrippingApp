@@ -222,11 +222,9 @@
                     VerticalAlignment="Center"
                     Grid.Column="1"
                     Grid.Row="1">
-                <themes:PackIcon
-                        Height="180"
-                        Width="180"
-                        Kind="CogTransfer"/>
-
+                <Image
+                    Margin="20"
+                    Source="{StaticResource monitor_svgrepo_comDrawingImage}"/>
 
             </Button>
             <!--Process Param Page-->
@@ -265,7 +263,7 @@
                     Grid.Row="2">
                 <Image
                     Margin="10"
-                    Source="{StaticResource monitor_analytics_svgrepo_comDrawingImage}"/>
+                    Source="{StaticResource analytics_monitor_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Data Machine Page-->
             <Button
@@ -276,10 +274,9 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="2"
                 Grid.Row="2">
-                <themes:PackIcon
-                        Height="180"
-                        Width="180"
-                        Kind="Atom"/>
+                <Image
+                    Margin="10"
+                    Source="{StaticResource speedometer_svgrepo_comDrawingImage}"/>
             </Button>
             <!--Robot And Manual Configuration Page-->
             <Button
@@ -362,10 +359,12 @@
                 Command="{Binding IO_Page_Command}"
                  Width="100"
                 Height="100"
-                Content="IO Table"
                 FontSize="20"
                 FontWeight="DemiBold"
                 >
+                    <Image
+                    Margin="10"
+                    Source="{StaticResource settings_connector_svgrepo_comDrawingImage}"/>
                 </Button>
                 <!--<Button 
                 Command="{Binding Test1}"

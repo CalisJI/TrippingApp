@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using System.Windows;
-
+using TrippingApp.Runtime;
 
 namespace TrippingApp
 {
@@ -29,6 +29,11 @@ namespace TrippingApp
             {
                 new AppConfig.ApplicationConfig();
                 SetStartup();
+
+                if (!HistoryLogger.Checktable())
+                {
+                    HistoryLogger.CreateTable_History();
+                } 
             }
             catch (Exception ex)
             {

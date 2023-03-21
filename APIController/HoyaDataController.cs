@@ -12,18 +12,14 @@ using Org.BouncyCastle.Math.Field;
 using Owin;
 using TrippingApp.Model;
 using TrippingApp.Runtime;
+using TrippingApp.ViewModel;
 
 namespace TrippingApp.APIController
 {
     public static class GlobalDataHoya
     {
-        
-        public static List<HoyaData> hoyaDatas = new List<HoyaData>
-        {
-            new HoyaData { Id = 1, Name = "John", Age = 30 },
-            new HoyaData { Id = 2, Name = "Jane", Age = 25 },
-            new HoyaData { Id = 3, Name = "Bob", Age = 40 }
-        };
+
+        public static List<HoyaData> hoyaDatas = new List<HoyaData> ();
         public static Nhietdo Nhietdo = new Nhietdo();
         public static Dictionary<string, HoyaData> HoyadataDict = new Dictionary<string, HoyaData>();
     }
@@ -40,9 +36,9 @@ namespace TrippingApp.APIController
 
         // GET api/hoyaDatas/5
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(string id)
         {
-            var user = GlobalDataHoya.hoyaDatas.FirstOrDefault(u => u.Id == id);
+            var user = GlobalDataHoya.hoyaDatas.FirstOrDefault(u=>u.Barcode==id);
             if (user == null)
             {
                 return NotFound();
@@ -50,114 +46,43 @@ namespace TrippingApp.APIController
             return Json(user); // Return the user object as JSON
         }
 
-        // PUT api/user/5
+        // PUT api/hoyaDatas/5
         [HttpPut]
         public IHttpActionResult Put(int id, [FromBody] HoyaData hoyaData)
         {
-            var existingUser = GlobalDataHoya.hoyaDatas.FirstOrDefault(u => u.Id == id);
-            if (existingUser == null)
-            {
-                return NotFound();
-            }
-            existingUser.Name = hoyaData.Name;
-            existingUser.Age = hoyaData.Age;
-            return Json(existingUser); // Return the updated user object as JSON
+            //var existingUser = GlobalDataHoya.hoyaDatas.FirstOrDefault(u => u.Id == id);
+            //if (existingUser == null)
+            //{
+            //    return NotFound();
+            //}
+            //existingUser.Name = hoyaData.Name;
+            //existingUser.Age = hoyaData.Age;
+            return Json(new {message = "OK"}); // Return the updated user object as JSON
         }
         [HttpPost]
         public IHttpActionResult AddItem([FromBody] HoyaData item)
         {
             string keyCode = "HY-000";
-            
-            if (GlobalDataHoya.hoyaDatas.Any(i => i.Id == item.Id))
-            {
-                int newId = GlobalDataHoya.hoyaDatas.Count > 0 ? GlobalDataHoya.hoyaDatas.Max(i => i.Id) + 1 : 1;
-                item.Id = newId;
-            }
-            GlobalDataHoya.hoyaDatas.Add(new HoyaData
-            {
-                Id = item.Id,
-                 Age = item.Age,
-                 Name = item.Name
-            });
 
-            if (!GlobalDataHoya.HoyadataDict.ContainsKey(keyCode))
+            if (AppConfig.ApplicationConfig.SystemConfig.DataMethod) 
             {
-                GlobalDataHoya.HoyadataDict.Add(keyCode, item);   
+                if (!GlobalDataHoya.HoyadataDict.ContainsKey(keyCode))
+                {
+                    GlobalDataHoya.HoyadataDict.Add(keyCode, item);
+                }
+                else
+                {
+                    GlobalDataHoya.HoyadataDict[keyCode] = item;
+                }
+
+                return Json(new { message = "Item added successfully" });
             }
             else 
             {
-                GlobalDataHoya.HoyadataDict[keyCode] = item;
+                return Json(new { message = "Error add item" });
             }
-            RackObject rackObject = new RackObject()
-            {
-                RackBarcode = keyCode,
-                NGType = "1",
-                Data = item,
-                RackStatus = Status.Inprocess,
-                Bath1_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath2_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath3_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath4_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath5_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath6_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath7_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath8_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath9_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                },
-                Bath10_Infor = new BathInformation()
-                {
-                    BathTemper = 0,
-                    TimeIn = DateTime.Now,
-                    TimeOut = new DateTime()
-                }
-                
-            };
-            HistoryLogger.AddRackObject(rackObject);
-            return Json(new { message = "Item added successfully" });
+
+            
         }
     }
     [Route("QRCode")]
@@ -197,17 +122,65 @@ namespace TrippingApp.APIController
             if (data != null)
             {
                 string barcode = data.GetValue("Barcode").ToString();
-                JObject hoyadt = data.GetValue("HoyaData") as JObject;
-                HoyaData hoyaData = hoyadt.ToObject<HoyaData>();
+                string kind = data.GetValue("NG_Type").ToString();
+                HoyaData hoyaData = new HoyaData() { Barcode = barcode, Ng_Type = kind };
+                
                 if (!GlobalDataHoya.HoyadataDict.ContainsKey(barcode))
                 {
-                    GlobalDataHoya.HoyadataDict.Add(barcode, hoyaData);
+                    try
+                    {
+                        GlobalDataHoya.HoyadataDict.Add(barcode, hoyaData);
+                        Data_Barcode_PLC data_Barcode_ = new Data_Barcode_PLC()
+                        {
+                            BarCode = barcode,
+                            Kind = hoyaData.Ng_Type
+                        };
+                        bool status = false;
+                        if (PLC_Query.PLC_Controller == null || PLC_Query.PLC_Controller.IsConnected == false)
+                        {
+                            return BadRequest("PLC Is Not Connect");
+                        }
+                        PLC_Query.AddRack2Queue(data_Barcode_, ref status);
+                        if (status == false)
+                        {
+                            return BadRequest("Full Queue In PLC");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        return NotFound();
+                    }
+                   
                 }
                 else 
                 {
-                    GlobalDataHoya.HoyadataDict[barcode] = hoyaData;
+                    try
+                    {
+                        GlobalDataHoya.HoyadataDict[barcode] = hoyaData;
+                        Data_Barcode_PLC data_Barcode_ = new Data_Barcode_PLC()
+                        {
+                            BarCode = barcode,
+                            Kind = hoyaData.Ng_Type
+                        };
+                        bool status = false;
+                        if (PLC_Query.PLC_Controller == null || PLC_Query.PLC_Controller.IsConnected == false) 
+                        {
+                            return BadRequest("PLC Is Not Connect");
+                        }
+                        PLC_Query.AddRack2Queue(data_Barcode_, ref status);
+                        if(status == false) 
+                        {
+                            return BadRequest("Full Queue In PLC");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return BadRequest("Full Queue In PLC");
+                    }
+
                 }
-                return Ok(new { message = "Update Barcode Rack" });
+                return Ok(new { message = "Updated QRCode Rack" });
             }
             else
             {
@@ -232,15 +205,15 @@ namespace TrippingApp.APIController
                 return NotFound();
             }
             GlobalDataHoya.Nhietdo = nhietdo;
+            MachineViewModel.Update_Temperature_Command.Execute(null);
             return Json("OK"); // Return the updated user object as JSON
         }
        
     }
     public class HoyaData
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Barcode { get; set; }
+        public string Ng_Type { get; set; }
     }
     public class Nhietdo 
     {

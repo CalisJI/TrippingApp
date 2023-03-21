@@ -159,6 +159,8 @@ namespace TrippingApp.Runtime
                         SyncProcessData.MovedRack123();
                         MachineViewModel.Get_Dip_Time_A1_Command.Execute(true);
                         PLC_Query.WriteBit(AddressCrt.MoveRack123, false);
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
                         break;
                     //Move Area 2 Done
                     case "2m":
@@ -166,12 +168,15 @@ namespace TrippingApp.Runtime
                         SyncProcessData.MovedRack456();
                         MachineViewModel.Get_Dip_Time_Robot.Execute(true);
                         PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
                         break;
                     //Move Area 3 Done
                     case "3m":
                         //MonitorRackData.MoveRack789_10();
                         SyncProcessData.MovedRack789_10();
                         MachineViewModel.Get_Dip_Time_A3_Command.Execute(true);
+                        MachineViewModel.Getbarcode_Command.Execute(null);
                         PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
                         break;
                     // Trip A1 Done

@@ -242,7 +242,7 @@ namespace TrippingApp.Runtime
             }
             else 
             {
-            
+                
             }
 
         }
@@ -432,78 +432,134 @@ namespace TrippingApp.Runtime
 
             }
         }
-        public static void AddRack2Queue(Data_Barcode_PLC data) 
+        public static void AddRack2Queue(Data_Barcode_PLC data, ref bool status) 
         {
             try
             {
                 Get_ListCodeChar();
-                for (int i = 0; i < 10; i++)
-                {
-                    if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode1_P1) == "" 
+                if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode1_P1) == ""
                         && S7String.FromByteArray(LIST_CODE_CHAR.Barcode1_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_1_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_1_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode2_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode2_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_2_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_2_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode3_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode3_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_3_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_3_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode4_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode4_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_4_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_4_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode5_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode5_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_5_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_5_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode6_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode6_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_6_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_6_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode7_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode7_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_7_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_7_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode8_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode8_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_8_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_8_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode9_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode9_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_9_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_9_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode10_P1) == ""
+                    && S7String.FromByteArray(LIST_CODE_CHAR.Barcode10_P2) == "")
+                {
+                    WriteData(AddressCrt.Barcode_10_P1, S7String.ToByteArray(data.BarCode, 10));
+                    WriteData(AddressCrt.Barcode_10_P2, S7String.ToByteArray(data.Kind, 1));
+                }
+                else 
+                {
+                    if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode1_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_1_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_1_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode2_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode2_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode2_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_2_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_2_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode3_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode3_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode3_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_3_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_3_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode4_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode4_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode4_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_4_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_4_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode5_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode5_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode5_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_5_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_5_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode6_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode6_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode6_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_6_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_6_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode7_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode7_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode7_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_7_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_7_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode8_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode8_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode8_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_8_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_8_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode9_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode9_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode9_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_9_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_9_P2, S7String.ToByteArray(data.Kind, 1));
                     }
-                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode10_P1) == ""
-                        && S7String.FromByteArray(LIST_CODE_CHAR.Barcode10_P2) == "")
+                    else if (S7String.FromByteArray(LIST_CODE_CHAR.Barcode10_P1) == data.BarCode)
                     {
                         WriteData(AddressCrt.Barcode_10_P1, S7String.ToByteArray(data.BarCode, 10));
                         WriteData(AddressCrt.Barcode_10_P2, S7String.ToByteArray(data.Kind, 1));
                     }
+                    else 
+                    {
+                        throw new Exception("Hàng đợi đã đầy!");
+                    }
                 }
+                status = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                if (ex.Message == "Hàng đợi đã đầy!") throw new Exception(message: "Hàng đợi đã đầy!");
+                status = false;
             }
         }
         public static void PostData_Temperature(float[] Temperatures)
@@ -925,14 +981,16 @@ namespace TrippingApp.Runtime
         public readonly static DataOffSetPLC Barcode_1_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 0,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_1_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 12,
             VarCount = 0
         };
@@ -940,56 +998,64 @@ namespace TrippingApp.Runtime
         public readonly static DataOffSetPLC Barcode_2_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 16,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_2_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
-            StartByteAddress = 32,
+            DB = 3,
+            VarType = VarType.S7String,
+            StartByteAddress = 28,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_3_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
-            StartByteAddress = 0,
+            DB = 3,
+            VarType = VarType.S7String,
+            StartByteAddress = 32,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_3_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 44,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_4_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 48,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_4_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 60,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_5_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 64,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_5_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 76,
             VarCount = 0
         };
@@ -997,14 +1063,16 @@ namespace TrippingApp.Runtime
         public readonly static DataOffSetPLC Barcode_6_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 80,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_6_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 92,
             VarCount = 0
         };
@@ -1012,56 +1080,64 @@ namespace TrippingApp.Runtime
         public readonly static DataOffSetPLC Barcode_7_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 96,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_7_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 108,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_8_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 112,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_8_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 124,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_9_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 128,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_9_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 140,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_10_P1 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 144,
             VarCount = 0
         };
         public readonly static DataOffSetPLC Barcode_10_P2 = new DataOffSetPLC()
         {
             DataType = DataType.DataBlock,
-            DB = 8,
+            DB = 3,
+            VarType = VarType.S7String,
             StartByteAddress = 156,
             VarCount = 0
         };

@@ -12,8 +12,38 @@ namespace TrippingApp.Runtime
 {
     public class HistoryLogger
     {
-        public static string ConnectionString = "Server=localhost;Database=calis;Uid=root;Pwd=12345678;";
+        public static string ConnectionString = "Server=localhost;Database=hoya_server;Uid=root;Pwd=123456789;";
         public static readonly string TableName = "rack_object";
+
+        public static bool Checktable() 
+        {
+            using (var connection = new MySqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var command = new MySqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = @database AND table_name = @tableName";
+                    command.Parameters.AddWithValue("@database", connection.Database);
+                    command.Parameters.AddWithValue("@tableName", TableName);
+
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        Console.WriteLine("Table exists.");
+                        return true;
+                       
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table does not exist.");
+                        return false;
+                    }
+                }
+            }
+        }
 
         public static void CreateTable_History()
         {

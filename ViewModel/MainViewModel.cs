@@ -117,7 +117,7 @@ namespace TrippingApp.ViewModel
 
         private static Process process = null;
         #region ViewModel
-        private Lazy<SimulationViewModel> SimulationViewModel = new Lazy<SimulationViewModel>(() => { return new ViewModel.SimulationViewModel(); });
+        private SimulationViewModel SimulationViewModel = new SimulationViewModel();
         //private SimulationViewModel SimulationViewModel;
         private SettingViewModel SettingViewModel;
         private OverViewMachineViewModel OverViewMachineViewModel;
@@ -334,7 +334,7 @@ namespace TrippingApp.ViewModel
             Process_Param_Page = new ActionCommand(() =>
             {
                 //IsActive = true;
-                this.SelectedViewModel = SimulationViewModel.Value;
+                this.SelectedViewModel = SimulationViewModel;
                 ChildPage = true;
                 //IsActive = false;
             });
