@@ -587,6 +587,7 @@ namespace TrippingApp.ViewModel
                         {
                             DipTime10 = "--:--";
                         }
+                        
                         Getbarcode_Command.Execute(null);
                     }
                 }

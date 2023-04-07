@@ -25,21 +25,7 @@
                 <!--<RowDefinition Height="0.1*"/>-->
             </Grid.RowDefinitions>
             <Grid Background="Black">
-                <Button
-                    ToolTip="Menu"
-                    Margin="10 0 0 0"
-                    PreviewMouseDown="Button_PreviewMouseDown"
-                    PreviewMouseUp="Button_PreviewMouseUp"
-                    PreviewTouchDown="Button_PreviewTouchDown"
-                    PreviewTouchUp="Button_PreviewTouchUp"
-                    Command="{Binding Home_Page_Command}"
-                    HorizontalAlignment="Left"
-                    Width="50"
-                    Height="50">
-                    <Image
-                        Margin="5"
-                        Source="{StaticResource menu_svgrepo_comDrawingImage}"/>
-                </Button>
+                
                 <TextBlock
                     Foreground="{StaticResource GlyphBrush}"
                     Grid.Row="0"
@@ -49,21 +35,22 @@
                     FontWeight="DemiBold"
                     VerticalAlignment="Top"
                     Text="{Binding Timer_Full}"/>
-                <Grid Width="250" HorizontalAlignment="Right">
+                <Grid Width="350" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.3*"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Image
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Visibility="{Binding Workbench_Running, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Margin="20"
                         Source="{StaticResource database_svgrepo_comDrawingImage}"/>
                     <Image
                         Visibility="{Binding CameraOn, Converter={StaticResource BooleanToVisibilityConverter}}"
-                        Grid.Column="1"
+                        Grid.Column="3"
                         Margin="20"
                         VerticalAlignment="Center"
                         Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
@@ -76,11 +63,25 @@
                     <Button
                         Command="{Binding OpenKeyBoard_Command}"
                         Margin="10"
-                        Grid.Column="0">
+                        Grid.Column="1">
                         <Image
                         Source="{StaticResource keyboard_svgrepo_comDrawingImage}"/>
                     </Button>
-                    
+                        <Button
+                        ToolTip="Menu"
+                        Grid.Column="0"
+                        PreviewMouseDown="Button_PreviewMouseDown"
+                        PreviewMouseUp="Button_PreviewMouseUp"
+                        PreviewTouchDown="Button_PreviewTouchDown"
+                        PreviewTouchUp="Button_PreviewTouchUp"
+                        Command="{Binding Home_Page_Command}"
+                        HorizontalAlignment="Center"
+                        Width="50"
+                        Height="50">
+                            <Image
+                            Margin="5"
+                            Source="{StaticResource menu_svgrepo_comDrawingImage}"/>
+                        </Button>
                 </Grid>
             </Grid>
             <ContentControl

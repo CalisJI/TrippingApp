@@ -275,6 +275,7 @@ namespace TrippingApp.ViewModel
             {
                 Connected = true;
                 Connected_Camera = true;
+                CvsInSightDisplay2.SoftOnline = true;
             }
             else
             {

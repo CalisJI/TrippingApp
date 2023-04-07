@@ -29,11 +29,20 @@ namespace TrippingApp
             {
                 new AppConfig.ApplicationConfig();
                 SetStartup();
+                //try
+                //{
+                //    if (!HistoryLogger.Checktable())
+                //    {
+                //        HistoryLogger.CreateTable_History();
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
 
-                if (!HistoryLogger.Checktable())
-                {
-                    HistoryLogger.CreateTable_History();
-                } 
+                //    // throw;
+                //    System.Windows.Forms.MessageBox.Show(ex.Message);
+                //}
+                
             }
             catch (Exception ex)
             {

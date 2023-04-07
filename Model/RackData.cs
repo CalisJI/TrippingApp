@@ -459,6 +459,10 @@ namespace TrippingApp.Model
     public class BathInformation
     {
         public float BathTemper { get; set; }
+        public float Envir_H1 { get; set; }
+        public float Envir_T1 { get; set; }
+        public float Envir_H2 { get; set; }
+        public float Envir_T2 { get; set; }
         public DateTime TimeIn { get; set; }
         public DateTime TimeOut { get; set; }
     }
@@ -482,60 +486,101 @@ namespace TrippingApp.Model
                     Bath1_Infor = new BathInformation()
                     {
                         BathTemper = GlobalDataHoya.Nhietdo.Temp1,
+                        Envir_H1 = GlobalDataHoya.Nhietdo.H1,
+                        Envir_T1 = GlobalDataHoya.Nhietdo.T1,
+                        Envir_H2 = GlobalDataHoya.Nhietdo.H2,
+                        Envir_T2 = GlobalDataHoya.Nhietdo.T2,
                         TimeIn = DateTime.Now,
                         TimeOut = new DateTime()
+
                     },
                     Bath2_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath3_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath4_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath5_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath6_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath7_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath8_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath9_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
                     Bath10_Infor = new BathInformation()
                     {
                         BathTemper = 0,
+                        Envir_H1 = 0,
+                        Envir_T1 = 0,
+                        Envir_H2 = 0,
+                        Envir_T2 = 0,
                         TimeIn = new DateTime(),
                         TimeOut = new DateTime()
                     },
@@ -550,6 +595,10 @@ namespace TrippingApp.Model
             if (R2!=null)
             {
                 R2.Bath2_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp2;
+                R2.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R2.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R2.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R2.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R2.Bath2_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R2);
             }
@@ -562,6 +611,10 @@ namespace TrippingApp.Model
             if (R3 != null) 
             {
                 R3.Bath3_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp3;
+                R3.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R3.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R3.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R3.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R3.Bath3_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R3);
             }
@@ -581,6 +634,10 @@ namespace TrippingApp.Model
                 if (R4!=null)
                 {
                     R4.Bath4_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp4;
+                    R4.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                    R4.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                    R4.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                    R4.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                     R4.Bath4_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R4);
                 }
@@ -593,6 +650,10 @@ namespace TrippingApp.Model
                 if (R5 != null)
                 {
                     R5.Bath5_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp5;
+                    R5.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                    R5.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                    R5.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                    R5.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                     R5.Bath5_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R5);
                 }
@@ -606,6 +667,10 @@ namespace TrippingApp.Model
                 if (R6 != null)
                 {
                     R6.Bath6_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp6;
+                    R6.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                    R6.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                    R6.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                    R6.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                     R6.Bath6_Infor.TimeIn = DateTime.Now;
                     HistoryLogger.EditRackObject(R6);
                 }
@@ -625,6 +690,10 @@ namespace TrippingApp.Model
             if (R7 != null) 
             {
                 R7.Bath7_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp7;
+                R7.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R7.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R7.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R7.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R7.Bath7_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R7);
             }
@@ -634,6 +703,10 @@ namespace TrippingApp.Model
             if (R8 != null)
             {
                 R8.Bath8_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp8;
+                R8.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R8.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R8.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R8.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R8.Bath8_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R8);
             }
@@ -643,6 +716,10 @@ namespace TrippingApp.Model
             if (R9 != null)
             {
                 R9.Bath9_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp9;
+                R9.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R9.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R9.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R9.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R9.Bath9_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R9);
             }
@@ -653,6 +730,10 @@ namespace TrippingApp.Model
             if (R10 != null)
             {
                 R10.Bath10_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp10;
+                R10.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                R10.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                R10.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                R10.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
                 R10.Bath10_Infor.TimeIn = DateTime.Now;
                 HistoryLogger.EditRackObject(R10);
             }
@@ -701,7 +782,7 @@ namespace TrippingApp.Model
                 R3.Bath3_Infor.TimeOut = DateTime.Now;
                 HistoryLogger.EditRackObject(R3);
             }
-            DateTime dateTime = DateTime.Parse("2023-03-16 17:49:57");
+            //DateTime dateTime = DateTime.Parse("2023-03-16 17:49:57");
             //var R4 = new RackObject()
             //{
             //    RackBarcode = "HY-004",

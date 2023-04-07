@@ -20,9 +20,21 @@ namespace TrippingApp.View
     /// </summary>
     public partial class Robot_Manual_ConfigurationView : UserControl
     {
+        private static Robot_Manual_ConfigurationView instance;
         public Robot_Manual_ConfigurationView()
         {
             InitializeComponent();
+        }
+        public static Robot_Manual_ConfigurationView Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Robot_Manual_ConfigurationView();
+                }
+                return instance;
+            }
         }
     }
 }

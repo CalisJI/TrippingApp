@@ -222,10 +222,17 @@
                     VerticalAlignment="Center"
                     Grid.Column="1"
                     Grid.Row="1">
-                <Image
-                    Margin="20"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                    Height="150"
+                    HorizontalAlignment="Center"
+                    Width="200"
                     Source="{StaticResource monitor_svgrepo_comDrawingImage}"/>
-
+                    <Label
+                        Foreground="#FF042271"
+                        Content="Basket Indicator" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             <!--Process Param Page-->
             <Button
@@ -236,9 +243,14 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="2"
                 Grid.Row="1">
-                <Image
-                    Margin="20"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="150"
                     Source="{StaticResource table_excel_svgrepo_comDrawingImage}"/>
+                    <Label 
+                        Foreground="#FF042271"
+                        Content="Data Tracking" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
             </Button>
             <!--Setting Page-->
             <Button
@@ -249,21 +261,34 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="3"
                 Grid.Row="1">
-                <Image
-                    Margin="20"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                       Height="150"
                     Source="{StaticResource setting_two_svgrepo_comDrawingImage}"/>
+                    <Label
+                        Foreground="#FF042271"
+                        Content="App Setting" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             <!--Dashboard Page-->
             <Button
+                Command="{Binding OP_Page_Command}"
                     themes:ButtonAssist.CornerRadius="25"
                     Width="280"
                     Height="210"
                 VerticalAlignment="Center"                    
                     Grid.Column="1"
                     Grid.Row="2">
-                <Image
-                    Margin="10"
-                    Source="{StaticResource analytics_monitor_svgrepo_comDrawingImage}"/>
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="150"
+                    Source="{StaticResource target_svgrepo_comDrawingImage}"/>
+                    <Label
+                        Foreground="#FF042271"
+                        Content="OP Indicator" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             <!--Data Machine Page-->
             <Button
@@ -274,9 +299,14 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="2"
                 Grid.Row="2">
-                <Image
-                    Margin="10"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="150"
                     Source="{StaticResource speedometer_svgrepo_comDrawingImage}"/>
+                    <Label
+                        Foreground="#FF042271"
+                        Content="Energy Analyzer" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
             </Button>
             <!--Robot And Manual Configuration Page-->
             <Button
@@ -287,9 +317,15 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="3"
                 Grid.Row="2">
-                <Image
-                    Margin="20"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Width="150"
                     Source="{StaticResource loader_svgrepo_comDrawingImage}"/>
+                    <Label
+                        Foreground="#FF042271"
+                        Content="Machine Manual" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             <!--Camera API Page-->
             <Button
@@ -300,9 +336,15 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="4"
                 Grid.Row="1">
-                <Image
-                    Margin="10"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="150"
                     Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+                    <Label 
+                        Foreground="#FF042271"
+                        Content="Camera Setting" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             
             <!-- Connect PLC-->
@@ -315,9 +357,15 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="1"
                 Grid.Row="3">
-                <Image
-                    Margin="10"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="80"
                     Source="{StaticResource network_server_svgrepo_comDrawingImage}"/>
+                    <Label
+                        Foreground="#FF042271"
+                        Content="Connect PLC" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
             <!--Connect Camera-->
             <Button
@@ -328,9 +376,15 @@
                 VerticalAlignment="Center"                    
                 Grid.Column="2"
                 Grid.Row="3">
-                <Image
-                    Margin="10"
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Height="80"
                     Source="{StaticResource camera_svgrepo_comDrawingImage}"/>
+                    <Label 
+                        Foreground="#FF042271"
+                        Content="Connect Camera" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+                
             </Button>
 
             <!--<Button
@@ -360,11 +414,15 @@
                  Width="100"
                 Height="100"
                 FontSize="20"
-                FontWeight="DemiBold"
-                >
-                    <Image
-                    Margin="10"
-                    Source="{StaticResource settings_connector_svgrepo_comDrawingImage}"/>
+                FontWeight="DemiBold">
+                    <StackPanel Orientation="Vertical">
+                        <Image
+                            Height="70"
+                            Source="{StaticResource settings_connector_svgrepo_comDrawingImage}"/>
+                        <Label
+                            Foreground="#FF042271"
+                            Content="I/O" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
                 </Button>
                 <!--<Button 
                 Command="{Binding Test1}"

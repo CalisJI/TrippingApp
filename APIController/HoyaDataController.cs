@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math.Field;
 using Owin;
+using S7.Net.Types;
 using TrippingApp.Model;
 using TrippingApp.Runtime;
 using TrippingApp.ViewModel;
@@ -22,6 +23,7 @@ namespace TrippingApp.APIController
         public static List<HoyaData> hoyaDatas = new List<HoyaData> ();
         public static Nhietdo Nhietdo = new Nhietdo();
         public static Dictionary<string, HoyaData> HoyadataDict = new Dictionary<string, HoyaData>();
+        public static InforQueueRack InforQueueRack = new InforQueueRack();
     }
 
     public class HoyaDataController : ApiController
@@ -81,8 +83,6 @@ namespace TrippingApp.APIController
             {
                 return Json(new { message = "Error add item" });
             }
-
-            
         }
     }
     [Route("QRCode")]
@@ -92,6 +92,146 @@ namespace TrippingApp.APIController
         public IHttpActionResult Get()
         {
             return Json(GlobalDataHoya.HoyadataDict);
+        }
+        [Route("Get_RackPLC")]
+        [HttpGet]
+        public IHttpActionResult Get_RackPLC()
+        {
+            try
+            {
+                if (!PLC_Query.Connected)
+                {
+                    return BadRequest("PLC is not connect");
+                }
+                PLC_Query.Get_ListCodeChar();
+                GlobalDataHoya.InforQueueRack.Bath1_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode1_P1);
+                GlobalDataHoya.InforQueueRack.Bath1_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode1_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath2_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode2_P1);
+                GlobalDataHoya.InforQueueRack.Bath2_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode2_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath3_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode3_P1);
+                GlobalDataHoya.InforQueueRack.Bath3_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode3_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath4_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode4_P1);
+                GlobalDataHoya.InforQueueRack.Bath4_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode4_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath5_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode5_P1);
+                GlobalDataHoya.InforQueueRack.Bath5_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode5_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath6_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode6_P1);
+                GlobalDataHoya.InforQueueRack.Bath6_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode6_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath7_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode7_P1);
+                GlobalDataHoya.InforQueueRack.Bath7_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode7_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath8_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode8_P1);
+                GlobalDataHoya.InforQueueRack.Bath8_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode8_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath9_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode9_P1);
+                GlobalDataHoya.InforQueueRack.Bath9_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode9_P2);
+
+                GlobalDataHoya.InforQueueRack.Bath10_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode10_P1);
+                GlobalDataHoya.InforQueueRack.Bath10_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Barcode10_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath1_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P1);
+                GlobalDataHoya.InforQueueRack.CBath1_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath1_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath2_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P1);
+                GlobalDataHoya.InforQueueRack.CBath2_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath2_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath3_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P1);
+                GlobalDataHoya.InforQueueRack.CBath3_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath3_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath4_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                GlobalDataHoya.InforQueueRack.CBath4_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath5_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                GlobalDataHoya.InforQueueRack.CBath5_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath6_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                GlobalDataHoya.InforQueueRack.CBath6_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath7_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P1);
+                GlobalDataHoya.InforQueueRack.CBath7_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath7_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath8_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P1);
+                GlobalDataHoya.InforQueueRack.CBath8_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath8_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath9_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P1);
+                GlobalDataHoya.InforQueueRack.CBath9_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath9_P2);
+
+                GlobalDataHoya.InforQueueRack.CBath10_QR = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P1);
+                GlobalDataHoya.InforQueueRack.CBath10_T = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath10_P2);
+                //GlobalDataHoya.InforQueueRack.Bath1_QR = "HY-001";
+                //GlobalDataHoya.InforQueueRack.Bath1_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.Bath2_QR = "HY-002";
+                //GlobalDataHoya.InforQueueRack.Bath2_T = "2";
+
+                //GlobalDataHoya.InforQueueRack.Bath3_QR = "HY-003";
+                //GlobalDataHoya.InforQueueRack.Bath3_T = "3";
+
+                //GlobalDataHoya.InforQueueRack.Bath4_QR = "HY-004";
+                //GlobalDataHoya.InforQueueRack.Bath4_T = "4";
+
+                //GlobalDataHoya.InforQueueRack.Bath5_QR = "HY-005";
+                //GlobalDataHoya.InforQueueRack.Bath5_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.Bath6_QR = "HY-006";
+                //GlobalDataHoya.InforQueueRack.Bath6_T = "2";
+
+                //GlobalDataHoya.InforQueueRack.Bath7_QR = "HY-007";
+                //GlobalDataHoya.InforQueueRack.Bath7_T = "3";
+
+                //GlobalDataHoya.InforQueueRack.Bath8_QR = "HY-008";
+                //GlobalDataHoya.InforQueueRack.Bath8_T = "4";
+
+                //GlobalDataHoya.InforQueueRack.Bath9_QR = "HY-009";
+                //GlobalDataHoya.InforQueueRack.Bath9_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.Bath10_QR = "HY-009";
+                //GlobalDataHoya.InforQueueRack.Bath10_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath1_QR = "HY-001";
+                //GlobalDataHoya.InforQueueRack.CBath1_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath2_QR = "HY-002";
+                //GlobalDataHoya.InforQueueRack.CBath2_T = "2";
+
+                //GlobalDataHoya.InforQueueRack.CBath3_QR = "HY-003";
+                //GlobalDataHoya.InforQueueRack.CBath3_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath4_QR = "HY-004";
+                //GlobalDataHoya.InforQueueRack.CBath4_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath5_QR = "HY-005";
+                //GlobalDataHoya.InforQueueRack.CBath5_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath6_QR = "HY-006";
+                //GlobalDataHoya.InforQueueRack.CBath6_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath7_QR = "HY-007";
+                //GlobalDataHoya.InforQueueRack.CBath7_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath8_QR = "HY-008";
+                //GlobalDataHoya.InforQueueRack.CBath8_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath9_QR = "HY-009";
+                //GlobalDataHoya.InforQueueRack.CBath9_T = "1";
+
+                //GlobalDataHoya.InforQueueRack.CBath10_QR = "HY-010";
+                //GlobalDataHoya.InforQueueRack.CBath10_T = "1";
+                return Json(GlobalDataHoya.InforQueueRack);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return NotFound();
+            }
+
+           
         }
         //[Route("[action]")]
         [Route("LoadBarcode")]
@@ -205,7 +345,11 @@ namespace TrippingApp.APIController
                 return NotFound();
             }
             GlobalDataHoya.Nhietdo = nhietdo;
-            MachineViewModel.Update_Temperature_Command.Execute(null);
+            if (MachineViewModel.Update_Temperature_Command != null)
+            {
+                MachineViewModel.Update_Temperature_Command.Execute(null);
+
+            }
             return Json("OK"); // Return the updated user object as JSON
         }
        
@@ -228,6 +372,53 @@ namespace TrippingApp.APIController
         public int Temp9 { get; set; }
         public int Temp10 { get; set; }
         public int Temp11 { get; set; }
+        public float H1 { get; set; }
+        public float T1 { get; set; }
+        public float H2 { get; set; }
+        public float T2 { get; set; }
     }
-    
+    public class InforQueueRack 
+    {
+        public string Bath1_QR { get; set; }
+        public string Bath1_T { get; set; }
+        public string Bath2_QR { get; set; }
+        public string Bath2_T { get; set; }
+        public string Bath3_QR { get; set; }
+        public string Bath3_T { get; set; }
+        public string Bath4_QR { get; set; }
+        public string Bath4_T { get; set; }
+        public string Bath5_QR { get; set; }
+        public string Bath5_T { get; set; }
+        public string Bath6_QR { get; set; }
+        public string Bath6_T { get; set; }
+        public string Bath7_QR { get; set; }
+        public string Bath7_T { get; set; }
+        public string Bath8_QR { get; set; }
+        public string Bath8_T { get; set; }
+        public string Bath9_QR { get; set; }
+        public string Bath9_T { get; set; }
+        public string Bath10_QR { get; set; }
+        public string Bath10_T { get; set; }
+
+        public string CBath1_QR { get; set; }
+        public string CBath1_T { get; set; }
+        public string CBath2_QR { get; set; }
+        public string CBath2_T { get; set; }
+        public string CBath3_QR { get; set; }
+        public string CBath3_T { get; set; }
+        public string CBath4_QR { get; set; }
+        public string CBath4_T { get; set; }
+        public string CBath5_QR { get; set; }
+        public string CBath5_T { get; set; }
+        public string CBath6_QR { get; set; }
+        public string CBath6_T { get; set; }
+        public string CBath7_QR { get; set; }
+        public string CBath7_T { get; set; }
+        public string CBath8_QR { get; set; }
+        public string CBath8_T { get; set; }
+        public string CBath9_QR { get; set; }
+        public string CBath9_T { get; set; }
+        public string CBath10_QR { get; set; }
+        public string CBath10_T { get; set; }
+    }
 }

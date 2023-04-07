@@ -449,7 +449,6 @@
                 HorizontalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="4"
-                IsReadOnly="True"
                 Text="{Binding Bath4P2Time, Converter={StaticResource str2tp}, StringFormat='{}{0:%m}:{0:%s}'}"/>
             <TextBox 
                 Foreground="Black"
@@ -645,7 +644,6 @@
                 HorizontalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="6"
-                IsReadOnly="True"
                 Text="{Binding Bath4P3Time, Converter={StaticResource str2tp},StringFormat='{}{0:%m}:{0:%s}'}"/>
             <TextBox 
                 Foreground="Black"

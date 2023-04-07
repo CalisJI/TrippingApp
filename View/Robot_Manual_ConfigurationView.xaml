@@ -21,7 +21,7 @@
     <Grid Width="1920" Height="990">
         <TabControl 
                 x:Name="container"
-                TabStripPlacement="Left"
+                TabStripPlacement="Top"  
                 Background="Transparent">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -40,13 +40,7 @@
                                 Text=" Robot Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
-                        <Grid.LayoutTransform>
-                            <RotateTransform>
-                                <RotateTransform.Angle>
-                                    -90
-                                </RotateTransform.Angle>
-                            </RotateTransform>
-                        </Grid.LayoutTransform>
+                        
                     </Grid>
                 </TabItem.Header>
                 <Grid Width="1920" Height="1000">
@@ -85,13 +79,7 @@
                                 Text=" Servo Lift Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
-                        <Grid.LayoutTransform>
-                            <RotateTransform>
-                                <RotateTransform.Angle>
-                                    -90
-                                </RotateTransform.Angle>
-                            </RotateTransform>
-                        </Grid.LayoutTransform>
+                        
                     </Grid>
                 </TabItem.Header>
                 <control:ServoLit_Control
@@ -127,13 +115,7 @@
                                 Text=" Manual Control "
                                 FontSize="20"
                                 FontWeight="Black"/>
-                        <Grid.LayoutTransform>
-                            <RotateTransform>
-                                <RotateTransform.Angle>
-                                    -90
-                                </RotateTransform.Angle>
-                            </RotateTransform>
-                        </Grid.LayoutTransform>
+                        
                     </Grid>
                 </TabItem.Header>
                 <ContentControl Content="{Binding Cylinder_View}"/>
@@ -173,13 +155,7 @@
                                 Text=" Timer Parameter "
                                 FontSize="20"
                                 FontWeight="Black"/>
-                        <Grid.LayoutTransform>
-                            <RotateTransform>
-                                <RotateTransform.Angle>
-                                    -90
-                                </RotateTransform.Angle>
-                            </RotateTransform>
-                        </Grid.LayoutTransform>
+                       
                     </Grid>
                 </TabItem.Header>
                 <ContentControl Content="{Binding Process_Param_View}"/>

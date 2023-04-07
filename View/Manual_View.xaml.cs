@@ -20,9 +20,21 @@ namespace TrippingApp.View
     /// </summary>
     public partial class Manual_View : UserControl
     {
+        private static Manual_View instance;
         public Manual_View()
         {
             InitializeComponent();
+        }
+        public static Manual_View Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Manual_View();
+                }
+                return instance;
+            }
         }
     }
 }

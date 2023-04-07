@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrippingApp.View"
              mc:Ignorable="d"
+             xmlns:controls="clr-namespace:TrippingApp.Control"
              xmlns:themes="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:digit ="clr-namespace:TrippingApp.Control"
              xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
@@ -144,6 +145,7 @@
                     Grid.Row="1"/>
             </Grid>
         </Grid>-->
-        <Wpf:WebView2 Source="http://127.0.0.1:1880/ui/#!/2"/>
+        <!--<Wpf:WebView2 Source="http://127.0.0.1:1880/ui/#!/2"/>-->
+        <controls:ViewWeb Source="http://127.0.0.1:1880/ui/#!/2" PageIndex="2"/>
     </Grid>
 </UserControl>

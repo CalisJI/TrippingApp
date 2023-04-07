@@ -288,10 +288,11 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition Height="0.2*"/>
                 </Grid.RowDefinitions>
                 <Button
                 Command="{Binding Origin_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                Height="80"
+                Height="75"
                 Width="80"
                 Grid.Row="2">
                     <StackPanel Orientation="Vertical">
@@ -308,7 +309,7 @@
                 </Button>
                 <Button
                     Command="{Binding Enable_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    Height="80"
+                    Height="75"
                     Width="80"
                     Grid.Row="0">
                     <StackPanel Orientation="Vertical">
@@ -325,12 +326,11 @@
                 </Button>
                 <Button
                     Command="{Binding Disable_Command, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                    Height="80"
+                    Height="75"
                     Width="80"
                     Grid.Row="1">
                     <StackPanel Orientation="Vertical">
                         <Image
-                        
                         Width="50"
                         Source="{StaticResource stop_svgrepo_comDrawingImage}"/>
                         <Label

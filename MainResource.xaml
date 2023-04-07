@@ -50,4 +50,7 @@
     <DataTemplate DataType="{x:Type viewmodel:Manual_ViewModel}">
         <view:Manual_View/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:OP_ViewModel}">
+        <view:OP_View/>
+    </DataTemplate>
 </ResourceDictionary>

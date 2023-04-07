@@ -90,6 +90,7 @@ namespace TrippingApp.ViewModel
         public ICommand Tracking_Page_Command { get; set; }
         public ICommand IO_Page_Command { get; set; }
         public ICommand OpenKeyBoard_Command { get; set; }
+        public ICommand OP_Page_Command { get; set; }
         #region Model
         private string _time;
 
@@ -127,6 +128,8 @@ namespace TrippingApp.ViewModel
         private CameraApiViewModel CameraApiViewModel = new CameraApiViewModel();
         private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
         private IOViewModel IOViewModel = new IOViewModel();
+        private OP_ViewModel OP_ViewModel = new OP_ViewModel();
+
         private Process _touchKeyboardProcess;
         #endregion
         [DllImport("user32.dll")]
@@ -174,6 +177,10 @@ namespace TrippingApp.ViewModel
             ShowTimer.Start();
 
             this.SelectedViewModel = this;
+            OP_Page_Command = new ActionCommand(() =>
+            {
+                this.SelectedViewModel = OP_ViewModel;
+            });
             Test = new ActionCommand((p) => 
             {
                 try
