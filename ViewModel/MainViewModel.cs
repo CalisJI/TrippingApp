@@ -91,6 +91,7 @@ namespace TrippingApp.ViewModel
         public ICommand IO_Page_Command { get; set; }
         public ICommand OpenKeyBoard_Command { get; set; }
         public ICommand OP_Page_Command { get; set; }
+        public static ICommand Alarm_Page_Command { get; set; }
         #region Model
         private string _time;
 
@@ -129,6 +130,7 @@ namespace TrippingApp.ViewModel
         private TrackHistory_ViewModel TrackHistory_ViewModel = new TrackHistory_ViewModel();
         private IOViewModel IOViewModel = new IOViewModel();
         private OP_ViewModel OP_ViewModel = new OP_ViewModel();
+        private AlarmViewModel AlarmViewModel = new AlarmViewModel();
 
         private Process _touchKeyboardProcess;
         #endregion
@@ -243,6 +245,14 @@ namespace TrippingApp.ViewModel
                     Console.WriteLine(ex.Message);
                 }
                
+            });
+
+            Alarm_Page_Command = new ActionCommand(() => 
+            {
+                if(this.SelectedViewModel != AlarmViewModel) 
+                {
+                    this.SelectedViewModel = AlarmViewModel;
+                }
             });
 
             Test1 = new ActionCommand(() => 

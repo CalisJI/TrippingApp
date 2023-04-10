@@ -49,7 +49,8 @@ namespace TrippingApp
             if(count_hold >= 3)
             {
                 MainViewModel.Unloaded.Execute(null);
-                Environment.Exit(0);
+                Application.Current.Shutdown();
+                //Environment.Exit(0);
             }
         }
 

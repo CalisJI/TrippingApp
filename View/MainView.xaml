@@ -346,7 +346,25 @@
                 </StackPanel>
                 
             </Button>
-            
+            <Button
+                Command="{Binding Alarm_Page_Command}"
+                themes:ButtonAssist.CornerRadius="25"
+                Width="280"
+                Height="210"
+                VerticalAlignment="Center"                    
+                Grid.Column="4"
+                Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <Image
+                        Margin="0 10 0 0"
+                        Height="140"
+                    Source="{StaticResource alarm_svgrepo_comDrawingImage}"/>
+                    <Label 
+                        Foreground="#FF042271"
+                        Content="Alarm Information" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"/>
+                </StackPanel>
+
+            </Button>
             <!-- Connect PLC-->
 
             <Button

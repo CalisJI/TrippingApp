@@ -352,6 +352,14 @@ namespace TrippingApp.APIController
             }
             return Json("OK"); // Return the updated user object as JSON
         }
+
+        [Route("Get_Alarm")]
+        [HttpGet]
+        public IHttpActionResult Get_Alarm() 
+        {
+            MainViewModel.Alarm_Page_Command.Execute(null);
+            return Json("OK");
+        }
        
     }
     public class HoyaData

@@ -295,6 +295,7 @@
     <Compile Include="Runtime\PLC_Query.cs" />
     <Compile Include="Runtime\TCP_Runtime.cs" />
     <Compile Include="Runtime\TranferData.cs" />
+    <Compile Include="ViewModel\AlarmViewModel.cs" />
     <Compile Include="ViewModel\CameraApiViewModel.cs" />
     <Compile Include="ViewModel\Cylinder_Control_ViewModel.cs" />
     <Compile Include="ViewModel\IOViewModel.cs" />
