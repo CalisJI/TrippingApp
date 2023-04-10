@@ -36,7 +36,8 @@ namespace TrippingApp.AppConfig
         public static readonly string File_Logger = Directory.GetCurrentDirectory() + @"\" + "Logger.txt";
 
         public static readonly string File_Tranfer = Directory.GetCurrentDirectory() + @"\" + "Community.txt";
-
+        
+        
         public static SystemConfig SystemConfig;
         public ApplicationConfig()
         {

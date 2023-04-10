@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -92,7 +93,28 @@ namespace TrippingApp.ViewModel
         public ICommand OpenKeyBoard_Command { get; set; }
         public ICommand OP_Page_Command { get; set; }
         public static ICommand Alarm_Page_Command { get; set; }
+
+
+        private PerformanceCounter cpuCounter;
+        private PerformanceCounter ramCounter;
         #region Model
+
+
+        private string _cpu;
+
+        public string CpuCounter
+        {
+            get { return _cpu; }
+            set { SetProperty(ref _cpu, value, nameof(CpuCounter)); }
+        }
+
+        private string _ram;
+
+        public string RamCounter
+        {
+            get { return _ram; }
+            set { SetProperty(ref _ram, value, nameof(RamCounter)); }
+        }
         private string _time;
 
         public string Timer_Full
@@ -140,6 +162,8 @@ namespace TrippingApp.ViewModel
 
         public MainViewModel()
         {
+            cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+            ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             Loaded = new ActionCommand(() =>
             {
                 
@@ -451,6 +475,12 @@ namespace TrippingApp.ViewModel
 
         private void ShowTimer_Tick(object sender, EventArgs e)
         {
+            float cpuUsage = cpuCounter.NextValue();
+            float ramUsage = ramCounter.NextValue();
+
+            // Display the CPU usage and RAM usage in the text blocks
+            CpuCounter = $"CPU Usage: {cpuUsage:F2}%";
+            RamCounter = $"RAM Usage: {ramUsage:F2} MB";
             DateTime dateTime = DateTime.Now;
             Timer_Full = string.Format("{0}:{1}:{2} {3} {4}-{5}-{6}",
                 dateTime.Hour.ToString("D2"),

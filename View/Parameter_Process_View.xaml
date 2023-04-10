@@ -8,7 +8,7 @@
              xmlns:str2timespan="clr-namespace:TrippingApp.ViewModel"
              DataContext="{StaticResource VM_Param}"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             d:DesignHeight="360" d:DesignWidth="900">
+             d:DesignHeight="1000" d:DesignWidth="1920">
     <UserControl.Resources>
         <str2timespan:StringToTimeSpanConverter x:Key="str2tp"/>
     </UserControl.Resources>
@@ -21,7 +21,8 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Viewbox  >
-        <Grid>
+        <!--#region Comment -->
+        <!--<Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -49,7 +50,9 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="0.8*"/>
             </Grid.RowDefinitions>
-            <!--#region Row 1 -->
+            -->
+        <!--#region Row 1 -->
+        <!--
             <Label
                 FontSize="15"
                    FontWeight="DemiBold"
@@ -127,9 +130,11 @@
                Grid.Column="11"
                Grid.Row="0"/>
 
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 2 -->
+        <!--#region Row 2 -->
+        <!--
             <Label 
                    Content="1"
                    FontSize="25"
@@ -210,9 +215,11 @@
                VerticalAlignment="Center"
                Grid.Column="11"
                Grid.Row="1"/>
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 3 -->
+        <!--#region Row 3 -->
+        <!--
             <TextBox 
                 Foreground="White"
                 FontWeight="DemiBold"
@@ -322,9 +329,11 @@
                 Grid.Column="11"
                 Grid.Row="2"
                 Text="{Binding BathA3Time, Converter={StaticResource str2tp},StringFormat='{}{0:%m}:{0:%s}'}"/>
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 4 -->
+        <!--#region Row 4 -->
+        <!--
             <Label 
                 FontSize="25"
                 Content="2"
@@ -403,9 +412,11 @@
                VerticalAlignment="Center"
                Grid.Column="11"
                Grid.Row="3"/>
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 5 -->
+        <!--#region Row 5 -->
+        <!--
             <TextBox
                 Foreground="White"
                 FontWeight="DemiBold"
@@ -516,8 +527,10 @@
                 Grid.Column="11"
                 Grid.Row="4"
                 Text="{Binding BathA3Time, Converter={StaticResource str2tp},StringFormat='{}{0:%m}:{0:%s}'}"/>
-            <!--#endregion-->
-            <!--#region Row 6 -->
+            -->
+        <!--#endregion-->
+        <!--#region Row 6 -->
+        <!--
 
             <Label 
                 FontSize="25"
@@ -597,9 +610,11 @@
                VerticalAlignment="Center"
                Grid.Column="11"
                Grid.Row="5"/>
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 7 -->
+        <!--#region Row 7 -->
+        <!--
 
             <TextBox 
                 Foreground="White"
@@ -711,8 +726,10 @@
                 Grid.Column="11"
                 Grid.Row="6"
                 Text="{Binding BathA3Time, Converter={StaticResource str2tp},StringFormat='{}{0:%m}:{0:%s}'}"/>
-            <!--#endregion-->
-            <!--#region Row 8 -->
+            -->
+        <!--#endregion-->
+        <!--#region Row 8 -->
+        <!--
             <Label 
                 FontSize="25"
                 Content="4"
@@ -791,9 +808,11 @@
                VerticalAlignment="Center"
                Grid.Column="11"
                Grid.Row="7"/>
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 9 -->
+        <!--#region Row 9 -->
+        <!--
             <TextBox
                 Foreground="White"
                 FontWeight="DemiBold"
@@ -906,9 +925,11 @@
                 Grid.Row="8"
                 Text="{Binding BathA3Time, Converter={StaticResource str2tp},StringFormat='{}{0:%m}:{0:%s}'}"/>
             
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
 
-            <!--#region Row 10 -->
+        <!--#region Row 10 -->
+        <!--
             <Button
                 Command="{Binding Apply_DataProcess_Command}"
                 Content="Apply"
@@ -920,7 +941,71 @@
                     Margin="10"
                     Height="35"
                 />
-            <!--#endregion-->
+            -->
+        <!--#endregion-->
+        <!--
+        </Grid>-->
+        <!--#endregion-->
+        <Grid Height="1000" Width="1920">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0.15*"/>
+            </Grid.RowDefinitions>
+            <DataGrid 
+                ItemsSource="{Binding Robot_Type}" 
+                Width="1800"
+                FontSize="25"
+                IsReadOnly="True"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                CanUserSortColumns="False"
+                CanUserAddRows="False"
+                GridLinesVisibility="All"
+                CanUserResizeColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Orange"/>
+                                <Setter Property="Foreground" Value="Blue"/>
+                                <Setter Property="FontWeight" Value="DemiBold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+            <StackPanel
+                HorizontalAlignment="Right"
+                Grid.Row="1"
+                Orientation="Horizontal"
+                 Margin="0 0 60 0">
+                <Button 
+                    Content="Apply"
+                    Command="{Binding Apply_DataProcess_Command}"
+                    Height="60"
+                    Width="150" 
+                    FontSize="25" 
+                    FontWeight="DemiBold"/>
+
+                <Button 
+                    Margin="10 0 0 0"
+                    Content="Edit"
+                    Command="{Binding Edit_Command}"
+                    Height="60"
+                    Width="150" 
+                    FontSize="25" 
+                    FontWeight="DemiBold"/>
+
+                <Button 
+                    Margin="10 0 0 0"
+                    Content="Cancel"
+                    Command="{Binding Cancel_Command}"
+                    Height="60"
+                    Width="150" 
+                    FontSize="25" 
+                    FontWeight="DemiBold"/>
+            </StackPanel>
         </Grid>
     </Viewbox>
 </UserControl>

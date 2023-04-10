@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -34,14 +35,7 @@ namespace TrippingApp.AppConfig
         #endregion
 
         #region Press Parameter
-        public Int32 DipTimeTranfer { get; set; }
-        public Int32 DipP1 { get; set; }
-        public Int32 Dip1P2 { get; set; }
-        public Int32 Dip2P2 { get; set; }
-        public Int32 Dip1P3 { get; set; }
-        public Int32 Dip2P3 { get; set; }
-        public Int32 Dip1P4 { get; set; }
-        public Int32 Dip2P4 { get; set; }
+        public DataTable Robot_Table_Type { get; set; } = new DataTable("Robot_Type");
         #endregion
 
 
@@ -75,6 +69,8 @@ namespace TrippingApp.AppConfig
         #endregion
 
 
-        public bool DataMethod { get; set; }
+        public bool DataMethod { get; set; } // use to enable orr disable send data to hoya
+
+
     }
 }

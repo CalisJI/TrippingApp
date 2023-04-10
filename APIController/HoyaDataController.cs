@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Math.Field;
 using Owin;
 using S7.Net.Types;
+using TrippingApp.AppConfig;
 using TrippingApp.Model;
 using TrippingApp.Runtime;
 using TrippingApp.ViewModel;
@@ -24,6 +26,7 @@ namespace TrippingApp.APIController
         public static Nhietdo Nhietdo = new Nhietdo();
         public static Dictionary<string, HoyaData> HoyadataDict = new Dictionary<string, HoyaData>();
         public static InforQueueRack InforQueueRack = new InforQueueRack();
+        public static DataTable Robot_Type_Table = new DataTable();
     }
 
     public class HoyaDataController : ApiController
@@ -348,11 +351,15 @@ namespace TrippingApp.APIController
             if (MachineViewModel.Update_Temperature_Command != null)
             {
                 MachineViewModel.Update_Temperature_Command.Execute(null);
-
             }
             return Json("OK"); // Return the updated user object as JSON
         }
-
+        [Route("GetRobotTable")]
+        [HttpGet]
+        public IHttpActionResult GetRobotTable()
+        {
+            return Json(ApplicationConfig.SystemConfig.Robot_Table_Type);
+        }
         [Route("Get_Alarm")]
         [HttpGet]
         public IHttpActionResult Get_Alarm() 

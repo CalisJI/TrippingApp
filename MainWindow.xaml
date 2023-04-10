@@ -25,7 +25,25 @@
                 <!--<RowDefinition Height="0.1*"/>-->
             </Grid.RowDefinitions>
             <Grid Background="Black">
-                
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock 
+                    Text="{Binding CpuCounter}"
+                    FontSize="20"
+                        VerticalAlignment="Center"
+                        FontWeight="DemiBold"
+                    Foreground="{StaticResource GlyphBrush}"
+                    Grid.Row="0"/>
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Margin="10 0 0 0"
+                        FontWeight="DemiBold"
+                    Text="{Binding RamCounter}"
+                    FontSize="20"
+                    Foreground="{StaticResource GlyphBrush}"
+                    Grid.Row="0"/>
+                </StackPanel>
+               
+
                 <TextBlock
                     Foreground="{StaticResource GlyphBrush}"
                     Grid.Row="0"

@@ -28,6 +28,7 @@ namespace TrippingApp.Runtime
         public static Plc PLC_Controller = null;
         public static PLCInput PLCInput = new PLCInput();
         public static PLCOutput PLCOutput = new PLCOutput();
+        public static Multy_Robot_Type Multy_Robot_Type = new Multy_Robot_Type();
         /// <summary>
         /// Trang thái kết nối
         /// </summary>
@@ -639,7 +640,18 @@ namespace TrippingApp.Runtime
 
             }
         }
+        public static void GetMulty_Type_Robot()
+        {
+            try
+            {
+                ReadData(Multy_Robot_Type, 48);
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
 
+            }
+        }
         public static void Get_ListCodeChar()
         {
             try
@@ -666,7 +678,18 @@ namespace TrippingApp.Runtime
 
             }
         }
+        public static void Write_Multy_Type_Robot()
+        {
+            try
+            {
+                WriteData(Multy_Robot_Type, 48);
+            }
+            catch (PlcException ex)
+            {
+                _ = Logger.Logger.Async_write(ex.Message);
 
+            }
+        }
     }
 
     public class Data_Barcode_PLC
@@ -1343,6 +1366,137 @@ namespace TrippingApp.Runtime
 
         public byte[] Barcode_Queue_Robot_P1 { get; set; } = new byte[11];
         public byte[] Barcode_Queue_Robot_P2 { get; set; } = new byte[3];
+
+    }
+
+    public class Multy_Robot_Type 
+    {
+        //Type5
+        public Int32 Type5_Bath4_Px { get; set; }
+        public Int32 Type5_Bath5_Px { get; set; }
+        public Int32 Type5_Bath6_Px { get; set; }
+        public Int32 Type5_Bath1_3 { get; set; }
+
+        //Type6
+        public Int32 Type6_Bath4_Px { get; set; }
+        public Int32 Type6_Bath5_Px { get; set; }
+        public Int32 Type6_Bath6_Px { get; set; }
+        public Int32 Type6_Bath1_3 { get; set; }
+
+        //Type7
+        public Int32 Type7_Bath4_Px { get; set; }
+        public Int32 Type7_Bath5_Px { get; set; }
+        public Int32 Type7_Bath6_Px { get; set; }
+        public Int32 Type7_Bath1_3 { get; set; }
+
+        //Type8
+        public Int32 Type8_Bath4_Px { get; set; }
+        public Int32 Type8_Bath5_Px { get; set; }
+        public Int32 Type8_Bath6_Px { get; set; }
+        public Int32 Type8_Bath1_3 { get; set; }
+
+        //Type9
+        public Int32 Type9_Bath4_Px { get; set; }
+        public Int32 Type9_Bath5_Px { get; set; }
+        public Int32 Type9_Bath6_Px { get; set; }
+        public Int32 Type9_Bath1_3 { get; set; }
+        //Type10
+        public Int32 Type10_Bath4_Px { get; set; }
+        public Int32 Type10_Bath5_Px { get; set; }
+        public Int32 Type10_Bath6_Px { get; set; }
+        public Int32 Type10_Bath1_3 { get; set; }
+
+        //Type11
+        public Int32 Type11_Bath4_Px { get; set; }
+        public Int32 Type11_Bath5_Px { get; set; }
+        public Int32 Type11_Bath6_Px { get; set; }
+        public Int32 Type11_Bath1_3 { get; set; }
+
+        //Type12
+        public Int32 Type12_Bath4_Px { get; set; }
+        public Int32 Type12_Bath5_Px { get; set; }
+        public Int32 Type12_Bath6_Px { get; set; }
+        public Int32 Type12_Bath1_3 { get; set; }
+
+        //Type13
+        public Int32 Type13_Bath4_Px { get; set; }
+        public Int32 Type13_Bath5_Px { get; set; }
+        public Int32 Type13_Bath6_Px { get; set; }
+        public Int32 Type13_Bath1_3 { get; set; }
+
+        //Type14
+        public Int32 Type14_Bath4_Px { get; set; }
+        public Int32 Type14_Bath5_Px { get; set; }
+        public Int32 Type14_Bath6_Px { get; set; }
+        public Int32 Type14_Bath1_3 { get; set; }
+
+        //Type15
+        public Int32 Type15_Bath4_Px { get; set; }
+        public Int32 Type15_Bath5_Px { get; set; }
+        public Int32 Type15_Bath6_Px { get; set; }
+        public Int32 Type15_Bath1_3 { get; set; }
+
+        //Type16
+        public Int32 Type16_Bath4_Px { get; set; }
+        public Int32 Type16_Bath5_Px { get; set; }
+        public Int32 Type16_Bath6_Px { get; set; }
+        public Int32 Type16_Bath1_3 { get; set; }
+
+        //Type17
+        public Int32 Type17_Bath4_Px { get; set; }
+        public Int32 Type17_Bath5_Px { get; set; }
+        public Int32 Type17_Bath6_Px { get; set; }
+        public Int32 Type17_Bath1_3 { get; set; }
+
+        //Type18
+        public Int32 Type18_Bath4_Px { get; set; }
+        public Int32 Type18_Bath5_Px { get; set; }
+        public Int32 Type18_Bath6_Px { get; set; }
+        public Int32 Type18_Bath1_3 { get; set; }
+
+        //Type19
+        public Int32 Type19_Bath4_Px { get; set; }
+        public Int32 Type19_Bath5_Px { get; set; }
+        public Int32 Type19_Bath6_Px { get; set; }
+        public Int32 Type19_Bath1_3 { get; set; }
+
+        //Type20
+        public Int32 Type20_Bath4_Px { get; set; }
+        public Int32 Type20_Bath5_Px { get; set; }
+        public Int32 Type20_Bath6_Px { get; set; }
+        public Int32 Type20_Bath1_3 { get; set; }
+
+        //Type21
+        public Int32 Type21_Bath4_Px { get; set; }
+        public Int32 Type21_Bath5_Px { get; set; }
+        public Int32 Type21_Bath6_Px { get; set; }
+        public Int32 Type21_Bath1_3 { get; set; }
+
+        //Type22
+        public Int32 Type22_Bath4_Px { get; set; }
+        public Int32 Type22_Bath5_Px { get; set; }
+        public Int32 Type22_Bath6_Px { get; set; }
+        public Int32 Type22_Bath1_3 { get; set; }
+
+        //Type23
+        public Int32 Type23_Bath4_Px { get; set; }
+        public Int32 Type23_Bath5_Px { get; set; }
+        public Int32 Type23_Bath6_Px { get; set; }
+        public Int32 Type23_Bath1_3 { get; set; }
+
+        //Type24
+        public Int32 Type24_Bath4_Px { get; set; }
+        public Int32 Type24_Bath5_Px { get; set; }
+        public Int32 Type24_Bath6_Px { get; set; }
+        public Int32 Type24_Bath1_3 { get; set; }
+
+        //Type25
+        public Int32 Type25_Bath4_Px { get; set; }
+        public Int32 Type25_Bath5_Px { get; set; }
+        public Int32 Type25_Bath6_Px { get; set; }
+        public Int32 Type25_Bath1_3 { get; set; }
+
+
 
     }
     public struct Barcode
