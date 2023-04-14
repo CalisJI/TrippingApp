@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Windows.Interop;
 using Microsoft.Owin.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -22,7 +23,7 @@ namespace TrippingApp.APIController
     public static class GlobalDataHoya
     {
 
-        public static List<HoyaData> hoyaDatas = new List<HoyaData> ();
+        public static List<HoyaData> hoyaDatas = new List<HoyaData>();
         public static Nhietdo Nhietdo = new Nhietdo();
         public static Dictionary<string, HoyaData> HoyadataDict = new Dictionary<string, HoyaData>();
         public static InforQueueRack InforQueueRack = new InforQueueRack();
@@ -43,7 +44,7 @@ namespace TrippingApp.APIController
         [HttpGet]
         public IHttpActionResult Get(string id)
         {
-            var user = GlobalDataHoya.hoyaDatas.FirstOrDefault(u=>u.Barcode==id);
+            var user = GlobalDataHoya.hoyaDatas.FirstOrDefault(u => u.Barcode == id);
             if (user == null)
             {
                 return NotFound();
@@ -62,14 +63,14 @@ namespace TrippingApp.APIController
             //}
             //existingUser.Name = hoyaData.Name;
             //existingUser.Age = hoyaData.Age;
-            return Json(new {message = "OK"}); // Return the updated user object as JSON
+            return Json(new { message = "OK" }); // Return the updated user object as JSON
         }
         [HttpPost]
         public IHttpActionResult AddItem([FromBody] HoyaData item)
         {
             string keyCode = "HY-000";
 
-            if (AppConfig.ApplicationConfig.SystemConfig.DataMethod) 
+            if (AppConfig.ApplicationConfig.SystemConfig.DataMethod)
             {
                 if (!GlobalDataHoya.HoyadataDict.ContainsKey(keyCode))
                 {
@@ -82,7 +83,7 @@ namespace TrippingApp.APIController
 
                 return Json(new { message = "Item added successfully" });
             }
-            else 
+            else
             {
                 return Json(new { message = "Error add item" });
             }
@@ -96,6 +97,20 @@ namespace TrippingApp.APIController
         {
             return Json(GlobalDataHoya.HoyadataDict);
         }
+        [Route("ReLoad_Rack")]
+        [HttpGet]
+        public IHttpActionResult ReLoad_Rack()
+        {
+            if (!PLC_Query.Connected)
+            {
+                return Json(new { message = "PLC Is Not Connec" });
+            }
+            PLC_Query.Get_ListCodeChar();
+            MachineViewModel.Getbarcode_Command.Execute(null);
+
+            return Json(new { message = "OK" });
+        }
+
         [Route("Get_RackPLC")]
         [HttpGet]
         public IHttpActionResult Get_RackPLC()
@@ -225,6 +240,7 @@ namespace TrippingApp.APIController
 
                 //GlobalDataHoya.InforQueueRack.CBath10_QR = "HY-010";
                 //GlobalDataHoya.InforQueueRack.CBath10_T = "1";
+                MachineViewModel.Getbarcode_Command.Execute(null);
                 return Json(GlobalDataHoya.InforQueueRack);
             }
             catch (Exception ex)
@@ -234,7 +250,7 @@ namespace TrippingApp.APIController
                 return NotFound();
             }
 
-           
+
         }
         //[Route("[action]")]
         [Route("LoadBarcode")]
@@ -267,7 +283,7 @@ namespace TrippingApp.APIController
                 string barcode = data.GetValue("Barcode").ToString();
                 string kind = data.GetValue("NG_Type").ToString();
                 HoyaData hoyaData = new HoyaData() { Barcode = barcode, Ng_Type = kind };
-                
+
                 if (!GlobalDataHoya.HoyadataDict.ContainsKey(barcode))
                 {
                     try
@@ -294,9 +310,9 @@ namespace TrippingApp.APIController
 
                         return NotFound();
                     }
-                   
+
                 }
-                else 
+                else
                 {
                     try
                     {
@@ -307,12 +323,12 @@ namespace TrippingApp.APIController
                             Kind = hoyaData.Ng_Type
                         };
                         bool status = false;
-                        if (PLC_Query.PLC_Controller == null || PLC_Query.PLC_Controller.IsConnected == false) 
+                        if (PLC_Query.PLC_Controller == null || PLC_Query.PLC_Controller.IsConnected == false)
                         {
                             return BadRequest("PLC Is Not Connect");
                         }
                         PLC_Query.AddRack2Queue(data_Barcode_, ref status);
-                        if(status == false) 
+                        if (status == false)
                         {
                             return BadRequest("Full Queue In PLC");
                         }
@@ -339,10 +355,11 @@ namespace TrippingApp.APIController
             //var data = HistoryLogger.Upload_Rows();
             return Json(GlobalDataHoya.Nhietdo); // Return the list of users as JSON
         }
+        [Route("PutNhietDo")]
         [HttpPut]
-        public IHttpActionResult Put([FromBody] Nhietdo nhietdo)
+        public IHttpActionResult PutNhietDo([FromBody] Nhietdo nhietdo)
         {
-            
+
             if (nhietdo == null)
             {
                 return NotFound();
@@ -354,6 +371,189 @@ namespace TrippingApp.APIController
             }
             return Json("OK"); // Return the updated user object as JSON
         }
+        [Route("PutQRCode")]
+        [HttpPut]
+        public IHttpActionResult PutQRCode([FromBody] QR QR_)
+        {
+
+            switch (QR_.Code)
+            {
+                //Move Area 1 Done
+                case "1m":
+                    //MonitorRackData.MoveRack123();
+                    SyncProcessData.MovedRack123();
+                    if (MachineViewModel.Get_Dip_Time_A1_Command != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_A1_Command.Execute(true);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.MoveRack123, false);
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+                    }
+
+                    break;
+                //Move Area 2 Done
+                case "2m":
+                    //MonitorRackData.MoveRack456();
+                    SyncProcessData.MovedRack456();
+                    MachineViewModel.Get_Dip_Time_Robot.Execute(true);
+                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                    MachineViewModel.Getbarcode_Command.Execute(null);
+
+                    break;
+
+                case "2m4":
+                    //MonitorRackData.MoveRack456();
+                    SyncProcessData.MovedRack456(4);
+                    if (MachineViewModel.Get_Dip_Time_Robot != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(true);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
+                    }
+
+                    break;
+                case "2m5":
+                    //MonitorRackData.MoveRack456();
+                    SyncProcessData.MovedRack456(5);
+                    if (MachineViewModel.Get_Dip_Time_Robot != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(true);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
+                    }
+
+                    break;
+                case "2m6":
+                    //MonitorRackData.MoveRack456();
+                    SyncProcessData.MovedRack456(6);
+                    if (MachineViewModel.Get_Dip_Time_Robot != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(true);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.MoveRack456, false);
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
+                    }
+
+                    break;
+                //Move Area 3 Done
+                case "3m":
+                    //MonitorRackData.MoveRack789_10();
+                    SyncProcessData.MovedRack789_10();
+                    if (MachineViewModel.Get_Dip_Time_A3_Command != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_A3_Command.Execute(true);
+
+                    }
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+                    }
+                    PLC_Query.WriteBit(AddressCrt.MoveRack789_10, false);
+                    break;
+                // Trip A1 Done
+                case "1t":
+                    SyncProcessData.TripDoneRack_123();
+                    if (MachineViewModel.Get_Dip_Time_A1_Command != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_A1_Command.Execute(false);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.TripDoneRack123, false);
+                    break;
+                // Trip A2 Done
+                case "2t":
+                    if (MachineViewModel.Get_Dip_Time_Robot != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_Robot.Execute(false);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
+                    break;
+                case "2t4":
+                    SyncProcessData.TripDoneRack_456(4);
+                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
+                    break;
+                case "2t5":
+                    SyncProcessData.TripDoneRack_456(5);
+                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
+                    break;
+                case "2t6":
+                    SyncProcessData.TripDoneRack_456(6);
+                    PLC_Query.WriteBit(AddressCrt.TripRackDone456, false);
+                    break;
+                // Trip A3 Done
+                case "3t":
+                    SyncProcessData.TripRackDone_798_10();
+                    if (MachineViewModel.Get_Dip_Time_A3_Command != null)
+                    {
+                        MachineViewModel.Get_Dip_Time_A3_Command.Execute(false);
+                    }
+                    PLC_Query.WriteBit(AddressCrt.TripDoneRack_789_10, false);
+                    break;
+                //Begin Robot
+                case "gr":
+                    PLC_Query.Get_ListCodeChar();
+                    if (MachineViewModel.Getbarcode_Command != null)
+                    {
+                        MachineViewModel.Getbarcode_Command.Execute(null);
+
+                    }
+                    PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
+                    break;
+                //out of qrcode
+                case "e":
+                    PLC_Query.WriteBit(AddressCrt.SEND_OutofQR, false);
+                    break;
+                //
+                case "d":
+                    PLC_Query.WriteBit(AddressCrt.SEND_Done_rack, false);
+                    break;
+                // Read Barcode Position
+                case "l":
+                    //PLC_Query.Get_ListCodeChar();
+                    break;
+                // Read Time Trip 3
+                case "m":
+                    break;
+                //Trip Area 3 Done Trigger
+                case "m1":
+                    break;
+                // Read Time Trip 1
+                case "n":
+                    break;
+                //Trip Area 1 Done Trigger
+                case "n1":
+                    break;
+                // Read Time Trip Robot
+                case "o":
+                    break;
+                // Trip Robot Done trigger
+                case "o1":
+                    break;
+                default:
+                    break;
+
+            }
+            return Json("OK"); // Return the updated user object as JSON
+        }
+
         [Route("GetRobotTable")]
         [HttpGet]
         public IHttpActionResult GetRobotTable()
@@ -362,19 +562,23 @@ namespace TrippingApp.APIController
         }
         [Route("Get_Alarm")]
         [HttpGet]
-        public IHttpActionResult Get_Alarm() 
+        public IHttpActionResult Get_Alarm()
         {
-            MainViewModel.Alarm_Page_Command.Execute(null);
+            //MainViewModel.Alarm_Page_Command.Execute(null);
             return Json("OK");
         }
-       
+
+    }
+    public class QR 
+    {
+        public string Code { get; set; }
     }
     public class HoyaData
     {
         public string Barcode { get; set; }
         public string Ng_Type { get; set; }
     }
-    public class Nhietdo 
+    public class Nhietdo
     {
         public int Temp1 { get; set; }
         public int Temp2 { get; set; }
@@ -392,7 +596,7 @@ namespace TrippingApp.APIController
         public float H2 { get; set; }
         public float T2 { get; set; }
     }
-    public class InforQueueRack 
+    public class InforQueueRack
     {
         public string Bath1_QR { get; set; }
         public string Bath1_T { get; set; }

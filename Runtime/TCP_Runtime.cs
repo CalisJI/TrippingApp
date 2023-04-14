@@ -199,6 +199,7 @@ namespace TrippingApp.Runtime
                         break;
                     //Begin Robot
                     case "gr":
+                        PLC_Query.Get_ListCodeChar();
                         MachineViewModel.Getbarcode_Command.Execute(null);
                         PLC_Query.WriteBit(AddressCrt.Trigger_GetRack_Infor, false);
                         break;

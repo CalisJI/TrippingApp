@@ -949,13 +949,16 @@
         <Grid Height="1000" Width="1920">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.12*"/>
             </Grid.RowDefinitions>
             <DataGrid 
-                ItemsSource="{Binding Robot_Type}" 
+                AutoGenerateColumns="False"
+                Margin="0 20 0 0"
+                ItemsSource="{Binding Robot_View_Data}" 
+                SelectedItem="{Binding Selected_Row}"
                 Width="1800"
                 FontSize="25"
-                IsReadOnly="True"
+                IsReadOnly="{Binding CanEdit, Converter={StaticResource InvertBooleanConverter}}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 CanUserSortColumns="False"
                 CanUserAddRows="False"
@@ -974,6 +977,23 @@
                         </Style.Triggers>
                     </Style>
                 </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="STT" Binding="{Binding Path=Id}"/>
+                    <DataGridTextColumn Header="Liquid" Binding="{Binding Path = Liquid}"/>
+                    <DataGridTextColumn Header="FS Time" Binding="{Binding Path = [FS Time]}"/>
+                    <DataGridTextColumn Header="Bath 1" Binding="{Binding Path=[Bath 1]}"/>
+                    <DataGridTextColumn Header="Bath 2" Binding="{Binding Path=[Bath 2]}"/>
+                    <DataGridTextColumn Header="Bath 3" Binding="{Binding Path=[Bath 3]}"/>
+                    <DataGridTextColumn Header="Bath 4" Binding="{Binding Path=[Bath 4]}"/>
+                    <DataGridTextColumn Header="Bath 5" Binding="{Binding Path=[Bath 5]}"/>
+                    <DataGridTextColumn Header="Bath 6" Binding="{Binding Path=[Bath 6]}"/>
+                    <DataGridTextColumn Header="Bath 7" Binding="{Binding Path=[Bath 7]}"/>
+                    <DataGridTextColumn Header="Bath 8" Binding="{Binding Path=[Bath 8]}"/>
+                    <DataGridTextColumn Header="Bath 9" Binding="{Binding Path=[Bath 9]}"/>
+                    <DataGridTextColumn Header="Bath 10" Binding="{Binding Path=[Bath 10]}"/>
+                    <DataGridTextColumn Header="Condition" Binding="{Binding Path=Id}"/>
+                    <DataGridTextColumn Header="PLC Type" Binding="{Binding Path=Condition}"/>
+                </DataGrid.Columns>
             </DataGrid>
             <StackPanel
                 HorizontalAlignment="Right"
@@ -981,6 +1001,7 @@
                 Orientation="Horizontal"
                  Margin="0 0 60 0">
                 <Button 
+                    IsEnabled="{Binding CanEdit}"
                     Content="Apply"
                     Command="{Binding Apply_DataProcess_Command}"
                     Height="60"
@@ -989,6 +1010,7 @@
                     FontWeight="DemiBold"/>
 
                 <Button 
+                    IsEnabled="{Binding CanEdit, Converter={StaticResource InvertBooleanConverter}}"
                     Margin="10 0 0 0"
                     Content="Edit"
                     Command="{Binding Edit_Command}"
@@ -996,8 +1018,27 @@
                     Width="150" 
                     FontSize="25" 
                     FontWeight="DemiBold"/>
+                <Button 
+                    IsEnabled="{Binding CanEdit}"
+                    Margin="10 0 0 0"
+                    Content="Add"
+                    Command="{Binding Add_Command}"
+                    Height="60"
+                    Width="150" 
+                    FontSize="25" 
+                    FontWeight="DemiBold"/>
+                <Button 
+                    IsEnabled="{Binding CanEdit}"
+                    Margin="10 0 0 0"
+                    Content="Delete"
+                    Command="{Binding Deleted_Command}"
+                    Height="60"
+                    Width="150" 
+                    FontSize="25" 
+                    FontWeight="DemiBold"/>
 
                 <Button 
+                    IsEnabled="{Binding CanEdit}"
                     Margin="10 0 0 0"
                     Content="Cancel"
                     Command="{Binding Cancel_Command}"

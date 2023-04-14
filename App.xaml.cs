@@ -47,6 +47,7 @@ namespace TrippingApp
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
+                Application.Current.Shutdown();
             }
 
         }

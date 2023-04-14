@@ -21,7 +21,7 @@ namespace TrippingApp.AppConfig
         #endregion
         #region PLC Configuration
         public string PC_IP_Address { get; set; }
-        public string PLC_IP_Address { get; set; }
+        public string PLC_IP_Address { get; set; } = "192.168.1.25";
         public int Port { get; set; }
         public short Rack { get; set; }
         public short Slot { get; set; }

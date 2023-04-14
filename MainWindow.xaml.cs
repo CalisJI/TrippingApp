@@ -68,6 +68,7 @@ namespace TrippingApp
             {
                 Console.WriteLine("MySQL Workbench is not running.");
             }
+            Environment.Exit(0);
         }
 
         private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)

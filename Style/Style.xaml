@@ -50,6 +50,7 @@
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#A5FFFFFF"/>
     <SolidColorBrush x:Key="DisabledBorderBrush" Color="#66FFFFFF"/>
     <SolidColorBrush x:Key="FocusBrush" Color="#FFE99862"/>
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
 
     <LinearGradientBrush x:Key="ControlBackgroundBrush" EndPoint="1.204,0.5" StartPoint="0.056,0.5">
         <GradientStop Color="#FFFFFFFF" Offset="0" />
@@ -168,12 +169,15 @@
                     <BeginStoryboard Storyboard="{StaticResource PressedOn}" />
                 </Trigger.EnterActions>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="true" />
+            <Trigger Property="IsEnabled" Value="true" >
+                <Setter Property="Foreground" Value="#FF042271" />
+                <Setter Property="Opacity" TargetName="BackgroundNorm" Value="1" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="false">
 
-                <Trigger.EnterActions>
+                <!--<Trigger.EnterActions>
                     <BeginStoryboard Storyboard="{StaticResource DisabledOn}" />
-                </Trigger.EnterActions>
+                </Trigger.EnterActions>-->
 
                 <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
                 <Setter Property="Opacity" TargetName="DisabledVisualElement" Value="1" />
@@ -273,7 +277,9 @@
                     <BeginStoryboard Storyboard="{StaticResource PressedOn1}" />
                 </Trigger.EnterActions>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="true" />
+            <Trigger Property="IsEnabled" Value="true">
+                
+            </Trigger>
             <Trigger Property="IsEnabled" Value="false">
 
                 <Trigger.EnterActions>

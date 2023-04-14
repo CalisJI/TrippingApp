@@ -14,6 +14,7 @@ using System.Globalization;
 using TrippingApp.APIController;
 using Newtonsoft.Json;
 using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
+using Org.BouncyCastle.Math.Field;
 
 namespace TrippingApp.Model
 {
@@ -622,63 +623,125 @@ namespace TrippingApp.Model
 
 
         }
-        public static void MovedRack456()
+        public static void MovedRack456(int bath = 0)
         {
             PLC_Query.Get_ListCodeChar();
 
-            if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1) != "")
+            if(bath == 0) 
             {
-                string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
-                string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
-                var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-                if (R4!=null)
+                if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1) != "")
                 {
-                    R4.Bath4_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp4;
-                    R4.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
-                    R4.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
-                    R4.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
-                    R4.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
-                    R4.Bath4_Infor.TimeIn = DateTime.Now;
-                    HistoryLogger.EditRackObject(R4);
+                    string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                    string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                    var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R4 != null)
+                    {
+                        R4.Bath4_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp4;
+                        R4.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R4.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R4.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R4.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R4.Bath4_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R4);
+                    }
+                }
+                else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
+                {
+                    string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                    string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                    var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R5 != null)
+                    {
+                        R5.Bath5_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp5;
+                        R5.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R5.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R5.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R5.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R5.Bath5_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R5);
+                    }
+
+                }
+                else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
+                {
+                    string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                    string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                    var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R6 != null)
+                    {
+                        R6.Bath6_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp6;
+                        R6.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R6.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R6.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R6.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R6.Bath6_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R6);
+                    }
+                }
+                else
+                {
+                    return;
                 }
             }
-            else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
+            else if (bath == 4) 
             {
-                string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
-                string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
-                var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-                if (R5 != null)
+                if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1) != "")
                 {
-                    R5.Bath5_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp5;
-                    R5.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
-                    R5.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
-                    R5.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
-                    R5.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
-                    R5.Bath5_Infor.TimeIn = DateTime.Now;
-                    HistoryLogger.EditRackObject(R5);
-                }
-            
-            }
-            else if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
-            {
-                string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
-                string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
-                var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-                if (R6 != null)
-                {
-                    R6.Bath6_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp6;
-                    R6.Bath2_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
-                    R6.Bath2_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
-                    R6.Bath2_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
-                    R6.Bath2_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
-                    R6.Bath6_Infor.TimeIn = DateTime.Now;
-                    HistoryLogger.EditRackObject(R6);
+                    string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                    string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                    var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R4 != null)
+                    {
+                        R4.Bath4_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp4;
+                        R4.Bath4_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R4.Bath4_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R4.Bath4_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R4.Bath4_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R4.Bath4_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R4);
+                    }
                 }
             }
-            else
+            else if (bath == 5)
             {
-                return;
+                if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1) != "")
+                {
+                    string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                    string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                    var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R5 != null)
+                    {
+                        R5.Bath5_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp5;
+                        R5.Bath5_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R5.Bath5_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R5.Bath5_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R5.Bath5_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R5.Bath5_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R5);
+                    }
+
+                }
             }
+            else if(bath == 6) 
+            {
+                if (S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1) != "")
+                {
+                    string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                    string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                    var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R6 != null)
+                    {
+                        R6.Bath6_Infor.BathTemper = GlobalDataHoya.Nhietdo.Temp6;
+                        R6.Bath6_Infor.Envir_H1 = GlobalDataHoya.Nhietdo.H1;
+                        R6.Bath6_Infor.Envir_T1 = GlobalDataHoya.Nhietdo.T1;
+                        R6.Bath6_Infor.Envir_H2 = GlobalDataHoya.Nhietdo.H2;
+                        R6.Bath6_Infor.Envir_T2 = GlobalDataHoya.Nhietdo.T2;
+                        R6.Bath6_Infor.TimeIn = DateTime.Now;
+                        HistoryLogger.EditRackObject(R6);
+                    }
+                }
+            }
+
         }
 
         public static void MovedRack789_10()
@@ -805,45 +868,90 @@ namespace TrippingApp.Model
             //HistoryLogger.EditRackObject(R4);
 
         }
-        public static void TripDoneRack_456()
+        public static void TripDoneRack_456(int bath = 0)
         {
-            string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
-            if (code4 != "") 
+            if(bath == 0) 
             {
-                string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
-                var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-                if (R4 != null)
+                string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                if (code4 != "")
                 {
-                    R4.Bath1_Infor.TimeOut = DateTime.Now;
-                    HistoryLogger.EditRackObject(R4);
+                    string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                    var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R4 != null)
+                    {
+                        R4.Bath1_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R4);
+                    }
+                }
+
+                string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                if (code5 != "")
+                {
+                    string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                    var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+                    if (R5 != null)
+                    {
+                        R5.Bath2_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R5);
+                    }
+                }
+
+                string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                if (code6 != "")
+                {
+                    string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                    var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R6 != null)
+                    {
+                        R6.Bath6_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R6);
+                    }
                 }
             }
-
-            string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
-            if (code5!="")
+            else if(bath == 4) 
             {
-                string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
-                var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-
-                if (R5 != null)
+                string code4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P1);
+                if (code4 != "")
                 {
-                    R5.Bath2_Infor.TimeOut = DateTime.Now;
-                    HistoryLogger.EditRackObject(R5);
+                    string type4 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath4_P2);
+                    var R4 = RackObjects.Where(x => x.RackBarcode == code4 && x.NGType == type4 && code4 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R4 != null)
+                    {
+                        R4.Bath1_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R4);
+                    }
                 }
             }
-
-            string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
-            if (code6 != "")
+            else if(bath == 5) 
             {
-                string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
-                var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
-                if (R6 != null)
+                string code5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P1);
+                if (code5 != "")
                 {
-                    R6.Bath6_Infor.TimeOut = DateTime.Now;
-                    HistoryLogger.EditRackObject(R6);
+                    string type5 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath5_P2);
+                    var R5 = RackObjects.Where(x => x.RackBarcode == code5 && x.NGType == type5 && code5 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+
+                    if (R5 != null)
+                    {
+                        R5.Bath2_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R5);
+                    }
                 }
             }
-           
+            else if(bath == 6)
+            {
+                string code6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P1);
+                if (code6 != "")
+                {
+                    string type6 = S7String.FromByteArray(PLC_Query.LIST_CODE_CHAR.Contain_In_Bath6_P2);
+                    var R6 = RackObjects.Where(x => x.RackBarcode == code6 && x.NGType == type6 && code6 != "" && x.RackStatus == Status.Inprocess).FirstOrDefault();
+                    if (R6 != null)
+                    {
+                        R6.Bath6_Infor.TimeOut = DateTime.Now;
+                        HistoryLogger.EditRackObject(R6);
+                    }
+                }
+            }
         }
 
         public static void TripRackDone_798_10()

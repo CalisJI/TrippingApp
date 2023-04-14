@@ -23,6 +23,10 @@ namespace TrippingApp.ViewModel
         private TimeSpan TimeA1_TP = new TimeSpan();
         private TimeSpan TimeA3_TP = new TimeSpan();
         private TimeSpan TimeRobot_TP = new TimeSpan();
+        private TimeSpan TimeRobot4 = new TimeSpan();
+        private TimeSpan TimeRobot5 = new TimeSpan();
+        private TimeSpan TimeRobot6 = new TimeSpan();
+
         #region Command
         public ICommand Loaded { get; set; }
         public ICommand Unloaded { get; set; }
@@ -680,25 +684,41 @@ namespace TrippingApp.ViewModel
             {
                 if ((bool)p)
                 {
-                    TimerRobot.Start();
-                    TimerRobot.IsEnabled = true;
+                    if (!TimerRobot.IsEnabled)
+                    {
+                        TimerRobot.Start();
+                        TimerRobot.IsEnabled = true;
+                    }
+
                     if (Barcode4 != string.Empty)
                     {
-                        ImputTime5 = "--:--";
-                        ImputTime6 = "--:--";
+
                         ImputTime4 = DateTime.Now.ToString("HH:mm:ss");
+                        TimeRobot4 = TimeSpan.FromSeconds(0);
                     }
-                    else if (Barcode5 != string.Empty)
+                    else
                     {
                         ImputTime4 = "--:--";
-                        ImputTime6 = "--:--";
+                    }
+                    if (Barcode5 != string.Empty)
+                    {
+
                         ImputTime5 = DateTime.Now.ToString("HH:mm:ss");
+                        TimeRobot5 = TimeSpan.FromSeconds(0);
                     }
-                    else if (Barcode6 != string.Empty)
+                    else
                     {
-                        ImputTime4 = "--:--";
                         ImputTime5 = "--:--";
+                    }
+                    if (Barcode6 != string.Empty)
+                    {
+
                         ImputTime6 = DateTime.Now.ToString("HH:mm:ss");
+                        TimeRobot6 = TimeSpan.FromSeconds(0);
+                    }
+                    else
+                    {
+                        ImputTime6 = "--:--";
                     }
                 }
                 else
@@ -733,24 +753,33 @@ namespace TrippingApp.ViewModel
         {
             if(Barcode4 != string.Empty) 
             {
-                DipTime5 = "--:--";
-                DipTime6 = "--:--";
-                TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime4 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
+               
+                TimeRobot4 += TimeSpan.FromSeconds(1);
+                DipTime4 = string.Format("{0:00}:{1:00}", TimeRobot4.Minutes, TimeRobot4.Seconds);
             }
-            else if(Barcode5 != string.Empty)
+            else 
             {
                 DipTime4 = "--:--";
-                DipTime6 = "--:--";
-                TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime5 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
             }
-            else if (Barcode6 != string.Empty) 
+            if(Barcode5 != string.Empty)
+            {
+               
+                TimeRobot5 += TimeSpan.FromSeconds(1);
+                DipTime5 = string.Format("{0:00}:{1:00}", TimeRobot5.Minutes, TimeRobot5.Seconds);
+            }
+            else 
             {
                 DipTime5 = "--:--";
-                DipTime4 = "--:--";
-                TimeRobot_TP += TimeSpan.FromSeconds(1);
-                DipTime6 = string.Format("{0:00}:{1:00}", TimeRobot_TP.Minutes, TimeRobot_TP.Seconds);
+            }
+            if (Barcode6 != string.Empty) 
+            {
+               
+                TimeRobot6 += TimeSpan.FromSeconds(1);
+                DipTime6 = string.Format("{0:00}:{1:00}", TimeRobot6.Minutes, TimeRobot6.Seconds);
+            }
+            else 
+            {
+                DipTime6 = "--:--";
             }
         }
 

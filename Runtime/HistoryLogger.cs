@@ -12,7 +12,9 @@ namespace TrippingApp.Runtime
 {
     public class HistoryLogger
     {
+        //public static string ConnectionString = "Server=localhost;Database=calis;Uid=root;Pwd=12345678;";
         public static string ConnectionString = "Server=localhost;Database=hoya_server;Uid=root;Pwd=123456789;";
+
         public static readonly string TableName = "rack_object";
 
         public static bool Checktable() 
